@@ -1,0 +1,4402 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+MitumoLib
+</name>
+</assembly>
+<members>
+<member name="T:MitumoLib.My.Resources.Resources">
+<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member>
+<member name="P:MitumoLib.My.Resources.Resources.ResourceManager">
+<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member>
+<member name="P:MitumoLib.My.Resources.Resources.Culture">
+<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member>
+<member name="T:MitumoLib.Biz.BaseBiz">
+ <summary>
+ 基底ビジネスロジック
+ </summary>
+</member>
+<member name="P:MitumoLib.Biz.BaseBiz.connection">
+ <summary>
+ データベース接続
+ </summary>
+ <returns></returns>
+</member>
+<member name="M:MitumoLib.Biz.BaseBiz.#ctor(System.String)">
+ <summary>
+ コンストラクタ
+ </summary>
+ <param name="connectionString"></param>
+</member>
+<member name="T:MitumoLib.Biz.MTM01">
+ <summary>
+ 単価入力シート取込ビジネスロジック
+ </summary>
+</member>
+<member name="M:MitumoLib.Biz.MTM01.#ctor(System.String)">
+ <summary>
+ コンストラクタ
+ </summary>
+ <param name="connectionString"></param>
+</member>
+<member name="M:MitumoLib.Biz.MTM01.GetCostInputNumber">
+ <summary>
+ 価格入力番号取得
+ </summary>
+ <returns>String</returns>
+</member>
+<member name="M:MitumoLib.Biz.MTM01.ValidateBeforeImport(MitumoLib.Models.MTM10R003JITSUKOU)">
+ <summary>
+ バリデーション前処理(Inport用)
+ </summary>
+ <param name="mtm10r003jitsukou"></param>
+ <returns>List</returns>
+</member>
+<member name="M:MitumoLib.Biz.MTM01.ValidateBeforeDelete(MitumoLib.Models.MTM10R003JITSUKOU)">
+ <summary>
+ バリデーション前処理(Delete用)
+ </summary>
+ <param name="mtm10r003jitsukou"></param>
+ <returns>List</returns>
+</member>
+<member name="M:MitumoLib.Biz.MTM01.Import(MitumoLib.Models.MTM10R003JITSUKOU,System.Data.DataTable)">
+ <summary>
+ 一括取込処理
+ </summary>
+ <param name="mtm10r003jitsukou"></param>
+ <param name="table"></param>
+ <returns>List</returns>
+</member>
+<member name="M:MitumoLib.Biz.MTM01.Delete(MitumoLib.Models.MTM10R003JITSUKOU,System.String@)">
+ <summary>
+ 一括取消処理
+ </summary>
+ <param name="mtm10r003jitsukou"></param>
+ <param name="sysError"></param>
+ <returns>List</returns>
+</member>
+<member name="M:MitumoLib.Biz.MTM01.KakakuDataCheck(MitumoLib.Models.MTM10R001TANKA)">
+ <summary>
+ 価格入力データ重複チェック（プライマリーチェック）
+ </summary>
+ <returns>True:存在, Flase:存在しない</returns>
+</member>
+<member name="M:MitumoLib.Biz.MTM01.KakakuDataCheck(System.String,System.Boolean@)">
+ <summary>
+ 実行管理テーブルより情報取得
+ </summary>
+ <param name="searchMTMR003001"></param>
+ <returns>Models.MTM10R003JITSUKOU</returns>
+</member>
+<member name="M:MitumoLib.Biz.MTM01.UserNameSearch(System.String)">
+ <summary>
+ 担当者名称の取得
+ </summary>
+ <param name="searchHANM004001"></param>
+ <returns>String</returns>
+</member>
+<member name="M:MitumoLib.Biz.MTM01.GetDate(System.String,System.DateTime@)">
+ <summary>
+ 日付分解
+ </summary>
+ <returns>Boolean</returns>
+</member>
+<member name="M:MitumoLib.Biz.MTM01.ImportFileNameSearch">
+ <summary>
+ 取込ファイル名を取得（制御マスタ）
+ </summary>
+ <returns>String</returns>
+</member>
+<member name="M:MitumoLib.Biz.MTM01.BackUpfileMove(System.String)">
+ <summary>
+ ファイルバックアップ
+ </summary>
+ <returns>String</returns>
+</member>
+<member name="M:MitumoLib.Biz.MTM01.FileCheck(System.String)">
+ <summary>
+ ファイル存在チェック
+ </summary>
+ <returns>Boolean</returns>
+</member>
+<member name="M:MitumoLib.Biz.MTM01.StringNumberDigitsCheck(System.String,System.Int32)">
+ <summary>
+ 文字列桁数チェック
+ </summary>
+ <param name="checkTarget"></param>
+ <param name="checkDigit"></param>
+ <returns>Boolean</returns>
+</member>
+<member name="M:MitumoLib.Biz.MTM01.NumericNumberDigitsCheck(System.String,System.Int32,System.Int32)">
+ <summary>
+ 数値チェック桁数(整数部、小数部）チェック
+ 小数部がない場合はcheckDigit2=0を指定
+ </summary>
+ <param name="checkTarget"></param>
+ <param name="checkDigit1"></param>
+ <param name="checkDigit2"></param>
+ <returns>Boolean</returns>
+</member>
+<member name="M:MitumoLib.Biz.MTM01.DeliveryConvert(System.String)">
+ <summary>
+ 納品先履歴の変換
+ </summary>
+ <param name="checkTarget"></param>
+ <returns>String</returns>
+</member>
+<member name="M:MitumoLib.Biz.MTM01.CutStrByteLen(System.String,System.Int32)">
+ <summary>
+ 文字列バイト数変換
+ </summary>
+ <param name="strInput"></param>
+ <param name="intLen"></param>
+ <returns>String</returns>
+</member>
+<member name="M:MitumoLib.Biz.MTM02.#ctor(System.String)">
+ <summary>
+ コンストラクタ
+ </summary>
+ <param name="connectionString"></param>
+</member>
+<member name="M:MitumoLib.Biz.MTM02.ValidateBeforeSearch(MitumoLib.Biz.MTM02SearchCondition)">
+ <summary>
+ バリデーション前処理(検索用)
+ </summary>
+ <param name="searchCondition"></param>
+ <returns>List</returns>
+</member>
+<member name="M:MitumoLib.Biz.MTM02.GetKakaku(MitumoLib.Biz.MTM02SearchCondition)">
+ <summary>
+ 価格入力データの取得
+ </summary>
+ <param name="searchCondition"></param>
+ <returns></returns>
+</member>
+<member name="M:MitumoLib.Biz.MTM02.Update(System.Data.DataTable)">
+ <summary>
+ 更新処理
+ </summary>
+ <param name="table"></param>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Biz.MTM02SearchCondition.KakakuNyuuryokuNo">
+ <summary>
+ 価格入力番号
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Biz.MTM02SearchCondition.LoginId">
+ <summary>
+ ログインID
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Biz.MTM02SearchCondition.EigyosyoCode">
+ <summary>
+ 営業所コード
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Biz.MTM02SearchCondition.BukaCodeFrom">
+ <summary>
+ 部課コード(From)
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Biz.MTM02SearchCondition.BukaCodeTo">
+ <summary>
+ 部課コード(To)
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Biz.MTM02SearchCondition.TantousyaCodeFrom">
+ <summary>
+ 担当者コード(From)
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Biz.MTM02SearchCondition.TantousyaCodeTo">
+ <summary>
+ 担当者コード(To)
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Biz.MTM02SearchCondition.TokuisakiCodeFrom">
+ <summary>
+ 得意先コード(From)
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Biz.MTM02SearchCondition.TokuisakiCodeTo">
+ <summary>
+ 得意先コード(To)
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Biz.MTM02SearchCondition.ShohinCodeFrom">
+ <summary>
+ 商品コード(From)
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Biz.MTM02SearchCondition.ShohinCodeTo">
+ <summary>
+ 商品コード(To)
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Biz.MTM02SearchCondition.ShinArariFrom">
+ <summary>
+ 新粗利率(From)
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Biz.MTM02SearchCondition.ShinArariTo">
+ <summary>
+ 新粗利率(To)
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Biz.MTM02SearchCondition.Mikakutei">
+ <summary>
+ 確定の指定(未確定のみ出力)
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Biz.MTM02SearchCondition.Kakutei">
+ <summary>
+ 確定の指定(確定のみ出力)
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Biz.MTM02SearchCondition.Zenken">
+ <summary>
+ 確定の指定(全件出力)
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Biz.MTM02SearchCondition.EigyosyoCodeList">
+ <summary>
+ 営業所コードリスト
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Biz.MTM02SearchCondition.BukaCodeList">
+ <summary>
+ 部課コードリスト
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Biz.MTM02SearchCondition.TantousyaCodeList">
+ <summary>
+ 担当者コードリスト
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Biz.MTM02SearchCondition.TokuisakiCodeList">
+ <summary>
+ 得意先コードリスト
+ </summary>
+ <returns></returns>
+</member>
+<member name="M:MitumoLib.Biz.MTM03.#ctor(System.String)">
+ <summary>
+ コンストラクタ
+ </summary>
+ <param name="connectionString"></param>
+</member>
+<member name="M:MitumoLib.Biz.MTM03.OutputPDF">
+ <summary>
+ PDF出力
+ </summary>
+ <returns>String</returns>
+</member>
+<member name="M:MitumoLib.Biz.MTM04.#ctor(System.String)">
+ <summary>
+ コンストラクタ
+ </summary>
+ <param name="connectionString"></param>
+</member>
+<member name="M:MitumoLib.Biz.MTM04.ValidateBeforeImport(MitumoLib.Models.MTM10R004RENKEI)">
+ <summary>
+ バリデーション前処理(Inport用)
+ </summary>
+ <param name="mtm10r004renkei"></param>
+ <returns>List</returns>
+</member>
+<member name="M:MitumoLib.Biz.MTM04.TemporaryNumbering">
+ <summary>
+ 仮採番MAX取得
+ </summary>
+ <returns>List</returns>
+</member>
+<member name="M:MitumoLib.Biz.MTM04.ProductNameSearch(System.String,System.String,System.String)">
+ <summary>
+ 商品名１称の取得
+ </summary>
+ <param name="scHANMA01001"></param>
+ <param name="scHANMA01002"></param>
+ <param name="scHANMA01003"></param>
+ <returns>String</returns>
+</member>
+<member name="M:MitumoLib.Biz.MTM04.ProductName2Search(System.String,System.String,System.String)">
+ <summary>
+ 商品名２称の取得
+ </summary>
+ <param name="scHANMA01001"></param>
+ <param name="scHANMA01002"></param>
+ <param name="scHANMA01003"></param>
+ <returns>String</returns>
+</member>
+<member name="M:MitumoLib.Biz.MTM04.ArrangeDivisionSearch(System.String,System.String,System.String)">
+ <summary>
+ 手配区分の取得
+ </summary>
+ <param name="scHANMA01001"></param>
+ <param name="scHANMA01002"></param>
+ <param name="scHANMA01003"></param>
+ <returns>String</returns>
+</member>
+<member name="M:MitumoLib.Biz.MTM04.PaymentTermsSearch(System.String)">
+ <summary>
+ 支払条件の取得
+ </summary>
+ <param name="scHANM001003"></param>
+ <returns>String</returns>
+</member>
+<member name="M:MitumoLib.Biz.MTM04.Customer1Search(System.String)">
+ <summary>
+ 手入力得意先名１の取得
+ </summary>
+ <param name="scHANM001003"></param>
+ <returns>String</returns>
+</member>
+<member name="M:MitumoLib.Biz.MTM04.Customer2Search(System.String)">
+ <summary>
+ 手入力得意先名２の取得
+ </summary>
+ <param name="scHANM001003"></param>
+ <returns>String</returns>
+</member>
+<member name="M:MitumoLib.Biz.MTM04.FareSearch(System.String)">
+ <summary>
+ 運賃の取得
+ </summary>
+ <param name="scMTMR003001"></param>
+ <returns>String</returns>
+</member>
+<member name="M:MitumoLib.Biz.MTM04.GetDataPrice(MitumoLib.Biz.MTM02SearchCondition,System.String@)">
+ <summary>
+ 価格入力データ取得（システム間連携用）
+ </summary>
+ <param name="searchCondition"></param>
+ <param name="sysError"></param>
+ <returns>List</returns>
+</member>
+<member name="M:MitumoLib.Biz.MTM04.GetDataPriceSpecify(System.String,System.String,System.String,System.String@)">
+ <summary>
+ 価格入力データ取得（指定して見積明細行数を取得）
+ </summary>
+ <param name="scMTMR002080"></param>
+ <param name="scMTMR002001"></param>
+ <param name="scMTMR002032"></param>
+ <returns>String</returns>
+</member>
+<member name="M:MitumoLib.Biz.MTM04.GetDataEstimatedAmount(System.String,System.String,System.String,System.String@)">
+ <summary>
+ 見積明細の見積金額の合計を取得
+ </summary>
+ <param name="scMTMR002080"></param>
+ <param name="scMTMR002001"></param>
+ <param name="scMTMR002032"></param>
+ <returns>String</returns>
+</member>
+<member name="M:MitumoLib.Biz.MTM04.GetDataTotalCost(System.String,System.String,System.String,System.String@)">
+ <summary>
+ 見積明細の原価金額の合計を取得
+ </summary>
+ <param name="scMTMR002080"></param>
+ <param name="scMTMR002001"></param>
+ <param name="scMTMR002032"></param>
+ <returns>String</returns>
+</member>
+<member name="M:MitumoLib.Biz.MTM04.GetDataGrossProfit(System.String,System.String,System.String,System.String@)">
+ <summary>
+ 見積明細の粗利額の合計を取得
+ </summary>
+ <param name="scMTMR002080"></param>
+ <param name="scMTMR002001"></param>
+ <param name="scMTMR002032"></param>
+ <returns>String</returns>
+</member>
+<member name="M:MitumoLib.Biz.MTM04.TaxNewOldSearch(System.String)">
+ <summary>
+ 消費税率を制御マスタより取得
+ </summary>
+ <param name="scMTMR002032"></param>
+ <returns>String</returns>
+</member>
+<member name="M:MitumoLib.Biz.MTM04.SystemLinkage(System.Data.DataTable,System.Data.DataTable)">
+ <summary>
+ システム連携処理
+ </summary>
+ <param name="tableEstimate"></param>
+ <param name="tableEstimateDetils"></param>
+ <returns>List</returns>
+</member>
+<member name="M:MitumoLib.Biz.MTM04.EstimateProduction(System.Collections.Generic.List{System.Decimal},System.Data.DataTable,System.Data.DataTable,System.Data.DataTable,System.Data.DataTable,System.String@)">
+ <summary>
+ 見積データの本採番
+ </summary>
+ <param name="dummyNumber"></param>
+ <param name="tableMTM10R001TANKA"></param>
+ <param name="tableHAN10R006MITSUMORIH"></param>
+ <param name="tableHAN10R007MITSUMORIM"></param>
+ <param name="tableHAN98MA01TANKA"></param>
+ <param name="sysError"></param>
+ <returns>List</returns>
+</member>
+<member name="M:MitumoLib.Biz.MTM04.SqlScriptOutput(System.String,System.Data.DataTable,System.Data.DataTable,System.Data.DataTable,System.Data.DataTable,System.String@)">
+ <summary>
+ スクリプト作成
+ </summary>
+ <param name="fileDirectory"></param>
+ <param name="tableHAN10R006MITSUMORIH"></param>
+ <param name="tableHAN10R007MITSUMORIM"></param>
+ <param name="tableHAN98MA01TANKA"></param>
+ <param name="tableHAN98MA02SUTANKA"></param>
+ <param name="sysError"></param>
+ <returns>List</returns>
+</member>
+<member name="M:MitumoLib.Biz.MTM04.DataCheckSutanka(System.String,System.String,System.String,System.Decimal)">
+ <summary>
+ 数量別単価台帳マスター存在チェック
+ <param name="scHANMA02001"></param>
+ <param name="scHANMA02002"></param>
+ <param name="scHANMA02003"></param>
+ <param name="scHANMA02005"></param>
+ </summary>
+ <returns>Boolean</returns>
+</member>
+<member name="M:MitumoLib.Biz.MTM04.DataCheckTanka(System.String,System.String,System.String)">
+ <summary>
+ 単価台帳マスター存在チェック
+ <param name="scHANMA01001"></param>
+ <param name="scHANMA01002"></param>
+ <param name="scHANMA01003"></param>
+ </summary>
+ <returns>Boolean</returns>
+</member>
+<member name="M:MitumoLib.Biz.MTM04.FileDirectory">
+ <summary>
+ 制御マスタのシステム間連携フォルダ
+ </summary>
+ <returns>String</returns>
+</member>
+<member name="M:MitumoLib.Biz.MTM04.GetKakakuNumber">
+ <summary>
+ 制御マスタの価格入力番号
+ </summary>
+ <returns>String</returns>
+</member>
+<member name="M:MitumoLib.Biz.MTM04.GetAppStartDate">
+ <summary>
+ 制御マスタのシステム間連携日付から起動日判定
+ </summary>
+ <returns>String</returns>
+</member>
+<member name="M:MitumoLib.Biz.MTM04.OutputFileNameSearch">
+ <summary>
+ システム間連携フォルダを取得（制御マスタ）
+ </summary>
+ <returns>String</returns>
+</member>
+<member name="M:MitumoLib.Biz.MTM04.GetCostInputNumber">
+ <summary>
+ 価格入力番号取得
+ </summary>
+ <returns>String</returns>
+</member>
+<member name="M:MitumoLib.Biz.MTM04.GetKakakuName(System.Decimal)">
+ <summary>
+ 価格入力番号、名称を取得
+ </summary>
+ <returns>String</returns>
+</member>
+<member name="M:MitumoLib.Biz.MTM04.DataUpdateSeigyo(System.String)">
+ <summary>
+ 制御マスタ更新（出力先フォルダ）
+ <param name="scMTMM001014"></param>
+ </summary>
+ <returns>Boolean</returns>
+</member>
+<member name="P:MitumoLib.Biz.MTM04SearchCondition.KakakuNyuuryokuNo">
+ <summary>
+ 価格入力番号
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Biz.MTM04SearchCondition.EigyosyoCode">
+ <summary>
+ 営業所コード
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Biz.MTM04SearchCondition.TantousyaCodeFrom">
+ <summary>
+ 担当者コード(From)
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Biz.MTM04SearchCondition.TantousyaCodeTo">
+ <summary>
+ 担当者コード(To)
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Biz.MTM04SearchCondition.TokuisakiCodeFrom">
+ <summary>
+ 得意先コード(From)
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Biz.MTM04SearchCondition.TokuisakiCodeTo">
+ <summary>
+ 得意先コード(To)
+ </summary>
+ <returns></returns>
+</member>
+<member name="M:MitumoLib.Biz.MTM05.#ctor(System.String)">
+ <summary>
+ コンストラクタ
+ </summary>
+ <param name="connectionString"></param>
+</member>
+<member name="T:MitumoLib.Biz.MTMConfirm">
+ <summary>
+ 起動パスワード確認ビジネスロジック
+ </summary>
+</member>
+<member name="M:MitumoLib.Biz.MTMConfirm.#ctor(System.String)">
+ <summary>
+ コンストラクタ
+ </summary>
+ <param name="connectionString"></param>
+</member>
+<member name="M:MitumoLib.Biz.MTMConfirm.ConfirmPassword(System.String)">
+ <summary>
+ 起動パスワードの確認
+ </summary>
+ <param name="password">起動パスワード</param>
+ <returns>比較結果</returns>
+</member>
+<member name="P:MitumoLib.Biz.MTMConfirmResult.Result">
+ <summary>
+ 結果
+ </summary>
+ <returns>True:ログイン可/False:ログイン不可</returns>
+</member>
+<member name="P:MitumoLib.Biz.MTMConfirmResult.Password">
+ <summary>
+ 表示用メッセージ
+ </summary>
+ <returns></returns>
+</member>
+<member name="T:MitumoLib.Biz.MTMLogin">
+ <summary>
+ ログインビジネスロジック
+ </summary>
+</member>
+<member name="M:MitumoLib.Biz.MTMLogin.#ctor(System.String)">
+ <summary>
+ コンストラクタ
+ </summary>
+ <param name="connectionString"></param>
+</member>
+<member name="M:MitumoLib.Biz.MTMLogin.ValidateLogin(MitumoLib.Models.MTM00M002USER)">
+ <summary>
+ ログイン前バリデーション
+ </summary>
+ <param name="mtm00m002user">ユーザーマスタ</param>
+ <returns>エラーメッセージリスト</returns>
+</member>
+<member name="M:MitumoLib.Biz.MTMLogin.Login(MitumoLib.Models.MTM00M002USER)">
+ <summary>
+ ログイン
+ </summary>
+ <param name="mtm00m002user">ログインユーザー</param>
+ <returns>ログイン結果</returns>
+</member>
+<member name="T:MitumoLib.Biz.MTMLoginResult">
+ <summary>
+ ログイン結果
+ </summary>
+</member>
+<member name="P:MitumoLib.Biz.MTMLoginResult.Mtm00m002User">
+ <summary>
+ ユーザーマスタ
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Biz.MTMLoginResult.Result">
+ <summary>
+ 結果
+ </summary>
+ <returns>True:ログイン可/False:ログイン不可</returns>
+</member>
+<member name="P:MitumoLib.Biz.MTMLoginResult.Message">
+ <summary>
+ 表示用メッセージ
+ </summary>
+ <returns></returns>
+</member>
+<member name="T:MitumoLib.Biz.MTMSearchBumon">
+ <summary>
+ 部門コード検索ビジネスロジック
+ </summary>
+</member>
+<member name="M:MitumoLib.Biz.MTMSearchBumon.#ctor(System.String)">
+ <summary>
+ コンストラクタ
+ </summary>
+ <param name="connectionString"></param>
+</member>
+<member name="M:MitumoLib.Biz.MTMSearchBumon.GetBumon">
+ <summary>
+ 部門マスターテーブルデータを取得
+ </summary>
+ <returns></returns>
+</member>
+<member name="T:MitumoLib.Biz.MTMSearchEigyou">
+ <summary>
+ 営業所コード検索ビジネスロジック
+ </summary>
+</member>
+<member name="M:MitumoLib.Biz.MTMSearchEigyou.#ctor(System.String)">
+ <summary>
+ コンストラクタ
+ </summary>
+ <param name="connectionString"></param>
+</member>
+<member name="M:MitumoLib.Biz.MTMSearchEigyou.GetEigyou">
+ <summary>
+ 営業所マスターテーブルデータを取得
+ </summary>
+ <returns></returns>
+</member>
+<member name="T:MitumoLib.Biz.MTMSearchJitsukou">
+ <summary>
+ 価格入力番号検索ビジネスロジック
+ </summary>
+</member>
+<member name="M:MitumoLib.Biz.MTMSearchJitsukou.#ctor(System.String)">
+ <summary>
+ コンストラクタ
+ </summary>
+ <param name="connectionString"></param>
+</member>
+<member name="M:MitumoLib.Biz.MTMSearchJitsukou.GetJitsukou">
+ <summary>
+ 実行管理テーブルデータを取得
+ </summary>
+ <returns></returns>
+</member>
+<member name="T:MitumoLib.Biz.MTMSearchShohin">
+ <summary>
+ 商品コード検索ビジネスロジック
+ </summary>
+</member>
+<member name="M:MitumoLib.Biz.MTMSearchShohin.#ctor(System.String)">
+ <summary>
+ コンストラクタ
+ </summary>
+ <param name="connectionString"></param>
+</member>
+<member name="M:MitumoLib.Biz.MTMSearchShohin.GetShohin">
+ <summary>
+ 商品マスターテーブルデータを取得
+ </summary>
+ <returns></returns>
+</member>
+<member name="T:MitumoLib.Biz.MTMSearchTokui">
+ <summary>
+ 得意先コード検索ビジネスロジック
+ </summary>
+</member>
+<member name="M:MitumoLib.Biz.MTMSearchTokui.#ctor(System.String)">
+ <summary>
+ コンストラクタ
+ </summary>
+ <param name="connectionString"></param>
+</member>
+<member name="M:MitumoLib.Biz.MTMSearchTokui.GetTokui">
+ <summary>
+ 得意先マスターテーブルデータを取得
+ </summary>
+ <returns></returns>
+</member>
+<member name="T:MitumoLib.Biz.MTMSearchUser">
+ <summary>
+ ログインID検索ビジネスロジック
+ </summary>
+</member>
+<member name="M:MitumoLib.Biz.MTMSearchUser.#ctor(System.String)">
+ <summary>
+ コンストラクタ
+ </summary>
+ <param name="connectionString"></param>
+</member>
+<member name="M:MitumoLib.Biz.MTMSearchUser.GetUser">
+ <summary>
+ ユーザーマスタデータを取得
+ </summary>
+ <returns></returns>
+</member>
+<member name="T:MitumoLib.Biz.MTMUser">
+ <summary>
+ ユーザーマスタ登録ビジネスロジック
+ </summary>
+</member>
+<member name="M:MitumoLib.Biz.MTMUser.#ctor(System.String)">
+ <summary>
+ コンストラクタ
+ </summary>
+ <param name="connectionString"></param>
+</member>
+<member name="M:MitumoLib.Biz.MTMUser.ValidateRegist(MitumoLib.Models.MTM00M002USER)">
+ <summary>
+ 登録前バリデーション
+ </summary>
+ <param name="mtm00m002user">ユーザーマスタ</param>
+ <returns>エラーメッセージリスト</returns>
+</member>
+<member name="M:MitumoLib.Biz.MTMUser.ExistLoginId(System.String)">
+ <summary>
+ ログインIDの存在チェック
+ </summary>
+ <param name="mtmm002001">ログインID</param>
+ <returns>True:存在, Flase:存在しない</returns>
+</member>
+<member name="M:MitumoLib.Biz.MTMUser.Regist(MitumoLib.Models.MTM00M002USER)">
+ <summary>
+ 登録処理
+ </summary>
+ <param name="mtm00m002user">ユーザーマスタ</param>
+ <returns></returns>
+</member>
+<member name="T:MitumoLib.Biz.SubPersonMaster">
+ <summary>
+ 担当者マスタリスト選択ビジネスロジック
+ </summary>
+</member>
+<member name="M:MitumoLib.Biz.SubPersonMaster.#ctor(System.String)">
+ <summary>
+ コンストラクタ
+ </summary>
+ <param name="connectionString"></param>
+</member>
+<member name="M:MitumoLib.Biz.SubPersonMaster.PersonMasterList">
+ <summary>
+ 担当者マスタよりリスト取得
+ </summary>
+ <returns>True:存在, Flase:存在しない</returns>
+</member>
+<member name="T:MitumoLib.Biz.MTMSearchTanto">
+ <summary>
+ ログインID検索ビジネスロジック
+ </summary>
+</member>
+<member name="M:MitumoLib.Biz.MTMSearchTanto.#ctor(System.String)">
+ <summary>
+ コンストラクタ
+ </summary>
+ <param name="connectionString"></param>
+</member>
+<member name="M:MitumoLib.Biz.MTMSearchTanto.GetTanto">
+ <summary>
+ 担当者を取得
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10M001TOKUI.HANM001001">
+ <summary>
+ 請求先コード
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10M001TOKUI.HANM001002">
+ <summary>
+ 請求先区分
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10M001TOKUI.HANM001003">
+ <summary>
+ 得意先コード
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10M001TOKUI.HANM001004">
+ <summary>
+ 得意先名１
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10M001TOKUI.HANM001005">
+ <summary>
+ 得意先名２
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10M001TOKUI.HANM001006">
+ <summary>
+ 得意先略称
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10M001TOKUI.HANM001007">
+ <summary>
+ 得意先索引
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10M001TOKUI.HANM001008">
+ <summary>
+ 郵便番号
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10M001TOKUI.HANM001009">
+ <summary>
+ 住所１
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10M001TOKUI.HANM001010">
+ <summary>
+ 住所２
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10M001TOKUI.HANM001011">
+ <summary>
+ 住所３
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10M001TOKUI.HANM001012">
+ <summary>
+ 電話番号
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10M001TOKUI.HANM001013">
+ <summary>
+ ＦＡＸ番号
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10M001TOKUI.HANM001014">
+ <summary>
+ カスタマバーコード
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10M003SHOHIN.HANM003001">
+ <summary>
+ 商品コード
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10M003SHOHIN.HANM003002">
+ <summary>
+ 商品略称
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10M003SHOHIN.HANM003003">
+ <summary>
+ 商品索引
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10M003SHOHIN.HANM003004">
+ <summary>
+ 単位
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10M003SHOHIN.HANM003005">
+ <summary>
+ 個数単位
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10M003SHOHIN.HANM003006">
+ <summary>
+ 入数
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10M003SHOHIN.HANM003007">
+ <summary>
+ セット品区分
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10M003SHOHIN.HANM003008">
+ <summary>
+ 在庫管理区分
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10M003SHOHIN.HANM003009">
+ <summary>
+ 標準売上単価
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10M003SHOHIN.HANM003010">
+ <summary>
+ ランク１売上単価
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10M003SHOHIN.HANM003011">
+ <summary>
+ ランク２売上単価
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10M003SHOHIN.HANM003012">
+ <summary>
+ ランク３売上単価
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10M003SHOHIN.HANM003013">
+ <summary>
+ ランク４売上単価
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10M003SHOHIN.HANM003014">
+ <summary>
+ ランク５売上単価
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10M003SHOHIN.HANM003015">
+ <summary>
+ 標準仕入単価
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10M003SHOHIN.HANM003016">
+ <summary>
+ 在庫評価単価
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10M003SHOHIN.HANM003017">
+ <summary>
+ 粗利算出用原単価
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10M003SHOHIN.HANM003018">
+ <summary>
+ 上代単価
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10M004TANTO.HANM004001">
+ <summary>
+ 担当者コード
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10M004TANTO.HANM004002">
+ <summary>
+ 担当者名
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10M015BUMON.HANM015001">
+ <summary>
+ 部門コード
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10M015BUMON.HANM015002">
+ <summary>
+ 部門名
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10M015BUMON.HANM015003">
+ <summary>
+ 部門略称
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10M015BUMON.HANM015004">
+ <summary>
+ 部門索引
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10M015BUMON.HANM015005">
+ <summary>
+ 分類コード０
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10M015BUMON.HANM015006">
+ <summary>
+ 分類コード１
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10M015BUMON.HANM015007">
+ <summary>
+ 分類コード２
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10M015BUMON.HANM015008">
+ <summary>
+ 分類コード３
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10M015BUMON.HANM015009">
+ <summary>
+ 分類コード４
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10M015BUMON.HANM015010">
+ <summary>
+ 分類コード５
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10M015BUMON.HANM015011">
+ <summary>
+ 分類コード６
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10M015BUMON.HANM015012">
+ <summary>
+ 分類コード７
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10M015BUMON.HANM015013">
+ <summary>
+ 分類コード８
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10M015BUMON.HANM015014">
+ <summary>
+ 分類コード９
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10M015BUMON.HANM015015">
+ <summary>
+ マスター検索表示区分
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10M036EIGYOU.HANM036001">
+ <summary>
+ 営業所コード
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10M036EIGYOU.HANM036002">
+ <summary>
+ 営業所名
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10M036EIGYOU.HANM036003">
+ <summary>
+ 営業所略称
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10M036EIGYOU.HANM036004">
+ <summary>
+ 営業所索引
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10M036EIGYOU.HANM036005">
+ <summary>
+ 分類コード０
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10M036EIGYOU.HANM036006">
+ <summary>
+ 分類コード１
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10M036EIGYOU.HANM036007">
+ <summary>
+ 分類コード２
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10M036EIGYOU.HANM036008">
+ <summary>
+ 分類コード３
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10M036EIGYOU.HANM036009">
+ <summary>
+ 分類コード４
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10M036EIGYOU.HANM036010">
+ <summary>
+ 分類コード５
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10M036EIGYOU.HANM036011">
+ <summary>
+ 分類コード６
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10M036EIGYOU.HANM036012">
+ <summary>
+ 分類コード７
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10M036EIGYOU.HANM036013">
+ <summary>
+ 分類コード８
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10M036EIGYOU.HANM036014">
+ <summary>
+ 分類コード９
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10M036EIGYOU.HANM036015">
+ <summary>
+ マスター検索表示区分
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006001">
+ <summary>
+ 得意先コード
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006002">
+ <summary>
+ 見積日付(年月日)
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006003">
+ <summary>
+ 見積書番号
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006004">
+ <summary>
+ 処理連番
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006005">
+ <summary>
+ 伝票チェック 操作日付(年月日)
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006006">
+ <summary>
+ 伝票チェック ログインＩＤ
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006007">
+ <summary>
+ 伝票チェック 担当者コード
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006008">
+ <summary>
+ 伝票チェック 部門コード
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006009">
+ <summary>
+ 納品先	納品先コード
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006010">
+ <summary>
+ 納入期限 納期日(年月日)	
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006011">
+ <summary>
+ 納入期限 納期(手入力)
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006012">
+ <summary>
+ 納入期限 支払条件
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006013">
+ <summary>
+ 有効期限 有効期限(年月日)
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006014">
+ <summary>
+ 有効期限 有効期限(手入力)	
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006015">
+ <summary>
+ 有効期限 要件
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006016">
+ <summary>
+ 消費税 消費税計算区分
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006017">
+ <summary>
+ 消費税 消費税率
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006018">
+ <summary>
+ 消費税 見積書行数
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006019">
+ <summary>
+ 消費税 見積書タイトル
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006020">
+ <summary>
+ 見出し 見出し１
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006021">
+ <summary>
+ 見出し 見出し２
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006022">
+ <summary>
+ 見出し 見出し３
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006023">
+ <summary>
+ 備  考 備考１
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006024">
+ <summary>
+ 備  考 備考２
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006025">
+ <summary>
+ 備  考 備考３
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006026">
+ <summary>
+ 税込売上 売上額
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006027">
+ <summary>
+ 税込売上 値引額
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006028">
+ <summary>
+ 内消費税 売上額
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006029">
+ <summary>
+ 内消費税 値引額
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006030">
+ <summary>
+ 税抜売上 売上額
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006031">
+ <summary>
+ 税抜売上 値引額
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006032">
+ <summary>
+ 外  税 売上額
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006033">
+ <summary>
+ 外  税 値引額
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006034">
+ <summary>
+ 非課税 売上額
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006035">
+ <summary>
+ 非課税 値引額
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006036">
+ <summary>
+ 非課税 見積仮原価
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006037">
+ <summary>
+ 非課税 仮粗利額
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006038">
+ <summary>
+ 非課税 関連売上伝票枚数
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006039">
+ <summary>
+ 非課税 関連受注伝票枚数
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006040">
+ <summary>
+ 手入力 手入力得意先名１
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006041">
+ <summary>
+ 手入力 手入力得意先名２
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006042">
+ <summary>
+ 手入力 手入力納品先名
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006043">
+ <summary>
+ 手入力 通貨コード
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006044">
+ <summary>
+ 手入力 データ発生区分
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006045">
+ <summary>
+ 手入力 営業所コード
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006046">
+ <summary>
+ 手入力 計上済区分
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006047">
+ <summary>
+ 手入力 計上伝票処理連番
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006999">
+ <summary>
+ 更新制御 更新番号
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006048">
+ <summary>
+ 検収基準 検収計上済区分
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006049">
+ <summary>
+ 検収基準 検収計上伝票処理連番
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006050">
+ <summary>
+ 検収基準 検収区分
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006051">
+ <summary>
+ F
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006052">
+ <summary>
+ 原価管理 原価集計コード
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006053">
+ <summary>
+ 原価管理 原価集計サブコード
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006911">
+ <summary>
+ 変更履歴 履歴№
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006914">
+ <summary>
+ 変更履歴 最終更新操作日付
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006915">
+ <summary>
+ 変更履歴 最終更新操作時刻
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006916">
+ <summary>
+ 変更履歴 最終更新ログインID
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006917">
+ <summary>
+ 変更履歴 操作プログラムID
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006918">
+ <summary>
+ 変更履歴 操作プログラムID枝番
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006919">
+ <summary>
+ 変更履歴 操作コンピュータ名
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006INS">
+ <summary>
+ 更新制御 登録日時
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006UPD">
+ <summary>
+ 更新制御 更新日時
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006054">
+ <summary>
+ 伝票チェック チェックマーク区分
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006055">
+ <summary>
+ 伝票承認 仮伝票発生区分
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006056">
+ <summary>
+ 伝票承認 承認日付
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006057">
+ <summary>
+ 伝票承認 承認対象区分
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006058">
+ <summary>
+ 発行済管理 発行済管理更新日時
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006059">
+ <summary>
+ 外貨管理 レート移送区分
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006060">
+ <summary>
+ 外貨管理 レート種類
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006061">
+ <summary>
+ 外貨管理 レート
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006062">
+ <summary>
+ 外貨管理 外貨　売上額
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006063">
+ <summary>
+ 外貨管理 外貨　値引額
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006064">
+ <summary>
+ 外貨管理 外貨　見積仮原価
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006065">
+ <summary>
+ 外貨管理 外貨　仮粗利額
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006066">
+ <summary>
+ 消費税分類 消費税分類
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006067">
+ <summary>
+ 消費税分類 副税率優先採用区分
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006A001">
+ <summary>
+ 消費税分類 作成者ID
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006A002">
+ <summary>
+ 消費税分類 見積種別
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006A003">
+ <summary>
+ 消費税分類 単価変更日付（売上）
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006A004">
+ <summary>
+ 消費税分類 単価変更日付（仕入）
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006A005">
+ <summary>
+ 消費税分類 運賃
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006A006">
+ <summary>
+ 消費税分類 備考コード
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006A007">
+ <summary>
+ 消費税分類 備考
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006A008">
+ <summary>
+ 消費税分類 社内メモコード
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006A009">
+ <summary>
+ 消費税分類 社内メモ
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006A010">
+ <summary>
+ 消費税分類 添付フォルダパス
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006A011">
+ <summary>
+ 消費税分類 成約行数
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006A012">
+ <summary>
+ 消費税分類 単価台帳参照行数
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006A013">
+ <summary>
+ 成約 成約区分
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006A014">
+ <summary>
+ 成約 成約日時 
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006A015">
+ <summary>
+ 成約 成約者ID
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006A016">
+ <summary>
+ 見積書出力 見積書印刷日時
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006A017">
+ <summary>
+ 見積書出力 見積書送信区分
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006A018">
+ <summary>
+ 見積書出力 見積書個別編集区分
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006A019">
+ <summary>
+ 見積書出力 見積書送信日時
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006A020">
+ <summary>
+ 見積書出力 見積書送信者ID
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006A021">
+ <summary>
+ 更新管理 登録者ID 
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006A022">
+ <summary>
+ 更新管理 登録日時
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006A023">
+ <summary>
+ 更新管理 登録端末
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006A024">
+ <summary>
+ 更新管理 更新者ID
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006A025">
+ <summary>
+ 更新管理 更新日時
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006A026">
+ <summary>
+ 更新管理 更新端末
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006A027">
+ <summary>
+ 更新管理 代理作成者ID
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006A028">
+ <summary>
+ 更新管理 成約分類
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006A029">
+ <summary>
+ 更新管理 台帳反映区分
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006A030">
+ <summary>
+ 更新管理 旧単価印字区分
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006A031">
+ <summary>
+ 更新管理 見積分類
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006A032">
+ <summary>
+ 更新管理 図面区分
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006A033">
+ <summary>
+ 更新管理 見積依頼区分
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006A034">
+ <summary>
+ 更新管理 仕入先見積区分
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006A035">
+ <summary>
+ 更新管理 その他区分
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006A036">
+ <summary>
+ 更新管理 合計金額表示区分
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006A037">
+ <summary>
+ 拡張備考 拡張備考01
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006A038">
+ <summary>
+ 拡張備考 拡張備考02
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006A039">
+ <summary>
+ 拡張備考拡張備考03
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006A040">
+ <summary>
+ 拡張備考 拡張備考04
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006A041">
+ <summary>
+ 拡張備考 拡張備考05
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006A042">
+ <summary>
+ 拡張備考 拡張備考06
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006A043">
+ <summary>
+ 拡張備考 拡張備考07
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006A044">
+ <summary>
+ 拡張備考 拡張備考08
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006A045">
+ <summary>
+ 拡張備考 拡張備考09
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006A046">
+ <summary>
+ 拡張備考 拡張備考10
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006A047">
+ <summary>
+ 拡張備考 拡張備考11
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006A048">
+ <summary>
+ 拡張備考 拡張備考12
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006A049">
+ <summary>
+ 拡張備考 拡張備考13
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006A050">
+ <summary>
+ 拡張備考 拡張備考14
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006A051">
+ <summary>
+ 拡張備考 拡張備考15
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006A052">
+ <summary>
+ 拡張備考 拡張備考16
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006A053">
+ <summary>
+ 拡張備考 拡張備考17
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006A054">
+ <summary>
+ 拡張備考 拡張備考18
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006A055">
+ <summary>
+ 拡張備考 拡張備考19
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006A056">
+ <summary>
+ 拡張備考 拡張備考20
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006A057">
+ <summary>
+ 拡張備考 拡張備考21
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006A058">
+ <summary>
+ 拡張備考 拡張備考22
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006A059">
+ <summary>
+ 拡張備考 拡張備考23
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006A060">
+ <summary>
+ 拡張備考 拡張備考24
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006A061">
+ <summary>
+ 拡張備考 拡張備考25
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006A062">
+ <summary>
+ 拡張備考 拡張備考26
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006A063">
+ <summary>
+ 拡張備考 拡張備考27
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006A064">
+ <summary>
+ 拡張備考 拡張備考28
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006A065">
+ <summary>
+ 拡張備考 拡張備考29
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006A066">
+ <summary>
+ 拡張備考 拡張備考30
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R006MITSUMORIH.HANR006A067">
+ <summary>
+ 消費税金額表示区分
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R007MITSUMORIM.HANR007001">
+ <summary>
+ 見積日付(年月日)
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R007MITSUMORIM.HANR007002">
+ <summary>
+ 処理連番
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R007MITSUMORIM.HANR007003">
+ <summary>
+ 明細区分
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R007MITSUMORIM.HANR007004">
+ <summary>
+ 行番号
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R007MITSUMORIM.HANR007005">
+ <summary>
+ 取引区分
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R007MITSUMORIM.HANR007006">
+ <summary>
+ 商品コード
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R007MITSUMORIM.HANR007007">
+ <summary>
+ 商品名１
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R007MITSUMORIM.HANR007008">
+ <summary>
+ 数量単位
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R007MITSUMORIM.HANR007009">
+ <summary>
+ 入数・個数 入  数
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R007MITSUMORIM.HANR007010">
+ <summary>
+ 入数・個数 個  数
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R007MITSUMORIM.HANR007011">
+ <summary>
+ 入数・個数 個数単位
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R007MITSUMORIM.HANR007012">
+ <summary>
+ 入数・個数 見積数量
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R007MITSUMORIM.HANR007013">
+ <summary>
+ 入数・個数 見積単価
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R007MITSUMORIM.HANR007014">
+ <summary>
+ 入数・個数 見積金額
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R007MITSUMORIM.HANR007015">
+ <summary>
+ 入数・個数 原単価
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R007MITSUMORIM.HANR007016">
+ <summary>
+ 入数・個数 単価計算方法
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R007MITSUMORIM.HANR007017">
+ <summary>
+ 入数・個数 単価掛率
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R007MITSUMORIM.HANR007018">
+ <summary>
+ 入数・個数 標準売上単価
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R007MITSUMORIM.HANR007019">
+ <summary>
+ 入数・個数 標準仕入単価
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R007MITSUMORIM.HANR007020">
+ <summary>
+ 入数・個数 上代単価
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R007MITSUMORIM.HANR007021">
+ <summary>
+ 入数・個数 粗利額
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R007MITSUMORIM.HANR007022">
+ <summary>
+ 値  引	値引対象額
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R007MITSUMORIM.HANR007023">
+ <summary>
+ 値  引	値引率
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R007MITSUMORIM.HANR007024">
+ <summary>
+ 消費税 課税区分
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R007MITSUMORIM.HANR007025">
+ <summary>
+ 消費税 消費税率
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R007MITSUMORIM.HANR007026">
+ <summary>
+ 消費税 内消費税額
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R007MITSUMORIM.HANR007027">
+ <summary>
+ 消費税 外税額(明細消費税用)
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R007MITSUMORIM.HANR007028">
+ <summary>
+ 消費税 消費税計算区分
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R007MITSUMORIM.HANR007029">
+ <summary>
+ 行摘要 行摘要コード
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R007MITSUMORIM.HANR007030">
+ <summary>
+ 行摘要 行摘要１
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R007MITSUMORIM.HANR007031">
+ <summary>
+ 行摘要 行摘要２
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R007MITSUMORIM.HANR007032">
+ <summary>
+ 行摘要 通貨コード
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R007MITSUMORIM.HANR007033">
+ <summary>
+ 原価管理 管理コード
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R007MITSUMORIM.HANR007034">
+ <summary>
+ 原価管理 データ発生区分
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R007MITSUMORIM.HANR007035">
+ <summary>
+ 消費税総額 上代課税区分
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R007MITSUMORIM.HANR007036">
+ <summary>
+ 消費税総額 原価金額
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R007MITSUMORIM.HANR007037">
+ <summary>
+ 消費税総額 営業所コード
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R007MITSUMORIM.HANR007038">
+ <summary>
+ 消費税総額 拡張項目入力パターン№
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R007MITSUMORIM.HANR007039">
+ <summary>
+ 消費税総額 得意先コード
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R007MITSUMORIM.HANR007040">
+ <summary>
+ 消費税総額 担当者コード
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R007MITSUMORIM.HANR007041">
+ <summary>
+ 消費税総額 部門コード
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R007MITSUMORIM.HANR007042">
+ <summary>
+ 消費税総額 取引区分属性
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R007MITSUMORIM.HANR007999">
+ <summary>
+ 更新制御 更新番号
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R007MITSUMORIM.HANR007043">
+ <summary>
+ Ｆ
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R007MITSUMORIM.HANR007044">
+ <summary>
+ 原価管理 原価集計コード
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R007MITSUMORIM.HANR007045">
+ <summary>
+ 原価管理 原価集計サブコード
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R007MITSUMORIM.HANR007046">
+ <summary>
+ 原価管理 要素コード
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R007MITSUMORIM.HANR007047">
+ <summary>
+ 商品内訳管理 内訳コード１
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R007MITSUMORIM.HANR007048">
+ <summary>
+ 商品内訳管理 内訳コード２
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R007MITSUMORIM.HANR007049">
+ <summary>
+ 商品内訳管理 内訳コード３
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R007MITSUMORIM.HANR007050">
+ <summary>
+ 換算数量 換算数量
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R007MITSUMORIM.HANR007051">
+ <summary>
+ 換算数量 金額算出モード
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R007MITSUMORIM.HANR007052">
+ <summary>
+ 換算数量 原価金額算出モード
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R007MITSUMORIM.HANR007INS">
+ <summary>
+ 更新制御 登録日時
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R007MITSUMORIM.HANR007UPD">
+ <summary>
+ 更新制御 更新日時
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R007MITSUMORIM.HANR007053">
+ <summary>
+ 伝票承認 仮伝票発生区分
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R007MITSUMORIM.HANR007054">
+ <summary>
+ 検収基準 検収区分
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R007MITSUMORIM.HANR007055">
+ <summary>
+ 外貨管理 外貨　見積単価
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R007MITSUMORIM.HANR007056">
+ <summary>
+ 外貨管理 外貨　見積金額
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R007MITSUMORIM.HANR007057">
+ <summary>
+ 外貨管理 外貨　原単価
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R007MITSUMORIM.HANR007058">
+ <summary>
+ 外貨管理 外貨　原価金額
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R007MITSUMORIM.HANR007059">
+ <summary>
+ 外貨管理 外貨　粗利額
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R007MITSUMORIM.HANR007060">
+ <summary>
+ 外貨管理 外貨　上代単価
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R007MITSUMORIM.HANR007061">
+ <summary>
+ 外貨管理 外貨　値引対象額
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R007MITSUMORIM.HANR007062">
+ <summary>
+ 消費税分類 消費税分類
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R007MITSUMORIM.HANR007063">
+ <summary>
+ 消費税分類 商品名２
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R007MITSUMORIM.HANR007A001">
+ <summary>
+ 消費税分類 単価台帳参照区分
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R007MITSUMORIM.HANR007A002">
+ <summary>
+ 消費税分類 手配区分
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R007MITSUMORIM.HANR007A003">
+ <summary>
+ 消費税分類 規格
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R007MITSUMORIM.HANR007A004">
+ <summary>
+ 消費税分類 見積書商品名
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R007MITSUMORIM.HANR007A005">
+ <summary>
+ 消費税分類 仕入先コード
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R007MITSUMORIM.HANR007A006">
+ <summary>
+ 消費税分類 約区分
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R007MITSUMORIM.HANR007A007">
+ <summary>
+ 消費税分類 旧売上単価
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R007MITSUMORIM.HANR007A008">
+ <summary>
+ 消費税分類 売上単価（現在）
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R007MITSUMORIM.HANR007A009">
+ <summary>
+ 消費税分類 仕入単価（現在）
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R007MITSUMORIM.HANR007A010">
+ <summary>
+ 成約 成約区分
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R007MITSUMORIM.HANR007A011">
+ <summary>
+ 成約 成約日時
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R007MITSUMORIM.HANR007A012">
+ <summary>
+ 成約 成約者ID
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R007MITSUMORIM.HANR007A013">
+ <summary>
+ 成約 見積数量（ロット）
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R007MITSUMORIM.HANR007A014">
+ <summary>
+ 成約 台帳反映区分
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R007MITSUMORIM.HANR007A015">
+ <summary>
+ 成約 旧単価印字区分
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R007MITSUMORIM.HANR007A016">
+ <summary>
+ 成約 注意事項
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R007MITSUMORIM.HANR007A017">
+ <summary>
+ 成約 特値区分（売上）
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN10R007MITSUMORIM.HANR007A018">
+ <summary>
+ 成約 特値区分（仕入）
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN98MA01TANKA.HANMA01001">
+ <summary>
+ 得意先コード
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN98MA01TANKA.HANMA01002">
+ <summary>
+ 商品コード
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN98MA01TANKA.HANMA01003">
+ <summary>
+ 規格
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN98MA01TANKA.HANMA01004">
+ <summary>
+ 商品略称
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN98MA01TANKA.HANMA01005">
+ <summary>
+ 索引
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN98MA01TANKA.HANMA01006">
+ <summary>
+ 入数
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN98MA01TANKA.HANMA01007">
+ <summary>
+ 個数単位
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN98MA01TANKA.HANMA01008">
+ <summary>
+ 初期値⇒優先順位1
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN98MA01TANKA.HANMA01009">
+ <summary>
+ 優先順位1⇒優先順位2
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN98MA01TANKA.HANMA01010">
+ <summary>
+ 優先順位2
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN98MA01TANKA.HANMA01011">
+ <summary>
+ 優先順位3
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN98MA01TANKA.HANMA01012">
+ <summary>
+ 優先順位4
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN98MA01TANKA.HANMA01013">
+ <summary>
+ 発注摘要
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN98MA01TANKA.HANMA01014">
+ <summary>
+ 社内摘要
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN98MA01TANKA.HANMA01015">
+ <summary>
+ 販売先ユーザー情報
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN98MA01TANKA.HANMA01016">
+ <summary>
+ 図面等パス
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN98MA01TANKA.HANMA01017">
+ <summary>
+ 特値区分（売上）
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN98MA01TANKA.HANMA01018">
+ <summary>
+ 特値区分（仕入）
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN98MA01TANKA.HANMA01019">
+ <summary>
+ 仕入先コード
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN98MA01TANKA.HANMA01020">
+ <summary>
+ 単価変更日付（売上）
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN98MA01TANKA.HANMA01021">
+ <summary>
+ 単価変更日付（仕入）
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN98MA01TANKA.HANMA01022">
+ <summary>
+ 最終売上日
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN98MA01TANKA.HANMA01023">
+ <summary>
+ 最終売上処理連番
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN98MA01TANKA.HANMA01024">
+ <summary>
+ 最終売上単価
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN98MA01TANKA.HANMA01025">
+ <summary>
+ 最終仕入日
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN98MA01TANKA.HANMA01026">
+ <summary>
+ 最終仕入処理連番
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN98MA01TANKA.HANMA01027">
+ <summary>
+ 最終仕入単価
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN98MA01TANKA.HANMA01028">
+ <summary>
+ 作成元プログラムID
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN98MA01TANKA.HANMA01029">
+ <summary>
+ 参照見積処理連番
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN98MA01TANKA.HANMA01030">
+ <summary>
+ 参照見積行番号
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN98MA01TANKA.HANMA01031">
+ <summary>
+ 登録者ID
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN98MA01TANKA.HANMA01032">
+ <summary>
+ 登録日時
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN98MA01TANKA.HANMA01033">
+ <summary>
+ 登録端末
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN98MA01TANKA.HANMA01034">
+ <summary>
+ 更新者ID
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN98MA01TANKA.HANMA01035">
+ <summary>
+ 更新日時
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN98MA01TANKA.HANMA01036">
+ <summary>
+ 更新端末
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN98MA01TANKA.HANMA01037">
+ <summary>
+ 見積商品名
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN98MA01TANKA.HANMA01038">
+ <summary>
+ 最終更新見積処理連番
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN98MA01TANKA.HANMA01039">
+ <summary>
+ 最終更新見積行番号
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN98MA01TANKA.HANMA01040">
+ <summary>
+ 作成元見積処理連番
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN98MA01TANKA.HANMA01041">
+ <summary>
+ 作成元見積行番号
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN98MA01TANKA.HANMA01042">
+ <summary>
+ 運賃摘要
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN98MA01TANKA.HANMA01043">
+ <summary>
+ 品番
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN98MA01TANKA.HANMA01044">
+ <summary>
+ 厚み
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN98MA01TANKA.HANMA01045">
+ <summary>
+ 幅1
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN98MA01TANKA.HANMA01046">
+ <summary>
+ 幅2、奥行き
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN98MA01TANKA.HANMA01047">
+ <summary>
+ ベロ
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN98MA01TANKA.HANMA01048">
+ <summary>
+ 長さ
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN98MA01TANKA.HANMA01049">
+ <summary>
+ 高さ
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN98MA01TANKA.HANMA01050">
+ <summary>
+ スリット数
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN98MA01TANKA.HANMA01051">
+ <summary>
+ 度量衡
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN98MA01TANKA.HANMA01052">
+ <summary>
+ 度量衡の単位
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN98MA01TANKA.HANMA01053">
+ <summary>
+ 形状
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN98MA01TANKA.HANMA01054">
+ <summary>
+ 備考
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN98MA01TANKA.HANMA01055">
+ <summary>
+ 色
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN98MA01TANKA.HANMA01056">
+ <summary>
+ リードタイム
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN98MA01TANKA.HANMA01057">
+ <summary>
+ 予想注文間隔
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN98MA01TANKA.HANMA01058">
+ <summary>
+ メーカー、ブランド
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN98MA01TANKA.HANMA01059">
+ <summary>
+ ベース単価売り
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN98MA01TANKA.HANMA01060">
+ <summary>
+ ベース単価仕入
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN98MA01TANKA.HANMA01061">
+ <summary>
+ 得意先商品コード
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN98MA01TANKA.HANMA01062">
+ <summary>
+ メーカ商品コード
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN98MA01TANKA.HANMA01063">
+ <summary>
+ もりや管理番号
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN98MA01TANKA.HANMA01064">
+ <summary>
+ JANコード
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN98MA01TANKA.HANMA01065">
+ <summary>
+ 単価変更時
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN98MA01TANKA.HANMA01066">
+ <summary>
+ 変更前商品名
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN98MA01TANKA.HANMA01067">
+ <summary>
+ 変更前見積商品名
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN98MA01TANKA.HANMA01068">
+ <summary>
+ その他・予備・数字1
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN98MA01TANKA.HANMA01069">
+ <summary>
+ その他・予備・数字2
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN98MA01TANKA.HANMA01070">
+ <summary>
+ その他・予備・数字3
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN98MA01TANKA.HANMA01071">
+ <summary>
+ その他・予備・文字1
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN98MA01TANKA.HANMA01072">
+ <summary>
+ その他・予備・文字2
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN98MA01TANKA.HANMA01073">
+ <summary>
+ その他・予備・文字3
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN98MA01TANKA.HANMA01074">
+ <summary>
+ 更新番号
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN98MA01TANKA.HANMA01075">
+ <summary>
+ 登録日時
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN98MA01TANKA.HANMA01999">
+ <summary>
+ 更新日時
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN98MA01TANKA.HANMA01INS">
+ <summary>
+ 商品名１
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN98MA01TANKA.HANMA01UPD">
+ <summary>
+ 商品名２
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN98MA02SUTANKA.HANMA02001">
+ <summary>
+ 得意先コード
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN98MA02SUTANKA.HANMA02002">
+ <summary>
+ 商品コード
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN98MA02SUTANKA.HANMA02003">
+ <summary>
+ 規格
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN98MA02SUTANKA.HANMA02004">
+ <summary>
+ 台帳データ区分
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN98MA02SUTANKA.HANMA02005">
+ <summary>
+ 行番号
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN98MA02SUTANKA.HANMA02006">
+ <summary>
+ 数量・上限
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN98MA02SUTANKA.HANMA02007">
+ <summary>
+ 売上単価
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN98MA02SUTANKA.HANMA02008">
+ <summary>
+ 仕入単価
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN98MA02SUTANKA.HANMA02009">
+ <summary>
+ 単価変更日付（売上）
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN98MA02SUTANKA.HANMA02010">
+ <summary>
+ 単価変更日付（仕入）
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN98MA02SUTANKA.HANMA02011">
+ <summary>
+ 売上単価（新）
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN98MA02SUTANKA.HANMA02012">
+ <summary>
+ 仕入単価（新）
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN98MA02SUTANKA.HANMA02999">
+ <summary>
+ 更新番号
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN98MA02SUTANKA.HANMA02INS">
+ <summary>
+ 登録日時
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.HAN98MA02SUTANKA.HANMA02UPD">
+ <summary>
+ 更新日時
+ </summary>
+ <returns></returns>
+</member>
+<member name="T:MitumoLib.Models.MTM00M002USER">
+ <summary>
+ ユーザーマスタ
+ </summary>
+</member>
+<member name="P:MitumoLib.Models.MTM00M002USER.MTMM002001">
+ <summary>
+ ログインID
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM00M002USER.MTMM002002">
+ <summary>
+ ログイン名
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM00M002USER.MTMM002003">
+ <summary>
+ パスワード
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM00M002USER.MTMM002003_2">
+ <summary>
+ パスワード（確認）
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R001TANKA.MTMR001001">
+ <summary>
+ 検索値
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R001TANKA.MTMR001002">
+ <summary>
+ 連番
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R001TANKA.MTMR001003">
+ <summary>
+ 得C
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R001TANKA.MTMR001004">
+ <summary>
+ 得意先名
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R001TANKA.MTMR001005">
+ <summary>
+ ﾗﾝｸC
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R001TANKA.MTMR001006">
+ <summary>
+ ﾗﾝｸ
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R001TANKA.MTMR001007">
+ <summary>
+ 営C
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R001TANKA.MTMR001008">
+ <summary>
+ 営業所
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R001TANKA.MTMR001009">
+ <summary>
+ 部課C
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R001TANKA.MTMR001010">
+ <summary>
+ 部課名
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R001TANKA.MTMR001011">
+ <summary>
+ 担C
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R001TANKA.MTMR001012">
+ <summary>
+ 担当者名
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R001TANKA.MTMR001013">
+ <summary>
+ 商品C
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R001TANKA.MTMR001014">
+ <summary>
+ 商品名
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R001TANKA.MTMR001015">
+ <summary>
+ 規格
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R001TANKA.MTMR001016">
+ <summary>
+ 数量・上限
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R001TANKA.MTMR001017">
+ <summary>
+ ロット
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R001TANKA.MTMR001018">
+ <summary>
+ 行番号
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R001TANKA.MTMR001019">
+ <summary>
+ 入数
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R001TANKA.MTMR001020">
+ <summary>
+ 単位
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R001TANKA.MTMR001021">
+ <summary>
+ 手配
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R001TANKA.MTMR001022">
+ <summary>
+ 改定前売単価
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R001TANKA.MTMR001023">
+ <summary>
+ 改定前仕入単価
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R001TANKA.MTMR001024">
+ <summary>
+ 改定前粗利率
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R001TANKA.MTMR001025">
+ <summary>
+ 現売単価
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R001TANKA.MTMR001026">
+ <summary>
+ 現売㎡単価
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R001TANKA.MTMR001027">
+ <summary>
+ 現仕入単価
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R001TANKA.MTMR001028">
+ <summary>
+ 現仕㎡単価
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R001TANKA.MTMR001029">
+ <summary>
+ 現粗利率
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R001TANKA.MTMR001030">
+ <summary>
+ 新売単価
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R001TANKA.MTMR001031">
+ <summary>
+ 新売㎡単価
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R001TANKA.MTMR001032">
+ <summary>
+ 売実施日
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R001TANKA.MTMR001033">
+ <summary>
+ 新仕入単価
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R001TANKA.MTMR001034">
+ <summary>
+ 新仕㎡単価
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R001TANKA.MTMR001035">
+ <summary>
+ 仕実施日
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R001TANKA.MTMR001036">
+ <summary>
+ 新粗利率
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R001TANKA.MTMR001037">
+ <summary>
+ 値上率
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R001TANKA.MTMR001038">
+ <summary>
+ 仕入先コメント
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R001TANKA.MTMR001039">
+ <summary>
+ 数量
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R001TANKA.MTMR001040">
+ <summary>
+ 売上回数
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R001TANKA.MTMR001041">
+ <summary>
+ 売上金額
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R001TANKA.MTMR001042">
+ <summary>
+ 粗利金額
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R001TANKA.MTMR001043">
+ <summary>
+ 改定後売上金額
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R001TANKA.MTMR001044">
+ <summary>
+ 改定後粗利金額
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R001TANKA.MTMR001045">
+ <summary>
+ 社内適用
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R001TANKA.MTMR001046">
+ <summary>
+ 発注適用
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R001TANKA.MTMR001047">
+ <summary>
+ 運賃適用
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R001TANKA.MTMR001048">
+ <summary>
+ 見積書商品名
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R001TANKA.MTMR001049">
+ <summary>
+ 最終売上日
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R001TANKA.MTMR001050">
+ <summary>
+ 最終売上単価
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R001TANKA.MTMR001051">
+ <summary>
+ 最終売上数量
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R001TANKA.MTMR001052">
+ <summary>
+ 最終納品先
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R001TANKA.MTMR001053">
+ <summary>
+ 納品先履歴
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R001TANKA.MTMR001054">
+ <summary>
+ 得意先FAX
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R001TANKA.MTMR001055">
+ <summary>
+ 仕入先C
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R001TANKA.MTMR001056">
+ <summary>
+ 仕入先名
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R001TANKA.MTMR001057">
+ <summary>
+ 売価変更
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R001TANKA.MTMR001058">
+ <summary>
+ 仕価変更
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R001TANKA.MTMR001059">
+ <summary>
+ 商品名(比較用)
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R001TANKA.MTMR001060">
+ <summary>
+ 商品名
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R001TANKA.MTMR001061">
+ <summary>
+ ｽﾘｯﾄ
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R001TANKA.MTMR001062">
+ <summary>
+ #
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R001TANKA.MTMR001063">
+ <summary>
+ 厚み
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R001TANKA.MTMR001064">
+ <summary>
+ （空白１）
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R001TANKA.MTMR001065">
+ <summary>
+ 巾1
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R001TANKA.MTMR001066">
+ <summary>
+ （空白２）
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R001TANKA.MTMR001067">
+ <summary>
+ 巾2
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R001TANKA.MTMR001068">
+ <summary>
+ （空白３）
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R001TANKA.MTMR001069">
+ <summary>
+ 長さ
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R001TANKA.MTMR001070">
+ <summary>
+ M
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R001TANKA.MTMR001071">
+ <summary>
+ +表示
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R001TANKA.MTMR001072">
+ <summary>
+ ｽﾘｯﾄ
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R001TANKA.MTMR001073">
+ <summary>
+ 備考
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R001TANKA.MTMR001074">
+ <summary>
+ ㎡計算
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R001TANKA.MTMR001075">
+ <summary>
+ 改定単価
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R001TANKA.MTMR001076">
+ <summary>
+ 値上がり率
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R001TANKA.MTMR001077">
+ <summary>
+ 備考
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R002KAKAKU.MTMR002001">
+ <summary>
+ 得意先コード
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R002KAKAKU.MTMR002002">
+ <summary>
+ 商品コード
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R002KAKAKU.MTMR002003">
+ <summary>
+ 規格
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R002KAKAKU.MTMR002004">
+ <summary>
+ 数量・上限
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R002KAKAKU.MTMR002005">
+ <summary>
+ 得意先名
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R002KAKAKU.MTMR002006">
+ <summary>
+ ランクコード
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R002KAKAKU.MTMR002007">
+ <summary>
+ ランク
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R002KAKAKU.MTMR002008">
+ <summary>
+ 営業所コード
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R002KAKAKU.MTMR002009">
+ <summary>
+ 営業所
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R002KAKAKU.MTMR002010">
+ <summary>
+ 部課コード
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R002KAKAKU.MTMR002011">
+ <summary>
+ 部課名
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R002KAKAKU.MTMR002012">
+ <summary>
+ 担当者コード
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R002KAKAKU.MTMR002013">
+ <summary>
+ 担当者名
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R002KAKAKU.MTMR002014">
+ <summary>
+ 仕入先コード
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R002KAKAKU.MTMR002015">
+ <summary>
+ 仕入先名
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R002KAKAKU.MTMR002016">
+ <summary>
+ 商品名
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R002KAKAKU.MTMR002017">
+ <summary>
+ ロット
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R002KAKAKU.MTMR002018">
+ <summary>
+ 行番号
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R002KAKAKU.MTMR002019">
+ <summary>
+ 入数
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R002KAKAKU.MTMR002020">
+ <summary>
+ 単位
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R002KAKAKU.MTMR002021">
+ <summary>
+ 手配
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R002KAKAKU.MTMR002022">
+ <summary>
+ 改定前売単価
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R002KAKAKU.MTMR002023">
+ <summary>
+ 改定前仕入単価
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R002KAKAKU.MTMR002024">
+ <summary>
+ 改定前粗利率
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R002KAKAKU.MTMR002025">
+ <summary>
+ 現売上単価
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R002KAKAKU.MTMR002026">
+ <summary>
+ 現売㎡単価
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R002KAKAKU.MTMR002027">
+ <summary>
+ 現仕入単価
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R002KAKAKU.MTMR002028">
+ <summary>
+ 現仕㎡単価
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R002KAKAKU.MTMR002029">
+ <summary>
+ 現粗利率
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R002KAKAKU.MTMR002030">
+ <summary>
+ 新売上単価
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R002KAKAKU.MTMR002031">
+ <summary>
+ 新売㎡単価
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R002KAKAKU.MTMR002032">
+ <summary>
+ 売実施日
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R002KAKAKU.MTMR002033">
+ <summary>
+ 新仕入単価
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R002KAKAKU.MTMR002034">
+ <summary>
+ 新仕㎡単価
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R002KAKAKU.MTMR002035">
+ <summary>
+ 仕実施日
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R002KAKAKU.MTMR002036">
+ <summary>
+ 新粗利率
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R002KAKAKU.MTMR002037">
+ <summary>
+ 値上率
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R002KAKAKU.MTMR002038">
+ <summary>
+ 仕入先コメント
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R002KAKAKU.MTMR002039">
+ <summary>
+ 数量
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R002KAKAKU.MTMR002040">
+ <summary>
+ 売上回数
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R002KAKAKU.MTMR002041">
+ <summary>
+ 売上金額
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R002KAKAKU.MTMR002042">
+ <summary>
+ 粗利金額
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R002KAKAKU.MTMR002043">
+ <summary>
+ 改定後売上金額
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R002KAKAKU.MTMR002044">
+ <summary>
+ 改定後粗利金額
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R002KAKAKU.MTMR002045">
+ <summary>
+ 社内摘要
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R002KAKAKU.MTMR002046">
+ <summary>
+ 発注摘要
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R002KAKAKU.MTMR002047">
+ <summary>
+ 運賃摘要
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R002KAKAKU.MTMR002048">
+ <summary>
+ 見積書商品名
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R002KAKAKU.MTMR002049">
+ <summary>
+ 最終売上日
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R002KAKAKU.MTMR002050">
+ <summary>
+ 最終売上単価
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R002KAKAKU.MTMR002051">
+ <summary>
+ 最終売上数量
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R002KAKAKU.MTMR002052">
+ <summary>
+ 最終納品先
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R002KAKAKU.MTMR002053">
+ <summary>
+ 納品先履歴（過去18カ月）
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R002KAKAKU.MTMR002054">
+ <summary>
+ 得意先FAX
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R002KAKAKU.MTMR002055">
+ <summary>
+ 売価変更
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R002KAKAKU.MTMR002056">
+ <summary>
+ 仕価変更
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R002KAKAKU.MTMR002057">
+ <summary>
+ 商品名(比較用)
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R002KAKAKU.MTMR002058">
+ <summary>
+ 商品名
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R002KAKAKU.MTMR002059">
+ <summary>
+ ｽﾘｯﾄ
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R002KAKAKU.MTMR002060">
+ <summary>
+ #
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R002KAKAKU.MTMR002061">
+ <summary>
+ 厚み
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R002KAKAKU.MTMR002062">
+ <summary>
+ 巾1
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R002KAKAKU.MTMR002063">
+ <summary>
+ 巾2
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R002KAKAKU.MTMR002064">
+ <summary>
+ 長さ
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R002KAKAKU.MTMR002065">
+ <summary>
+ M
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R002KAKAKU.MTMR002066">
+ <summary>
+ +表示
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R002KAKAKU.MTMR002067">
+ <summary>
+ ｽﾘｯﾄ
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R002KAKAKU.MTMR002068">
+ <summary>
+ 備考
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R002KAKAKU.MTMR002069">
+ <summary>
+ ㎡計算
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R002KAKAKU.MTMR002070">
+ <summary>
+ 改定単価
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R002KAKAKU.MTMR002071">
+ <summary>
+ 値上がり率
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R002KAKAKU.MTMR002072">
+ <summary>
+ 備考（見積書）
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R002KAKAKU.MTMR002073">
+ <summary>
+ 宛先名
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R002KAKAKU.MTMR002074">
+ <summary>
+ ログインID
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R002KAKAKU.MTMR002075">
+ <summary>
+ もりや担当者メールアドレス
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R002KAKAKU.MTMR002076">
+ <summary>
+ 宛先送信区分
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R002KAKAKU.MTMR002077">
+ <summary>
+ FAX番号
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R002KAKAKU.MTMR002078">
+ <summary>
+ メールアドレス
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R002KAKAKU.MTMR002079">
+ <summary>
+ 宛先名
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R002KAKAKU.MTMR002080">
+ <summary>
+ 価格入力番号
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R002KAKAKU.MTMR002081">
+ <summary>
+ 価格入力名
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R002KAKAKU.MTMR002082">
+ <summary>
+ 取込年月日
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R002KAKAKU.MTMR002083">
+ <summary>
+ 取込担当者コード
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R002KAKAKU.MTMR002084">
+ <summary>
+ 納品先履歴カットフラグ
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R002KAKAKU.MTMR002085">
+ <summary>
+ 確定フラグ
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R002KAKAKU.MTMR002086">
+ <summary>
+ 見積書送付フラグ
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R002KAKAKU.MTMR002087">
+ <summary>
+ 見積書送信日
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R002KAKAKU.MTMR002088">
+ <summary>
+ 見積書送付ログインID
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R002KAKAKU.MTMR002089">
+ <summary>
+ 見積連携日
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R002KAKAKU.MTMR002090">
+ <summary>
+ 単価台帳連携日
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R002KAKAKU.MTMR002091">
+ <summary>
+ 連携担当者コード
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R003JITSUKOU.MTMR003001">
+ <summary>
+ 価格入力番号
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R003JITSUKOU.MTMR003002">
+ <summary>
+ 価格入力名
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R003JITSUKOU.MTMR003003">
+ <summary>
+ 取込担当者コード
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R003JITSUKOU.MTMR003004">
+ <summary>
+ 取込年月日
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R003JITSUKOU.MTMR003005">
+ <summary>
+ 一斉送信日時
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R003JITSUKOU.MTMR003005_2">
+ <summary>
+ 一斉送信日時（時間）
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R003JITSUKOU.MTMR003006">
+ <summary>
+ 更新日時
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R003JITSUKOU.MTMR003006_2">
+ <summary>
+ 更新日時（時間）
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R003JITSUKOU.MTMR003007">
+ <summary>
+ 締切日
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R003JITSUKOU.MTMR003008">
+ <summary>
+ 運賃の指定
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R003JITSUKOU.MTMR003009">
+ <summary>
+ 案内文
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R003JITSUKOU.MTMR003010">
+ <summary>
+ 取込元ファイル名
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R003JITSUKOU.MTMR003011">
+ <summary>
+ 値下前売単価
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R003JITSUKOU.MTMR003012">
+ <summary>
+ 値下前仕入単価
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R003JITSUKOU.MTMR003013">
+ <summary>
+ 値下前粗利率
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R003JITSUKOU.MTMR003014">
+ <summary>
+ 現売㎡単価
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R003JITSUKOU.MTMR003015">
+ <summary>
+ 現仕㎡単価
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R003JITSUKOU.MTMR003016">
+ <summary>
+ 新売㎡単価
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R003JITSUKOU.MTMR003017">
+ <summary>
+ 新仕㎡単価
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R003JITSUKOU.MTMR003018">
+ <summary>
+ 取込件数
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R003JITSUKOU.MTMR003019">
+ <summary>
+ 取込開始時間
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R003JITSUKOU.MTMR003020">
+ <summary>
+ 取込終了時間
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R004RENKEI.MTMR004001">
+ <summary>
+ 連携番号
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R004RENKEI.MTMR004002">
+ <summary>
+ 価格入力番号
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R004RENKEI.MTMR004003">
+ <summary>
+ 価格入力名
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R004RENKEI.MTMR004004">
+ <summary>
+ 出力対象
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R004RENKEI.MTMR004005">
+ <summary>
+ 担当者コード 開始
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R004RENKEI.MTMR004006">
+ <summary>
+ 担当者コード 終了
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R004RENKEI.MTMR004007">
+ <summary>
+ 営業所コード
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R004RENKEI.MTMR004008">
+ <summary>
+ 得意先コード 開始
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R004RENKEI.MTMR004009">
+ <summary>
+ 得意先コード 終了
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R004RENKEI.MTMR004010">
+ <summary>
+ 出力年月日
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R004RENKEI.MTMR004011">
+ <summary>
+ 出力フォルダ名
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R004RENKEI.MTMR004012">
+ <summary>
+ 単価台帳
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R004RENKEI.MTMR004013">
+ <summary>
+ 見積書
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R004RENKEI.MTMR004014">
+ <summary>
+ 取込開始時間
+ </summary>
+ <returns></returns>
+</member>
+<member name="P:MitumoLib.Models.MTM10R004RENKEI.MTMR004015">
+ <summary>
+ 取込終了時間
+ </summary>
+ <returns></returns>
+</member>
+</members>
+</doc>

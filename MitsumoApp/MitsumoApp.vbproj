@@ -1,0 +1,381 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{C5F83F23-7F2C-402F-8866-4437ACD30D00}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <StartupObject>MitsumoApp.My.MyApplication</StartupObject>
+    <RootNamespace>MitsumoApp</RootNamespace>
+    <AssemblyName>MitsumoApp</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>WindowsForms</MyType>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>MitsumoApp.xml</DocumentationFile>
+    <NoWarn>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>MitsumoApp.xml</DocumentationFile>
+    <NoWarn>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionExplicit>On</OptionExplicit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionCompare>Binary</OptionCompare>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionStrict>Off</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|Win32'">
+    <OutputPath>bin\Debug\</OutputPath>
+    <NoWarn>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|Win32'">
+    <NoWarn>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</NoWarn>
+    <OutputPath>bin\Release\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Web.WebView2.Core, Version=1.0.1587.40, Culture=neutral, PublicKeyToken=2a8ab48044d2601e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.WebView2.1.0.1587.40\lib\net45\Microsoft.Web.WebView2.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.WebView2.WinForms, Version=1.0.1587.40, Culture=neutral, PublicKeyToken=2a8ab48044d2601e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.WebView2.1.0.1587.40\lib\net45\Microsoft.Web.WebView2.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.WebView2.Wpf, Version=1.0.1587.40, Culture=neutral, PublicKeyToken=2a8ab48044d2601e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.WebView2.1.0.1587.40\lib\net45\Microsoft.Web.WebView2.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Drawing" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Windows.Forms" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+    <Import Include="System.Threading.Tasks" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="FormMTM01.Designer.vb">
+      <DependentUpon>FormMTM01.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormMTM01.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormMTM02.Designer.vb">
+      <DependentUpon>FormMTM02.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormMTM02.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormMTM02Regist.Designer.vb">
+      <DependentUpon>FormMTM02Regist.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormMTM02Regist.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormMTM03.Designer.vb">
+      <DependentUpon>FormMTM03.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormMTM03.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormMTM04.Designer.vb">
+      <DependentUpon>FormMTM04.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormMTM04.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormMTM05.Designer.vb">
+      <DependentUpon>FormMTM05.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormMTM05.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormMTMConfirm.Designer.vb">
+      <DependentUpon>FormMTMConfirm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormMTMConfirm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormMTMPreview.Designer.vb">
+      <DependentUpon>FormMTMPreview.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormMTMPreview.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormMTMProgress.Designer.vb">
+      <DependentUpon>FormMTMProgress.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormMTMProgress.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormMTMSearchBumon.Designer.vb">
+      <DependentUpon>FormMTMSearchBumon.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormMTMSearchBumon.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormMTMSearchEigyou.Designer.vb">
+      <DependentUpon>FormMTMSearchEigyou.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormMTMSearchEigyou.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormMTMSearchJitsukou.Designer.vb">
+      <DependentUpon>FormMTMSearchJitsukou.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormMTMSearchJitsukou.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormMTMLogin.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormMTMLogin.Designer.vb">
+      <DependentUpon>FormMTMLogin.vb</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormMTMMenu.Designer.vb">
+      <DependentUpon>FormMTMMenu.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormMTMMenu.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormMTMSearchShohin.Designer.vb">
+      <DependentUpon>FormMTMSearchShohin.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormMTMSearchShohin.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormMTMSearchTokui.Designer.vb">
+      <DependentUpon>FormMTMSearchTokui.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormMTMSearchTokui.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormMTMSearchUriage.Designer.vb">
+      <DependentUpon>FormMTMSearchUriage.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormMTMSearchUriage.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormMTMSearchUser.Designer.vb">
+      <DependentUpon>FormMTMSearchUser.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormMTMSearchUser.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormMTMSearchTanto.Designer.vb">
+      <DependentUpon>FormMTMSearchTanto.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormMTMSearchTanto.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormMTMSelect.Designer.vb">
+      <DependentUpon>FormMTMSelect.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormMTMSelect.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormMTMSearchTanka.Designer.vb">
+      <DependentUpon>FormMTMSearchTanka.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormMTMSearchTanka.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormMTMUser.Designer.vb">
+      <DependentUpon>FormMTMUser.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormMTMUser.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormSubPersonMaster.Designer.vb">
+      <DependentUpon>FormSubPersonMaster.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormSubPersonMaster.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FormMTM01.resx">
+      <DependentUpon>FormMTM01.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormMTM02.resx">
+      <DependentUpon>FormMTM02.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormMTM02Regist.resx">
+      <DependentUpon>FormMTM02Regist.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormMTM03.resx">
+      <DependentUpon>FormMTM03.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormMTM04.resx">
+      <DependentUpon>FormMTM04.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormMTM05.resx">
+      <DependentUpon>FormMTM05.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormMTMConfirm.resx">
+      <DependentUpon>FormMTMConfirm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormMTMPreview.resx">
+      <DependentUpon>FormMTMPreview.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormMTMProgress.resx">
+      <DependentUpon>FormMTMProgress.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormMTMSearchBumon.resx">
+      <DependentUpon>FormMTMSearchBumon.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormMTMSearchEigyou.resx">
+      <DependentUpon>FormMTMSearchEigyou.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormMTMSearchJitsukou.resx">
+      <DependentUpon>FormMTMSearchJitsukou.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormMTMLogin.resx">
+      <DependentUpon>FormMTMLogin.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormMTMMenu.resx">
+      <DependentUpon>FormMTMMenu.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormMTMSearchShohin.resx">
+      <DependentUpon>FormMTMSearchShohin.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormMTMSearchTokui.resx">
+      <DependentUpon>FormMTMSearchTokui.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormMTMSearchUriage.resx">
+      <DependentUpon>FormMTMSearchUriage.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormMTMSearchUser.resx">
+      <DependentUpon>FormMTMSearchUser.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormMTMSearchTanto.resx">
+      <DependentUpon>FormMTMSearchTanto.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormMTMSelect.resx">
+      <DependentUpon>FormMTMSelect.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormMTMSearchTanka.resx">
+      <DependentUpon>FormMTMSearchTanka.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormMTMUser.resx">
+      <DependentUpon>FormMTMUser.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormSubPersonMaster.resx">
+      <DependentUpon>FormSubPersonMaster.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.manifest" />
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Image\16_calendar.png" />
+    <Content Include="Image\32_close.png" />
+    <Content Include="Image\32_input.png" />
+    <Content Include="Image\32_search.png" />
+    <Content Include="Image\32_send.png" />
+    <Content Include="Image\32_systemsend.png" />
+    <Content Include="Image\32_table.png" />
+    <Content Include="Image\32_upload.png" />
+    <Content Include="Image\appicon.ico" />
+    <Content Include="Image\login_icon.png" />
+    <Content Include="Image\Logo_login.png" />
+    <Content Include="Image\logo_title.ico" />
+    <Content Include="Image\User_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MitsumoLib\MitsumoLib.vbproj">
+      <Project>{3a9b45eb-9ec3-4c26-a05c-a215a3c095f9}</Project>
+      <Name>MitsumoLib</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <Import Project="..\packages\Microsoft.Web.WebView2.1.0.1587.40\build\Microsoft.Web.WebView2.targets" Condition="Exists('..\packages\Microsoft.Web.WebView2.1.0.1587.40\build\Microsoft.Web.WebView2.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>このプロジェクトは、このコンピューター上にない NuGet パッケージを参照しています。それらのパッケージをダウンロードするには、[NuGet パッケージの復元] を使用します。詳細については、http://go.microsoft.com/fwlink/?LinkID=322105 を参照してください。見つからないファイルは {0} です。</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Web.WebView2.1.0.1587.40\build\Microsoft.Web.WebView2.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Web.WebView2.1.0.1587.40\build\Microsoft.Web.WebView2.targets'))" />
+  </Target>
+</Project>
