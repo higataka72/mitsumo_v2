@@ -1,6 +1,6 @@
 ﻿Imports System.Configuration
 Imports MitsumoLib
-
+Imports System.IO
 Public Class FormMTM03
     ''' <summary>
     ''' メニューフォーム
@@ -68,11 +68,14 @@ Public Class FormMTM03
             Next
         End If
 
+        '帳票ツール新コード
         Dim executionAsm As Reflection.Assembly = Reflection.Assembly.GetExecutingAssembly
         Dim executingPath As String = IO.Path.GetDirectoryName(New Uri(executionAsm.CodeBase).LocalPath)
+        Dim pdfTemplateDir = ConfigurationManager.AppSettings("PDF_DIR_TEMPLATE")
         Dim pdfDir = ConfigurationManager.AppSettings("PDF_DIR")
 
-        Dim previewData As Biz.MTM03PreviewData = Me.Biz03.PreviewPdf(searchCondition, executingPath + "\" + pdfDir)
+        Dim previewData As Biz.MTM03PreviewData = Me.Biz03.PreviewNewPdf(searchCondition, executingPath + "\" + pdfDir, executingPath + "\" + pdfTemplateDir)
+        'Dim previewData As Biz.MTM03PreviewData = Me.Biz03.PreviewPdf(searchCondition, executingPath + "\" + pdfDir)
 
         If previewData.ErrorList.Count > 0 Then
             For Each errorMessage As String In previewData.ErrorList
@@ -81,9 +84,28 @@ Public Class FormMTM03
             Next
         End If
 
+        '旧コード
+        'Dim executionAsm As Reflection.Assembly = Reflection.Assembly.GetExecutingAssembly
+        'Dim executingPath As String = IO.Path.GetDirectoryName(New Uri(executionAsm.CodeBase).LocalPath)
+        'Dim pdfDir = ConfigurationManager.AppSettings("PDF_DIR")
+
+        'Dim previewData As Biz.MTM03PreviewData = Me.Biz03.PreviewPdf(searchCondition, executingPath + "\" + pdfDir)
+
+        'If previewData.ErrorList.Count > 0 Then
+        '    For Each errorMessage As String In previewData.ErrorList
+        '        MessageBox.Show(errorMessage)
+        '        Exit Sub
+        '    Next
+        'End If
+
         'PDF起動
-        Dim p As System.Diagnostics.Process =
-        System.Diagnostics.Process.Start(previewData.FilePath)
+        Dim previewPathString As String = executingPath + "\" + pdfDir + "\" + previewData.FilePath
+        If File.Exists(previewPathString) Then
+            Dim p As Process = Process.Start(previewPathString)
+        Else
+            MessageBox.Show("プレビューファイルが存在しません" + vbCrLf + previewPathString)
+        End If
+
         'p.WaitForExit()
 
         ''後処理としてプレビューPDFを削除する
@@ -277,7 +299,9 @@ Public Class FormMTM03
 
             Dim executionAsm As Reflection.Assembly = Reflection.Assembly.GetExecutingAssembly
             Dim executingPath As String = IO.Path.GetDirectoryName(New Uri(executionAsm.CodeBase).LocalPath)
+            Dim pdfTemplateDir = ConfigurationManager.AppSettings("PDF_DIR_TEMPLATE")
             Dim pdfDir = ConfigurationManager.AppSettings("PDF_DIR")
+
 
             Me.ButtonSend.Enabled = False
             dialogProgress.Message = "送信開始.."
@@ -290,13 +314,13 @@ Public Class FormMTM03
                 For Each resultElement In sendMailData.SearchResult.ElementList
                     dialogProgress.Message = "送信中/得意先.." & resultElement.TokuisakiCode.Trim()
                     If (searchCondition.OutputNum = "0" Or searchCondition.OutputNum = "1") And resultElement.SoushinKubun = "1" Then
-                        Dim sendMailErrorList = Me.Biz03.SendMail(searchCondition.KakakuNyuuryokuNo, mailInfo, resultElement, executingPath + "\" + pdfDir)
+                        Dim sendMailErrorList = Me.Biz03.SendMail(searchCondition.KakakuNyuuryokuNo, mailInfo, resultElement, executingPath + "\" + pdfDir, executingPath + "\" + pdfTemplateDir)
                         If sendMailErrorList.Count > 0 Then
                             sendMailData.ErrorList.AddRange(sendMailErrorList)
                             Exit For
                         End If
                     ElseIf (searchCondition.OutputNum = "0" Or searchCondition.OutputNum = "2") And resultElement.SoushinKubun = "2" Then
-                        Dim sendEDocumentErrorList = Me.Biz03.SendEDocumentHeader(searchCondition.KakakuNyuuryokuNo, mailInfo, resultElement, executingPath + "\" + pdfDir)
+                        Dim sendEDocumentErrorList = Me.Biz03.SendEDocumentHeader(searchCondition.KakakuNyuuryokuNo, mailInfo, resultElement, executingPath + "\" + pdfDir, executingPath + "\" + pdfTemplateDir)
                         If sendEDocumentErrorList.Count > 0 Then
                             sendMailData.ErrorList.AddRange(sendEDocumentErrorList)
                             Exit For
@@ -930,6 +954,10 @@ Public Class FormMTM03
     Private Sub TextBox005_TextChanged(sender As Object, e As EventArgs) Handles TextBox005.TextChanged
         If (String.IsNullOrEmpty(Trim(Me.TextBox005.Text))) Then
             Me.TextBox006.Text = ""
+        Else
+            If (String.IsNullOrEmpty(Trim(Me.TextBox007.Text))) Then
+                Me.TextBox007.Text = Me.TextBox005.Text
+            End If
         End If
     End Sub
 
@@ -942,6 +970,10 @@ Public Class FormMTM03
     Private Sub TextBox009_TextChanged(sender As Object, e As EventArgs) Handles TextBox009.TextChanged
         If (String.IsNullOrEmpty(Trim(Me.TextBox009.Text))) Then
             Me.TextBox010.Text = ""
+        Else
+            If (String.IsNullOrEmpty(Trim(Me.TextBox011.Text))) Then
+                Me.TextBox011.Text = Me.TextBox009.Text
+            End If
         End If
     End Sub
 
@@ -954,6 +986,10 @@ Public Class FormMTM03
     Private Sub TextBox013_TextChanged(sender As Object, e As EventArgs) Handles TextBox013.TextChanged
         If (String.IsNullOrEmpty(Trim(Me.TextBox013.Text))) Then
             Me.TextBox014.Text = ""
+        Else
+            If (String.IsNullOrEmpty(Trim(Me.TextBox015.Text))) Then
+                Me.TextBox015.Text = Me.TextBox013.Text
+            End If
         End If
     End Sub
 
@@ -966,6 +1002,10 @@ Public Class FormMTM03
     Private Sub TextBox017_TextChanged(sender As Object, e As EventArgs) Handles TextBox017.TextChanged
         If (String.IsNullOrEmpty(Trim(Me.TextBox017.Text))) Then
             Me.TextBox018.Text = ""
+        Else
+            If (String.IsNullOrEmpty(Trim(Me.TextBox018.Text))) Then
+                Me.TextBox019.Text = Me.TextBox017.Text
+            End If
         End If
     End Sub
 
@@ -1117,5 +1157,429 @@ Public Class FormMTM03
         If (String.IsNullOrEmpty(Trim(Me.TextBox031.Text))) Then
             Me.TextBox032.Text = ""
         End If
+    End Sub
+
+    Private Sub TextBox001_KeyDown(sender As Object, e As KeyEventArgs) Handles TextBox001.KeyDown
+        If e.KeyCode = Keys.F3 Then
+            Button001.PerformClick()
+        End If
+        If e.KeyCode = Keys.Enter Then
+            Dim forward As Boolean = e.Modifiers <> Keys.Shift
+            'Me.ProcessTabKey(forward);
+            Me.SelectNextControl(Me.ActiveControl, forward, True, True, True)
+            e.Handled = True
+        End If
+    End Sub
+
+    Private Sub TextBox003_KeyDown(sender As Object, e As KeyEventArgs) Handles TextBox003.KeyDown
+        If e.KeyCode = Keys.F3 Then
+            Button002.PerformClick()
+        End If
+        If e.KeyCode = Keys.Enter Then
+            Dim forward As Boolean = e.Modifiers <> Keys.Shift
+            'Me.ProcessTabKey(forward);
+            Me.SelectNextControl(Me.ActiveControl, forward, True, True, True)
+            e.Handled = True
+        End If
+    End Sub
+
+    Private Sub TextBox005_KeyDown(sender As Object, e As KeyEventArgs) Handles TextBox005.KeyDown
+        If e.KeyCode = Keys.F3 Then
+            Button003.PerformClick()
+        End If
+        If e.KeyCode = Keys.Enter Then
+            Dim forward As Boolean = e.Modifiers <> Keys.Shift
+            'Me.ProcessTabKey(forward);
+            Me.SelectNextControl(Me.ActiveControl, forward, True, True, True)
+            e.Handled = True
+        End If
+    End Sub
+
+    Private Sub TextBox007_KeyDown(sender As Object, e As KeyEventArgs) Handles TextBox007.KeyDown
+        If e.KeyCode = Keys.F3 Then
+            Button004.PerformClick()
+        End If
+        If e.KeyCode = Keys.Enter Then
+            Dim forward As Boolean = e.Modifiers <> Keys.Shift
+            'Me.ProcessTabKey(forward);
+            Me.SelectNextControl(Me.ActiveControl, forward, True, True, True)
+            e.Handled = True
+        End If
+    End Sub
+
+    Private Sub TextBox009_KeyDown(sender As Object, e As KeyEventArgs) Handles TextBox009.KeyDown
+        If e.KeyCode = Keys.F3 Then
+            Button005.PerformClick()
+        End If
+        If e.KeyCode = Keys.Enter Then
+            Dim forward As Boolean = e.Modifiers <> Keys.Shift
+            'Me.ProcessTabKey(forward);
+            Me.SelectNextControl(Me.ActiveControl, forward, True, True, True)
+            e.Handled = True
+        End If
+    End Sub
+
+    Private Sub TextBox011_KeyDown(sender As Object, e As KeyEventArgs) Handles TextBox011.KeyDown
+        If e.KeyCode = Keys.F3 Then
+            Button006.PerformClick()
+        End If
+        If e.KeyCode = Keys.Enter Then
+            Dim forward As Boolean = e.Modifiers <> Keys.Shift
+            'Me.ProcessTabKey(forward);
+            Me.SelectNextControl(Me.ActiveControl, forward, True, True, True)
+            e.Handled = True
+        End If
+    End Sub
+
+    Private Sub TextBox013_KeyDown(sender As Object, e As KeyEventArgs) Handles TextBox013.KeyDown
+        If e.KeyCode = Keys.F3 Then
+            Button007.PerformClick()
+        End If
+        If e.KeyCode = Keys.Enter Then
+            Dim forward As Boolean = e.Modifiers <> Keys.Shift
+            'Me.ProcessTabKey(forward);
+            Me.SelectNextControl(Me.ActiveControl, forward, True, True, True)
+            e.Handled = True
+        End If
+    End Sub
+
+    Private Sub TextBox015_KeyDown(sender As Object, e As KeyEventArgs) Handles TextBox015.KeyDown
+        If e.KeyCode = Keys.F3 Then
+            Button008.PerformClick()
+        End If
+        If e.KeyCode = Keys.Enter Then
+            Dim forward As Boolean = e.Modifiers <> Keys.Shift
+            'Me.ProcessTabKey(forward);
+            Me.SelectNextControl(Me.ActiveControl, forward, True, True, True)
+            e.Handled = True
+        End If
+    End Sub
+
+    Private Sub TextBox017_KeyDown(sender As Object, e As KeyEventArgs) Handles TextBox017.KeyDown
+        If e.KeyCode = Keys.F3 Then
+            Button009.PerformClick()
+        End If
+        If e.KeyCode = Keys.Enter Then
+            Dim forward As Boolean = e.Modifiers <> Keys.Shift
+            'Me.ProcessTabKey(forward);
+            Me.SelectNextControl(Me.ActiveControl, forward, True, True, True)
+            e.Handled = True
+        End If
+    End Sub
+
+    Private Sub TextBox019_KeyDown(sender As Object, e As KeyEventArgs) Handles TextBox019.KeyDown
+        If e.KeyCode = Keys.F3 Then
+            Button010.PerformClick()
+        End If
+        If e.KeyCode = Keys.Enter Then
+            Dim forward As Boolean = e.Modifiers <> Keys.Shift
+            'Me.ProcessTabKey(forward);
+            Me.SelectNextControl(Me.ActiveControl, forward, True, True, True)
+            e.Handled = True
+        End If
+    End Sub
+
+    Private Sub TextBox021_KeyDown(sender As Object, e As KeyEventArgs) Handles TextBox021.KeyDown
+        If e.KeyCode = Keys.F3 Then
+            Button011.PerformClick()
+        End If
+        If e.KeyCode = Keys.Enter Then
+            Dim forward As Boolean = e.Modifiers <> Keys.Shift
+            'Me.ProcessTabKey(forward);
+            Me.SelectNextControl(Me.ActiveControl, forward, True, True, True)
+            e.Handled = True
+        End If
+    End Sub
+
+    Private Sub TextBox023_KeyDown(sender As Object, e As KeyEventArgs) Handles TextBox023.KeyDown
+        If e.KeyCode = Keys.F3 Then
+            Button012.PerformClick()
+        End If
+        If e.KeyCode = Keys.Enter Then
+            Dim forward As Boolean = e.Modifiers <> Keys.Shift
+            'Me.ProcessTabKey(forward);
+            Me.SelectNextControl(Me.ActiveControl, forward, True, True, True)
+            e.Handled = True
+        End If
+    End Sub
+
+    Private Sub TextBox025_KeyDown(sender As Object, e As KeyEventArgs) Handles TextBox025.KeyDown
+        If e.KeyCode = Keys.F3 Then
+            Button013.PerformClick()
+        End If
+        If e.KeyCode = Keys.Enter Then
+            Dim forward As Boolean = e.Modifiers <> Keys.Shift
+            'Me.ProcessTabKey(forward);
+            Me.SelectNextControl(Me.ActiveControl, forward, True, True, True)
+            e.Handled = True
+        End If
+    End Sub
+
+    Private Sub TextBox027_KeyDown(sender As Object, e As KeyEventArgs) Handles TextBox027.KeyDown
+        If e.KeyCode = Keys.F3 Then
+            Button014.PerformClick()
+        End If
+        If e.KeyCode = Keys.Enter Then
+            Dim forward As Boolean = e.Modifiers <> Keys.Shift
+            'Me.ProcessTabKey(forward);
+            Me.SelectNextControl(Me.ActiveControl, forward, True, True, True)
+            e.Handled = True
+        End If
+    End Sub
+
+    Private Sub TextBox029_KeyDown(sender As Object, e As KeyEventArgs) Handles TextBox029.KeyDown
+        If e.KeyCode = Keys.F3 Then
+            Button015.PerformClick()
+        End If
+        If e.KeyCode = Keys.Enter Then
+            Dim forward As Boolean = e.Modifiers <> Keys.Shift
+            'Me.ProcessTabKey(forward);
+            Me.SelectNextControl(Me.ActiveControl, forward, True, True, True)
+            e.Handled = True
+        End If
+    End Sub
+
+    Private Sub TextBox031_KeyDown(sender As Object, e As KeyEventArgs) Handles TextBox031.KeyDown
+        If e.KeyCode = Keys.F3 Then
+            Button016.PerformClick()
+        End If
+        If e.KeyCode = Keys.Enter Then
+            Dim forward As Boolean = e.Modifiers <> Keys.Shift
+            'Me.ProcessTabKey(forward);
+            Me.SelectNextControl(Me.ActiveControl, forward, True, True, True)
+            e.Handled = True
+        End If
+    End Sub
+
+    Private Sub TextBox033_KeyDown(sender As Object, e As KeyEventArgs) Handles TextBox033.KeyDown
+        If e.KeyCode = Keys.F3 Then
+            Button017.PerformClick()
+        End If
+        If e.KeyCode = Keys.Enter Then
+            Dim forward As Boolean = e.Modifiers <> Keys.Shift
+            'Me.ProcessTabKey(forward);
+            Me.SelectNextControl(Me.ActiveControl, forward, True, True, True)
+            e.Handled = True
+        End If
+    End Sub
+
+    Private Sub TextBox035_KeyDown(sender As Object, e As KeyEventArgs) Handles TextBox035.KeyDown
+        If e.KeyCode = Keys.F3 Then
+            Button018.PerformClick()
+        End If
+        If e.KeyCode = Keys.Enter Then
+            Dim forward As Boolean = e.Modifiers <> Keys.Shift
+            'Me.ProcessTabKey(forward);
+            Me.SelectNextControl(Me.ActiveControl, forward, True, True, True)
+            e.Handled = True
+        End If
+    End Sub
+
+    Private Sub TextBox037_KeyDown(sender As Object, e As KeyEventArgs) Handles TextBox037.KeyDown
+        If e.KeyCode = Keys.F3 Then
+            Button019.PerformClick()
+        End If
+        If e.KeyCode = Keys.Enter Then
+            Dim forward As Boolean = e.Modifiers <> Keys.Shift
+            'Me.ProcessTabKey(forward);
+            Me.SelectNextControl(Me.ActiveControl, forward, True, True, True)
+            e.Handled = True
+        End If
+    End Sub
+
+    Private Sub TextBox039_KeyDown(sender As Object, e As KeyEventArgs) Handles TextBox039.KeyDown
+        If e.KeyCode = Keys.F3 Then
+            Button020.PerformClick()
+        End If
+        If e.KeyCode = Keys.Enter Then
+            Dim forward As Boolean = e.Modifiers <> Keys.Shift
+            'Me.ProcessTabKey(forward);
+            Me.SelectNextControl(Me.ActiveControl, forward, True, True, True)
+            e.Handled = True
+        End If
+    End Sub
+
+    Private Sub TextBox041_KeyDown(sender As Object, e As KeyEventArgs) Handles TextBox041.KeyDown
+        If e.KeyCode = Keys.F3 Then
+            Button021.PerformClick()
+        End If
+        If e.KeyCode = Keys.Enter Then
+            Dim forward As Boolean = e.Modifiers <> Keys.Shift
+            'Me.ProcessTabKey(forward);
+            Me.SelectNextControl(Me.ActiveControl, forward, True, True, True)
+            e.Handled = True
+        End If
+    End Sub
+
+    Private Sub TextBox043_KeyDown(sender As Object, e As KeyEventArgs) Handles TextBox043.KeyDown
+        If e.KeyCode = Keys.F3 Then
+            Button022.PerformClick()
+        End If
+        If e.KeyCode = Keys.Enter Then
+            Dim forward As Boolean = e.Modifiers <> Keys.Shift
+            'Me.ProcessTabKey(forward);
+            Me.SelectNextControl(Me.ActiveControl, forward, True, True, True)
+            e.Handled = True
+        End If
+    End Sub
+
+    Private Sub TextBox045_KeyDown(sender As Object, e As KeyEventArgs) Handles TextBox045.KeyDown
+        If e.KeyCode = Keys.F3 Then
+            Button023.PerformClick()
+        End If
+        If e.KeyCode = Keys.Enter Then
+            Dim forward As Boolean = e.Modifiers <> Keys.Shift
+            'Me.ProcessTabKey(forward);
+            Me.SelectNextControl(Me.ActiveControl, forward, True, True, True)
+            e.Handled = True
+        End If
+    End Sub
+
+    Private Sub TextBox047_KeyDown(sender As Object, e As KeyEventArgs) Handles TextBox047.KeyDown
+        If e.KeyCode = Keys.F3 Then
+            Button024.PerformClick()
+        End If
+        If e.KeyCode = Keys.Enter Then
+            Dim forward As Boolean = e.Modifiers <> Keys.Shift
+            'Me.ProcessTabKey(forward);
+            Me.SelectNextControl(Me.ActiveControl, forward, True, True, True)
+            e.Handled = True
+        End If
+    End Sub
+
+    Private Sub TextBox049_KeyDown(sender As Object, e As KeyEventArgs) Handles TextBox049.KeyDown
+        If e.KeyCode = Keys.F3 Then
+            Button025.PerformClick()
+        End If
+        If e.KeyCode = Keys.Enter Then
+            Dim forward As Boolean = e.Modifiers <> Keys.Shift
+            'Me.ProcessTabKey(forward);
+            Me.SelectNextControl(Me.ActiveControl, forward, True, True, True)
+            e.Handled = True
+        End If
+    End Sub
+
+    Private Sub TextBox051_KeyDown(sender As Object, e As KeyEventArgs) Handles TextBox051.KeyDown
+        If e.KeyCode = Keys.F3 Then
+            Button026.PerformClick()
+        End If
+        If e.KeyCode = Keys.Enter Then
+            Dim forward As Boolean = e.Modifiers <> Keys.Shift
+            'Me.ProcessTabKey(forward);
+            Me.SelectNextControl(Me.ActiveControl, forward, True, True, True)
+            e.Handled = True
+        End If
+    End Sub
+
+    Private Sub TextBox053_KeyDown(sender As Object, e As KeyEventArgs) Handles TextBox053.KeyDown
+        If e.KeyCode = Keys.F3 Then
+            Button027.PerformClick()
+        End If
+        If e.KeyCode = Keys.Enter Then
+            Dim forward As Boolean = e.Modifiers <> Keys.Shift
+            'Me.ProcessTabKey(forward);
+            Me.SelectNextControl(Me.ActiveControl, forward, True, True, True)
+            e.Handled = True
+        End If
+    End Sub
+
+    Private Sub TextBox055_KeyDown(sender As Object, e As KeyEventArgs) Handles TextBox055.KeyDown
+        If e.KeyCode = Keys.F3 Then
+            Button028.PerformClick()
+        End If
+        If e.KeyCode = Keys.Enter Then
+            Dim forward As Boolean = e.Modifiers <> Keys.Shift
+            'Me.ProcessTabKey(forward);
+            Me.SelectNextControl(Me.ActiveControl, forward, True, True, True)
+            e.Handled = True
+        End If
+    End Sub
+
+    Private Sub TextBox058_KeyDown(sender As Object, e As KeyEventArgs) Handles TextBox058.KeyDown
+        If e.KeyCode = Keys.F3 Then
+            Button029.PerformClick()
+        End If
+        If e.KeyCode = Keys.Enter Then
+            Dim forward As Boolean = e.Modifiers <> Keys.Shift
+            'Me.ProcessTabKey(forward);
+            Me.SelectNextControl(Me.ActiveControl, forward, True, True, True)
+            e.Handled = True
+        End If
+    End Sub
+
+    Private Sub TextBox060_KeyDown(sender As Object, e As KeyEventArgs) Handles TextBox060.KeyDown
+        If e.KeyCode = Keys.F3 Then
+            Button030.PerformClick()
+        End If
+        If e.KeyCode = Keys.Enter Then
+            Dim forward As Boolean = e.Modifiers <> Keys.Shift
+            'Me.ProcessTabKey(forward);
+            Me.SelectNextControl(Me.ActiveControl, forward, True, True, True)
+            e.Handled = True
+        End If
+    End Sub
+
+    Private Sub TextBox062_KeyDown(sender As Object, e As KeyEventArgs) Handles TextBox062.KeyDown
+        If e.KeyCode = Keys.F3 Then
+            Button031.PerformClick()
+        End If
+        If e.KeyCode = Keys.Enter Then
+            Dim forward As Boolean = e.Modifiers <> Keys.Shift
+            'Me.ProcessTabKey(forward);
+            Me.SelectNextControl(Me.ActiveControl, forward, True, True, True)
+            e.Handled = True
+        End If
+    End Sub
+
+    Private Sub TextBox064_KeyDown(sender As Object, e As KeyEventArgs) Handles TextBox064.KeyDown
+        If e.KeyCode = Keys.F3 Then
+            Button032.PerformClick()
+        End If
+        If e.KeyCode = Keys.Enter Then
+            Dim forward As Boolean = e.Modifiers <> Keys.Shift
+            'Me.ProcessTabKey(forward);
+            Me.SelectNextControl(Me.ActiveControl, forward, True, True, True)
+            e.Handled = True
+        End If
+    End Sub
+
+    Private Sub TextBox066_KeyDown(sender As Object, e As KeyEventArgs) Handles TextBox066.KeyDown
+        If e.KeyCode = Keys.F3 Then
+            Button033.PerformClick()
+        End If
+        If e.KeyCode = Keys.Enter Then
+            Dim forward As Boolean = e.Modifiers <> Keys.Shift
+            'Me.ProcessTabKey(forward);
+            Me.SelectNextControl(Me.ActiveControl, forward, True, True, True)
+            e.Handled = True
+        End If
+    End Sub
+
+    Private Sub TextBox068_KeyDown(sender As Object, e As KeyEventArgs) Handles TextBox068.KeyDown
+        If e.KeyCode = Keys.F3 Then
+            Button034.PerformClick()
+        End If
+        If e.KeyCode = Keys.Enter Then
+            Dim forward As Boolean = e.Modifiers <> Keys.Shift
+            'Me.ProcessTabKey(forward);
+            Me.SelectNextControl(Me.ActiveControl, forward, True, True, True)
+            e.Handled = True
+        End If
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        Dim annaiFilePath As String = Me.Biz03.GetAnnaiFilePath(Me.TextBox001.Text)
+
+        If (String.IsNullOrEmpty(annaiFilePath)) Then
+            MessageBox.Show("案内文は設定されていません")
+            Exit Sub
+        End If
+
+        If File.Exists(annaiFilePath) Then
+            Dim p As Process = Process.Start(annaiFilePath)
+        Else
+            MessageBox.Show("プレビューファイルが存在しません" + vbCrLf + annaiFilePath)
+        End If
+
     End Sub
 End Class

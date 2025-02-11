@@ -47,6 +47,7 @@ Public Class FormMTMMenu
         'ユーザー
         Me.ButtonMTM02.Visible = True
         Me.ButtonMTM03.Visible = True
+        Me.ButtonMTM06.Visible = True
         '管理者
         Me.ButtonMTM01.Visible = False
         Me.ButtonMTM04.Visible = False
@@ -65,6 +66,7 @@ Public Class FormMTMMenu
         'ユーザー
         Me.ButtonMTM02.Visible = False
         Me.ButtonMTM03.Visible = False
+        Me.ButtonMTM06.Visible = False
         '管理者
         Me.ButtonMTM01.Visible = True
         Me.ButtonMTM04.Visible = True
@@ -83,6 +85,7 @@ Public Class FormMTMMenu
         'ユーザー
         Me.ButtonMTM02.Visible = True
         Me.ButtonMTM03.Visible = True
+        Me.ButtonMTM06.Visible = True
         '管理者
         Me.ButtonMTM01.Visible = False
         Me.ButtonMTM04.Visible = False
@@ -219,5 +222,11 @@ Public Class FormMTMMenu
         Finally
             connection.Close()
         End Try
+    End Sub
+
+    Private Sub ButtonMTM06_Click(sender As Object, e As EventArgs) Handles ButtonMTM06.Click
+        Me.Hide()
+        Dim form06 As New FormMTM06(Me)
+        form06.Show()
     End Sub
 End Class

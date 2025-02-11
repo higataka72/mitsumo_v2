@@ -1801,57 +1801,7 @@ Public Class FormMTM02Regist
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     Private Sub dataGridViewTextBox_KeyPress4(ByVal sender As Object, ByVal e As KeyPressEventArgs)
-        '数字しか入力できないようにする
-        If (e.KeyChar < "0"c Or e.KeyChar > "9"c) And e.KeyChar <> "."c And e.KeyChar <> vbBack Then
-            e.Handled = True
-            'Else
-            '    If e.KeyChar = vbBack Then
-            '        If copyMTMR002033.Length <> 0 Then
-            '            copyMTMR002033 = copyMTMR002033.Remove(copyMTMR002033.Length - 1, 1)
-            '            Dim count As Integer = copyMTMR002033.Length - copyMTMR002033.Replace(".", "").Length
-            '            '.が１つ以上ならキャンセル
-            '            If (count = 0) Then
-            '                digitsMTMR002033 = copyMTMR002033.Length
-            '            Else
-            '                fewMTMR002033 -= 1
-            '            End If
-            '        End If
-            '    Else
-            '        copyMTMR002033 += e.KeyChar
-            '        Dim count As Integer = copyMTMR002033.Length - copyMTMR002033.Replace(".", "").Length
-            '        '.が１つ以上ならキャンセル
-            '        If (count > 1) Then
-            '            copyMTMR002033 = copyMTMR002033.Remove(copyMTMR002033.Length - 1, 1)
-            '            e.Handled = True
-            '        ElseIf (count = 1) Then
-            '            '小数点以下の対応
-            '            konmaMTMR002033 = True
-            '            If (e.KeyChar <> "."c) Then
-            '                fewMTMR002033 += 1
-            '            End If
-            '        Else
-            '            '整数部の対応
-            '            konmaMTMR002033 = False
-            '            digitsMTMR002033 += 1
-            '        End If
-            '        '桁数チェック
-            '        If (konmaMTMR002033) Then
-            '            '小数点以下の桁数対応
-            '            If (fewMTMR002033) > 2 Then
-            '                fewMTMR002033 -= 1
-            '                copyMTMR002033 = copyMTMR002033.Remove(copyMTMR002033.Length - 1, 1)
-            '                e.Handled = True
-            '            End If
-            '        Else
-            '            '整数部の桁数対応
-            '            If (digitsMTMR002033) > 9 Then
-            '                digitsMTMR002033 -= 1
-            '                copyMTMR002033 = copyMTMR002033.Remove(copyMTMR002033.Length - 1, 1)
-            '                e.Handled = True
-            '            End If
-            '        End If
-            '    End If
-        End If
+
     End Sub
     ''' <summary>
     ''' データグリッドイベント

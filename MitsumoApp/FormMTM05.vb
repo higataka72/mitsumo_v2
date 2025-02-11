@@ -45,6 +45,7 @@ Public Class FormMTM05
 
         Me.TextBox001.Text = ""
         Me.TextBox002.Text = ""
+        Me.TextBox002_2.Text = ""
         Me.TextBox005.Text = ""
         Me.TextBox006.Text = ""
         Me.TextBox010.Text = ""
@@ -100,6 +101,7 @@ Public Class FormMTM05
             Dim dtPicker003 As Date
             Me.TextBox001.Text = formSearch.Selected.MTMR003001
             Me.TextBox002.Text = formSearch.Selected.MTMR003002
+            Me.TextBox002_2.Text = formSearch.Selected.MTMR003022
             Me.TextBox003.Text = formSearch.Selected.MTMR003003
             If (DateTime.TryParse(formSearch.Selected.MTMR003005, dtPicker001)) Then
                 Me.DatePicker001.Format = DateTimePickerFormat.Long
@@ -281,6 +283,7 @@ Public Class FormMTM05
 
         Dim txt001 As String = Me.TextBox001.Text.Trim
         Dim txt002 As String = Me.TextBox002.Text.Trim
+        Dim txt002_2 As String = Me.TextBox002_2.Text.Trim
         Dim txt005 As String = Me.TextBox005.Text.Trim
         Dim txt006 As String = Me.TextBox006.Text.Trim
         Dim txt010 As String = Me.TextBox010.Text.Trim
@@ -322,6 +325,7 @@ Public Class FormMTM05
             End If
 
             mtm10r003jitsukou.MTMR003002 = txt002
+            mtm10r003jitsukou.MTMR003022 = txt002_2
             mtm10r003jitsukou.MTMR003003 = Me.FormMenu.ModelMtmUser.MTMM002001
 
             If (bl001) Then
@@ -456,6 +460,7 @@ Public Class FormMTM05
         If (tableMTM10R003JITSUKOU.Rows.Count > 0) Then
             For Each dataRow As DataRow In rowsMTM10R003JITSUKOU
                 Me.TextBox002.Text = dataRow("MTMR003002")
+                Me.TextBox002_2.Text = dataRow("MTMR003022")
                 Me.TextBox003.Text = dataRow("MTMR003003")
                 If (DateTime.TryParse(dataRow("MTMR003005"), dtPicker001)) Then
                     Me.DatePicker001.Format = DateTimePickerFormat.Long
@@ -508,6 +513,7 @@ Public Class FormMTM05
             Next
         Else
             Me.TextBox002.Text = ""
+            Me.TextBox002_2.Text = ""
             Me.DatePicker001.Format = DateTimePickerFormat.Custom
             Me.DatePicker001.CustomFormat = " "
             Me.DatePicker002.Format = DateTimePickerFormat.Custom

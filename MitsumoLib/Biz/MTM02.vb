@@ -151,6 +151,7 @@ Namespace Biz
                         + ", CASE WHEN CONVERT(VARCHAR, MTMR002087) <> '' THEN SUBSTRING(CONVERT(VARCHAR, MTMR002087), 1, 4) + '/' + SUBSTRING(CONVERT(VARCHAR, MTMR002087), 5, 2) + '/' + SUBSTRING(CONVERT(VARCHAR, MTMR002087), 7, 2) ELSE '' END AS MTMR002087" _ '最終送信日
                         + ", MTMR002001" _ '得意先コード(非表示)
                         + ", MTMR002080" _ '価格入力番号(非表示)
+                        + ", FORMAT(ISNULL(MTMR002069,0), 'N2') AS MTMR002069" _ '㎡計算
                         + " FROM MTM10R002KAKAKU" _
                         + " LEFT JOIN HAN10M001TOKUI AS TOKUI" _
                         + " ON RIGHT('00000000000' + CONVERT(NVARCHAR, RTRIM(MTMR002001)), 11) = RIGHT('00000000000' + CONVERT(NVARCHAR, RTRIM(TOKUI.HANM001003)), 11)" _
@@ -172,6 +173,9 @@ Namespace Biz
                     End If
                     If Not String.IsNullOrWhiteSpace(searchCondition.TantousyaCodeTo) Then
                         command.CommandText += " AND MTMR002012 <= @MTMR002012_To"      '担当者コード(To)
+                    End If
+                    If Not String.IsNullOrWhiteSpace(searchCondition.TokuisakiName) Then
+                        command.CommandText += " AND REPLACE(REPLACE(MTMR002005,' ',''),'　','') LIKE @MTMR002005"  '得意先名
                     End If
                     If Not String.IsNullOrWhiteSpace(searchCondition.TokuisakiCodeFrom) Then
                         command.CommandText += " AND MTMR002001 >= @MTMR002001_From"    '得意先コード(From)
@@ -245,6 +249,10 @@ Namespace Biz
                     End If
                     If Not String.IsNullOrWhiteSpace(searchCondition.TantousyaCodeTo) Then
                         command.Parameters.Add(New SqlParameter("@MTMR002012_To", searchCondition.TantousyaCodeTo))
+                    End If
+                    If Not String.IsNullOrWhiteSpace(searchCondition.TokuisakiName) Then
+                        Dim strtokuisakiName = System.Text.RegularExpressions.Regex.Replace(searchCondition.TokuisakiName, "\s", "")
+                        command.Parameters.Add(New SqlParameter("@MTMR002005", "%" & strtokuisakiName & "%"))
                     End If
                     If Not String.IsNullOrWhiteSpace(searchCondition.TokuisakiCodeFrom) Then
                         command.Parameters.Add(New SqlParameter("@MTMR002001_From", searchCondition.TokuisakiCodeFrom))
@@ -514,6 +522,11 @@ Namespace Biz
         ''' </summary>
         ''' <returns></returns>
         Public Property TantousyaCodeTo As String = ""
+        ''' <summary>
+        ''' 得意先名
+        ''' </summary>
+        ''' <returns></returns>
+        Public Property TokuisakiName As String = ""
         ''' <summary>
         ''' 得意先コード(From)
         ''' </summary>

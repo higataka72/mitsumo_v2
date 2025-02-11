@@ -59,6 +59,14 @@
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Net.Http" />
+    <Reference Include="VBReport.BarCode.v10, Version=10.0.5270.1631, Culture=neutral, PublicKeyToken=fe65e9112744d958, processorArchitecture=MSIL" />
+    <Reference Include="VBReport.CellReport.v10, Version=10.0.5270.1631, Culture=neutral, PublicKeyToken=7f9b7389f2a49928, processorArchitecture=MSIL" />
+    <Reference Include="VBReport.Document.v10, Version=10.0.5270.1631, Culture=neutral, PublicKeyToken=3fb8050fe3dafe56, processorArchitecture=MSIL" />
+    <Reference Include="VBReport.Shared.v10, Version=10.0.5270.1631, Culture=neutral, PublicKeyToken=f9620971ea350b0b, processorArchitecture=MSIL" />
+    <Reference Include="VBReport.View.v10, Version=10.0.5270.1631, Culture=neutral, PublicKeyToken=7e2bf845939f8fcf, processorArchitecture=MSIL" />
+    <Reference Include="VBReport.Viewer.v10, Version=10.0.5270.1631, Culture=neutral, PublicKeyToken=edb80da3fc0fa680, processorArchitecture=MSIL" />
+    <Reference Include="VBReport.Xls.Core.v10, Version=10.0.5270.1631, Culture=neutral, PublicKeyToken=28473c9702fc99f2, processorArchitecture=MSIL" />
+    <Reference Include="VBReport.Xlsx.Core.v10, Version=10.0.5270.1631, Culture=neutral, PublicKeyToken=6beb6278b21e4db7, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
     <Import Include="Microsoft.VisualBasic" />
@@ -79,6 +87,7 @@
     <Compile Include="Biz\MTM04.vb" />
     <Compile Include="Biz\MTM04_1.vb" />
     <Compile Include="Biz\MTM05.vb" />
+    <Compile Include="Biz\MTM06.vb" />
     <Compile Include="Biz\MTMConfirm.vb" />
     <Compile Include="Biz\MTMLogin.vb" />
     <Compile Include="Biz\MTMSearchBumon.vb" />
@@ -92,6 +101,9 @@
     <Compile Include="Biz\MTMUser.vb" />
     <Compile Include="Biz\SubPersonMaster.vb" />
     <Compile Include="Com\ComTaskScheduler.vb" />
+    <Compile Include="Com\PrintCommon.vb" />
+    <Compile Include="Data\H_Print.vb" />
+    <Compile Include="Data\MTM03Data.vb" />
     <Compile Include="Models\HAN10C021RENBAN.vb" />
     <Compile Include="Models\HAN10M001TOKUI.vb" />
     <Compile Include="Models\HAN10M002SHIIRE.vb" />
@@ -113,6 +125,7 @@
     <Compile Include="Models\MTM00M003ATESAKI.vb" />
     <Compile Include="Models\MTM10R001TANKA.vb" />
     <Compile Include="Models\MTM10R002KAKAKU.vb" />
+    <Compile Include="Models\MTM10R006MAIL.vb" />
     <Compile Include="Models\MTM10R003JITSUKOU.vb" />
     <Compile Include="Models\MTM10R004RENKEI.vb" />
     <Compile Include="Biz\MTMSearchTanto.vb" />
@@ -133,6 +146,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Print\MTM03Print.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">
@@ -154,5 +168,6 @@
     </None>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

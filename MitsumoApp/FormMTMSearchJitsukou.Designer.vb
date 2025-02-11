@@ -46,7 +46,7 @@ Partial Class FormMTMSearchJitsukou
         Me.DataGridView001.RowHeadersWidth = 62
         Me.DataGridView001.RowTemplate.Height = 27
         Me.DataGridView001.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DataGridView001.Size = New System.Drawing.Size(1002, 349)
+        Me.DataGridView001.Size = New System.Drawing.Size(1120, 349)
         Me.DataGridView001.TabIndex = 0
         '
         'ButtonClose
@@ -56,7 +56,7 @@ Partial Class FormMTMSearchJitsukou
         Me.ButtonClose.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.ButtonClose.Font = New System.Drawing.Font("メイリオ", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.ButtonClose.ForeColor = System.Drawing.SystemColors.Control
-        Me.ButtonClose.Location = New System.Drawing.Point(934, 388)
+        Me.ButtonClose.Location = New System.Drawing.Point(1052, 388)
         Me.ButtonClose.Name = "ButtonClose"
         Me.ButtonClose.Size = New System.Drawing.Size(85, 39)
         Me.ButtonClose.TabIndex = 1
@@ -97,7 +97,7 @@ Partial Class FormMTMSearchJitsukou
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
-        Me.ClientSize = New System.Drawing.Size(1039, 439)
+        Me.ClientSize = New System.Drawing.Size(1157, 439)
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.ButtonClose)

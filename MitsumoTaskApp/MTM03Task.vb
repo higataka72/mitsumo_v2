@@ -48,6 +48,7 @@ Public Class MTM03Task
 
             Dim executionAsm As Reflection.Assembly = Reflection.Assembly.GetExecutingAssembly
             Dim executingPath As String = IO.Path.GetDirectoryName(New Uri(executionAsm.CodeBase).LocalPath)
+            Dim pdfTemplateDir = ConfigurationManager.AppSettings("PDF_DIR_TEMPLATE")
             Dim pdfDir = ConfigurationManager.AppSettings("PDF_DIR")
 
             Dim sendMailData As New Biz.MTM03SendMailData
@@ -56,13 +57,13 @@ Public Class MTM03Task
             If sendMailData.SearchResult.ElementList.Count > 0 Then
                 For Each resultElement In sendMailData.SearchResult.ElementList
                     If (searchCondition.OutputNum = "0" Or searchCondition.OutputNum = "1") And resultElement.SoushinKubun = "1" Then
-                        Dim sendMailErrorList = biz03.SendMail(searchCondition.KakakuNyuuryokuNo, mailInfo, resultElement, executingPath + "/" + pdfDir)
+                        Dim sendMailErrorList = biz03.SendMail(searchCondition.KakakuNyuuryokuNo, mailInfo, resultElement, executingPath + "/" + pdfDir, executingPath + "/" + pdfTemplateDir)
                         If sendMailErrorList.Count > 0 Then
                             sendMailData.ErrorList.AddRange(sendMailErrorList)
                             Exit For
                         End If
                     ElseIf (searchCondition.OutputNum = "0" Or searchCondition.OutputNum = "2") And resultElement.SoushinKubun = "2" Then
-                        Dim sendEDocumentErrorList = biz03.SendEDocumentHeader(searchCondition.KakakuNyuuryokuNo, mailInfo, resultElement, executingPath + "/" + pdfDir)
+                        Dim sendEDocumentErrorList = biz03.SendEDocumentHeader(searchCondition.KakakuNyuuryokuNo, mailInfo, resultElement, executingPath + "/" + pdfDir, executingPath + "/" + pdfTemplateDir)
                         If sendEDocumentErrorList.Count > 0 Then
                             sendMailData.ErrorList.AddRange(sendEDocumentErrorList)
                             Exit For

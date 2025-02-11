@@ -103,6 +103,9 @@ Partial Class FormMTM02
         Me.ButtonOffice002 = New System.Windows.Forms.Button()
         Me.TextBox025 = New System.Windows.Forms.TextBox()
         Me.TabPage001 = New System.Windows.Forms.TabPage()
+        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.Label15 = New System.Windows.Forms.Label()
+        Me.ButtonSearch001_old = New System.Windows.Forms.Button()
         Me.ButtonClose = New System.Windows.Forms.Button()
         Me.ButtonSearch001 = New System.Windows.Forms.Button()
         Me.RadioButton003 = New System.Windows.Forms.RadioButton()
@@ -253,6 +256,7 @@ Partial Class FormMTM02
         Me.ButtonCustomer008.Name = "ButtonCustomer008"
         Me.ButtonCustomer008.Size = New System.Drawing.Size(29, 24)
         Me.ButtonCustomer008.TabIndex = 41
+        Me.ButtonCustomer008.TabStop = False
         Me.ButtonCustomer008.UseVisualStyleBackColor = True
         '
         'TextBox071
@@ -279,6 +283,7 @@ Partial Class FormMTM02
         Me.ButtonCustomer007.Name = "ButtonCustomer007"
         Me.ButtonCustomer007.Size = New System.Drawing.Size(29, 24)
         Me.ButtonCustomer007.TabIndex = 38
+        Me.ButtonCustomer007.TabStop = False
         Me.ButtonCustomer007.UseVisualStyleBackColor = True
         '
         'TextBox069
@@ -305,6 +310,7 @@ Partial Class FormMTM02
         Me.ButtonCustomer006.Name = "ButtonCustomer006"
         Me.ButtonCustomer006.Size = New System.Drawing.Size(29, 24)
         Me.ButtonCustomer006.TabIndex = 35
+        Me.ButtonCustomer006.TabStop = False
         Me.ButtonCustomer006.UseVisualStyleBackColor = True
         '
         'TextBox067
@@ -331,6 +337,7 @@ Partial Class FormMTM02
         Me.ButtonCustomer005.Name = "ButtonCustomer005"
         Me.ButtonCustomer005.Size = New System.Drawing.Size(29, 24)
         Me.ButtonCustomer005.TabIndex = 32
+        Me.ButtonCustomer005.TabStop = False
         Me.ButtonCustomer005.UseVisualStyleBackColor = True
         '
         'TextBox065
@@ -357,6 +364,7 @@ Partial Class FormMTM02
         Me.ButtonCustomer004.Name = "ButtonCustomer004"
         Me.ButtonCustomer004.Size = New System.Drawing.Size(29, 24)
         Me.ButtonCustomer004.TabIndex = 29
+        Me.ButtonCustomer004.TabStop = False
         Me.ButtonCustomer004.UseVisualStyleBackColor = True
         '
         'TextBox063
@@ -383,6 +391,7 @@ Partial Class FormMTM02
         Me.ButtonCustomer003.Name = "ButtonCustomer003"
         Me.ButtonCustomer003.Size = New System.Drawing.Size(29, 24)
         Me.ButtonCustomer003.TabIndex = 26
+        Me.ButtonCustomer003.TabStop = False
         Me.ButtonCustomer003.UseVisualStyleBackColor = True
         '
         'TextBox061
@@ -437,6 +446,7 @@ Partial Class FormMTM02
         Me.ButtonStaff008.Name = "ButtonStaff008"
         Me.ButtonStaff008.Size = New System.Drawing.Size(29, 24)
         Me.ButtonStaff008.TabIndex = 52
+        Me.ButtonStaff008.TabStop = False
         Me.ButtonStaff008.UseVisualStyleBackColor = True
         '
         'TextBox059
@@ -463,6 +473,7 @@ Partial Class FormMTM02
         Me.ButtonStaff007.Name = "ButtonStaff007"
         Me.ButtonStaff007.Size = New System.Drawing.Size(29, 24)
         Me.ButtonStaff007.TabIndex = 49
+        Me.ButtonStaff007.TabStop = False
         Me.ButtonStaff007.UseVisualStyleBackColor = True
         '
         'TextBox057
@@ -489,6 +500,7 @@ Partial Class FormMTM02
         Me.ButtonStaff006.Name = "ButtonStaff006"
         Me.ButtonStaff006.Size = New System.Drawing.Size(29, 24)
         Me.ButtonStaff006.TabIndex = 46
+        Me.ButtonStaff006.TabStop = False
         Me.ButtonStaff006.UseVisualStyleBackColor = True
         '
         'TextBox055
@@ -515,6 +527,7 @@ Partial Class FormMTM02
         Me.ButtonStaff005.Name = "ButtonStaff005"
         Me.ButtonStaff005.Size = New System.Drawing.Size(29, 24)
         Me.ButtonStaff005.TabIndex = 43
+        Me.ButtonStaff005.TabStop = False
         Me.ButtonStaff005.UseVisualStyleBackColor = True
         '
         'TextBox053
@@ -541,6 +554,7 @@ Partial Class FormMTM02
         Me.ButtonStaff004.Name = "ButtonStaff004"
         Me.ButtonStaff004.Size = New System.Drawing.Size(29, 24)
         Me.ButtonStaff004.TabIndex = 41
+        Me.ButtonStaff004.TabStop = False
         Me.ButtonStaff004.UseVisualStyleBackColor = True
         '
         'TextBox051
@@ -567,6 +581,7 @@ Partial Class FormMTM02
         Me.ButtonStaff003.Name = "ButtonStaff003"
         Me.ButtonStaff003.Size = New System.Drawing.Size(29, 24)
         Me.ButtonStaff003.TabIndex = 38
+        Me.ButtonStaff003.TabStop = False
         Me.ButtonStaff003.UseVisualStyleBackColor = True
         '
         'TextBox049
@@ -621,6 +636,7 @@ Partial Class FormMTM02
         Me.ButtonSection008.Name = "ButtonSection008"
         Me.ButtonSection008.Size = New System.Drawing.Size(29, 24)
         Me.ButtonSection008.TabIndex = 35
+        Me.ButtonSection008.TabStop = False
         Me.ButtonSection008.UseVisualStyleBackColor = True
         '
         'TextBox047
@@ -647,6 +663,7 @@ Partial Class FormMTM02
         Me.ButtonSection007.Name = "ButtonSection007"
         Me.ButtonSection007.Size = New System.Drawing.Size(29, 24)
         Me.ButtonSection007.TabIndex = 32
+        Me.ButtonSection007.TabStop = False
         Me.ButtonSection007.UseVisualStyleBackColor = True
         '
         'TextBox045
@@ -673,6 +690,7 @@ Partial Class FormMTM02
         Me.ButtonSection006.Name = "ButtonSection006"
         Me.ButtonSection006.Size = New System.Drawing.Size(29, 24)
         Me.ButtonSection006.TabIndex = 29
+        Me.ButtonSection006.TabStop = False
         Me.ButtonSection006.UseVisualStyleBackColor = True
         '
         'TextBox043
@@ -699,6 +717,7 @@ Partial Class FormMTM02
         Me.ButtonSection005.Name = "ButtonSection005"
         Me.ButtonSection005.Size = New System.Drawing.Size(29, 24)
         Me.ButtonSection005.TabIndex = 26
+        Me.ButtonSection005.TabStop = False
         Me.ButtonSection005.UseVisualStyleBackColor = True
         '
         'TextBox041
@@ -725,6 +744,7 @@ Partial Class FormMTM02
         Me.ButtonSection004.Name = "ButtonSection004"
         Me.ButtonSection004.Size = New System.Drawing.Size(29, 24)
         Me.ButtonSection004.TabIndex = 23
+        Me.ButtonSection004.TabStop = False
         Me.ButtonSection004.UseVisualStyleBackColor = True
         '
         'TextBox039
@@ -751,6 +771,7 @@ Partial Class FormMTM02
         Me.ButtonSection003.Name = "ButtonSection003"
         Me.ButtonSection003.Size = New System.Drawing.Size(29, 24)
         Me.ButtonSection003.TabIndex = 20
+        Me.ButtonSection003.TabStop = False
         Me.ButtonSection003.UseVisualStyleBackColor = True
         '
         'TextBox037
@@ -805,6 +826,7 @@ Partial Class FormMTM02
         Me.ButtonOffice007.Name = "ButtonOffice007"
         Me.ButtonOffice007.Size = New System.Drawing.Size(29, 24)
         Me.ButtonOffice007.TabIndex = 17
+        Me.ButtonOffice007.TabStop = False
         Me.ButtonOffice007.UseVisualStyleBackColor = True
         '
         'TextBox035
@@ -831,6 +853,7 @@ Partial Class FormMTM02
         Me.ButtonOffice006.Name = "ButtonOffice006"
         Me.ButtonOffice006.Size = New System.Drawing.Size(29, 24)
         Me.ButtonOffice006.TabIndex = 14
+        Me.ButtonOffice006.TabStop = False
         Me.ButtonOffice006.UseVisualStyleBackColor = True
         '
         'TextBox033
@@ -857,6 +880,7 @@ Partial Class FormMTM02
         Me.ButtonOffice005.Name = "ButtonOffice005"
         Me.ButtonOffice005.Size = New System.Drawing.Size(29, 24)
         Me.ButtonOffice005.TabIndex = 11
+        Me.ButtonOffice005.TabStop = False
         Me.ButtonOffice005.UseVisualStyleBackColor = True
         '
         'TextBox031
@@ -883,6 +907,7 @@ Partial Class FormMTM02
         Me.ButtonOffice004.Name = "ButtonOffice004"
         Me.ButtonOffice004.Size = New System.Drawing.Size(29, 24)
         Me.ButtonOffice004.TabIndex = 8
+        Me.ButtonOffice004.TabStop = False
         Me.ButtonOffice004.UseVisualStyleBackColor = True
         '
         'TextBox029
@@ -909,6 +934,7 @@ Partial Class FormMTM02
         Me.ButtonOffice003.Name = "ButtonOffice003"
         Me.ButtonOffice003.Size = New System.Drawing.Size(29, 24)
         Me.ButtonOffice003.TabIndex = 5
+        Me.ButtonOffice003.TabStop = False
         Me.ButtonOffice003.UseVisualStyleBackColor = True
         '
         'TextBox027
@@ -936,6 +962,7 @@ Partial Class FormMTM02
         Me.ButtonOffice002.Name = "ButtonOffice002"
         Me.ButtonOffice002.Size = New System.Drawing.Size(29, 24)
         Me.ButtonOffice002.TabIndex = 2
+        Me.ButtonOffice002.TabStop = False
         Me.ButtonOffice002.UseVisualStyleBackColor = True
         '
         'TextBox025
@@ -949,6 +976,9 @@ Partial Class FormMTM02
         'TabPage001
         '
         Me.TabPage001.BackColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.TabPage001.Controls.Add(Me.TextBox1)
+        Me.TabPage001.Controls.Add(Me.Label15)
+        Me.TabPage001.Controls.Add(Me.ButtonSearch001_old)
         Me.TabPage001.Controls.Add(Me.ButtonClose)
         Me.TabPage001.Controls.Add(Me.ButtonSearch001)
         Me.TabPage001.Controls.Add(Me.RadioButton003)
@@ -1010,6 +1040,37 @@ Partial Class FormMTM02
         Me.TabPage001.TabIndex = 0
         Me.TabPage001.Text = "条件指定"
         '
+        'TextBox1
+        '
+        Me.TextBox1.Font = New System.Drawing.Font("メイリオ", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TextBox1.Location = New System.Drawing.Point(183, 238)
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.Size = New System.Drawing.Size(603, 25)
+        Me.TextBox1.TabIndex = 22
+        '
+        'Label15
+        '
+        Me.Label15.AutoSize = True
+        Me.Label15.Font = New System.Drawing.Font("メイリオ", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.Label15.Location = New System.Drawing.Point(22, 238)
+        Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(74, 24)
+        Me.Label15.TabIndex = 52
+        Me.Label15.Text = "得意先名"
+        '
+        'ButtonSearch001_old
+        '
+        Me.ButtonSearch001_old.BackColor = System.Drawing.Color.MediumTurquoise
+        Me.ButtonSearch001_old.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.ButtonSearch001_old.Font = New System.Drawing.Font("メイリオ", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.ButtonSearch001_old.ForeColor = System.Drawing.Color.Red
+        Me.ButtonSearch001_old.Location = New System.Drawing.Point(26, 462)
+        Me.ButtonSearch001_old.Name = "ButtonSearch001_old"
+        Me.ButtonSearch001_old.Size = New System.Drawing.Size(263, 39)
+        Me.ButtonSearch001_old.TabIndex = 50
+        Me.ButtonSearch001_old.Text = "検索(旧)[本番時は消します]"
+        Me.ButtonSearch001_old.UseVisualStyleBackColor = False
+        '
         'ButtonClose
         '
         Me.ButtonClose.BackColor = System.Drawing.Color.MediumTurquoise
@@ -1040,7 +1101,7 @@ Partial Class FormMTM02
         '
         Me.RadioButton003.AutoSize = True
         Me.RadioButton003.Font = New System.Drawing.Font("メイリオ", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.RadioButton003.Location = New System.Drawing.Point(462, 395)
+        Me.RadioButton003.Location = New System.Drawing.Point(462, 424)
         Me.RadioButton003.Name = "RadioButton003"
         Me.RadioButton003.Size = New System.Drawing.Size(92, 28)
         Me.RadioButton003.TabIndex = 38
@@ -1051,7 +1112,7 @@ Partial Class FormMTM02
         '
         Me.RadioButton002.AutoSize = True
         Me.RadioButton002.Font = New System.Drawing.Font("メイリオ", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.RadioButton002.Location = New System.Drawing.Point(325, 395)
+        Me.RadioButton002.Location = New System.Drawing.Point(325, 424)
         Me.RadioButton002.Name = "RadioButton002"
         Me.RadioButton002.Size = New System.Drawing.Size(124, 28)
         Me.RadioButton002.TabIndex = 37
@@ -1063,7 +1124,7 @@ Partial Class FormMTM02
         Me.RadioButton001.AutoSize = True
         Me.RadioButton001.Checked = True
         Me.RadioButton001.Font = New System.Drawing.Font("メイリオ", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.RadioButton001.Location = New System.Drawing.Point(181, 395)
+        Me.RadioButton001.Location = New System.Drawing.Point(181, 424)
         Me.RadioButton001.Name = "RadioButton001"
         Me.RadioButton001.Size = New System.Drawing.Size(140, 28)
         Me.RadioButton001.TabIndex = 36
@@ -1075,7 +1136,7 @@ Partial Class FormMTM02
         '
         Me.Label14.AutoSize = True
         Me.Label14.Font = New System.Drawing.Font("メイリオ", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label14.Location = New System.Drawing.Point(22, 396)
+        Me.Label14.Location = New System.Drawing.Point(22, 425)
         Me.Label14.Name = "Label14"
         Me.Label14.Size = New System.Drawing.Size(90, 24)
         Me.Label14.TabIndex = 48
@@ -1084,7 +1145,7 @@ Partial Class FormMTM02
         'TextBox024
         '
         Me.TextBox024.Font = New System.Drawing.Font("メイリオ", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TextBox024.Location = New System.Drawing.Point(328, 352)
+        Me.TextBox024.Location = New System.Drawing.Point(328, 390)
         Me.TextBox024.Name = "TextBox024"
         Me.TextBox024.Size = New System.Drawing.Size(115, 25)
         Me.TextBox024.TabIndex = 35
@@ -1092,7 +1153,7 @@ Partial Class FormMTM02
         'TextBox023
         '
         Me.TextBox023.Font = New System.Drawing.Font("メイリオ", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TextBox023.Location = New System.Drawing.Point(181, 352)
+        Me.TextBox023.Location = New System.Drawing.Point(183, 390)
         Me.TextBox023.Name = "TextBox023"
         Me.TextBox023.Size = New System.Drawing.Size(115, 25)
         Me.TextBox023.TabIndex = 34
@@ -1101,7 +1162,7 @@ Partial Class FormMTM02
         '
         Me.TextBox022.Enabled = False
         Me.TextBox022.Font = New System.Drawing.Font("メイリオ", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TextBox022.Location = New System.Drawing.Point(473, 324)
+        Me.TextBox022.Location = New System.Drawing.Point(473, 360)
         Me.TextBox022.Name = "TextBox022"
         Me.TextBox022.Size = New System.Drawing.Size(313, 25)
         Me.TextBox022.TabIndex = 33
@@ -1109,7 +1170,7 @@ Partial Class FormMTM02
         'TextBox021
         '
         Me.TextBox021.Font = New System.Drawing.Font("メイリオ", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TextBox021.Location = New System.Drawing.Point(328, 323)
+        Me.TextBox021.Location = New System.Drawing.Point(328, 359)
         Me.TextBox021.Name = "TextBox021"
         Me.TextBox021.Size = New System.Drawing.Size(103, 25)
         Me.TextBox021.TabIndex = 31
@@ -1118,7 +1179,7 @@ Partial Class FormMTM02
         '
         Me.TextBox020.Enabled = False
         Me.TextBox020.Font = New System.Drawing.Font("メイリオ", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TextBox020.Location = New System.Drawing.Point(328, 294)
+        Me.TextBox020.Location = New System.Drawing.Point(328, 330)
         Me.TextBox020.Name = "TextBox020"
         Me.TextBox020.Size = New System.Drawing.Size(313, 25)
         Me.TextBox020.TabIndex = 30
@@ -1126,7 +1187,7 @@ Partial Class FormMTM02
         'TextBox019
         '
         Me.TextBox019.Font = New System.Drawing.Font("メイリオ", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TextBox019.Location = New System.Drawing.Point(181, 295)
+        Me.TextBox019.Location = New System.Drawing.Point(183, 331)
         Me.TextBox019.Name = "TextBox019"
         Me.TextBox019.Size = New System.Drawing.Size(106, 25)
         Me.TextBox019.TabIndex = 28
@@ -1169,7 +1230,7 @@ Partial Class FormMTM02
         '
         Me.TextBox018.Enabled = False
         Me.TextBox018.Font = New System.Drawing.Font("メイリオ", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TextBox018.Location = New System.Drawing.Point(473, 265)
+        Me.TextBox018.Location = New System.Drawing.Point(473, 301)
         Me.TextBox018.Name = "TextBox018"
         Me.TextBox018.Size = New System.Drawing.Size(313, 25)
         Me.TextBox018.TabIndex = 27
@@ -1177,7 +1238,7 @@ Partial Class FormMTM02
         'TextBox017
         '
         Me.TextBox017.Font = New System.Drawing.Font("メイリオ", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TextBox017.Location = New System.Drawing.Point(328, 265)
+        Me.TextBox017.Location = New System.Drawing.Point(328, 301)
         Me.TextBox017.Name = "TextBox017"
         Me.TextBox017.Size = New System.Drawing.Size(103, 25)
         Me.TextBox017.TabIndex = 25
@@ -1186,7 +1247,7 @@ Partial Class FormMTM02
         '
         Me.TextBox016.Enabled = False
         Me.TextBox016.Font = New System.Drawing.Font("メイリオ", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TextBox016.Location = New System.Drawing.Point(328, 236)
+        Me.TextBox016.Location = New System.Drawing.Point(328, 272)
         Me.TextBox016.Name = "TextBox016"
         Me.TextBox016.Size = New System.Drawing.Size(313, 25)
         Me.TextBox016.TabIndex = 24
@@ -1194,7 +1255,7 @@ Partial Class FormMTM02
         'TextBox015
         '
         Me.TextBox015.Font = New System.Drawing.Font("メイリオ", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TextBox015.Location = New System.Drawing.Point(181, 236)
+        Me.TextBox015.Location = New System.Drawing.Point(183, 272)
         Me.TextBox015.Name = "TextBox015"
         Me.TextBox015.Size = New System.Drawing.Size(106, 25)
         Me.TextBox015.TabIndex = 22
@@ -1288,7 +1349,7 @@ Partial Class FormMTM02
         'Label13
         '
         Me.Label13.AutoSize = True
-        Me.Label13.Location = New System.Drawing.Point(300, 356)
+        Me.Label13.Location = New System.Drawing.Point(300, 394)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(22, 20)
         Me.Label13.TabIndex = 46
@@ -1298,7 +1359,7 @@ Partial Class FormMTM02
         '
         Me.Label12.AutoSize = True
         Me.Label12.Font = New System.Drawing.Font("メイリオ", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label12.Location = New System.Drawing.Point(22, 352)
+        Me.Label12.Location = New System.Drawing.Point(22, 390)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(106, 24)
         Me.Label12.TabIndex = 44
@@ -1307,16 +1368,17 @@ Partial Class FormMTM02
         'ButtonItem002
         '
         Me.ButtonItem002.Image = CType(resources.GetObject("ButtonItem002.Image"), System.Drawing.Image)
-        Me.ButtonItem002.Location = New System.Drawing.Point(437, 323)
+        Me.ButtonItem002.Location = New System.Drawing.Point(437, 359)
         Me.ButtonItem002.Name = "ButtonItem002"
         Me.ButtonItem002.Size = New System.Drawing.Size(29, 24)
         Me.ButtonItem002.TabIndex = 32
+        Me.ButtonItem002.TabStop = False
         Me.ButtonItem002.UseVisualStyleBackColor = True
         '
         'Label10
         '
         Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(292, 323)
+        Me.Label10.Location = New System.Drawing.Point(292, 359)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(22, 20)
         Me.Label10.TabIndex = 43
@@ -1325,17 +1387,18 @@ Partial Class FormMTM02
         'ButtonItem001
         '
         Me.ButtonItem001.Image = CType(resources.GetObject("ButtonItem001.Image"), System.Drawing.Image)
-        Me.ButtonItem001.Location = New System.Drawing.Point(293, 294)
+        Me.ButtonItem001.Location = New System.Drawing.Point(293, 330)
         Me.ButtonItem001.Name = "ButtonItem001"
         Me.ButtonItem001.Size = New System.Drawing.Size(29, 24)
         Me.ButtonItem001.TabIndex = 29
+        Me.ButtonItem001.TabStop = False
         Me.ButtonItem001.UseVisualStyleBackColor = True
         '
         'Label11
         '
         Me.Label11.AutoSize = True
         Me.Label11.Font = New System.Drawing.Font("メイリオ", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label11.Location = New System.Drawing.Point(23, 295)
+        Me.Label11.Location = New System.Drawing.Point(22, 331)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(90, 24)
         Me.Label11.TabIndex = 41
@@ -1357,6 +1420,7 @@ Partial Class FormMTM02
         Me.ButtonStaff002.Name = "ButtonStaff002"
         Me.ButtonStaff002.Size = New System.Drawing.Size(29, 24)
         Me.ButtonStaff002.TabIndex = 20
+        Me.ButtonStaff002.TabStop = False
         Me.ButtonStaff002.UseVisualStyleBackColor = True
         '
         'ButtonStaff001
@@ -1366,13 +1430,14 @@ Partial Class FormMTM02
         Me.ButtonStaff001.Name = "ButtonStaff001"
         Me.ButtonStaff001.Size = New System.Drawing.Size(29, 24)
         Me.ButtonStaff001.TabIndex = 17
+        Me.ButtonStaff001.TabStop = False
         Me.ButtonStaff001.UseVisualStyleBackColor = True
         '
         'Label6
         '
         Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("メイリオ", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label6.Location = New System.Drawing.Point(23, 175)
+        Me.Label6.Location = New System.Drawing.Point(22, 175)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(106, 24)
         Me.Label6.TabIndex = 34
@@ -1381,16 +1446,17 @@ Partial Class FormMTM02
         'ButtonCustomer002
         '
         Me.ButtonCustomer002.Image = CType(resources.GetObject("ButtonCustomer002.Image"), System.Drawing.Image)
-        Me.ButtonCustomer002.Location = New System.Drawing.Point(437, 265)
+        Me.ButtonCustomer002.Location = New System.Drawing.Point(437, 301)
         Me.ButtonCustomer002.Name = "ButtonCustomer002"
         Me.ButtonCustomer002.Size = New System.Drawing.Size(29, 24)
         Me.ButtonCustomer002.TabIndex = 26
+        Me.ButtonCustomer002.TabStop = False
         Me.ButtonCustomer002.UseVisualStyleBackColor = True
         '
         'Label9
         '
         Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(292, 265)
+        Me.Label9.Location = New System.Drawing.Point(292, 301)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(22, 20)
         Me.Label9.TabIndex = 27
@@ -1399,17 +1465,18 @@ Partial Class FormMTM02
         'ButtonCustomer001
         '
         Me.ButtonCustomer001.Image = CType(resources.GetObject("ButtonCustomer001.Image"), System.Drawing.Image)
-        Me.ButtonCustomer001.Location = New System.Drawing.Point(293, 236)
+        Me.ButtonCustomer001.Location = New System.Drawing.Point(293, 272)
         Me.ButtonCustomer001.Name = "ButtonCustomer001"
         Me.ButtonCustomer001.Size = New System.Drawing.Size(29, 24)
         Me.ButtonCustomer001.TabIndex = 23
+        Me.ButtonCustomer001.TabStop = False
         Me.ButtonCustomer001.UseVisualStyleBackColor = True
         '
         'Label8
         '
         Me.Label8.AutoSize = True
         Me.Label8.Font = New System.Drawing.Font("メイリオ", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label8.Location = New System.Drawing.Point(23, 236)
+        Me.Label8.Location = New System.Drawing.Point(22, 272)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(106, 24)
         Me.Label8.TabIndex = 26
@@ -1431,6 +1498,7 @@ Partial Class FormMTM02
         Me.ButtonSection002.Name = "ButtonSection002"
         Me.ButtonSection002.Size = New System.Drawing.Size(29, 24)
         Me.ButtonSection002.TabIndex = 14
+        Me.ButtonSection002.TabStop = False
         Me.ButtonSection002.UseVisualStyleBackColor = True
         '
         'ButtonSection001
@@ -1440,13 +1508,14 @@ Partial Class FormMTM02
         Me.ButtonSection001.Name = "ButtonSection001"
         Me.ButtonSection001.Size = New System.Drawing.Size(29, 24)
         Me.ButtonSection001.TabIndex = 11
+        Me.ButtonSection001.TabStop = False
         Me.ButtonSection001.UseVisualStyleBackColor = True
         '
         'Label4
         '
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("メイリオ", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label4.Location = New System.Drawing.Point(23, 116)
+        Me.Label4.Location = New System.Drawing.Point(22, 116)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(90, 24)
         Me.Label4.TabIndex = 18
@@ -1459,6 +1528,7 @@ Partial Class FormMTM02
         Me.ButtonOffice001.Name = "ButtonOffice001"
         Me.ButtonOffice001.Size = New System.Drawing.Size(29, 24)
         Me.ButtonOffice001.TabIndex = 8
+        Me.ButtonOffice001.TabStop = False
         Me.ButtonOffice001.UseVisualStyleBackColor = True
         '
         'Label3
@@ -1478,6 +1548,7 @@ Partial Class FormMTM02
         Me.ButtonUser.Name = "ButtonUser"
         Me.ButtonUser.Size = New System.Drawing.Size(29, 24)
         Me.ButtonUser.TabIndex = 5
+        Me.ButtonUser.TabStop = False
         Me.ButtonUser.UseVisualStyleBackColor = True
         '
         'Label2
@@ -1497,6 +1568,7 @@ Partial Class FormMTM02
         Me.ButtonCostInputNumber.Name = "ButtonCostInputNumber"
         Me.ButtonCostInputNumber.Size = New System.Drawing.Size(29, 24)
         Me.ButtonCostInputNumber.TabIndex = 2
+        Me.ButtonCostInputNumber.TabStop = False
         Me.ButtonCostInputNumber.UseVisualStyleBackColor = True
         '
         'Label1
@@ -1684,4 +1756,7 @@ Partial Class FormMTM02
     Friend WithEvents ButtonCostInputNumber As Button
     Friend WithEvents Label1 As Label
     Friend WithEvents TabControl001 As TabControl
+    Friend WithEvents ButtonSearch001_old As Button
+    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents Label15 As Label
 End Class

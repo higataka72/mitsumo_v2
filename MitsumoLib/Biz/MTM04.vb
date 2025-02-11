@@ -1637,16 +1637,24 @@ Namespace Biz
                             If (Not dataRow("HANMA01021").ToString() = "0") Then
                                 updateHAN98MA01TANKA += "HANMA01021 = " + dataRow("HANMA01021") + ","
                             End If
-                            updateHAN98MA01TANKA += "HANMA01029 = " + dataRow("HANMA01029") + ","
-                            updateHAN98MA01TANKA += "HANMA01030 = " + dataRow("HANMA01030") + ","
+                            updateHAN98MA01TANKA += "HANMA01029 = 0,"
+                            updateHAN98MA01TANKA += "HANMA01030 = 0,"
+                            'updateHAN98MA01TANKA += "HANMA01029 = " + dataRow("HANMA01029") + ","
+                            'updateHAN98MA01TANKA += "HANMA01030 = " + dataRow("HANMA01030") + ","
                             updateHAN98MA01TANKA += "HANMA01034 = 'BULK UPDATE',"
                             updateHAN98MA01TANKA += "HANMA01035 = " + dataRow("HANMA01035") + "000000,"
-                            updateHAN98MA01TANKA += "HANMA01036 = '" + dataRow("HANMA01036") + "' "
-                            If (dataRow("HANMA01029") = 0) Then
-                                updateHAN98MA01TANKA += ",HANMA01038 = " + dataRow("HANMA01038") + " "
-                                updateHAN98MA01TANKA += ",HANMA01039 = " + dataRow("HANMA01039") + " "
-                                updateHAN98MA01TANKA += ",HANMA01UPD = " + dataRow("HANMA01UPD") + " "
-                            End If
+
+                            updateHAN98MA01TANKA += "HANMA01036 = '" + dataRow("HANMA01036") + "', "
+                            updateHAN98MA01TANKA += "HANMA01038 = " + dataRow("HANMA01029") + ", "
+                            updateHAN98MA01TANKA += "HANMA01039 = " + dataRow("HANMA01030") + ", "
+                            updateHAN98MA01TANKA += "HANMA01UPD = " + dataRow("HANMA01UPD") + " "
+
+                            'updateHAN98MA01TANKA += "HANMA01036 = '" + dataRow("HANMA01036") + "' "
+                            'If (dataRow("HANMA01029") = 0) Then
+                            '    updateHAN98MA01TANKA += ",HANMA01038 = " + dataRow("HANMA01038") + " "
+                            '    updateHAN98MA01TANKA += ",HANMA01039 = " + dataRow("HANMA01039") + " "
+                            '    updateHAN98MA01TANKA += ",HANMA01UPD = " + dataRow("HANMA01UPD") + " "
+                            'End If
                             updateHAN98MA01TANKA += "WHERE "
                             updateHAN98MA01TANKA += "HANMA01001 = '" + dataRow("HANMA01001") + "' "
                             updateHAN98MA01TANKA += "AND HANMA01002 = '" + dataRow("HANMA01002") + "' "
@@ -1667,16 +1675,24 @@ Namespace Biz
                             If (Not dataRow("HANMA01021").ToString() = "0") Then
                                 updateHAN98MA01TANKA += "HANMA01021 = " + dataRow("HANMA01021") + ","
                             End If
-                            updateHAN98MA01TANKA += "HANMA01029 = " + dataRow("HANMA01029") + ","
-                            updateHAN98MA01TANKA += "HANMA01030 = " + dataRow("HANMA01030") + ","
+                            updateHAN98MA01TANKA += "HANMA01029 = 0,"
+                            updateHAN98MA01TANKA += "HANMA01030 = 0,"
+                            'updateHAN98MA01TANKA += "HANMA01029 = " + dataRow("HANMA01029") + ","
+                            'updateHAN98MA01TANKA += "HANMA01030 = " + dataRow("HANMA01030") + ","
                             updateHAN98MA01TANKA += "HANMA01034 = 'BULK UPDATE',"
                             updateHAN98MA01TANKA += "HANMA01035 = " + dataRow("HANMA01035") + "000000,"
-                            updateHAN98MA01TANKA += "HANMA01036 = '" + dataRow("HANMA01036") + "' "
-                            If (dataRow("HANMA01029") = 0) Then
-                                updateHAN98MA01TANKA += ",HANMA01038 = " + dataRow("HANMA01038") + " "
-                                updateHAN98MA01TANKA += ",HANMA01039 = " + dataRow("HANMA01039") + " "
-                                updateHAN98MA01TANKA += ",HANMA01UPD = " + dataRow("HANMA01UPD") + " "
-                            End If
+
+                            updateHAN98MA01TANKA += "HANMA01036 = '" + dataRow("HANMA01036") + "', "
+                            updateHAN98MA01TANKA += "HANMA01038 = " + dataRow("HANMA01029") + ","
+                            updateHAN98MA01TANKA += "HANMA01039 = " + dataRow("HANMA01030") + ","
+                            updateHAN98MA01TANKA += "HANMA01UPD = " + dataRow("HANMA01UPD") + " "
+
+                            'updateHAN98MA01TANKA += "HANMA01036 = '" + dataRow("HANMA01036") + "' "
+                            'If (dataRow("HANMA01029") = 0) Then
+                            '    updateHAN98MA01TANKA += ",HANMA01038 = " + dataRow("HANMA01038") + " "
+                            '    updateHAN98MA01TANKA += ",HANMA01039 = " + dataRow("HANMA01039") + " "
+                            '    updateHAN98MA01TANKA += ",HANMA01UPD = " + dataRow("HANMA01UPD") + " "
+                            'End If
                             updateHAN98MA01TANKA += "WHERE "
                             updateHAN98MA01TANKA += "HANMA01001 = '" + dataRow("HANMA01001") + "' "
                             updateHAN98MA01TANKA += "AND HANMA01002 = '" + dataRow("HANMA01002") + "' "

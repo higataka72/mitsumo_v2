@@ -154,6 +154,7 @@ Partial Class FormMTM03
         Me.ButtonClose = New System.Windows.Forms.Button()
         Me.ButtonPreview = New System.Windows.Forms.Button()
         Me.ButtonSend = New System.Windows.Forms.Button()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.TabControl1.SuspendLayout()
         Me.TabPage001.SuspendLayout()
         Me.Panel002.SuspendLayout()
@@ -326,6 +327,7 @@ Partial Class FormMTM03
         Me.Button010.Name = "Button010"
         Me.Button010.Size = New System.Drawing.Size(29, 24)
         Me.Button010.TabIndex = 34
+        Me.Button010.TabStop = False
         Me.Button010.UseVisualStyleBackColor = True
         '
         'TextBox020
@@ -354,6 +356,7 @@ Partial Class FormMTM03
         Me.Button009.Name = "Button009"
         Me.Button009.Size = New System.Drawing.Size(29, 24)
         Me.Button009.TabIndex = 31
+        Me.Button009.TabStop = False
         Me.Button009.UseVisualStyleBackColor = True
         '
         'Label9
@@ -403,6 +406,7 @@ Partial Class FormMTM03
         Me.Button008.Name = "Button008"
         Me.Button008.Size = New System.Drawing.Size(29, 24)
         Me.Button008.TabIndex = 28
+        Me.Button008.TabStop = False
         Me.Button008.UseVisualStyleBackColor = True
         '
         'TextBox016
@@ -431,6 +435,7 @@ Partial Class FormMTM03
         Me.Button007.Name = "Button007"
         Me.Button007.Size = New System.Drawing.Size(29, 24)
         Me.Button007.TabIndex = 25
+        Me.Button007.TabStop = False
         Me.Button007.UseVisualStyleBackColor = True
         '
         'Label6
@@ -469,6 +474,7 @@ Partial Class FormMTM03
         Me.Button006.Name = "Button006"
         Me.Button006.Size = New System.Drawing.Size(29, 24)
         Me.Button006.TabIndex = 22
+        Me.Button006.TabStop = False
         Me.Button006.UseVisualStyleBackColor = True
         '
         'TextBox012
@@ -497,6 +503,7 @@ Partial Class FormMTM03
         Me.Button005.Name = "Button005"
         Me.Button005.Size = New System.Drawing.Size(29, 24)
         Me.Button005.TabIndex = 19
+        Me.Button005.TabStop = False
         Me.Button005.UseVisualStyleBackColor = True
         '
         'Label5
@@ -535,6 +542,7 @@ Partial Class FormMTM03
         Me.Button004.Name = "Button004"
         Me.Button004.Size = New System.Drawing.Size(29, 24)
         Me.Button004.TabIndex = 16
+        Me.Button004.TabStop = False
         Me.Button004.UseVisualStyleBackColor = True
         '
         'TextBox008
@@ -563,6 +571,7 @@ Partial Class FormMTM03
         Me.Button003.Name = "Button003"
         Me.Button003.Size = New System.Drawing.Size(29, 24)
         Me.Button003.TabIndex = 13
+        Me.Button003.TabStop = False
         Me.Button003.UseVisualStyleBackColor = True
         '
         'Label10
@@ -582,6 +591,7 @@ Partial Class FormMTM03
         Me.Button002.Name = "Button002"
         Me.Button002.Size = New System.Drawing.Size(29, 24)
         Me.Button002.TabIndex = 10
+        Me.Button002.TabStop = False
         Me.Button002.UseVisualStyleBackColor = True
         '
         'Button001
@@ -591,6 +601,7 @@ Partial Class FormMTM03
         Me.Button001.Name = "Button001"
         Me.Button001.Size = New System.Drawing.Size(29, 24)
         Me.Button001.TabIndex = 7
+        Me.Button001.TabStop = False
         Me.Button001.UseVisualStyleBackColor = True
         '
         'Label006
@@ -763,6 +774,7 @@ Partial Class FormMTM03
         Me.Button034.Name = "Button034"
         Me.Button034.Size = New System.Drawing.Size(29, 24)
         Me.Button034.TabIndex = 106
+        Me.Button034.TabStop = False
         Me.Button034.UseVisualStyleBackColor = True
         '
         'TextBox069
@@ -791,6 +803,7 @@ Partial Class FormMTM03
         Me.Button033.Name = "Button033"
         Me.Button033.Size = New System.Drawing.Size(29, 24)
         Me.Button033.TabIndex = 103
+        Me.Button033.TabStop = False
         Me.Button033.UseVisualStyleBackColor = True
         '
         'TextBox067
@@ -819,6 +832,7 @@ Partial Class FormMTM03
         Me.Button032.Name = "Button032"
         Me.Button032.Size = New System.Drawing.Size(29, 24)
         Me.Button032.TabIndex = 100
+        Me.Button032.TabStop = False
         Me.Button032.UseVisualStyleBackColor = True
         '
         'TextBox065
@@ -847,6 +861,7 @@ Partial Class FormMTM03
         Me.Button031.Name = "Button031"
         Me.Button031.Size = New System.Drawing.Size(29, 24)
         Me.Button031.TabIndex = 97
+        Me.Button031.TabStop = False
         Me.Button031.UseVisualStyleBackColor = True
         '
         'TextBox063
@@ -875,6 +890,7 @@ Partial Class FormMTM03
         Me.Button030.Name = "Button030"
         Me.Button030.Size = New System.Drawing.Size(29, 24)
         Me.Button030.TabIndex = 94
+        Me.Button030.TabStop = False
         Me.Button030.UseVisualStyleBackColor = True
         '
         'TextBox061
@@ -903,6 +919,7 @@ Partial Class FormMTM03
         Me.Button029.Name = "Button029"
         Me.Button029.Size = New System.Drawing.Size(29, 24)
         Me.Button029.TabIndex = 91
+        Me.Button029.TabStop = False
         Me.Button029.UseVisualStyleBackColor = True
         '
         'TextBox059
@@ -959,6 +976,7 @@ Partial Class FormMTM03
         Me.Button028.Name = "Button028"
         Me.Button028.Size = New System.Drawing.Size(29, 24)
         Me.Button028.TabIndex = 88
+        Me.Button028.TabStop = False
         Me.Button028.UseVisualStyleBackColor = True
         '
         'TextBox056
@@ -987,6 +1005,7 @@ Partial Class FormMTM03
         Me.Button027.Name = "Button027"
         Me.Button027.Size = New System.Drawing.Size(29, 24)
         Me.Button027.TabIndex = 85
+        Me.Button027.TabStop = False
         Me.Button027.UseVisualStyleBackColor = True
         '
         'TextBox054
@@ -1015,6 +1034,7 @@ Partial Class FormMTM03
         Me.Button026.Name = "Button026"
         Me.Button026.Size = New System.Drawing.Size(29, 24)
         Me.Button026.TabIndex = 82
+        Me.Button026.TabStop = False
         Me.Button026.UseVisualStyleBackColor = True
         '
         'TextBox052
@@ -1043,6 +1063,7 @@ Partial Class FormMTM03
         Me.Button025.Name = "Button025"
         Me.Button025.Size = New System.Drawing.Size(29, 24)
         Me.Button025.TabIndex = 79
+        Me.Button025.TabStop = False
         Me.Button025.UseVisualStyleBackColor = True
         '
         'TextBox050
@@ -1071,6 +1092,7 @@ Partial Class FormMTM03
         Me.Button024.Name = "Button024"
         Me.Button024.Size = New System.Drawing.Size(29, 24)
         Me.Button024.TabIndex = 76
+        Me.Button024.TabStop = False
         Me.Button024.UseVisualStyleBackColor = True
         '
         'TextBox048
@@ -1099,6 +1121,7 @@ Partial Class FormMTM03
         Me.Button023.Name = "Button023"
         Me.Button023.Size = New System.Drawing.Size(29, 24)
         Me.Button023.TabIndex = 73
+        Me.Button023.TabStop = False
         Me.Button023.UseVisualStyleBackColor = True
         '
         'TextBox046
@@ -1155,6 +1178,7 @@ Partial Class FormMTM03
         Me.Button022.Name = "Button022"
         Me.Button022.Size = New System.Drawing.Size(29, 24)
         Me.Button022.TabIndex = 70
+        Me.Button022.TabStop = False
         Me.Button022.UseVisualStyleBackColor = True
         '
         'TextBox044
@@ -1183,6 +1207,7 @@ Partial Class FormMTM03
         Me.Button021.Name = "Button021"
         Me.Button021.Size = New System.Drawing.Size(29, 24)
         Me.Button021.TabIndex = 67
+        Me.Button021.TabStop = False
         Me.Button021.UseVisualStyleBackColor = True
         '
         'TextBox042
@@ -1211,6 +1236,7 @@ Partial Class FormMTM03
         Me.Button020.Name = "Button020"
         Me.Button020.Size = New System.Drawing.Size(29, 24)
         Me.Button020.TabIndex = 64
+        Me.Button020.TabStop = False
         Me.Button020.UseVisualStyleBackColor = True
         '
         'TextBox040
@@ -1239,6 +1265,7 @@ Partial Class FormMTM03
         Me.Button019.Name = "Button019"
         Me.Button019.Size = New System.Drawing.Size(29, 24)
         Me.Button019.TabIndex = 61
+        Me.Button019.TabStop = False
         Me.Button019.UseVisualStyleBackColor = True
         '
         'TextBox038
@@ -1267,6 +1294,7 @@ Partial Class FormMTM03
         Me.Button018.Name = "Button018"
         Me.Button018.Size = New System.Drawing.Size(29, 24)
         Me.Button018.TabIndex = 58
+        Me.Button018.TabStop = False
         Me.Button018.UseVisualStyleBackColor = True
         '
         'TextBox036
@@ -1295,6 +1323,7 @@ Partial Class FormMTM03
         Me.Button017.Name = "Button017"
         Me.Button017.Size = New System.Drawing.Size(29, 24)
         Me.Button017.TabIndex = 55
+        Me.Button017.TabStop = False
         Me.Button017.UseVisualStyleBackColor = True
         '
         'TextBox034
@@ -1351,6 +1380,7 @@ Partial Class FormMTM03
         Me.Button016.Name = "Button016"
         Me.Button016.Size = New System.Drawing.Size(29, 24)
         Me.Button016.TabIndex = 52
+        Me.Button016.TabStop = False
         Me.Button016.UseVisualStyleBackColor = True
         '
         'TextBox032
@@ -1379,6 +1409,7 @@ Partial Class FormMTM03
         Me.Button015.Name = "Button015"
         Me.Button015.Size = New System.Drawing.Size(29, 24)
         Me.Button015.TabIndex = 49
+        Me.Button015.TabStop = False
         Me.Button015.UseVisualStyleBackColor = True
         '
         'TextBox030
@@ -1407,6 +1438,7 @@ Partial Class FormMTM03
         Me.Button014.Name = "Button014"
         Me.Button014.Size = New System.Drawing.Size(29, 24)
         Me.Button014.TabIndex = 46
+        Me.Button014.TabStop = False
         Me.Button014.UseVisualStyleBackColor = True
         '
         'TextBox028
@@ -1435,6 +1467,7 @@ Partial Class FormMTM03
         Me.Button013.Name = "Button013"
         Me.Button013.Size = New System.Drawing.Size(29, 24)
         Me.Button013.TabIndex = 43
+        Me.Button013.TabStop = False
         Me.Button013.UseVisualStyleBackColor = True
         '
         'TextBox026
@@ -1463,6 +1496,7 @@ Partial Class FormMTM03
         Me.Button012.Name = "Button012"
         Me.Button012.Size = New System.Drawing.Size(29, 24)
         Me.Button012.TabIndex = 40
+        Me.Button012.TabStop = False
         Me.Button012.UseVisualStyleBackColor = True
         '
         'TextBox024
@@ -1491,6 +1525,7 @@ Partial Class FormMTM03
         Me.Button011.Name = "Button011"
         Me.Button011.Size = New System.Drawing.Size(29, 24)
         Me.Button011.TabIndex = 37
+        Me.Button011.TabStop = False
         Me.Button011.UseVisualStyleBackColor = True
         '
         'TextBox022
@@ -1521,7 +1556,7 @@ Partial Class FormMTM03
         Me.ButtonClose.Location = New System.Drawing.Point(905, 506)
         Me.ButtonClose.Name = "ButtonClose"
         Me.ButtonClose.Size = New System.Drawing.Size(85, 39)
-        Me.ButtonClose.TabIndex = 110
+        Me.ButtonClose.TabIndex = 111
         Me.ButtonClose.Text = "閉じる"
         Me.ButtonClose.UseVisualStyleBackColor = False
         '
@@ -1531,11 +1566,11 @@ Partial Class FormMTM03
         Me.ButtonPreview.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.ButtonPreview.Font = New System.Drawing.Font("メイリオ", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.ButtonPreview.ForeColor = System.Drawing.SystemColors.Control
-        Me.ButtonPreview.Location = New System.Drawing.Point(708, 506)
+        Me.ButtonPreview.Location = New System.Drawing.Point(644, 506)
         Me.ButtonPreview.Name = "ButtonPreview"
-        Me.ButtonPreview.Size = New System.Drawing.Size(100, 39)
-        Me.ButtonPreview.TabIndex = 108
-        Me.ButtonPreview.Text = "プレビュー"
+        Me.ButtonPreview.Size = New System.Drawing.Size(164, 39)
+        Me.ButtonPreview.TabIndex = 109
+        Me.ButtonPreview.Text = "見積書プレビュー"
         Me.ButtonPreview.UseVisualStyleBackColor = False
         '
         'ButtonSend
@@ -1547,9 +1582,22 @@ Partial Class FormMTM03
         Me.ButtonSend.Location = New System.Drawing.Point(814, 506)
         Me.ButtonSend.Name = "ButtonSend"
         Me.ButtonSend.Size = New System.Drawing.Size(85, 39)
-        Me.ButtonSend.TabIndex = 109
+        Me.ButtonSend.TabIndex = 110
         Me.ButtonSend.Text = "送信"
         Me.ButtonSend.UseVisualStyleBackColor = False
+        '
+        'Button1
+        '
+        Me.Button1.BackColor = System.Drawing.Color.MediumTurquoise
+        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.Button1.Font = New System.Drawing.Font("メイリオ", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.Button1.ForeColor = System.Drawing.SystemColors.Control
+        Me.Button1.Location = New System.Drawing.Point(460, 506)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(178, 39)
+        Me.Button1.TabIndex = 108
+        Me.Button1.Text = "案内文書プレビュー"
+        Me.Button1.UseVisualStyleBackColor = False
         '
         'FormMTM03
         '
@@ -1558,6 +1606,7 @@ Partial Class FormMTM03
         Me.AutoScroll = True
         Me.BackColor = System.Drawing.SystemColors.ButtonHighlight
         Me.ClientSize = New System.Drawing.Size(1007, 552)
+        Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.ButtonSend)
         Me.Controls.Add(Me.ButtonClose)
         Me.Controls.Add(Me.ButtonPreview)
@@ -1720,4 +1769,5 @@ Partial Class FormMTM03
     Friend WithEvents TextBox021 As TextBox
     Friend WithEvents Panel001 As Panel
     Friend WithEvents Panel002 As Panel
+    Friend WithEvents Button1 As Button
 End Class

@@ -38,18 +38,18 @@ Public Class FormMTMSearchShohin
     Private Sub SetDataGridColumn()
         Me.DataGridView001.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
 
-        Dim column001 As New DataGridViewButtonColumn With {
-                .HeaderText = "選択",
-                .Name = "SelectButtonSelect"
-            }
-        column001.Width = 80
-        column001.DefaultCellStyle.ForeColor = Color.Black
-        column001.DefaultCellStyle.BackColor = Color.White
-        column001.UseColumnTextForButtonValue = True
-        column001.Text = "選択"
-        column001.DefaultCellStyle.Font = New Font("ＭＳ 明朝", 9, FontStyle.Underline)
-        column001.HeaderCell.Style.Font = New Font("ＭＳ 明朝", 12, FontStyle.Underline)
-        Me.DataGridView001.Columns.Add(column001)
+        'Dim column001 As New DataGridViewButtonColumn With {
+        '        .HeaderText = "選択",
+        '        .Name = "SelectButtonSelect"
+        '    }
+        'column001.Width = 80
+        'column001.DefaultCellStyle.ForeColor = Color.Black
+        'column001.DefaultCellStyle.BackColor = Color.White
+        'column001.UseColumnTextForButtonValue = True
+        'column001.Text = "選択"
+        'column001.DefaultCellStyle.Font = New Font("ＭＳ 明朝", 9, FontStyle.Underline)
+        'column001.HeaderCell.Style.Font = New Font("ＭＳ 明朝", 12, FontStyle.Underline)
+        'Me.DataGridView001.Columns.Add(column001)
         Dim column002 As New DataGridViewTextBoxColumn With {
                 .HeaderText = "商品コード",
                 .DataPropertyName = "HANM003001",
@@ -140,5 +140,18 @@ Public Class FormMTMSearchShohin
     Private Sub ButtonSearch_Click(sender As Object, e As EventArgs) Handles ButtonSearch.Click
         Me.SetData2()
         DataGridView001.Font = New Font(“メイリオ”, 10)
+    End Sub
+
+    Private Sub DataGridView001_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView001.CellDoubleClick
+        If e.RowIndex > -1 Then
+            Dim selectRow As DataGridViewRow = Me.DataGridView001.Rows(e.RowIndex)
+            Me.Selected = New Models.HAN10M003SHOHIN With {
+                    .HANM003001 = selectRow.Cells("HANM003001").Value.ToString.Trim,
+                    .HANM003002 = selectRow.Cells("HANM003103").Value.ToString.Trim,
+                    .HANM003003 = selectRow.Cells("HANM003104").Value.ToString.Trim
+                    }
+            Me.DialogResult = DialogResult.OK
+            Me.Close()
+        End If
     End Sub
 End Class

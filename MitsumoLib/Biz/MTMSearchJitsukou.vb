@@ -27,6 +27,7 @@ Namespace Biz
                     command.Connection = Me.connection
                     command.CommandText = "SELECT " _
                         + " MTMR003002" _
+                        + ", MTMR003022" _
                         + ", MTMR003003" _
                         + ", CASE WHEN MTMR003005 IS NOT NULL AND REPLACE(MTMR003005, ' ', '') <> '' THEN SUBSTRING(MTMR003005, 1, 4) + '/' + SUBSTRING(MTMR003005, 5, 2) + '/' + SUBSTRING(MTMR003005, 7, 2) + ' ' + SUBSTRING(MTMR003005, 9, 2) + '時' ELSE '' END AS MTMR003005_KETUGOU" _
                         + ", CASE WHEN MTMR003004 IS NOT NULL AND REPLACE(MTMR003004, ' ', '') <> '' THEN SUBSTRING(MTMR003004, 1, 4) + '/' + SUBSTRING(MTMR003004, 5, 2) + '/' + SUBSTRING(MTMR003004, 7, 2) ELSE '' END AS MTMR003004" _
@@ -74,6 +75,7 @@ Namespace Biz
                     command.Connection = Me.connection
                     command.CommandText = "SELECT " _
                         + " MTMR003002" _
+                        + ", MTMR003022" _
                         + ", MTMR003003" _
                         + ", CASE WHEN MTMR003005 IS NOT NULL AND REPLACE(MTMR003005, ' ', '') <> '' THEN SUBSTRING(MTMR003005, 1, 4) + '/' + SUBSTRING(MTMR003005, 5, 2) + '/' + SUBSTRING(MTMR003005, 7, 2) + ' ' + SUBSTRING(MTMR003005, 9, 2) + '時' ELSE '' END AS MTMR003005_KETUGOU" _
                         + ", CASE WHEN MTMR003004 IS NOT NULL AND REPLACE(MTMR003004, ' ', '') <> '' THEN SUBSTRING(MTMR003004, 1, 4) + '/' + SUBSTRING(MTMR003004, 5, 2) + '/' + SUBSTRING(MTMR003004, 7, 2) ELSE '' END AS MTMR003004" _

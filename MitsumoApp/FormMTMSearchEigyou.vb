@@ -38,18 +38,18 @@ Public Class FormMTMSearchEigyou
     Private Sub SetDataGridColumn()
         Me.DataGridView001.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
 
-        Dim column001 As New DataGridViewButtonColumn With {
-                .HeaderText = "選択",
-                .Name = "SelectButtonSelect"
-            }
-        column001.Width = 80
-        column001.DefaultCellStyle.ForeColor = Color.Black
-        column001.DefaultCellStyle.BackColor = Color.White
-        column001.UseColumnTextForButtonValue = True
-        column001.Text = "選択"
-        column001.DefaultCellStyle.Font = New Font("ＭＳ 明朝", 9, FontStyle.Underline)
-        column001.HeaderCell.Style.Font = New Font("ＭＳ 明朝", 12, FontStyle.Underline)
-        Me.DataGridView001.Columns.Add(column001)
+        'Dim column001 As New DataGridViewButtonColumn With {
+        '        .HeaderText = "選択",
+        '        .Name = "SelectButtonSelect"
+        '    }
+        'column001.Width = 80
+        'column001.DefaultCellStyle.ForeColor = Color.Black
+        'column001.DefaultCellStyle.BackColor = Color.White
+        'column001.UseColumnTextForButtonValue = True
+        'column001.Text = "選択"
+        'column001.DefaultCellStyle.Font = New Font("ＭＳ 明朝", 9, FontStyle.Underline)
+        'column001.HeaderCell.Style.Font = New Font("ＭＳ 明朝", 12, FontStyle.Underline)
+        'Me.DataGridView001.Columns.Add(column001)
         Dim column002 As New DataGridViewTextBoxColumn With {
                 .HeaderText = "営業所コード",
                 .DataPropertyName = "HANM036001",
@@ -103,6 +103,18 @@ Public Class FormMTMSearchEigyou
                 Me.DialogResult = DialogResult.OK
                 Me.Close()
             End If
+        End If
+    End Sub
+
+    Private Sub DataGridView001_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView001.CellDoubleClick
+        If e.RowIndex > -1 Then
+            Dim selectRow As DataGridViewRow = Me.DataGridView001.Rows(e.RowIndex)
+            Me.Selected = New Models.HAN10M036EIGYOU With {
+                    .HANM036001 = selectRow.Cells("HANM036001").Value.ToString.Trim,
+                    .HANM036002 = selectRow.Cells("HANM036002").Value.ToString.Trim
+                    }
+            Me.DialogResult = DialogResult.OK
+            Me.Close()
         End If
     End Sub
 End Class

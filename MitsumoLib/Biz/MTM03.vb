@@ -6,6 +6,7 @@ Imports iTextSharp.text.pdf
 Imports System.Net.Mail
 Imports System.Text
 Imports System.Net.Mime
+Imports System.Configuration
 
 Namespace Biz
     Public Class MTM03
@@ -34,6 +35,11 @@ Namespace Biz
             Return errorList
         End Function
 
+        ''' <summary>
+        ''' プレビューPDF
+        ''' </summary>
+        ''' <param name="searchCondition"></param>
+        ''' <returns></returns>
         Public Function PreviewPdf(ByVal searchCondition As MTM03SearchCondition, ByVal outputPath As String) As MTM03PreviewData
             Dim previewData As New MTM03PreviewData
 
@@ -42,6 +48,32 @@ Namespace Biz
             If previewData.SearchResult.ElementList.Count > 0 Then
                 Dim createPdf As String = ""
                 Dim errorList = Me.OutputPreviewPdf(searchCondition.KakakuNyuuryokuNo, previewData.SearchResult, outputPath, createPdf)
+                If errorList.Count > 0 Then
+                    previewData.ErrorList.AddRange(errorList)
+                Else
+                    'previewData.FilePath = outputPath + "/見積書.pdf"
+                    previewData.FilePath = createPdf
+                End If
+            Else
+                previewData.ErrorList.Add("見積データがありません")
+            End If
+
+            Return previewData
+        End Function
+
+        ''' <summary>
+        ''' 新帳票ツールプレビューPDF
+        ''' </summary>
+        ''' <param name="searchCondition"></param>
+        ''' <returns></returns>
+        Public Function PreviewNewPdf(ByVal searchCondition As MTM03SearchCondition, ByVal outputPath As String, ByVal templatePath As String) As MTM03PreviewData
+            Dim previewData As New MTM03PreviewData
+
+            previewData.SearchResult = Me.GetKakaku(searchCondition)
+
+            If previewData.SearchResult.ElementList.Count > 0 Then
+                Dim createPdf As String = ""
+                Dim errorList = Me.OutputPreviewNewPdf(previewData.SearchResult, outputPath, templatePath, createPdf)
                 If errorList.Count > 0 Then
                     previewData.ErrorList.AddRange(errorList)
                 Else
@@ -473,6 +505,31 @@ Namespace Biz
 
                 'ドキュメントを閉じる
                 doc.Close()
+            Catch ex As Exception
+                Console.Write(ex.Message)
+                errorList.Add(ex.Message)
+            End Try
+
+            Return errorList
+        End Function
+
+        ''' <summary>
+        ''' 新帳票ツール用プレビュー用PDF出力
+        ''' </summary>
+        ''' <returns>String</returns>
+        Private Function OutputPreviewNewPdf(ByVal result As MTM03SearchResult, ByVal outputPath As String, ByVal templatePath As String, ByRef createPdf As String) As List(Of String)
+            Dim errorList As New List(Of String)
+
+            Try
+                If Not System.IO.Directory.Exists(outputPath) Then
+                    System.IO.Directory.CreateDirectory(outputPath)
+                End If
+
+                Dim cls = New MTM03Print
+                'Dim ret = cls.Print2(result, outputPath, templatePath, createPdf)
+                Dim ret = cls.PrintPreview(result, outputPath, templatePath, createPdf)
+
+
             Catch ex As Exception
                 Console.Write(ex.Message)
                 errorList.Add(ex.Message)
@@ -1583,37 +1640,37 @@ Namespace Biz
         End Sub
 
         Public Function SendMailMitsumo(ByVal searchCondition As MTM03SearchCondition, ByVal mailInfo As MTM03MailInfo, ByVal outputPath As String, ByVal loginId As String) As MTM03SendMailData
-            Dim sendMailData As New MTM03SendMailData
+            'Dim sendMailData As New MTM03SendMailData
 
-            sendMailData.SearchResult = Me.GetKakaku(searchCondition)
+            'sendMailData.SearchResult = Me.GetKakaku(searchCondition)
 
-            If sendMailData.SearchResult.ElementList.Count > 0 Then
-                For Each resultElement In sendMailData.SearchResult.ElementList
-                    If (searchCondition.OutputNum = "0" Or searchCondition.OutputNum = "1") And resultElement.SoushinKubun = "1" Then
-                        Dim sendMailErrorList = Me.SendMail(searchCondition.KakakuNyuuryokuNo, mailInfo, resultElement, outputPath)
-                        If sendMailErrorList.Count > 0 Then
-                            sendMailData.ErrorList.AddRange(sendMailErrorList)
-                            Exit For
-                        End If
-                    ElseIf (searchCondition.OutputNum = "0" Or searchCondition.OutputNum = "2") And resultElement.SoushinKubun = "2" Then
-                        Dim sendEDocumentErrorList = Me.SendEDocumentHeader(searchCondition.KakakuNyuuryokuNo, mailInfo, resultElement, outputPath)
-                        If sendEDocumentErrorList.Count > 0 Then
-                            sendMailData.ErrorList.AddRange(sendEDocumentErrorList)
-                            Exit For
-                        End If
-                    End If
+            'If sendMailData.SearchResult.ElementList.Count > 0 Then
+            '    For Each resultElement In sendMailData.SearchResult.ElementList
+            '        If (searchCondition.OutputNum = "0" Or searchCondition.OutputNum = "1") And resultElement.SoushinKubun = "1" Then
+            '            Dim sendMailErrorList = Me.SendMail(searchCondition.KakakuNyuuryokuNo, mailInfo, resultElement, outputPath)
+            '            If sendMailErrorList.Count > 0 Then
+            '                sendMailData.ErrorList.AddRange(sendMailErrorList)
+            '                Exit For
+            '            End If
+            '        ElseIf (searchCondition.OutputNum = "0" Or searchCondition.OutputNum = "2") And resultElement.SoushinKubun = "2" Then
+            '            Dim sendEDocumentErrorList = Me.SendEDocumentHeader(searchCondition.KakakuNyuuryokuNo, mailInfo, resultElement, outputPath)
+            '            If sendEDocumentErrorList.Count > 0 Then
+            '                sendMailData.ErrorList.AddRange(sendEDocumentErrorList)
+            '                Exit For
+            '            End If
+            '        End If
 
-                    Dim updateErrorList = Me.Update(resultElement, loginId)
-                    If updateErrorList.Count > 0 Then
-                        sendMailData.ErrorList.AddRange(updateErrorList)
-                        Exit For
-                    End If
-                Next
-            Else
-                sendMailData.ErrorList.Add("見積データがありません")
-            End If
+            '        Dim updateErrorList = Me.Update(resultElement, loginId)
+            '        If updateErrorList.Count > 0 Then
+            '            sendMailData.ErrorList.AddRange(updateErrorList)
+            '            Exit For
+            '        End If
+            '    Next
+            'Else
+            '    sendMailData.ErrorList.Add("見積データがありません")
+            'End If
 
-            Return sendMailData
+            'Return sendMailData
         End Function
 
         ''' <summary>
@@ -1623,7 +1680,13 @@ Namespace Biz
         ''' <param name="resultElement"></param>
         ''' <param name="outputPath"></param>
         ''' <returns></returns>
-        Public Function SendMail(ByVal kakakuNyuuryokuNo As String, ByVal mailInfo As MTM03MailInfo, ByVal resultElement As MTM03SearchResultElement, ByVal outputPath As String) As List(Of String)
+        Public Function SendMail(ByVal kakakuNyuuryokuNo As String, ByVal mailInfo As MTM03MailInfo, ByVal resultElement As MTM03SearchResultElement,
+                                 ByVal outputPath As String, templatePath As String) As List(Of String)
+
+            Dim cls = New MTM03Print
+            '案内文を実行管理テーブルから取得
+            Dim annaiFilePath As String = GetAnnaiFilePath(resultElement.KakakuNyuuryokuNo)
+
             Dim errorList As New List(Of String)
             If Not System.IO.Directory.Exists(outputPath) Then
                 System.IO.Directory.CreateDirectory(outputPath)
@@ -1651,14 +1714,26 @@ Namespace Biz
                 tantouName = resultElement.AtesakiName
             End If
 
-            Dim fileName = resultElement.KakakuNyuuryokuNo.Trim + "_御見積書_" + resultElement.TokuisakiName1.Trim + "様_" + Date.Now.ToString("yyyyMMddHHmm") + ".pdf"
-            Dim filePath = outputPath + "\" + fileName
-
-            Dim pdfErrorList = Me.OutputAttachmentPdf(kakakuNyuuryokuNo, resultElement, filePath)
-            If pdfErrorList.Count > 0 Then
-                Return pdfErrorList
-                Exit Function
+            'フォルダ命名の変更対応
+            Dim folder2 As String = "\" + resultElement.KakakuNyuuryokuNo.Trim + " _御見積書_" + resultElement.JitsukouKakakuNyuuryokuName
+            outputPath = outputPath + folder2
+            If Not System.IO.Directory.Exists(outputPath) Then
+                System.IO.Directory.CreateDirectory(outputPath)
             End If
+
+            Dim fileName = resultElement.KakakuNyuuryokuNo.Trim + "_御見積書_" + resultElement.TokuisakiName1.Trim + "様_" + Date.Now.ToString("yyyyMMddHHmm") + ".pdf"
+            Dim filePath = outputPath & "\" & fileName
+
+            'print関数へ渡すためリストへ詰める
+            Dim Result As New MTM03SearchResult
+            Result.ElementList.Add(resultElement)
+
+            Dim ret = cls.Print(Result, outputPath, templatePath, fileName)
+            'Dim pdfErrorList = Me.OutputAttachmentPdf(kakakuNyuuryokuNo, resultElement, filePath)
+            'If pdfErrorList.Count > 0 Then
+            '    Return pdfErrorList
+            '    Exit Function
+            'End If
 
             Dim mailMessage As New System.Net.Mail.MailMessage
             Dim smtpClient As New System.Net.Mail.SmtpClient()
@@ -1674,29 +1749,79 @@ Namespace Biz
 
                 mailMessage.Subject = "（" + resultElement.JitsukouKakakuNyuuryokuName + "）改定お見積書の送付"
 
-                Dim body As String = tokuisakiName + vbCrLf _
-                    + tantouName + vbCrLf _
-                    + vbCrLf _
-                    + "　　お世話になっております。" + vbCrLf _
-                    + "　　もりや産業の" + resultElement.TantoName + "です。" + vbCrLf _
-                    + vbCrLf _
-                    + "　　この度、下記の商品の価格改定がございますので" + vbCrLf _
-                    + "　　改定見積書を添付致します。" + vbCrLf _
-                    + "　　ご査証いただきますようよろしくお願い致します。" + vbCrLf _
-                    + vbCrLf _
-                    + "　　　　該当商品：　" + resultElement.JitsukouKakakuNyuuryokuName + vbCrLf _
-                    + "　　　　改定日：　" + resultElement.NeageDate + " " + resultElement.Kaiteijitsusi + vbCrLf _
-                    + vbCrLf _
-                    + "　　以上よろしくお願い致します。" + vbCrLf _
-                    + vbCrLf _
-                    + "　　--------------------------------" + vbCrLf _
-                    + "　　もりや産業株式会社" + vbCrLf _
-                    + "　　　　" + resultElement.EigyosyoName + vbCrLf _
-                    + "　　　　" + resultElement.TantoName + vbCrLf _
-                    + vbCrLf _
-                    + "　　　　住所　" + resultElement.Address + vbCrLf _
-                    + "　　　　" + resultElement.PhoneFax + vbCrLf _
-                    + "　　　　メール　" + resultElement.MailFrom + vbCrLf
+                Dim body As String
+                body = tokuisakiName + vbCrLf
+                body += tantouName + vbCrLf
+                body += vbCrLf
+                body += "　　お世話になっております。" + vbCrLf
+                body += "　　もりや産業の" + resultElement.TantoName + "です。" + vbCrLf
+                body += vbCrLf
+                body += "　　この度、下記の商品の価格改定がございますので" + vbCrLf
+                body += "　　改定見積書を添付致します。" + vbCrLf
+                body += "　　ご査証いただきますようよろしくお願い致します。" + vbCrLf
+
+                '担当者毎に自由メール文項目を追加（前文）
+                Dim MailTemp = GetDataMail(resultElement.LoginId.Trim)
+                If (Not String.IsNullOrEmpty(MailTemp.MTMR006002)) Then
+                    body += "　　" + MailTemp.MTMR006002 + vbCrLf
+                End If
+                If (Not String.IsNullOrEmpty(MailTemp.MTMR006003)) Then
+                    body += "　　" + MailTemp.MTMR006003 + vbCrLf
+                End If
+                If (Not String.IsNullOrEmpty(MailTemp.MTMR006004)) Then
+                    body += "　　" + MailTemp.MTMR006004 + vbCrLf
+                End If
+
+                body += vbCrLf
+                body += "　　　　該当商品：　" + resultElement.JitsukouKakakuNyuuryokuName + vbCrLf
+                body += "　　　　改定日：　" + resultElement.NeageDate + " " + resultElement.Kaiteijitsusi + vbCrLf
+
+                '担当者毎に自由メール文項目を追加（後文）
+                If (Not String.IsNullOrEmpty(MailTemp.MTMR006005)) Then
+                    body += "　　　　" + MailTemp.MTMR006005 + vbCrLf
+                End If
+                If (Not String.IsNullOrEmpty(MailTemp.MTMR006006)) Then
+                    body += "　　　　" + MailTemp.MTMR006006 + vbCrLf
+                End If
+                If (Not String.IsNullOrEmpty(MailTemp.MTMR006007)) Then
+                    body += "　　　　" + MailTemp.MTMR006007 + vbCrLf
+                End If
+
+                body += vbCrLf
+                body += "　　以上よろしくお願い致します。" + vbCrLf
+                body += vbCrLf
+                body += "　　--------------------------------" + vbCrLf
+                body += "　　もりや産業株式会社" + vbCrLf
+                body += "　　　　" + resultElement.EigyosyoName + vbCrLf
+                body += "　　　　" + resultElement.TantoName + vbCrLf
+                body += vbCrLf
+                body += "　　　　住所　" + resultElement.Address + vbCrLf
+                body += "　　　　" + resultElement.PhoneFax + vbCrLf
+                body += "　　　　メール　" + resultElement.MailFrom + vbCrLf
+
+                'Dim body As String = tokuisakiName + vbCrLf _
+                '    + tantouName + vbCrLf _
+                '    + vbCrLf _
+                '    + "　　お世話になっております。" + vbCrLf _
+                '    + "　　もりや産業の" + resultElement.TantoName + "です。" + vbCrLf _
+                '    + vbCrLf _
+                '    + "　　この度、下記の商品の価格改定がございますので" + vbCrLf _
+                '    + "　　改定見積書を添付致します。" + vbCrLf _
+                '    + "　　ご査証いただきますようよろしくお願い致します。" + vbCrLf _
+                '    + vbCrLf _
+                '    + "　　　　該当商品：　" + resultElement.JitsukouKakakuNyuuryokuName + vbCrLf _
+                '    + "　　　　改定日：　" + resultElement.NeageDate + " " + resultElement.Kaiteijitsusi + vbCrLf _
+                '    + vbCrLf _
+                '    + "　　以上よろしくお願い致します。" + vbCrLf _
+                '    + vbCrLf _
+                '    + "　　--------------------------------" + vbCrLf _
+                '    + "　　もりや産業株式会社" + vbCrLf _
+                '    + "　　　　" + resultElement.EigyosyoName + vbCrLf _
+                '    + "　　　　" + resultElement.TantoName + vbCrLf _
+                '    + vbCrLf _
+                '    + "　　　　住所　" + resultElement.Address + vbCrLf _
+                '    + "　　　　" + resultElement.PhoneFax + vbCrLf _
+                '    + "　　　　メール　" + resultElement.MailFrom + vbCrLf
 
                 'mailMessage.Body = body
                 'mailMessage.IsBodyHtml = False
@@ -1706,10 +1831,21 @@ Namespace Biz
                 mailMessage.AlternateViews.Add(altView)
                 mailMessage.Headers.Add("Content-Transfer-Encoding", "7bit")
 
-                Dim attach As New System.Net.Mail.Attachment(filePath, MediaTypeNames.Application.Pdf)
-                Dim disposition As ContentDisposition = attach.ContentDisposition
-                disposition.FileName = EncordB(fileName)
-                mailMessage.Attachments.Add(attach)
+                '案内文も添付する
+                'If (Not String.IsNullOrEmpty(annaiFilePath)) Then
+                '    If File.Exists(annaiFilePath) Then
+                '        Dim annaiFileName = Path.GetFileName(annaiFilePath)
+                '        Dim attach1 As New System.Net.Mail.Attachment(annaiFilePath, MediaTypeNames.Application.Pdf)
+                '        Dim disposition1 As ContentDisposition = attach1.ContentDisposition
+                '        disposition1.FileName = EncordB(annaiFileName)
+                '        mailMessage.Attachments.Add(attach1)
+                '    End If
+                'End If
+
+                Dim attach2 As New System.Net.Mail.Attachment(filePath, MediaTypeNames.Application.Pdf)
+                Dim disposition2 As ContentDisposition = attach2.ContentDisposition
+                disposition2.FileName = EncordB(fileName)
+                mailMessage.Attachments.Add(attach2)
 
                 'gmailのSMTPサーバの設定
                 smtpClient.Host = mailInfo.MailHost
@@ -1776,7 +1912,7 @@ Namespace Biz
             Return errorList
         End Function
 
-        Private Function GetAnnaiFilePath(ByVal kakakuNyuuryokuNo As String) As String
+        Public Function GetAnnaiFilePath(ByVal kakakuNyuuryokuNo As String) As String
             Dim filePath As String = ""
 
             Try
@@ -1801,6 +1937,50 @@ Namespace Biz
 
             Return filePath
         End Function
+        ''' <summary>
+        ''' プレビュー用PDF出力(案内文のみ)
+        ''' </summary>
+        ''' <returns>String</returns>
+        Public Function OutputPreviewAnnaiPdf(ByVal annaiFilePath As String, ByVal outputPath As String) As List(Of String)
+            Dim errorList As New List(Of String)
+
+            Try
+                If Not System.IO.Directory.Exists(outputPath) Then
+                    System.IO.Directory.CreateDirectory(outputPath)
+                End If
+
+                'ドキュメントを作成
+                Dim doc As New Document(PageSize.A4.Rotate)
+                Dim stream As New FileStream(outputPath + "/見積書.pdf", FileMode.Create)
+                Dim writer As PdfWriter = PdfWriter.GetInstance(doc, stream)
+
+                'ドキュメントを開く
+                doc.Open()
+
+                Dim contentByte As PdfContentByte = writer.DirectContent
+
+                If System.IO.File.Exists(annaiFilePath) Then
+                    Dim reader As New PdfReader(annaiFilePath)
+                    For idx As Integer = 1 To reader.NumberOfPages
+                        Dim importedPage As PdfImportedPage = writer.GetImportedPage(reader, idx)
+                        doc.SetPageSize(reader.GetPageSize(idx))
+                        doc.NewPage()
+                        contentByte.AddTemplate(importedPage, 0, 0)
+                    Next
+
+                    doc.SetPageSize(PageSize.A4.Rotate)
+                    doc.NewPage()
+                End If
+
+                'ドキュメントを閉じる
+                doc.Close()
+            Catch ex As Exception
+                Console.Write(ex.Message)
+                errorList.Add(ex.Message)
+            End Try
+
+            Return errorList
+        End Function
 
         ''' <summary>
         ''' E帳票ヘッダー送信
@@ -1809,7 +1989,13 @@ Namespace Biz
         ''' <param name="resultElement"></param>
         ''' <param name="outputPath"></param>
         ''' <returns></returns>
-        Public Function SendEDocumentHeader(ByVal kakakuNyuuryokuNo As String, ByVal mailInfo As MTM03MailInfo, ByVal resultElement As MTM03SearchResultElement, ByVal outputPath As String) As List(Of String)
+        Public Function SendEDocumentHeader(ByVal kakakuNyuuryokuNo As String, ByVal mailInfo As MTM03MailInfo, ByVal resultElement As MTM03SearchResultElement,
+                                            ByVal outputPath As String, templatePath As String) As List(Of String)
+
+            Dim cls = New MTM03Print
+            '案内文を実行管理テーブルから取得
+            Dim annaiFilePath As String = GetAnnaiFilePath(resultElement.KakakuNyuuryokuNo)
+
             Dim errorList As New List(Of String)
             If Not System.IO.Directory.Exists(outputPath) Then
                 System.IO.Directory.CreateDirectory(outputPath)
@@ -1835,14 +2021,26 @@ Namespace Biz
                 tokuisakiName = resultElement.TokuisakiName1 + "　" + resultElement.TokuisakiName2 + "　御中"
             End If
 
+            'フォルダ命名の変更対応
+            Dim folder2 As String = "\" + resultElement.KakakuNyuuryokuNo.Trim + " _御見積書_" + resultElement.JitsukouKakakuNyuuryokuName
+            outputPath = outputPath + folder2
+            If Not System.IO.Directory.Exists(outputPath) Then
+                System.IO.Directory.CreateDirectory(outputPath)
+            End If
+
             Dim fileName = resultElement.KakakuNyuuryokuNo.Trim + "_御見積書_" + resultElement.TokuisakiName1.Trim + "様_" + Date.Now.ToString("yyyyMMddHHmm") + ".pdf"
             Dim filePath = outputPath + "\" + fileName
 
-            Dim pdfErrorList = Me.OutputAttachmentPdf(kakakuNyuuryokuNo, resultElement, filePath)
-            If pdfErrorList.Count > 0 Then
-                Return pdfErrorList
-                Exit Function
-            End If
+            'print関数へ渡すためリストへ詰める
+            Dim Result As New MTM03SearchResult
+            Result.ElementList.Add(resultElement)
+
+            Dim ret = cls.Print(Result, outputPath, templatePath, fileName)
+            'Dim pdfErrorList = Me.OutputAttachmentPdf(kakakuNyuuryokuNo, resultElement, filePath)
+            'If pdfErrorList.Count > 0 Then
+            '    Return pdfErrorList
+            '    Exit Function
+            'End If
 
             Dim mailMessage As New System.Net.Mail.MailMessage
             Dim smtpClient As New System.Net.Mail.SmtpClient()
@@ -1898,6 +2096,17 @@ Namespace Biz
                 'Dim altView As AlternateView = AlternateView.CreateAlternateViewFromString(body, myEnc, System.Net.Mime.MediaTypeNames.Text.Plain)
                 'altView.TransferEncoding = System.Net.Mime.TransferEncoding.SevenBit
                 'mailMessage.AlternateViews.Add(altView)
+
+                '案内文も添付する
+                'If (Not String.IsNullOrEmpty(annaiFilePath)) Then
+                '    If File.Exists(annaiFilePath) Then
+                '        Dim annaiFileName = Path.GetFileName(annaiFilePath)
+                '        Dim attach1 As New System.Net.Mail.Attachment(annaiFilePath, MediaTypeNames.Application.Pdf)
+                '        Dim disposition1 As ContentDisposition = attach1.ContentDisposition
+                '        disposition1.FileName = EncordB(annaiFileName)
+                '        mailMessage.Attachments.Add(attach1)
+                '    End If
+                'End If
 
                 Dim attach As New System.Net.Mail.Attachment(filePath, MediaTypeNames.Application.Pdf)
                 Dim disposition As ContentDisposition = attach.ContentDisposition
@@ -2066,8 +2275,10 @@ Namespace Biz
                                 + " AND MTMR002080 = @MTMR002080" _                      '価格入力番号
                                 + " AND ISNULL(MTMR002085, 0) <> 0" _                    '確定済
                                 + " AND ISNULL(MTMR002086, 0) = 0" _                     '印刷する
-                                + " AND LTRIM(RTRIM(ISNULL(MTMR002087, ''))) = ''" _     '未送信
                                 + " AND ISNULL(MTMR002032, 0) <> 0"                      '売更新日あり
+
+                        '追加対応でこの部分を除去（再送信時に最終見積日が更新されていません。）
+                        '+ " AND LTRIM(RTRIM(ISNULL(MTMR002087, ''))) = ''" _     '未送信
 
                         command.Parameters.Clear()
                         command.Parameters.Add(New SqlParameter("@MTMR002087", Date.Now.ToString("yyyyMMdd")))
@@ -2121,6 +2332,57 @@ Namespace Biz
             End If
 
             Return LenB
+
+        End Function
+
+        ''' <summary>
+        ''' メール文テーブルを取得
+        ''' <param name="scMTMR006001"></param>
+        ''' </summary>
+        ''' <returns>Boolean</returns>
+        Public Function GetDataMail(ByVal scMTMR006001 As String) As Models.MTM10R006MAIL
+            Dim reBool As Boolean = False
+            Dim mtm10r006mail As New Models.MTM10R006MAIL
+            mtm10r006mail.MTMR006002 = ""
+            mtm10r006mail.MTMR006003 = ""
+            mtm10r006mail.MTMR006004 = ""
+            mtm10r006mail.MTMR006005 = ""
+            mtm10r006mail.MTMR006006 = ""
+            mtm10r006mail.MTMR006007 = ""
+
+            Try
+                Me.connection.Open()
+                Using command As New SqlCommand
+                    command.Connection = Me.connection
+                    command.CommandText = "SELECT " _
+                                        + "MTMR006001 " _
+                                        + ",MTMR006002 " _
+                                        + ",MTMR006003 " _
+                                        + ",MTMR006004 " _
+                                        + ",MTMR006005 " _
+                                        + ",MTMR006006 " _
+                                        + ",MTMR006007 " _
+                                        + "FROM MTM10R006MAIL " _
+                                        + "WHERE LTRIM(RTRIM(MTMR006001)) = @MTMR006001 "
+                    command.Parameters.Clear()
+                    command.Parameters.Add(New SqlParameter("@MTMR006001", scMTMR006001))
+                    Dim reader As SqlDataReader = command.ExecuteReader
+                    If reader.Read = True Then
+                        mtm10r006mail.MTMR006002 = reader.Item("MTMR006002").ToString()
+                        mtm10r006mail.MTMR006003 = reader.Item("MTMR006003").ToString()
+                        mtm10r006mail.MTMR006004 = reader.Item("MTMR006004").ToString()
+                        mtm10r006mail.MTMR006005 = reader.Item("MTMR006005").ToString()
+                        mtm10r006mail.MTMR006006 = reader.Item("MTMR006006").ToString()
+                        mtm10r006mail.MTMR006007 = reader.Item("MTMR006007").ToString()
+                    End If
+                End Using
+            Catch ex As Exception
+                Throw ex
+            Finally
+                Me.connection.Close()
+            End Try
+
+            Return mtm10r006mail
 
         End Function
     End Class
@@ -2301,6 +2563,13 @@ Namespace Biz
     End Class
 
     Public Class MTM03SearchResultElementDetail
+        Public Property PageNo As String = ""
+
+        Public Property PageVal As Integer = 0
+        Public Property RowId As String = ""
+        Public Property RowIdVal As Integer = 0
+        Public Property RowDetailNo As String = ""
+
         Public Property SyohinName As String = ""
 
         Public Property Irisu As String = ""

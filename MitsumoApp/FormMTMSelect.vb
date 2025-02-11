@@ -38,7 +38,8 @@
     ''' <param name="e"></param>
     Private Sub ButtonUriSelect_Click(sender As Object, e As EventArgs) Handles ButtonUriSelect.Click
         '売上履歴
-        Dim formMTMSearchUriage As New FormMTMSearchUriage
+        'Dim formMTMSearchUriage As New FormMTMSearchUriage
+        Dim formMTMSearchUriage As New FormMTMSearchUriageV2
         formMTMSearchUriage.selectMTMR002001 = Me.selectMTMR002001
         formMTMSearchUriage.selectMTMR002002 = Me.selectMTMR002002
         formMTMSearchUriage.selectMTMR002003 = Me.selectMTMR002003
@@ -50,7 +51,8 @@
 
     Private Sub ButtonTankaSelect_Click(sender As Object, e As EventArgs) Handles ButtonTankaSelect.Click
         '単価台帳
-        Dim formMTMSearchTanka As New FormMTMSearchTanka
+        'Dim formMTMSearchTanka As New FormMTMSearchTanka
+        Dim formMTMSearchTanka As New FormMTMSearchTankaV2
         formMTMSearchTanka.selectMTMR002001 = Me.selectMTMR002001
         formMTMSearchTanka.selectMTMR002002 = Me.selectMTMR002002
         formMTMSearchTanka.selectMTMR002003 = Me.selectMTMR002003

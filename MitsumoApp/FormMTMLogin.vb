@@ -51,7 +51,7 @@ Public Class FormMTMLogin
             MessageBox.Show("[kikanDB]データベースへ接続できません" & vbCrLf & "設定ファイルを確認して下さい。" & vbCrLf & errorInfo)
             ButtonLogin.Enabled = False
         End If
-        ClearAll()
+        'ClearAll()
     End Sub
 
     ''' <summary>

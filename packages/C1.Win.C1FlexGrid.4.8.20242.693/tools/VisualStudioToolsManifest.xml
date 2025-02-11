@@ -1,0 +1,12 @@
+﻿<FileList>
+  <File Reference="C1.Win.C1FlexGrid.4.6.2.dll">
+    <ToolboxItems UIFramework="WinForms" VSCategory="C1 WinForms Controls" BlendCategory="C1 WinForms Controls">
+      <Item Type="C1.Win.C1FlexGrid.C1FlexGrid"/>
+    </ToolboxItems>
+  </File>
+  <File Reference="C1.Win.C1FlexGrid.4.8.dll">
+    <ToolboxItems UIFramework="WinForms" VSCategory="C1 WinForms Controls" BlendCategory="C1 WinForms Controls">
+      <Item Type="C1.Win.C1FlexGrid.C1FlexGrid"/>
+    </ToolboxItems>
+  </File>
+</FileList>

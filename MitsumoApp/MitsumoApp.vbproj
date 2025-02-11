@@ -61,6 +61,22 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="C1.Win.4.8, Version=4.8.20242.693, Culture=neutral, PublicKeyToken=944ae1ea0e47ca04, processorArchitecture=MSIL">
+      <HintPath>..\packages\C1.Win.8.0.20242.693\lib\net48\C1.Win.4.8.dll</HintPath>
+    </Reference>
+    <Reference Include="C1.Win.C1Command.4.8, Version=4.8.20242.693, Culture=neutral, PublicKeyToken=e808566f358766d8, processorArchitecture=MSIL">
+      <HintPath>..\packages\C1.Win.C1Command.4.8.20242.693\lib\net48\C1.Win.C1Command.4.8.dll</HintPath>
+    </Reference>
+    <Reference Include="C1.Win.C1FlexGrid.4.8, Version=4.8.20242.693, Culture=neutral, PublicKeyToken=79882d576c6336da, processorArchitecture=MSIL">
+      <HintPath>..\packages\C1.Win.C1FlexGrid.4.8.20242.693\lib\net48\C1.Win.C1FlexGrid.4.8.dll</HintPath>
+    </Reference>
+    <Reference Include="C1.Win.C1FlexGrid.ImportExport.4.8, Version=4.8.20242.688, Culture=neutral, PublicKeyToken=79882d576c6336da, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Program Files (x86)\ComponentOne\WinForms\bin\v4.8\C1.Win.C1FlexGrid.ImportExport.4.8.dll</HintPath>
+    </Reference>
+    <Reference Include="C1.Win.C1Input.4.8, Version=4.8.20242.693, Culture=neutral, PublicKeyToken=7e7ff60f0c214f9a, processorArchitecture=MSIL">
+      <HintPath>..\packages\C1.Win.C1Input.4.8.20242.693\lib\net48\C1.Win.C1Input.4.8.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Web.WebView2.Core, Version=1.0.1587.40, Culture=neutral, PublicKeyToken=2a8ab48044d2601e, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Web.WebView2.1.0.1587.40\lib\net45\Microsoft.Web.WebView2.Core.dll</HintPath>
     </Reference>
@@ -108,6 +124,12 @@
     <Compile Include="FormMTM02.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormMTM02RegistV2.Designer.vb">
+      <DependentUpon>FormMTM02RegistV2.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormMTM02RegistV2.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormMTM02Regist.Designer.vb">
       <DependentUpon>FormMTM02Regist.vb</DependentUpon>
     </Compile>
@@ -126,6 +148,12 @@
     <Compile Include="FormMTM04.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormMTM06.Designer.vb">
+      <DependentUpon>FormMTM06.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormMTM06.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormMTM05.Designer.vb">
       <DependentUpon>FormMTM05.vb</DependentUpon>
     </Compile>
@@ -136,6 +164,12 @@
       <DependentUpon>FormMTMConfirm.vb</DependentUpon>
     </Compile>
     <Compile Include="FormMTMConfirm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormMTMMailPreview.Designer.vb">
+      <DependentUpon>FormMTMMailPreview.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormMTMMailPreview.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormMTMPreview.Designer.vb">
@@ -187,10 +221,22 @@
     <Compile Include="FormMTMSearchShohin.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormMTMSearchTankaV2.Designer.vb">
+      <DependentUpon>FormMTMSearchTankaV2.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormMTMSearchTankaV2.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormMTMSearchTokui.Designer.vb">
       <DependentUpon>FormMTMSearchTokui.vb</DependentUpon>
     </Compile>
     <Compile Include="FormMTMSearchTokui.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormMTMSearchUriageV2.Designer.vb">
+      <DependentUpon>FormMTMSearchUriageV2.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormMTMSearchUriageV2.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormMTMSearchUriage.Designer.vb">
@@ -259,6 +305,9 @@
     <EmbeddedResource Include="FormMTM02.resx">
       <DependentUpon>FormMTM02.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormMTM02RegistV2.resx">
+      <DependentUpon>FormMTM02RegistV2.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormMTM02Regist.resx">
       <DependentUpon>FormMTM02Regist.vb</DependentUpon>
     </EmbeddedResource>
@@ -268,11 +317,17 @@
     <EmbeddedResource Include="FormMTM04.resx">
       <DependentUpon>FormMTM04.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormMTM06.resx">
+      <DependentUpon>FormMTM06.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormMTM05.resx">
       <DependentUpon>FormMTM05.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormMTMConfirm.resx">
       <DependentUpon>FormMTMConfirm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormMTMMailPreview.resx">
+      <DependentUpon>FormMTMMailPreview.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormMTMPreview.resx">
       <DependentUpon>FormMTMPreview.vb</DependentUpon>
@@ -298,8 +353,14 @@
     <EmbeddedResource Include="FormMTMSearchShohin.resx">
       <DependentUpon>FormMTMSearchShohin.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormMTMSearchTankaV2.resx">
+      <DependentUpon>FormMTMSearchTankaV2.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormMTMSearchTokui.resx">
       <DependentUpon>FormMTMSearchTokui.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormMTMSearchUriageV2.resx">
+      <DependentUpon>FormMTMSearchUriageV2.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormMTMSearchUriage.resx">
       <DependentUpon>FormMTMSearchUriage.vb</DependentUpon>
@@ -322,6 +383,7 @@
     <EmbeddedResource Include="FormSubPersonMaster.resx">
       <DependentUpon>FormSubPersonMaster.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="My Project\licenses.licx" />
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
@@ -331,6 +393,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.manifest" />
+    <EmbeddedResource Include="MitsumoApp.gclicx" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>

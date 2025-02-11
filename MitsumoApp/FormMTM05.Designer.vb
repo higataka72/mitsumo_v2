@@ -61,6 +61,8 @@ Partial Class FormMTM05
         Me.ButtonPreview = New System.Windows.Forms.Button()
         Me.TextBox010 = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
+        Me.TextBox002_2 = New System.Windows.Forms.TextBox()
+        Me.Label2 = New System.Windows.Forms.Label()
         Me.GroupBox001.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -73,7 +75,7 @@ Partial Class FormMTM05
         Me.ButtonExecute.Location = New System.Drawing.Point(418, 508)
         Me.ButtonExecute.Name = "ButtonExecute"
         Me.ButtonExecute.Size = New System.Drawing.Size(85, 39)
-        Me.ButtonExecute.TabIndex = 21
+        Me.ButtonExecute.TabIndex = 16
         Me.ButtonExecute.Text = "実行"
         Me.ButtonExecute.UseVisualStyleBackColor = False
         '
@@ -86,14 +88,14 @@ Partial Class FormMTM05
         Me.ButtonClose.Location = New System.Drawing.Point(509, 508)
         Me.ButtonClose.Name = "ButtonClose"
         Me.ButtonClose.Size = New System.Drawing.Size(85, 39)
-        Me.ButtonClose.TabIndex = 22
+        Me.ButtonClose.TabIndex = 17
         Me.ButtonClose.Text = "閉じる"
         Me.ButtonClose.UseVisualStyleBackColor = False
         '
         'TextBox002
         '
         Me.TextBox002.Font = New System.Drawing.Font("メイリオ", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TextBox002.Location = New System.Drawing.Point(178, 55)
+        Me.TextBox002.Location = New System.Drawing.Point(178, 45)
         Me.TextBox002.Name = "TextBox002"
         Me.TextBox002.Size = New System.Drawing.Size(385, 25)
         Me.TextBox002.TabIndex = 3
@@ -102,7 +104,7 @@ Partial Class FormMTM05
         '
         Me.Label002.AutoSize = True
         Me.Label002.Font = New System.Drawing.Font("メイリオ", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label002.Location = New System.Drawing.Point(24, 57)
+        Me.Label002.Location = New System.Drawing.Point(24, 47)
         Me.Label002.Name = "Label002"
         Me.Label002.Size = New System.Drawing.Size(106, 24)
         Me.Label002.TabIndex = 120
@@ -111,7 +113,7 @@ Partial Class FormMTM05
         'TextBox001
         '
         Me.TextBox001.Font = New System.Drawing.Font("メイリオ", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TextBox001.Location = New System.Drawing.Point(178, 25)
+        Me.TextBox001.Location = New System.Drawing.Point(178, 15)
         Me.TextBox001.Name = "TextBox001"
         Me.TextBox001.Size = New System.Drawing.Size(81, 25)
         Me.TextBox001.TabIndex = 1
@@ -120,7 +122,7 @@ Partial Class FormMTM05
         '
         Me.Label001.AutoSize = True
         Me.Label001.Font = New System.Drawing.Font("メイリオ", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label001.Location = New System.Drawing.Point(24, 25)
+        Me.Label001.Location = New System.Drawing.Point(24, 15)
         Me.Label001.Name = "Label001"
         Me.Label001.Size = New System.Drawing.Size(106, 24)
         Me.Label001.TabIndex = 118
@@ -129,7 +131,7 @@ Partial Class FormMTM05
         'Label010
         '
         Me.Label010.AutoSize = True
-        Me.Label010.Location = New System.Drawing.Point(432, 156)
+        Me.Label010.Location = New System.Drawing.Point(432, 179)
         Me.Label010.Name = "Label010"
         Me.Label010.Size = New System.Drawing.Size(24, 16)
         Me.Label010.TabIndex = 139
@@ -138,7 +140,7 @@ Partial Class FormMTM05
         'TextBox006
         '
         Me.TextBox006.Font = New System.Drawing.Font("メイリオ", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TextBox006.Location = New System.Drawing.Point(345, 153)
+        Me.TextBox006.Location = New System.Drawing.Point(345, 176)
         Me.TextBox006.MaxLength = 2
         Me.TextBox006.Name = "TextBox006"
         Me.TextBox006.Size = New System.Drawing.Size(81, 25)
@@ -147,7 +149,7 @@ Partial Class FormMTM05
         'Label009
         '
         Me.Label009.AutoSize = True
-        Me.Label009.Location = New System.Drawing.Point(432, 123)
+        Me.Label009.Location = New System.Drawing.Point(432, 146)
         Me.Label009.Name = "Label009"
         Me.Label009.Size = New System.Drawing.Size(24, 16)
         Me.Label009.TabIndex = 138
@@ -156,16 +158,16 @@ Partial Class FormMTM05
         'TextBox005
         '
         Me.TextBox005.Font = New System.Drawing.Font("メイリオ", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TextBox005.Location = New System.Drawing.Point(345, 120)
+        Me.TextBox005.Location = New System.Drawing.Point(345, 143)
         Me.TextBox005.MaxLength = 2
         Me.TextBox005.Name = "TextBox005"
         Me.TextBox005.Size = New System.Drawing.Size(81, 25)
-        Me.TextBox005.TabIndex = 122
+        Me.TextBox005.TabIndex = 5
         '
         'DatePicker003
         '
         Me.DatePicker003.Font = New System.Drawing.Font("メイリオ", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.DatePicker003.Location = New System.Drawing.Point(178, 189)
+        Me.DatePicker003.Location = New System.Drawing.Point(178, 212)
         Me.DatePicker003.Name = "DatePicker003"
         Me.DatePicker003.Size = New System.Drawing.Size(161, 25)
         Me.DatePicker003.TabIndex = 8
@@ -174,7 +176,7 @@ Partial Class FormMTM05
         '
         Me.DatePicker002.CustomFormat = ""
         Me.DatePicker002.Font = New System.Drawing.Font("メイリオ", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.DatePicker002.Location = New System.Drawing.Point(178, 154)
+        Me.DatePicker002.Location = New System.Drawing.Point(178, 177)
         Me.DatePicker002.Name = "DatePicker002"
         Me.DatePicker002.Size = New System.Drawing.Size(161, 25)
         Me.DatePicker002.TabIndex = 6
@@ -183,7 +185,7 @@ Partial Class FormMTM05
         '
         Me.DatePicker001.CustomFormat = ""
         Me.DatePicker001.Font = New System.Drawing.Font("メイリオ", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.DatePicker001.Location = New System.Drawing.Point(178, 120)
+        Me.DatePicker001.Location = New System.Drawing.Point(178, 143)
         Me.DatePicker001.Name = "DatePicker001"
         Me.DatePicker001.Size = New System.Drawing.Size(161, 25)
         Me.DatePicker001.TabIndex = 4
@@ -198,10 +200,10 @@ Partial Class FormMTM05
         Me.GroupBox001.Controls.Add(Me.CheckBox002)
         Me.GroupBox001.Controls.Add(Me.CheckBox001)
         Me.GroupBox001.Font = New System.Drawing.Font("メイリオ", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.GroupBox001.Location = New System.Drawing.Point(31, 354)
+        Me.GroupBox001.Location = New System.Drawing.Point(31, 375)
         Me.GroupBox001.Name = "GroupBox001"
-        Me.GroupBox001.Size = New System.Drawing.Size(563, 138)
-        Me.GroupBox001.TabIndex = 133
+        Me.GroupBox001.Size = New System.Drawing.Size(563, 125)
+        Me.GroupBox001.TabIndex = 14
         Me.GroupBox001.TabStop = False
         Me.GroupBox001.Text = "項目表示設定"
         '
@@ -212,7 +214,7 @@ Partial Class FormMTM05
         Me.CheckBox007.Location = New System.Drawing.Point(23, 90)
         Me.CheckBox007.Name = "CheckBox007"
         Me.CheckBox007.Size = New System.Drawing.Size(125, 28)
-        Me.CheckBox007.TabIndex = 20
+        Me.CheckBox007.TabIndex = 6
         Me.CheckBox007.Text = "改定前粗利率"
         Me.CheckBox007.UseVisualStyleBackColor = True
         '
@@ -223,7 +225,7 @@ Partial Class FormMTM05
         Me.CheckBox006.Location = New System.Drawing.Point(372, 58)
         Me.CheckBox006.Name = "CheckBox006"
         Me.CheckBox006.Size = New System.Drawing.Size(109, 28)
-        Me.CheckBox006.TabIndex = 19
+        Me.CheckBox006.TabIndex = 5
         Me.CheckBox006.Text = "新仕㎡単価"
         Me.CheckBox006.UseVisualStyleBackColor = True
         '
@@ -234,7 +236,7 @@ Partial Class FormMTM05
         Me.CheckBox005.Location = New System.Drawing.Point(203, 58)
         Me.CheckBox005.Name = "CheckBox005"
         Me.CheckBox005.Size = New System.Drawing.Size(109, 28)
-        Me.CheckBox005.TabIndex = 18
+        Me.CheckBox005.TabIndex = 4
         Me.CheckBox005.Text = "現仕㎡単価"
         Me.CheckBox005.UseVisualStyleBackColor = True
         '
@@ -245,7 +247,7 @@ Partial Class FormMTM05
         Me.CheckBox004.Location = New System.Drawing.Point(23, 58)
         Me.CheckBox004.Name = "CheckBox004"
         Me.CheckBox004.Size = New System.Drawing.Size(141, 28)
-        Me.CheckBox004.TabIndex = 17
+        Me.CheckBox004.TabIndex = 3
         Me.CheckBox004.Text = "改定前仕入単価"
         Me.CheckBox004.UseVisualStyleBackColor = True
         '
@@ -256,7 +258,7 @@ Partial Class FormMTM05
         Me.CheckBox003.Location = New System.Drawing.Point(372, 27)
         Me.CheckBox003.Name = "CheckBox003"
         Me.CheckBox003.Size = New System.Drawing.Size(109, 28)
-        Me.CheckBox003.TabIndex = 16
+        Me.CheckBox003.TabIndex = 2
         Me.CheckBox003.Text = "新売㎡単価"
         Me.CheckBox003.UseVisualStyleBackColor = True
         '
@@ -267,7 +269,7 @@ Partial Class FormMTM05
         Me.CheckBox002.Location = New System.Drawing.Point(203, 27)
         Me.CheckBox002.Name = "CheckBox002"
         Me.CheckBox002.Size = New System.Drawing.Size(109, 28)
-        Me.CheckBox002.TabIndex = 15
+        Me.CheckBox002.TabIndex = 1
         Me.CheckBox002.Text = "現売㎡単価"
         Me.CheckBox002.UseVisualStyleBackColor = True
         '
@@ -278,14 +280,14 @@ Partial Class FormMTM05
         Me.CheckBox001.Location = New System.Drawing.Point(23, 27)
         Me.CheckBox001.Name = "CheckBox001"
         Me.CheckBox001.Size = New System.Drawing.Size(125, 28)
-        Me.CheckBox001.TabIndex = 14
+        Me.CheckBox001.TabIndex = 0
         Me.CheckBox001.Text = "改定前売単価"
         Me.CheckBox001.UseVisualStyleBackColor = True
         '
         'Button003
         '
         Me.Button003.Image = CType(resources.GetObject("Button003.Image"), System.Drawing.Image)
-        Me.Button003.Location = New System.Drawing.Point(565, 322)
+        Me.Button003.Location = New System.Drawing.Point(565, 345)
         Me.Button003.Name = "Button003"
         Me.Button003.Size = New System.Drawing.Size(29, 24)
         Me.Button003.TabIndex = 13
@@ -294,7 +296,7 @@ Partial Class FormMTM05
         'TextBox009
         '
         Me.TextBox009.Font = New System.Drawing.Font("メイリオ", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TextBox009.Location = New System.Drawing.Point(178, 320)
+        Me.TextBox009.Location = New System.Drawing.Point(178, 343)
         Me.TextBox009.Name = "TextBox009"
         Me.TextBox009.Size = New System.Drawing.Size(385, 25)
         Me.TextBox009.TabIndex = 12
@@ -303,7 +305,7 @@ Partial Class FormMTM05
         '
         Me.Label008.AutoSize = True
         Me.Label008.Font = New System.Drawing.Font("メイリオ", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label008.Location = New System.Drawing.Point(24, 323)
+        Me.Label008.Location = New System.Drawing.Point(24, 346)
         Me.Label008.Name = "Label008"
         Me.Label008.Size = New System.Drawing.Size(106, 24)
         Me.Label008.TabIndex = 137
@@ -312,7 +314,7 @@ Partial Class FormMTM05
         'Button002
         '
         Me.Button002.Image = CType(resources.GetObject("Button002.Image"), System.Drawing.Image)
-        Me.Button002.Location = New System.Drawing.Point(565, 288)
+        Me.Button002.Location = New System.Drawing.Point(565, 311)
         Me.Button002.Name = "Button002"
         Me.Button002.Size = New System.Drawing.Size(29, 24)
         Me.Button002.TabIndex = 11
@@ -321,7 +323,7 @@ Partial Class FormMTM05
         'TextBox008
         '
         Me.TextBox008.Font = New System.Drawing.Font("メイリオ", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TextBox008.Location = New System.Drawing.Point(178, 287)
+        Me.TextBox008.Location = New System.Drawing.Point(178, 310)
         Me.TextBox008.Name = "TextBox008"
         Me.TextBox008.Size = New System.Drawing.Size(385, 25)
         Me.TextBox008.TabIndex = 10
@@ -330,7 +332,7 @@ Partial Class FormMTM05
         '
         Me.Label007.AutoSize = True
         Me.Label007.Font = New System.Drawing.Font("メイリオ", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label007.Location = New System.Drawing.Point(24, 289)
+        Me.Label007.Location = New System.Drawing.Point(24, 312)
         Me.Label007.Name = "Label007"
         Me.Label007.Size = New System.Drawing.Size(106, 24)
         Me.Label007.TabIndex = 136
@@ -339,7 +341,7 @@ Partial Class FormMTM05
         'TextBox007
         '
         Me.TextBox007.Font = New System.Drawing.Font("メイリオ", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TextBox007.Location = New System.Drawing.Point(178, 254)
+        Me.TextBox007.Location = New System.Drawing.Point(178, 277)
         Me.TextBox007.Name = "TextBox007"
         Me.TextBox007.Size = New System.Drawing.Size(385, 25)
         Me.TextBox007.TabIndex = 9
@@ -348,7 +350,7 @@ Partial Class FormMTM05
         '
         Me.Label006.AutoSize = True
         Me.Label006.Font = New System.Drawing.Font("メイリオ", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label006.Location = New System.Drawing.Point(24, 254)
+        Me.Label006.Location = New System.Drawing.Point(24, 277)
         Me.Label006.Name = "Label006"
         Me.Label006.Size = New System.Drawing.Size(90, 24)
         Me.Label006.TabIndex = 135
@@ -358,7 +360,7 @@ Partial Class FormMTM05
         '
         Me.Label005.AutoSize = True
         Me.Label005.Font = New System.Drawing.Font("メイリオ", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label005.Location = New System.Drawing.Point(24, 192)
+        Me.Label005.Location = New System.Drawing.Point(24, 215)
         Me.Label005.Name = "Label005"
         Me.Label005.Size = New System.Drawing.Size(58, 24)
         Me.Label005.TabIndex = 134
@@ -368,7 +370,7 @@ Partial Class FormMTM05
         '
         Me.Label004.AutoSize = True
         Me.Label004.Font = New System.Drawing.Font("メイリオ", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label004.Location = New System.Drawing.Point(24, 155)
+        Me.Label004.Location = New System.Drawing.Point(24, 178)
         Me.Label004.Name = "Label004"
         Me.Label004.Size = New System.Drawing.Size(154, 24)
         Me.Label004.TabIndex = 131
@@ -378,7 +380,7 @@ Partial Class FormMTM05
         '
         Me.Label003.AutoSize = True
         Me.Label003.Font = New System.Drawing.Font("メイリオ", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label003.Location = New System.Drawing.Point(24, 120)
+        Me.Label003.Location = New System.Drawing.Point(24, 143)
         Me.Label003.Name = "Label003"
         Me.Label003.Size = New System.Drawing.Size(106, 24)
         Me.Label003.TabIndex = 124
@@ -387,7 +389,7 @@ Partial Class FormMTM05
         'Button001
         '
         Me.Button001.Image = CType(resources.GetObject("Button001.Image"), System.Drawing.Image)
-        Me.Button001.Location = New System.Drawing.Point(268, 24)
+        Me.Button001.Location = New System.Drawing.Point(268, 14)
         Me.Button001.Name = "Button001"
         Me.Button001.Size = New System.Drawing.Size(29, 24)
         Me.Button001.TabIndex = 2
@@ -397,7 +399,7 @@ Partial Class FormMTM05
         '
         Me.TextBox003.Enabled = False
         Me.TextBox003.Font = New System.Drawing.Font("メイリオ", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TextBox003.Location = New System.Drawing.Point(178, 86)
+        Me.TextBox003.Location = New System.Drawing.Point(178, 109)
         Me.TextBox003.Name = "TextBox003"
         Me.TextBox003.ReadOnly = True
         Me.TextBox003.Size = New System.Drawing.Size(81, 27)
@@ -407,7 +409,7 @@ Partial Class FormMTM05
         '
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("メイリオ", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label3.Location = New System.Drawing.Point(24, 88)
+        Me.Label3.Location = New System.Drawing.Point(24, 111)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(92, 24)
         Me.Label3.TabIndex = 142
@@ -422,27 +424,46 @@ Partial Class FormMTM05
         Me.ButtonPreview.Location = New System.Drawing.Point(31, 508)
         Me.ButtonPreview.Name = "ButtonPreview"
         Me.ButtonPreview.Size = New System.Drawing.Size(164, 39)
-        Me.ButtonPreview.TabIndex = 143
+        Me.ButtonPreview.TabIndex = 15
+        Me.ButtonPreview.TabStop = False
         Me.ButtonPreview.Text = "案内文プレビュー"
         Me.ButtonPreview.UseVisualStyleBackColor = False
         '
         'TextBox010
         '
         Me.TextBox010.Font = New System.Drawing.Font("メイリオ", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TextBox010.Location = New System.Drawing.Point(178, 222)
+        Me.TextBox010.Location = New System.Drawing.Point(178, 245)
         Me.TextBox010.Name = "TextBox010"
         Me.TextBox010.Size = New System.Drawing.Size(385, 25)
-        Me.TextBox010.TabIndex = 144
+        Me.TextBox010.TabIndex = 9
         '
         'Label1
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("メイリオ", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label1.Location = New System.Drawing.Point(24, 222)
+        Me.Label1.Location = New System.Drawing.Point(24, 245)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(90, 24)
         Me.Label1.TabIndex = 145
         Me.Label1.Text = "改定実施日"
+        '
+        'TextBox002_2
+        '
+        Me.TextBox002_2.Font = New System.Drawing.Font("メイリオ", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.TextBox002_2.Location = New System.Drawing.Point(178, 78)
+        Me.TextBox002_2.Name = "TextBox002_2"
+        Me.TextBox002_2.Size = New System.Drawing.Size(385, 25)
+        Me.TextBox002_2.TabIndex = 4
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Font = New System.Drawing.Font("メイリオ", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.Label2.Location = New System.Drawing.Point(24, 80)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(122, 24)
+        Me.Label2.TabIndex = 147
+        Me.Label2.Text = "メモ（社内用）"
         '
         'FormMTM05
         '
@@ -451,6 +472,8 @@ Partial Class FormMTM05
         Me.AutoScroll = True
         Me.BackColor = System.Drawing.SystemColors.ButtonHighlight
         Me.ClientSize = New System.Drawing.Size(617, 563)
+        Me.Controls.Add(Me.TextBox002_2)
+        Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.TextBox010)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.ButtonPreview)
@@ -534,4 +557,6 @@ Partial Class FormMTM05
     Friend WithEvents ButtonPreview As Button
     Friend WithEvents TextBox010 As TextBox
     Friend WithEvents Label1 As Label
+    Friend WithEvents TextBox002_2 As TextBox
+    Friend WithEvents Label2 As Label
 End Class

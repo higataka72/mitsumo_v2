@@ -65,6 +65,18 @@ Namespace Biz
                 errorList.Add("価格入力名称が空です")
             End If
 
+            '価格入力名称
+            If (String.IsNullOrWhiteSpace(mtm10r003jitsukou.MTMR003002)) Then
+            ElseIf (Len(mtm10r003jitsukou.MTMR003002) > 36) Then
+                errorList.Add("価格入力名称の文字数が36桁を超えています")
+            End If
+
+            'メモ（社内用）
+            If (String.IsNullOrWhiteSpace(mtm10r003jitsukou.MTMR003022)) Then
+            ElseIf (Len(mtm10r003jitsukou.MTMR003022) > 200) Then
+                errorList.Add("メモ（社内用）の文字数が200桁を超えています")
+            End If
+
             If String.IsNullOrWhiteSpace(mtm10r003jitsukou.MTMR003003) Then
                 errorList.Add("ログインIDが空です")
             End If
@@ -286,25 +298,25 @@ Namespace Biz
                                             + ", TNK.MTMR001052" _                                                                              '最終納品先 (MTMR002052)
                                             + ", TNK.MTMR001053" _                                                                              '納品先履歴 (MTMR002053)
                                             + ", TNK.MTMR001054" _                                                                              '得意先FAX (MTMR002054)
-                                            + ", TNK.MTMR001057" _                                                                              '売価変更 (MTMR002055)
-                                            + ", TNK.MTMR001058" _                                                                              '仕価変更 (MTMR002056)
-                                            + ", TNK.MTMR001059" _                                                                              '商品名(比較用) (MTMR002057)
-                                            + ", TNK.MTMR001060" _                                                                              '商品名 (MTMR002058)
-                                            + ", CONVERT(decimal(19, 4), CASE WHEN TNK.MTMR001061 <> '' THEN TNK.MTMR001061 ELSE '0' END)" _    'ｽﾘｯﾄ (MTMR002059)
-                                            + ", CONVERT(decimal(19, 4), CASE WHEN TNK.MTMR001062 <> '' THEN TNK.MTMR001062 ELSE '0' END)" _    '# (MTMR002060)
-                                            + ", CONVERT(decimal(19, 4), CASE WHEN TNK.MTMR001063 <> '' THEN TNK.MTMR001063 ELSE '0' END)" _    '厚み (MTMR002061)
-                                            + ", CONVERT(decimal(19, 4), CASE WHEN TNK.MTMR001065 <> '' THEN TNK.MTMR001065 ELSE '0' END)" _    '巾1 (MTMR002062)
-                                            + ", CONVERT(decimal(19, 4), CASE WHEN TNK.MTMR001067 <> '' THEN TNK.MTMR001067 ELSE '0' END)" _    '巾2 (MTMR002063)
-                                            + ", CONVERT(decimal(19, 4), CASE WHEN TNK.MTMR001069 <> '' THEN TNK.MTMR001069 ELSE '0' END)" _    '長さ (MTMR002064)
-                                            + ", CONVERT(decimal(19, 4), CASE WHEN TNK.MTMR001070 <> '' THEN TNK.MTMR001070 ELSE '0' END)" _    'M (MTMR002065)
-                                            + ", CONVERT(decimal(19, 4), CASE WHEN TNK.MTMR001071 <> '' THEN TNK.MTMR001071 ELSE '0' END)" _    '+表示 (MTMR002066)
-                                            + ", CONVERT(decimal(19, 4), CASE WHEN TNK.MTMR001072 <> '' THEN TNK.MTMR001072 ELSE '0' END)" _    'ｽﾘｯﾄ (MTMR002067)
-                                            + ", TNK.MTMR001073" _                                                                              '備考 (MTMR002068)
+                                            + ", ''" _                                                                                          '売価変更 (MTMR002055)
+                                            + ", ''" _                                                                                          '仕価変更 (MTMR002056)
+                                            + ", ''" _                                                                                          '商品名(比較用) (MTMR002057)
+                                            + ", ''" _                                                                                          '商品名 (MTMR002058)
+                                            + ", '0'" _                                                                                         'ｽﾘｯﾄ (MTMR002059)
+                                            + ", '0'" _                                                                                         '# (MTMR002060)
+                                            + ", '0'" _                                                                                         '厚み (MTMR002061)
+                                            + ", '0'" _                                                                                         '巾1 (MTMR002062)
+                                            + ", '0'" _                                                                                         '巾2 (MTMR002063)
+                                            + ", '0'" _                                                                                         '長さ (MTMR002064)
+                                            + ", '0'" _                                                                                         'M (MTMR002065)
+                                            + ", '0'" _                                                                                         '+表示 (MTMR002066)
+                                            + ", '0'" _                                                                                         'ｽﾘｯﾄ (MTMR002067)
+                                            + ", ''" _                                                                                          '備考 (MTMR002068)
                                             + ", CONVERT(decimal(19, 4), CASE WHEN TNK.MTMR001074 <> '' THEN TNK.MTMR001074 ELSE '0' END)" _    '㎡計算 (MTMR002069)
-                                            + ", CONVERT(decimal(19, 4), CASE WHEN TNK.MTMR001075 <> '' THEN TNK.MTMR001075 ELSE '0' END)" _    '改定単価 (MTMR002070)
-                                            + ", CONVERT(decimal(5, 1), CASE WHEN TNK.MTMR001076 <> '' THEN TNK.MTMR001076 ELSE '0' END)" _     '値上がり率 (MTMR002071)
-                                            + ", TNK.MTMR001077" _                                                                              '備考（見積書） (MTMR002072)
-                                            + ", '－'" _                                                                                        '宛先名  (MTMR002073)
+                                            + ",'0'" _                                                                                          '改定単価 (MTMR002070)
+                                            + ",'0'" _                                                                                          '値上がり率 (MTMR002071)
+                                            + ", ''" _                                                                                          '備考（見積書） (MTMR002072)
+                                            + ", ''" _                                                                                          '宛先名  (MTMR002073)
                                             + ", ISNULL(TNT.HANM004K012, '')" _                                                                 '担当者M.担当者コード  (MTMR002074)
                                             + ", ISNULL(TNT.HANM004K011, '')" _                                                                 '担当者M.拡張項目１(メールアドレス) (MTMR002075)
                                             + ", CONVERT(decimal, ISNULL(ATS.CUSMB04002, 2))" _                                                 '宛先マスタ.宛先送信初期値 (MTMR002076)
@@ -320,6 +332,26 @@ Namespace Biz
                                             + " LEFT JOIN HAN10M004TANTO TNT ON RIGHT('00000000' + CONVERT(NVARCHAR, RTRIM(TNK.MTMR001011)), 8) = RIGHT('00000000' + CONVERT(NVARCHAR, RTRIM(TNT.HANM004001)), 8)" _
                                             + " LEFT JOIN CUS88MB04MITSUMOATESAKI ATS ON RIGHT('00000000' + CONVERT(NVARCHAR, RTRIM(TNK.MTMR001003)), 8) = RIGHT('00000000' + CONVERT(NVARCHAR, RTRIM(ATS.CUSMB04001)), 8)"
 
+
+                        '+ ", TNK.MTMR001057" _                                                                              '売価変更 (MTMR002055)
+                        '+ ", TNK.MTMR001058" _                                                                              '仕価変更 (MTMR002056)
+                        '+ ", TNK.MTMR001059" _                                                                              '商品名(比較用) (MTMR002057)
+                        '+ ", TNK.MTMR001060" _                                                                              '商品名 (MTMR002058)
+                        '+ ", CONVERT(decimal(19, 4), CASE WHEN TNK.MTMR001061 <> '' THEN TNK.MTMR001061 ELSE '0' END)" _    'ｽﾘｯﾄ (MTMR002059)
+                        '+ ", CONVERT(decimal(19, 4), CASE WHEN TNK.MTMR001062 <> '' THEN TNK.MTMR001062 ELSE '0' END)" _    '# (MTMR002060)
+                        '+ ", CONVERT(decimal(19, 4), CASE WHEN TNK.MTMR001063 <> '' THEN TNK.MTMR001063 ELSE '0' END)" _    '厚み (MTMR002061)
+                        '+ ", CONVERT(decimal(19, 4), CASE WHEN TNK.MTMR001065 <> '' THEN TNK.MTMR001065 ELSE '0' END)" _    '巾1 (MTMR002062)
+                        '+ ", CONVERT(decimal(19, 4), CASE WHEN TNK.MTMR001067 <> '' THEN TNK.MTMR001067 ELSE '0' END)" _    '巾2 (MTMR002063)
+                        '+ ", CONVERT(decimal(19, 4), CASE WHEN TNK.MTMR001069 <> '' THEN TNK.MTMR001069 ELSE '0' END)" _    '長さ (MTMR002064)
+                        '+ ", CONVERT(decimal(19, 4), CASE WHEN TNK.MTMR001070 <> '' THEN TNK.MTMR001070 ELSE '0' END)" _    'M (MTMR002065)
+                        '+ ", CONVERT(decimal(19, 4), CASE WHEN TNK.MTMR001071 <> '' THEN TNK.MTMR001071 ELSE '0' END)" _    '+表示 (MTMR002066)
+                        '+ ", CONVERT(decimal(19, 4), CASE WHEN TNK.MTMR001072 <> '' THEN TNK.MTMR001072 ELSE '0' END)" _    'ｽﾘｯﾄ (MTMR002067)
+                        '+ ", TNK.MTMR001073" _                                                                              '備考 (MTMR002068)
+                        '+ ", CONVERT(decimal(19, 4), CASE WHEN TNK.MTMR001075 <> '' THEN TNK.MTMR001075 ELSE '0' END)" _    '改定単価 (MTMR002070)
+                        '+ ", CONVERT(decimal(5, 1), CASE WHEN TNK.MTMR001076 <> '' THEN TNK.MTMR001076 ELSE '0' END)" _     '値上がり率 (MTMR002071)
+                        '+ ", TNK.MTMR001077" _                                                                              '備考（見積書） (MTMR002072)
+                        '+ ", '－'" _                                                                                        '宛先名  (MTMR002073)
+
                         command.Parameters.Add(New SqlParameter("@MTMR003001", mtm10r003jitsukou.MTMR003001))
                         command.Parameters.Add(New SqlParameter("@MTMR003002", mtm10r003jitsukou.MTMR003002))
                         command.Parameters.Add(New SqlParameter("@MTMR003003", mtm10r003jitsukou.MTMR003003))
@@ -329,6 +361,7 @@ Namespace Biz
                         command.CommandText = "INSERT INTO MTM10R003JITSUKOU (" _
                             + "MTMR003001" _   '価格入力番号
                             + ", MTMR003002" _ '価格入力名
+                            + ", MTMR003022" _ 'メモ（社内用）
                             + ", MTMR003003" _ '取込担当者コード
                             + ", MTMR003004" _ '取込年月日
                             + ", MTMR003005" _ '一斉送信日時
@@ -351,6 +384,7 @@ Namespace Biz
                             + ") VALUES (" _
                             + "CONVERT(decimal, @MTMR003001)" _
                             + ", @MTMR003002" _
+                            + ", @MTMR003022" _
                             + ", @MTMR003003" _
                             + ", @MTMR003004" _
                             + ", @MTMR003005" _
@@ -374,6 +408,7 @@ Namespace Biz
                         command.Parameters.Clear()
                         command.Parameters.Add(New SqlParameter("@MTMR003001", mtm10r003jitsukou.MTMR003001))
                         command.Parameters.Add(New SqlParameter("@MTMR003002", mtm10r003jitsukou.MTMR003002))
+                        command.Parameters.Add(New SqlParameter("@MTMR003022", mtm10r003jitsukou.MTMR003022))
                         command.Parameters.Add(New SqlParameter("@MTMR003003", mtm10r003jitsukou.MTMR003003))
                         '取込年月日はシステム日付を設定
                         mtm10r003jitsukou.MTMR003004 = DateTime.Now.ToString("yyyyMMdd")
@@ -521,7 +556,7 @@ Namespace Biz
                     command.CommandText = "SELECT " _
                                         + "JTK.MTMR003001, JTK.MTMR003002, JTK.MTMR003003, JTK.MTMR003004, JTK.MTMR003005, JTK.MTMR003006, JTK.MTMR003007, " _
                                         + "JTK.MTMR003008, JTK.MTMR003009, JTK.MTMR003010, JTK.MTMR003011, JTK.MTMR003012, JTK.MTMR003013, JTK.MTMR003014, " _
-                                        + "JTK.MTMR003015, JTK.MTMR003016, JTK.MTMR003017, JTK.MTMR003021 " _
+                                        + "JTK.MTMR003015, JTK.MTMR003016, JTK.MTMR003017, JTK.MTMR003021, JTK.MTMR003022 " _
                                         + "FROM MTM10R003JITSUKOU JTK " _
                                         + "WHERE " _
                                         + "MTMR003001 = @MTMR003001 "
@@ -532,6 +567,7 @@ Namespace Biz
                         reDataFlg = True
                         reMTM10R003JITSUKOU.MTMR003001 = reader.Item("MTMR003001").ToString()      '価格入力番号
                         reMTM10R003JITSUKOU.MTMR003002 = reader.Item("MTMR003002").ToString()      '価格入力名
+                        reMTM10R003JITSUKOU.MTMR003022 = reader.Item("MTMR003022").ToString()      'メモ（社内用）
                         reMTM10R003JITSUKOU.MTMR003003 = reader.Item("MTMR003003").ToString()      '取込担当者コード
                         reMTM10R003JITSUKOU.MTMR003005 = reader.Item("MTMR003005").ToString()      '一斉送信日時
                         reMTM10R003JITSUKOU.MTMR003006 = reader.Item("MTMR003006").ToString()      '更新日時

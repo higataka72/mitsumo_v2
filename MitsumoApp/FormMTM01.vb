@@ -72,6 +72,7 @@ Public Class FormMTM01
 
         Me.TextBox001.Text = Me.Biz01.GetCostInputNumber()
         'Me.TextBox002.Text = ""
+        Me.TextBox002_1.Text = ""
         Me.TextBox003.Text = Me.FormMenu.ModelMtmUser.MTMM002001.Trim
         Me.TextBox004.Text = Me.FormMenu.ModelMtmUser.MTMM002002
         Me.TextBox005.Text = ""
@@ -250,6 +251,7 @@ Public Class FormMTM01
         Dim msgLineTaskSystem As String = ""
         Dim txt001 As String = Me.TextBox001.Text.Trim
         Dim txt002 As String = Me.TextBox002.Text.Trim
+        Dim txt002_1 As String = Me.TextBox002_1.Text.Trim
         Dim txt003 As String = Me.TextBox003.Text.Trim
         Dim txt005 As String = Me.TextBox005.Text.Trim
         Dim txt006 As String = Me.TextBox006.Text.Trim
@@ -284,6 +286,7 @@ Public Class FormMTM01
             'ログインIDを取込時はロック
             Me.TextBox003.Enabled = False
             mtm10r003jitsukou.MTMR003002 = txt002
+            mtm10r003jitsukou.MTMR003022 = txt002_1
             mtm10r003jitsukou.MTMR003003 = txt003
             If (bl001) Then
                 If Not IsNothing(dt001) Then
@@ -1112,6 +1115,18 @@ Public Class FormMTM01
                             msgLineTaskSystem = "【成功】更新データ日時のタスクスケジュール登録完了"
                         End If
                     End If
+                Else
+                    'タスクスケジュール登録（見積一斉送信が入っていない場合は空のタスクを登録）
+                    If (bl002) Then
+                        Dim taskSysteErrorList = Me.BizCom.RegistTask(mtm10r003jitsukou, serversetting, 2)
+                        If taskSysteErrorList.Count > 0 Then
+                            For Each errorMessage As String In taskSysteErrorList
+                                msgLineTaskSystem = "【失敗】更新データ日時のタスクスケジュール登録失敗(手動実行して下さい）"
+                            Next
+                        Else
+                            msgLineTaskSystem = "【成功】更新データ日時のタスクスケジュール登録完了"
+                        End If
+                    End If
                 End If
 
                 '価格入力番号を採番した番号へ表示切替
@@ -1226,6 +1241,7 @@ Public Class FormMTM01
                     '各項目をセット
                     Me.TextBox001.Text = mtm10r003jitsukou.MTMR003001                                  '価格入力番号
                     Me.TextBox002.Text = mtm10r003jitsukou.MTMR003002                                  '価格入力名称
+                    Me.TextBox002_1.Text = mtm10r003jitsukou.MTMR003022                                'メモ（社内用）
                     Me.TextBox003.Text = mtm10r003jitsukou.MTMR003003                                  '取込担当者コード
                     If (String.IsNullOrEmpty(mtm10r003jitsukou.MTMR003003)) Then
                         Me.TextBox004.Text = Me.Biz01.UserNameSearch(mtm10r003jitsukou.MTMR003003)     '担当者名
@@ -1325,6 +1341,7 @@ Public Class FormMTM01
         If result = DialogResult.OK Then
             Me.TextBox001.Text = formSearch.Selected.MTMR003001
             Me.TextBox002.Text = formSearch.Selected.MTMR003002
+            Me.TextBox002_1.Text = formSearch.Selected.MTMR003022
             Me.TextBox003.Text = Me.FormMenu.ModelMtmUser.MTMM002001
             Me.TextBox004.Text = Me.FormMenu.ModelMtmUser.MTMM002002
             Me.TextBox005.Text = ""

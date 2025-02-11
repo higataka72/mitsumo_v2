@@ -11,6 +11,11 @@
         ''' <returns></returns>
         Public Property MTMR003002 As String
         ''' <summary>
+        ''' メモ（社内用）
+        ''' </summary>
+        ''' <returns></returns>
+        Public Property MTMR003022 As String
+        ''' <summary>
         ''' 取込担当者コード
         ''' </summary>
         ''' <returns></returns>

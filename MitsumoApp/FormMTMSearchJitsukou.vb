@@ -39,24 +39,24 @@ Public Class FormMTMSearchJitsukou
     Private Sub SetDataGridColumn()
         Me.DataGridView001.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
 
-        Dim column001 As New DataGridViewButtonColumn With {
-                .HeaderText = "選択",
-                .Name = "SelectButtonSelect"
-            }
-        column001.Width = 80
-        column001.DefaultCellStyle.ForeColor = Color.Black
-        column001.DefaultCellStyle.BackColor = Color.White
-        column001.UseColumnTextForButtonValue = True
-        column001.Text = "選択"
-        column001.DefaultCellStyle.Font = New Font("メイリオ", 9, FontStyle.Underline)
-        column001.HeaderCell.Style.Font = New Font("メイリオ", 12, FontStyle.Underline)
-        Me.DataGridView001.Columns.Add(column001)
+        'Dim column001 As New DataGridViewButtonColumn With {
+        '        .HeaderText = "選択",
+        '        .Name = "SelectButtonSelect"
+        '    }
+        'column001.Width = 80
+        'column001.DefaultCellStyle.ForeColor = Color.Black
+        'column001.DefaultCellStyle.BackColor = Color.White
+        'column001.UseColumnTextForButtonValue = True
+        'column001.Text = "選択"
+        'column001.DefaultCellStyle.Font = New Font("メイリオ", 9, FontStyle.Underline)
+        'column001.HeaderCell.Style.Font = New Font("メイリオ", 12, FontStyle.Underline)
+        'Me.DataGridView001.Columns.Add(column001)
         Dim column002 As New DataGridViewTextBoxColumn With {
                 .HeaderText = "締切日",
                 .DataPropertyName = "MTMR003007",
                 .Name = "MTMR003007"
             }
-        column002.Width = 200
+        column002.Width = 120
         column002.ReadOnly = True
         column002.SortMode = DataGridViewColumnSortMode.NotSortable
         Me.DataGridView001.Columns.Add(column002)
@@ -65,16 +65,25 @@ Public Class FormMTMSearchJitsukou
                 .DataPropertyName = "MTMR003002",
                 .Name = "MTMR003002"
             }
-        column003.Width = 450
+        column003.Width = 400
         column003.ReadOnly = True
         column003.SortMode = DataGridViewColumnSortMode.NotSortable
         Me.DataGridView001.Columns.Add(column003)
+        Dim column003_2 As New DataGridViewTextBoxColumn With {
+                .HeaderText = "メモ（社内用）",
+                .DataPropertyName = "MTMR003022",
+                .Name = "MTMR003022"
+            }
+        column003_2.Width = 300
+        column003_2.ReadOnly = True
+        column003_2.SortMode = DataGridViewColumnSortMode.NotSortable
+        Me.DataGridView001.Columns.Add(column003_2)
         Dim column003_1 As New DataGridViewTextBoxColumn With {
                 .HeaderText = "一斉送信日時",
                 .DataPropertyName = "MTMR003005_KETUGOU",
                 .Name = "MTMR003005_KETUGOU"
             }
-        column003_1.Width = 200
+        column003_1.Width = 180
         column003_1.ReadOnly = True
         column003_1.SortMode = DataGridViewColumnSortMode.NotSortable
         Me.DataGridView001.Columns.Add(column003_1)
@@ -143,7 +152,7 @@ Public Class FormMTMSearchJitsukou
                 .DataPropertyName = "MTMR003001",
                 .Name = "MTMR003001"
             }
-        column010.Width = 200
+        column010.Width = 120
         column010.ReadOnly = True
         column010.SortMode = DataGridViewColumnSortMode.NotSortable
         Me.DataGridView001.Columns.Add(column010)
@@ -383,5 +392,39 @@ Public Class FormMTMSearchJitsukou
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         Me.SetData()
         DataGridView001.Font = New Font(“メイリオ”, 10)
+    End Sub
+
+    Private Sub DataGridView001_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView001.CellDoubleClick
+        If e.RowIndex > -1 Then
+            Dim selectRow As DataGridViewRow = Me.DataGridView001.Rows(e.RowIndex)
+            Me.Selected = New Models.MTM10R003JITSUKOU With {
+                    .MTMR003001 = selectRow.Cells("MTMR003001").Value,
+                    .MTMR003002 = selectRow.Cells("MTMR003002").Value.ToString.Trim,
+                    .MTMR003003 = selectRow.Cells("MTMR003003").Value.ToString,
+                    .MTMR003004 = selectRow.Cells("MTMR003004").Value.ToString,
+                    .MTMR003005 = selectRow.Cells("MTMR003005").Value.ToString,
+                    .MTMR003005_2 = selectRow.Cells("MTMR003005_2").Value.ToString,
+                    .MTMR003006 = selectRow.Cells("MTMR003006").Value.ToString,
+                    .MTMR003006_2 = selectRow.Cells("MTMR003006_2").Value.ToString,
+                    .MTMR003007 = selectRow.Cells("MTMR003007").Value.ToString,
+                    .MTMR003008 = selectRow.Cells("MTMR003008").Value.ToString,
+                    .MTMR003009 = selectRow.Cells("MTMR003009").Value.ToString,
+                    .MTMR003010 = selectRow.Cells("MTMR003010").Value.ToString,
+                    .MTMR003011 = selectRow.Cells("MTMR003011").Value.ToString,
+                    .MTMR003012 = selectRow.Cells("MTMR003012").Value.ToString,
+                    .MTMR003013 = selectRow.Cells("MTMR003013").Value.ToString,
+                    .MTMR003014 = selectRow.Cells("MTMR003014").Value.ToString,
+                    .MTMR003015 = selectRow.Cells("MTMR003015").Value.ToString,
+                    .MTMR003016 = selectRow.Cells("MTMR003016").Value.ToString,
+                    .MTMR003017 = selectRow.Cells("MTMR003017").Value.ToString,
+                    .MTMR003018 = selectRow.Cells("MTMR003018").Value,
+                    .MTMR003019 = selectRow.Cells("MTMR003019").Value.ToString,
+                    .MTMR003020 = selectRow.Cells("MTMR003020").Value.ToString,
+                    .MTMR003021 = selectRow.Cells("MTMR003021").Value.ToString,
+                    .MTMR003022 = selectRow.Cells("MTMR003022").Value.ToString.Trim
+                }
+            Me.DialogResult = DialogResult.OK
+            Me.Close()
+        End If
     End Sub
 End Class

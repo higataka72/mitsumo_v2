@@ -58,4 +58,10 @@ Public Class FormMTMConfirm
         Me.Close()
         'Me.formMenu.Show()
     End Sub
+
+    Private Sub TextBox001_KeyDown(sender As Object, e As KeyEventArgs) Handles TextBox001.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            ButtonOK.PerformClick()
+        End If
+    End Sub
 End Class

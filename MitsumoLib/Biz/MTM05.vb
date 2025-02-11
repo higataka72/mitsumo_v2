@@ -62,6 +62,12 @@ Namespace Biz
                 errorList.Add("価格入力名称の文字数が36桁を超えています")
             End If
 
+            'メモ（社内用）
+            If (String.IsNullOrWhiteSpace(mtm10r003jitsukou.MTMR003022)) Then
+            ElseIf (Len(mtm10r003jitsukou.MTMR003022) > 200) Then
+                errorList.Add("メモ（社内用）の文字数が200桁を超えています")
+            End If
+
             '一斉送信日時（時間チェック）
             If Not String.IsNullOrEmpty(mtm10r003jitsukou.MTMR003005_2) Then
                 If Double.TryParse(mtm10r003jitsukou.MTMR003005_2, dbl) Then
@@ -161,6 +167,7 @@ Namespace Biz
                         command.Transaction = transaction
                         command.CommandText = "UPDATE MTM10R003JITSUKOU " _
                                         + "SET MTMR003002 = @MTMR003002 " _
+                                        + ",MTMR003022 = @MTMR003022 " _
                                         + ",MTMR003003 = @MTMR003003 " _
                                         + ",MTMR003005 = @MTMR003005 " _
                                         + ",MTMR003006 = @MTMR003006 " _
@@ -180,6 +187,7 @@ Namespace Biz
                         command.Parameters.Clear()
                         command.Parameters.Add(New SqlParameter("@MTMR003001", mtm10r003jitsukou.MTMR003001))
                         command.Parameters.Add(New SqlParameter("@MTMR003002", mtm10r003jitsukou.MTMR003002))
+                        command.Parameters.Add(New SqlParameter("@MTMR003022", mtm10r003jitsukou.MTMR003022))
                         command.Parameters.Add(New SqlParameter("@MTMR003003", mtm10r003jitsukou.MTMR003003))
                         command.Parameters.Add(New SqlParameter("@MTMR003005", mtm10r003jitsukou.MTMR003005 + mtm10r003jitsukou.MTMR003005_2))
                         command.Parameters.Add(New SqlParameter("@MTMR003006", mtm10r003jitsukou.MTMR003006 + mtm10r003jitsukou.MTMR003006_2))
@@ -259,6 +267,7 @@ Namespace Biz
                     command.Connection = Me.connection
                     command.CommandText = "SELECT MTMR003001" _
                         + ", MTMR003002" _
+                        + ", ISNULL(MTMR003022,'') AS MTMR003022" _
                         + ", MTMR003003" _
                         + ", CASE WHEN MTMR003004 IS NOT NULL AND REPLACE(MTMR003004, ' ', '') <> '' THEN SUBSTRING(MTMR003004, 1, 4) + '/' + SUBSTRING(MTMR003004, 5, 2) + '/' + SUBSTRING(MTMR003004, 7, 2) ELSE '' END AS MTMR003004" _
                         + ", CASE WHEN MTMR003005 IS NOT NULL AND REPLACE(MTMR003005, ' ', '') <> '' THEN SUBSTRING(MTMR003005, 1, 4) + '/' + SUBSTRING(MTMR003005, 5, 2) + '/' + SUBSTRING(MTMR003005, 7, 2) ELSE '' END AS MTMR003005" _

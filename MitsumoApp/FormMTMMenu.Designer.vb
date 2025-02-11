@@ -24,17 +24,19 @@ Partial Class FormMTMMenu
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormMTMMenu))
         Me.LabelVer = New System.Windows.Forms.Label()
-        Me.ButtonClose = New System.Windows.Forms.Button()
-        Me.ButtonMTM02 = New System.Windows.Forms.Button()
-        Me.ButtonMTM03 = New System.Windows.Forms.Button()
-        Me.ButtonMTM01 = New System.Windows.Forms.Button()
-        Me.ButtonMTM04 = New System.Windows.Forms.Button()
-        Me.ButtonMTM05 = New System.Windows.Forms.Button()
-        Me.ButtonMTMUser = New System.Windows.Forms.Button()
         Me.ButtonUser = New System.Windows.Forms.Button()
         Me.ButtonAdmin = New System.Windows.Forms.Button()
         Me.ButtonKensho01 = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.ButtonMTM06 = New System.Windows.Forms.Button()
+        Me.ButtonMTM01 = New System.Windows.Forms.Button()
+        Me.ButtonMTM04 = New System.Windows.Forms.Button()
+        Me.ButtonMTMUser = New System.Windows.Forms.Button()
+        Me.ButtonMTM03 = New System.Windows.Forms.Button()
+        Me.ButtonMTM05 = New System.Windows.Forms.Button()
+        Me.ButtonMTM02 = New System.Windows.Forms.Button()
+        Me.ButtonClose = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'LabelVer
@@ -45,109 +47,7 @@ Partial Class FormMTMMenu
         Me.LabelVer.Name = "LabelVer"
         Me.LabelVer.Size = New System.Drawing.Size(65, 18)
         Me.LabelVer.TabIndex = 2
-        Me.LabelVer.Text = "ver : 1.50"
-        '
-        'ButtonClose
-        '
-        Me.ButtonClose.BackColor = System.Drawing.Color.MediumTurquoise
-        Me.ButtonClose.FlatAppearance.BorderColor = System.Drawing.Color.White
-        Me.ButtonClose.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.ButtonClose.Font = New System.Drawing.Font("メイリオ", 12.0!, System.Drawing.FontStyle.Bold)
-        Me.ButtonClose.ForeColor = System.Drawing.Color.White
-        Me.ButtonClose.Image = CType(resources.GetObject("ButtonClose.Image"), System.Drawing.Image)
-        Me.ButtonClose.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.ButtonClose.Location = New System.Drawing.Point(537, 379)
-        Me.ButtonClose.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.ButtonClose.Name = "ButtonClose"
-        Me.ButtonClose.Size = New System.Drawing.Size(157, 66)
-        Me.ButtonClose.TabIndex = 3
-        Me.ButtonClose.TabStop = False
-        Me.ButtonClose.Text = "  終了"
-        Me.ButtonClose.UseVisualStyleBackColor = False
-        '
-        'ButtonMTM02
-        '
-        Me.ButtonMTM02.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.ButtonMTM02.Font = New System.Drawing.Font("メイリオ", 12.0!)
-        Me.ButtonMTM02.Image = CType(resources.GetObject("ButtonMTM02.Image"), System.Drawing.Image)
-        Me.ButtonMTM02.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.ButtonMTM02.Location = New System.Drawing.Point(46, 139)
-        Me.ButtonMTM02.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.ButtonMTM02.Name = "ButtonMTM02"
-        Me.ButtonMTM02.Size = New System.Drawing.Size(257, 87)
-        Me.ButtonMTM02.TabIndex = 2
-        Me.ButtonMTM02.Text = "価格入力"
-        Me.ButtonMTM02.UseVisualStyleBackColor = True
-        '
-        'ButtonMTM03
-        '
-        Me.ButtonMTM03.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.ButtonMTM03.Font = New System.Drawing.Font("メイリオ", 12.0!)
-        Me.ButtonMTM03.Image = CType(resources.GetObject("ButtonMTM03.Image"), System.Drawing.Image)
-        Me.ButtonMTM03.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.ButtonMTM03.Location = New System.Drawing.Point(404, 139)
-        Me.ButtonMTM03.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.ButtonMTM03.Name = "ButtonMTM03"
-        Me.ButtonMTM03.Size = New System.Drawing.Size(257, 87)
-        Me.ButtonMTM03.TabIndex = 3
-        Me.ButtonMTM03.Text = "見積送信"
-        Me.ButtonMTM03.UseVisualStyleBackColor = True
-        '
-        'ButtonMTM01
-        '
-        Me.ButtonMTM01.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.ButtonMTM01.Font = New System.Drawing.Font("メイリオ", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.ButtonMTM01.Image = CType(resources.GetObject("ButtonMTM01.Image"), System.Drawing.Image)
-        Me.ButtonMTM01.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.ButtonMTM01.Location = New System.Drawing.Point(46, 139)
-        Me.ButtonMTM01.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.ButtonMTM01.Name = "ButtonMTM01"
-        Me.ButtonMTM01.Size = New System.Drawing.Size(257, 87)
-        Me.ButtonMTM01.TabIndex = 2
-        Me.ButtonMTM01.Text = "    単価入力シート取込"
-        Me.ButtonMTM01.UseVisualStyleBackColor = True
-        '
-        'ButtonMTM04
-        '
-        Me.ButtonMTM04.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.ButtonMTM04.Font = New System.Drawing.Font("メイリオ", 12.0!)
-        Me.ButtonMTM04.Image = CType(resources.GetObject("ButtonMTM04.Image"), System.Drawing.Image)
-        Me.ButtonMTM04.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.ButtonMTM04.Location = New System.Drawing.Point(404, 139)
-        Me.ButtonMTM04.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.ButtonMTM04.Name = "ButtonMTM04"
-        Me.ButtonMTM04.Size = New System.Drawing.Size(257, 87)
-        Me.ButtonMTM04.TabIndex = 4
-        Me.ButtonMTM04.Text = "   システム間連携"
-        Me.ButtonMTM04.UseVisualStyleBackColor = True
-        '
-        'ButtonMTM05
-        '
-        Me.ButtonMTM05.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.ButtonMTM05.Font = New System.Drawing.Font("メイリオ", 12.0!)
-        Me.ButtonMTM05.Image = CType(resources.GetObject("ButtonMTM05.Image"), System.Drawing.Image)
-        Me.ButtonMTM05.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.ButtonMTM05.Location = New System.Drawing.Point(46, 248)
-        Me.ButtonMTM05.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.ButtonMTM05.Name = "ButtonMTM05"
-        Me.ButtonMTM05.Size = New System.Drawing.Size(257, 87)
-        Me.ButtonMTM05.TabIndex = 5
-        Me.ButtonMTM05.Text = "    実行管理テーブル"
-        Me.ButtonMTM05.UseVisualStyleBackColor = True
-        '
-        'ButtonMTMUser
-        '
-        Me.ButtonMTMUser.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.ButtonMTMUser.Font = New System.Drawing.Font("メイリオ", 12.0!)
-        Me.ButtonMTMUser.Image = CType(resources.GetObject("ButtonMTMUser.Image"), System.Drawing.Image)
-        Me.ButtonMTMUser.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.ButtonMTMUser.Location = New System.Drawing.Point(404, 248)
-        Me.ButtonMTMUser.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.ButtonMTMUser.Name = "ButtonMTMUser"
-        Me.ButtonMTMUser.Size = New System.Drawing.Size(257, 87)
-        Me.ButtonMTMUser.TabIndex = 6
-        Me.ButtonMTMUser.Text = "  ユーザー登録"
-        Me.ButtonMTMUser.UseVisualStyleBackColor = True
+        Me.LabelVer.Text = "ver : 2.00"
         '
         'ButtonUser
         '
@@ -205,6 +105,135 @@ Partial Class FormMTMMenu
         Me.Button1.UseVisualStyleBackColor = True
         Me.Button1.Visible = False
         '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Font = New System.Drawing.Font("メイリオ", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.Label1.ForeColor = System.Drawing.Color.Red
+        Me.Label1.Location = New System.Drawing.Point(12, 9)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(251, 36)
+        Me.Label1.TabIndex = 11
+        Me.Label1.Text = "MITSUMO-V2 検証中"
+        '
+        'ButtonMTM06
+        '
+        Me.ButtonMTM06.Enabled = False
+        Me.ButtonMTM06.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.ButtonMTM06.Font = New System.Drawing.Font("メイリオ", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.ButtonMTM06.Image = CType(resources.GetObject("ButtonMTM06.Image"), System.Drawing.Image)
+        Me.ButtonMTM06.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.ButtonMTM06.Location = New System.Drawing.Point(46, 248)
+        Me.ButtonMTM06.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.ButtonMTM06.Name = "ButtonMTM06"
+        Me.ButtonMTM06.Size = New System.Drawing.Size(257, 87)
+        Me.ButtonMTM06.TabIndex = 12
+        Me.ButtonMTM06.Text = "    見積メール文"
+        Me.ButtonMTM06.UseVisualStyleBackColor = True
+        '
+        'ButtonMTM01
+        '
+        Me.ButtonMTM01.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.ButtonMTM01.Font = New System.Drawing.Font("メイリオ", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.ButtonMTM01.Image = CType(resources.GetObject("ButtonMTM01.Image"), System.Drawing.Image)
+        Me.ButtonMTM01.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.ButtonMTM01.Location = New System.Drawing.Point(46, 139)
+        Me.ButtonMTM01.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.ButtonMTM01.Name = "ButtonMTM01"
+        Me.ButtonMTM01.Size = New System.Drawing.Size(257, 87)
+        Me.ButtonMTM01.TabIndex = 2
+        Me.ButtonMTM01.Text = "    単価入力シート取込"
+        Me.ButtonMTM01.UseVisualStyleBackColor = True
+        '
+        'ButtonMTM04
+        '
+        Me.ButtonMTM04.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.ButtonMTM04.Font = New System.Drawing.Font("メイリオ", 12.0!)
+        Me.ButtonMTM04.Image = CType(resources.GetObject("ButtonMTM04.Image"), System.Drawing.Image)
+        Me.ButtonMTM04.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.ButtonMTM04.Location = New System.Drawing.Point(404, 139)
+        Me.ButtonMTM04.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.ButtonMTM04.Name = "ButtonMTM04"
+        Me.ButtonMTM04.Size = New System.Drawing.Size(257, 87)
+        Me.ButtonMTM04.TabIndex = 4
+        Me.ButtonMTM04.Text = "   システム間連携"
+        Me.ButtonMTM04.UseVisualStyleBackColor = True
+        '
+        'ButtonMTMUser
+        '
+        Me.ButtonMTMUser.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.ButtonMTMUser.Font = New System.Drawing.Font("メイリオ", 12.0!)
+        Me.ButtonMTMUser.Image = CType(resources.GetObject("ButtonMTMUser.Image"), System.Drawing.Image)
+        Me.ButtonMTMUser.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.ButtonMTMUser.Location = New System.Drawing.Point(404, 248)
+        Me.ButtonMTMUser.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.ButtonMTMUser.Name = "ButtonMTMUser"
+        Me.ButtonMTMUser.Size = New System.Drawing.Size(257, 87)
+        Me.ButtonMTMUser.TabIndex = 6
+        Me.ButtonMTMUser.Text = "  ユーザー登録"
+        Me.ButtonMTMUser.UseVisualStyleBackColor = True
+        '
+        'ButtonMTM03
+        '
+        Me.ButtonMTM03.Enabled = False
+        Me.ButtonMTM03.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.ButtonMTM03.Font = New System.Drawing.Font("メイリオ", 12.0!)
+        Me.ButtonMTM03.Image = CType(resources.GetObject("ButtonMTM03.Image"), System.Drawing.Image)
+        Me.ButtonMTM03.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.ButtonMTM03.Location = New System.Drawing.Point(404, 139)
+        Me.ButtonMTM03.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.ButtonMTM03.Name = "ButtonMTM03"
+        Me.ButtonMTM03.Size = New System.Drawing.Size(257, 87)
+        Me.ButtonMTM03.TabIndex = 3
+        Me.ButtonMTM03.Text = "見積送信"
+        Me.ButtonMTM03.UseVisualStyleBackColor = True
+        '
+        'ButtonMTM05
+        '
+        Me.ButtonMTM05.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.ButtonMTM05.Font = New System.Drawing.Font("メイリオ", 12.0!)
+        Me.ButtonMTM05.Image = CType(resources.GetObject("ButtonMTM05.Image"), System.Drawing.Image)
+        Me.ButtonMTM05.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.ButtonMTM05.Location = New System.Drawing.Point(46, 248)
+        Me.ButtonMTM05.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.ButtonMTM05.Name = "ButtonMTM05"
+        Me.ButtonMTM05.Size = New System.Drawing.Size(257, 87)
+        Me.ButtonMTM05.TabIndex = 5
+        Me.ButtonMTM05.Text = "    実行管理テーブル"
+        Me.ButtonMTM05.UseVisualStyleBackColor = True
+        '
+        'ButtonMTM02
+        '
+        Me.ButtonMTM02.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.ButtonMTM02.Font = New System.Drawing.Font("メイリオ", 12.0!)
+        Me.ButtonMTM02.Image = CType(resources.GetObject("ButtonMTM02.Image"), System.Drawing.Image)
+        Me.ButtonMTM02.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.ButtonMTM02.Location = New System.Drawing.Point(46, 139)
+        Me.ButtonMTM02.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.ButtonMTM02.Name = "ButtonMTM02"
+        Me.ButtonMTM02.Size = New System.Drawing.Size(257, 87)
+        Me.ButtonMTM02.TabIndex = 2
+        Me.ButtonMTM02.Text = "価格入力"
+        Me.ButtonMTM02.UseVisualStyleBackColor = True
+        '
+        'ButtonClose
+        '
+        Me.ButtonClose.BackColor = System.Drawing.Color.MediumTurquoise
+        Me.ButtonClose.FlatAppearance.BorderColor = System.Drawing.Color.White
+        Me.ButtonClose.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.ButtonClose.Font = New System.Drawing.Font("メイリオ", 12.0!, System.Drawing.FontStyle.Bold)
+        Me.ButtonClose.ForeColor = System.Drawing.Color.White
+        Me.ButtonClose.Image = CType(resources.GetObject("ButtonClose.Image"), System.Drawing.Image)
+        Me.ButtonClose.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.ButtonClose.Location = New System.Drawing.Point(537, 379)
+        Me.ButtonClose.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.ButtonClose.Name = "ButtonClose"
+        Me.ButtonClose.Size = New System.Drawing.Size(157, 66)
+        Me.ButtonClose.TabIndex = 3
+        Me.ButtonClose.TabStop = False
+        Me.ButtonClose.Text = "  終了"
+        Me.ButtonClose.UseVisualStyleBackColor = False
+        '
         'FormMTMMenu
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -212,6 +241,8 @@ Partial Class FormMTMMenu
         Me.AutoScroll = True
         Me.BackColor = System.Drawing.SystemColors.ButtonHighlight
         Me.ClientSize = New System.Drawing.Size(720, 488)
+        Me.Controls.Add(Me.ButtonMTM06)
+        Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.ButtonKensho01)
         Me.Controls.Add(Me.ButtonAdmin)
@@ -247,4 +278,6 @@ Partial Class FormMTMMenu
     Friend WithEvents ButtonAdmin As Button
     Friend WithEvents ButtonKensho01 As Button
     Friend WithEvents Button1 As Button
+    Friend WithEvents Label1 As Label
+    Friend WithEvents ButtonMTM06 As Button
 End Class
