@@ -84,8 +84,8 @@ Namespace Biz
                 Me.connection.Open()
                 Using command As New SqlCommand
                     command.Connection = Me.connection
-                    command.CommandText = "SELECT MTMR002085" _ '確定
-                        + ", MTMR002086" _ '印刷しない
+                    command.CommandText = "SELECT CASE WHEN MTMR002085 = 0 THEN 'False' ELSE 'True' END AS MTMR002085" _ '確定
+                        + ", CASE WHEN MTMR002086 = 1 THEN 'True'  ELSE 'False' END AS MTMR002086" _ '印刷しない
                         + ", RTRIM(MTMR002009) AS MTMR002009" _ '営業所
                         + ", RTRIM(MTMR002011) AS MTMR002011" _ '部課
                         + ", RTRIM(MTMR002013) AS MTMR002013" _ '担当者
@@ -131,7 +131,7 @@ Namespace Biz
                         + ", FORMAT(ISNULL(MTMR002050,0), 'N2') AS MTMR002050" _ '最終売上単価
                         + ", FORMAT(ISNULL(MTMR002051,0), 'N0') AS MTMR002051" _ '最終売上数量
                         + ", RTRIM(MTMR002052) AS MTMR002052" _ '最終納品先
-                        + ", CASE WHEN MTMR002084 = 1 THEN 1 ELSE 0 END AS MTMR002084" _ '納品先履歴カットフラグ
+                        + ", CASE WHEN MTMR002084 = 1 THEN 'True' ELSE 'False' END AS MTMR002084" _ '納品先履歴カットフラグ
                         + ", RTRIM(MTMR002053) AS MTMR002053" _ '納品先履歴
                         + ", FORMAT(ISNULL(MTMR002039,0), 'N0') AS MTMR002039" _ '数量
                         + ", FORMAT(ISNULL(MTMR002040,0), 'N0') AS MTMR002040" _ '売上回数
@@ -143,9 +143,9 @@ Namespace Biz
                         + ", RTRIM(MTMR002048) AS MTMR002048" _ '見積書商品名
                         + ", MTMR002054" _ '得意先FAX
                         + ", RTRIM(MTMR002072) AS MTMR002072" _ '備考
-                        + ", CASE WHEN MTMR002076 = 1 THEN 1 ELSE 0 END AS MTMR002076MAIL" _ 'メール
-                        + ", CASE WHEN MTMR002076 = 2 THEN 1 ELSE 0 END AS MTMR002076FAX" _ 'ＦＡＸ
-                        + ", RTRIM(MTMR002079) AS MTMR002079" _ '宛先名
+                        + ", CASE WHEN MTMR002076 = 1 THEN 'True' ELSE 'False' END AS MTMR002076MAIL" _ 'メール
+                        + ", CASE WHEN MTMR002076 = 2 THEN 'True' ELSE 'False' END AS MTMR002076FAX" _ 'ＦＡＸ
+                        + ", RTRIM(LTRIM(ISNULL(MTMR002079,''))) AS MTMR002079" _ '宛先名
                         + ", RTRIM(MTMR002078) AS MTMR002078" _ 'メール宛先
                         + ", RTRIM(MTMR002077) AS MTMR002077" _ 'ＦＡＸ宛先
                         + ", CASE WHEN CONVERT(VARCHAR, MTMR002087) <> '' THEN SUBSTRING(CONVERT(VARCHAR, MTMR002087), 1, 4) + '/' + SUBSTRING(CONVERT(VARCHAR, MTMR002087), 5, 2) + '/' + SUBSTRING(CONVERT(VARCHAR, MTMR002087), 7, 2) ELSE '' END AS MTMR002087" _ '最終送信日
@@ -175,7 +175,11 @@ Namespace Biz
                         command.CommandText += " AND MTMR002012 <= @MTMR002012_To"      '担当者コード(To)
                     End If
                     If Not String.IsNullOrWhiteSpace(searchCondition.TokuisakiName) Then
-                        command.CommandText += " AND REPLACE(REPLACE(MTMR002005,' ',''),'　','') LIKE @MTMR002005"  '得意先名
+                        Dim Search_Str As String() = searchCondition.TokuisakiName.Split("　")
+                        For i As Integer = 0 To Search_Str.Length - 1
+                            command.CommandText += " AND(IsNull(RTRIM(HANM001004), '') + '　' + IsNull(RTRIM(HANM001005), '')) LIKE @MTMR002005" & i & " COLLATE Japanese_CI_AS"  '得意先名
+                        Next
+                        'command.CommandText += " AND(IsNull(RTRIM(HANM001004), '') + '　' + IsNull(RTRIM(HANM001005), '')) LIKE @MTMR002005"  '得意先名
                     End If
                     If Not String.IsNullOrWhiteSpace(searchCondition.TokuisakiCodeFrom) Then
                         command.CommandText += " AND MTMR002001 >= @MTMR002001_From"    '得意先コード(From)
@@ -184,10 +188,10 @@ Namespace Biz
                         command.CommandText += " AND MTMR002001 <= @MTMR002001_To"      '得意先コード(To)
                     End If
                     If Not String.IsNullOrWhiteSpace(searchCondition.ShohinCodeFrom) Then
-                        command.CommandText += " AND MTMR002002 >= @MTMR002002_From"    '商品コード(From)
+                        command.CommandText += " AND RTRIM(MTMR002002) >= @MTMR002002_From"    '商品コード(From)
                     End If
                     If Not String.IsNullOrWhiteSpace(searchCondition.ShohinCodeTo) Then
-                        command.CommandText += " AND MTMR002002 <= @MTMR002002_To"      '商品コード(To)
+                        command.CommandText += " AND RTRIM(MTMR002002) <= @MTMR002002_To"      '商品コード(To)
                     End If
                     If IsNumeric(searchCondition.ShinArariFrom) And (searchCondition.ShinArariFrom_bool = True) Then
                         command.CommandText += " AND MTMR002036 >= @MTMR002036_From"    '新粗利率(From)
@@ -251,8 +255,12 @@ Namespace Biz
                         command.Parameters.Add(New SqlParameter("@MTMR002012_To", searchCondition.TantousyaCodeTo))
                     End If
                     If Not String.IsNullOrWhiteSpace(searchCondition.TokuisakiName) Then
-                        Dim strtokuisakiName = System.Text.RegularExpressions.Regex.Replace(searchCondition.TokuisakiName, "\s", "")
-                        command.Parameters.Add(New SqlParameter("@MTMR002005", "%" & strtokuisakiName & "%"))
+                        Dim Search_Str As String() = searchCondition.TokuisakiName.Split("　")
+                        For i As Integer = 0 To Search_Str.Length - 1
+                            command.Parameters.Add(New SqlParameter("@MTMR002005" & i, "%" & Search_Str(i) & "%"))
+                        Next
+                        'Dim strtokuisakiName = System.Text.RegularExpressions.Regex.Replace(searchCondition.TokuisakiName, "\s", "")
+                        'command.Parameters.Add(New SqlParameter("@MTMR002005", "%" & strtokuisakiName & "%"))
                     End If
                     If Not String.IsNullOrWhiteSpace(searchCondition.TokuisakiCodeFrom) Then
                         command.Parameters.Add(New SqlParameter("@MTMR002001_From", searchCondition.TokuisakiCodeFrom))
@@ -347,9 +355,19 @@ Namespace Biz
                                 + " AND MTMR002080 = @MTMR002080"                           '価格入力番号
                             Dim dt As Date
                             command.Parameters.Clear()
-                            command.Parameters.Add(New SqlParameter("@MTMR002085", If(row.Item("MTMR002085").ToString() = "1", Integer.Parse(Date.Now.ToString("yyyyMMdd")), If(row.Item("MTMR002085").ToString <> "", row.Item("MTMR002085"), 0))))
-                            command.Parameters.Add(New SqlParameter("@MTMR002086", If(row.Item("MTMR002086").ToString() = "1", 1, 0)))
+                            Dim setMTMR002085 As Integer = 0
+                            If row.Item("MTMR002085").ToString() = "True" Then
+                                setMTMR002085 = Integer.Parse(Date.Now.ToString("yyyyMMdd"))
+                            End If
+                            command.Parameters.Add(New SqlParameter("@MTMR002085", setMTMR002085))
+
+                            Dim setMTMR002086 As Integer = 0
+                            If row.Item("MTMR002086").ToString() = "True" Then
+                                setMTMR002086 = 1
+                            End If
+                            command.Parameters.Add(New SqlParameter("@MTMR002086", setMTMR002086))
                             'command.Parameters.Add(New SqlParameter("@MTMR002086", row.Item("MTMR002086")))
+
                             command.Parameters.Add(New SqlParameter("@MTMR002017", row.Item("MTMR002017").ToString()))
                             command.Parameters.Add(New SqlParameter("@MTMR002030", row.Item("MTMR002030").ToString.Replace(",", "")))
                             command.Parameters.Add(New SqlParameter("@MTMR002031", row.Item("MTMR002031").ToString.Replace(",", "")))
@@ -369,7 +387,15 @@ Namespace Biz
                             command.Parameters.Add(New SqlParameter("@MTMR002053", row.Item("MTMR002053").ToString()))
                             command.Parameters.Add(New SqlParameter("@MTMR002054", row.Item("MTMR002054").ToString()))
                             command.Parameters.Add(New SqlParameter("@MTMR002072", row.Item("MTMR002072").ToString()))
-                            command.Parameters.Add(New SqlParameter("@MTMR002076", If(row.Item("MTMR002076MAIL").ToString() = "1", 1, If(row.Item("MTMR002076FAX").ToString() = "1", 2, SqlTypes.SqlDecimal.Null))))
+
+                            Dim setMTMR002076 As Integer = 1
+                            If row.Item("MTMR002076MAIL").ToString() = "True" Then
+                                setMTMR002076 = 1
+                            ElseIf row.Item("MTMR002076FAX").ToString() = "True" Then
+                                setMTMR002076 = 2
+                            End If
+                            command.Parameters.Add(New SqlParameter("@MTMR002076", setMTMR002076))
+
                             command.Parameters.Add(New SqlParameter("@MTMR002079", row.Item("MTMR002079").ToString()))
                             command.Parameters.Add(New SqlParameter("@MTMR002078", row.Item("MTMR002078").ToString()))
                             command.Parameters.Add(New SqlParameter("@MTMR002077", row.Item("MTMR002077").ToString()))

@@ -37,24 +37,30 @@
                     taskAppName = executingPath & taskAppName
                     taskAppExe = taskAppName
                     '日付を生成
-                    workStrDate = mtm10r003jitsukou.MTMR003005
-                    workDatDate = DateTime.ParseExact(workStrDate, "yyyyMMdd", Globalization.DateTimeFormatInfo.InvariantInfo, Globalization.DateTimeStyles.None)
-                    taskDate = workDatDate.ToString("yyyy/MM/dd")
-                    '時間を生成
-                    If Not String.IsNullOrEmpty(mtm10r003jitsukou.MTMR003005_2) Then
-                        If Double.TryParse(mtm10r003jitsukou.MTMR003005_2, dbl) Then
-                            If Not ((dbl < 0) Or (dbl > 23)) Then
-                                tsskdateTime = mtm10r003jitsukou.MTMR003005_2.PadLeft(2, "0"c) & ":00"
+                    If (mtm10r003jitsukou.MTMR003005 IsNot Nothing) AndAlso (mtm10r003jitsukou.MTMR003005.Length <> 0) Then
+                        workStrDate = mtm10r003jitsukou.MTMR003005
+                        workDatDate = DateTime.ParseExact(workStrDate, "yyyyMMdd", Globalization.DateTimeFormatInfo.InvariantInfo, Globalization.DateTimeStyles.None)
+                        taskDate = workDatDate.ToString("yyyy/MM/dd")
+                        '時間を生成
+                        If Not String.IsNullOrEmpty(mtm10r003jitsukou.MTMR003005_2) Then
+                            If Double.TryParse(mtm10r003jitsukou.MTMR003005_2, dbl) Then
+                                If Not ((dbl < 0) Or (dbl > 23)) Then
+                                    tsskdateTime = mtm10r003jitsukou.MTMR003005_2.PadLeft(2, "0"c) & ":00"
+                                End If
                             End If
                         End If
+
+                        '起動チェック
+                        '(日付不正)
+                        If (Not DateTime.TryParse(taskDate, workChkDate)) Then
+                            errorList.Add("一斉送信日付が不正なためスケジュールへの登録不可(手動登録して下さい)")
+                            Return errorList
+                        End If
+                    Else
+                        taskDate = "9999/12/31"
+                        tsskdateTime = "00:00"
                     End If
 
-                    '起動チェック
-                    '(日付不正)
-                    If (Not DateTime.TryParse(taskDate, workChkDate)) Then
-                        errorList.Add("一斉送信日付が不正なためスケジュールへの登録不可(手動登録して下さい)")
-                        Return errorList
-                    End If
                 ElseIf (AppNum = 2) Then
                     'システム間連携（更新日時）
                     'タスク名

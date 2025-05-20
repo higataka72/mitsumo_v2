@@ -393,9 +393,9 @@ Public Class FormMTM01
                                     errorList.Add("行数(" + lineCount.ToString() + ") 検索値 桁数エラー")
                                     Exit While
                                 End If
-                                '連番 桁数チェック(2)
+                                '連番 桁数チェック(5)
                                 mtm10r001tanka.MTMR001002 = arrayRow(1)
-                                If (Not Me.Biz01.StringNumberDigitsCheck(mtm10r001tanka.MTMR001002, 2)) Then
+                                If (Not Me.Biz01.StringNumberDigitsCheck(mtm10r001tanka.MTMR001002, 5)) Then
                                     errorList.Add("行数(" + lineCount.ToString() + ") 検索値 桁数エラー")
                                     Exit While
                                 End If
@@ -846,131 +846,145 @@ Public Class FormMTM01
                                     Exit While
                                 End If
                                 '売価変更 桁数チェック(5)
-                                mtm10r001tanka.MTMR001057 = arrayRow(56).Replace("#DIV/0!", "").Replace("#REF!", "").Replace("#NAME?", "")
-                                If (Not Me.Biz01.StringNumberDigitsCheck(mtm10r001tanka.MTMR001057, 5)) Then
-                                    errorList.Add("行数(" + lineCount.ToString() + ") 売価変更 桁数エラー")
-                                    Exit While
-                                End If
+                                mtm10r001tanka.MTMR001057 = ""
+                                'mtm10r001tanka.MTMR001057 = arrayRow(56).Replace("#DIV/0!", "").Replace("#REF!", "").Replace("#NAME?", "")
+                                'If (Not Me.Biz01.StringNumberDigitsCheck(mtm10r001tanka.MTMR001057, 5)) Then
+                                '    errorList.Add("行数(" + lineCount.ToString() + ") 売価変更 桁数エラー")
+                                '    Exit While
+                                'End If
                                 '仕価変更 桁数チェック(5)
-                                mtm10r001tanka.MTMR001058 = arrayRow(57).Replace("#DIV/0!", "").Replace("#REF!", "").Replace("#NAME?", "")
-                                If (Not Me.Biz01.StringNumberDigitsCheck(mtm10r001tanka.MTMR001058, 5)) Then
-                                    errorList.Add("行数(" + lineCount.ToString() + ") 仕価変更 桁数エラー")
-                                    Exit While
-                                End If
+                                mtm10r001tanka.MTMR001058 = ""
+                                'mtm10r001tanka.MTMR001058 = arrayRow(57).Replace("#DIV/0!", "").Replace("#REF!", "").Replace("#NAME?", "")
+                                'If (Not Me.Biz01.StringNumberDigitsCheck(mtm10r001tanka.MTMR001058, 5)) Then
+                                '    errorList.Add("行数(" + lineCount.ToString() + ") 仕価変更 桁数エラー")
+                                '    Exit While
+                                'End If
                                 '商品名(比較用) 桁数チェック(80)
-                                mtm10r001tanka.MTMR001059 = arrayRow(58).Replace("#DIV/0!", "").Replace("#REF!", "").Replace("#NAME?", "")
-                                If (Not Me.Biz01.StringNumberDigitsCheck(mtm10r001tanka.MTMR001059, 80)) Then
-                                    errorList.Add("行数(" + lineCount.ToString() + ") 商品名(比較用) 桁数エラー")
-                                    Exit While
-                                End If
+                                mtm10r001tanka.MTMR001059 = ""
+                                'mtm10r001tanka.MTMR001059 = arrayRow(58).Replace("#DIV/0!", "").Replace("#REF!", "").Replace("#NAME?", "")
+                                'If (Not Me.Biz01.StringNumberDigitsCheck(mtm10r001tanka.MTMR001059, 80)) Then
+                                '    errorList.Add("行数(" + lineCount.ToString() + ") 商品名(比較用) 桁数エラー")
+                                '    Exit While
+                                'End If
                                 '商品名 桁数チェック(80)
-                                mtm10r001tanka.MTMR001060 = arrayRow(59).Replace("#DIV/0!", "").Replace("#REF!", "").Replace("#NAME?", "")
-                                If (Not Me.Biz01.StringNumberDigitsCheck(mtm10r001tanka.MTMR001060, 80)) Then
-                                    errorList.Add("行数(" + lineCount.ToString() + ") 商品名 桁数エラー")
-                                    Exit While
-                                End If
+                                mtm10r001tanka.MTMR001060 = ""
+                                'mtm10r001tanka.MTMR001060 = arrayRow(59).Replace("#DIV/0!", "").Replace("#REF!", "").Replace("#NAME?", "")
+                                'If (Not Me.Biz01.StringNumberDigitsCheck(mtm10r001tanka.MTMR001060, 80)) Then
+                                '    errorList.Add("行数(" + lineCount.ToString() + ") 商品名 桁数エラー")
+                                '    Exit While
+                                'End If
                                 'ｽﾘｯﾄ 数値チェック＆整数・少数桁数チェック(19.4)
-                                mtm10r001tanka.MTMR001061 = arrayRow(60).Replace(",", "").Replace("%", "").Replace("#DIV/0!", "").Replace("#REF!", "").Replace("#VALUE!", "").Replace(" ", "").Replace("　", "").Replace("#NAME?", "").Replace("#N/A", "")
-                                If (mtm10r001tanka.MTMR001061.Length = 1) Then
-                                    mtm10r001tanka.MTMR001061 = mtm10r001tanka.MTMR001061.Replace("-", "")
-                                End If
-                                If (String.IsNullOrEmpty(mtm10r001tanka.MTMR001061)) Then mtm10r001tanka.MTMR001061 = "0"
-                                If (Not Me.Biz01.NumericNumberDigitsCheck(mtm10r001tanka.MTMR001061, 19, 4)) Then
-                                    errorList.Add("行数(" + lineCount.ToString() + ") ｽﾘｯﾄ 数値・桁数エラー")
-                                    Exit While
-                                End If
+                                mtm10r001tanka.MTMR001061 = "0"
+                                'mtm10r001tanka.MTMR001061 = arrayRow(60).Replace(",", "").Replace("%", "").Replace("#DIV/0!", "").Replace("#REF!", "").Replace("#VALUE!", "").Replace(" ", "").Replace("　", "").Replace("#NAME?", "").Replace("#N/A", "")
+                                'If (mtm10r001tanka.MTMR001061.Length = 1) Then
+                                '    mtm10r001tanka.MTMR001061 = mtm10r001tanka.MTMR001061.Replace("-", "")
+                                'End If
+                                'If (String.IsNullOrEmpty(mtm10r001tanka.MTMR001061)) Then mtm10r001tanka.MTMR001061 = "0"
+                                'If (Not Me.Biz01.NumericNumberDigitsCheck(mtm10r001tanka.MTMR001061, 19, 4)) Then
+                                '    errorList.Add("行数(" + lineCount.ToString() + ") ｽﾘｯﾄ 数値・桁数エラー")
+                                '    Exit While
+                                'End If
                                 '# 数値チェック＆整数・少数桁数チェック(19.4)
-                                mtm10r001tanka.MTMR001062 = arrayRow(61).Replace(",", "").Replace("%", "").Replace("#DIV/0!", "").Replace("#REF!", "").Replace("#VALUE!", "").Replace(" ", "").Replace("　", "").Replace("#NAME?", "").Replace("#N/A", "")
-                                If (mtm10r001tanka.MTMR001062.Length = 1) Then
-                                    mtm10r001tanka.MTMR001062 = mtm10r001tanka.MTMR001062.Replace("-", "")
-                                End If
-                                If (String.IsNullOrEmpty(mtm10r001tanka.MTMR001062)) Then mtm10r001tanka.MTMR001062 = "0"
-                                If (Not Me.Biz01.NumericNumberDigitsCheck(mtm10r001tanka.MTMR001062, 19, 4)) Then
-                                    errorList.Add("行数(" + lineCount.ToString() + ") # 数値・数値・桁数エラー")
-                                    Exit While
-                                End If
+                                mtm10r001tanka.MTMR001062 = "0"
+                                'mtm10r001tanka.MTMR001062 = arrayRow(61).Replace(",", "").Replace("%", "").Replace("#DIV/0!", "").Replace("#REF!", "").Replace("#VALUE!", "").Replace(" ", "").Replace("　", "").Replace("#NAME?", "").Replace("#N/A", "")
+                                'If (mtm10r001tanka.MTMR001062.Length = 1) Then
+                                '    mtm10r001tanka.MTMR001062 = mtm10r001tanka.MTMR001062.Replace("-", "")
+                                'End If
+                                'If (String.IsNullOrEmpty(mtm10r001tanka.MTMR001062)) Then mtm10r001tanka.MTMR001062 = "0"
+                                'If (Not Me.Biz01.NumericNumberDigitsCheck(mtm10r001tanka.MTMR001062, 19, 4)) Then
+                                '    errorList.Add("行数(" + lineCount.ToString() + ") # 数値・数値・桁数エラー")
+                                '    Exit While
+                                'End If
                                 '厚み 数値チェック＆整数・少数桁数チェック(19.4)
-                                mtm10r001tanka.MTMR001063 = arrayRow(62).Replace(",", "").Replace("%", "").Replace("#DIV/0!", "").Replace("#REF!", "").Replace("#VALUE!", "").Replace(" ", "").Replace("　", "").Replace("#NAME?", "").Replace("#N/A", "")
-                                If (mtm10r001tanka.MTMR001063.Length = 1) Then
-                                    mtm10r001tanka.MTMR001063 = mtm10r001tanka.MTMR001063.Replace("-", "")
-                                End If
-                                If (String.IsNullOrEmpty(mtm10r001tanka.MTMR001063)) Then mtm10r001tanka.MTMR001063 = "0"
-                                If (Not Me.Biz01.NumericNumberDigitsCheck(mtm10r001tanka.MTMR001063, 19, 4)) Then
-                                    errorList.Add("行数(" + lineCount.ToString() + ") 厚み 数値・桁数エラー")
-                                    Exit While
-                                End If
+                                mtm10r001tanka.MTMR001063 = "0"
+                                'mtm10r001tanka.MTMR001063 = arrayRow(62).Replace(",", "").Replace("%", "").Replace("#DIV/0!", "").Replace("#REF!", "").Replace("#VALUE!", "").Replace(" ", "").Replace("　", "").Replace("#NAME?", "").Replace("#N/A", "")
+                                'If (mtm10r001tanka.MTMR001063.Length = 1) Then
+                                '    mtm10r001tanka.MTMR001063 = mtm10r001tanka.MTMR001063.Replace("-", "")
+                                'End If
+                                'If (String.IsNullOrEmpty(mtm10r001tanka.MTMR001063)) Then mtm10r001tanka.MTMR001063 = "0"
+                                'If (Not Me.Biz01.NumericNumberDigitsCheck(mtm10r001tanka.MTMR001063, 19, 4)) Then
+                                '    errorList.Add("行数(" + lineCount.ToString() + ") 厚み 数値・桁数エラー")
+                                '    Exit While
+                                'End If
                                 '（空白１）
                                 mtm10r001tanka.MTMR001064 = arrayRow(63)
                                 '巾1 数値チェック＆整数・少数桁数チェック(19.4)
-                                mtm10r001tanka.MTMR001065 = arrayRow(64).Replace(",", "").Replace("%", "").Replace("#DIV/0!", "").Replace("#REF!", "").Replace("#VALUE!", "").Replace(" ", "").Replace("　", "").Replace("#NAME?", "").Replace("#N/A", "")
-                                If (mtm10r001tanka.MTMR001065.Length = 1) Then
-                                    mtm10r001tanka.MTMR001065 = mtm10r001tanka.MTMR001065.Replace("-", "")
-                                End If
-                                If (String.IsNullOrEmpty(mtm10r001tanka.MTMR001065)) Then mtm10r001tanka.MTMR001065 = "0"
-                                If (Not Me.Biz01.NumericNumberDigitsCheck(mtm10r001tanka.MTMR001065, 19, 4)) Then
-                                    errorList.Add("行数(" + lineCount.ToString() + ") 巾1 数値・桁数エラー")
-                                    Exit While
-                                End If
+                                mtm10r001tanka.MTMR001065 = "0"
+                                'mtm10r001tanka.MTMR001065 = arrayRow(64).Replace(",", "").Replace("%", "").Replace("#DIV/0!", "").Replace("#REF!", "").Replace("#VALUE!", "").Replace(" ", "").Replace("　", "").Replace("#NAME?", "").Replace("#N/A", "")
+                                'If (mtm10r001tanka.MTMR001065.Length = 1) Then
+                                '    mtm10r001tanka.MTMR001065 = mtm10r001tanka.MTMR001065.Replace("-", "")
+                                'End If
+                                'If (String.IsNullOrEmpty(mtm10r001tanka.MTMR001065)) Then mtm10r001tanka.MTMR001065 = "0"
+                                'If (Not Me.Biz01.NumericNumberDigitsCheck(mtm10r001tanka.MTMR001065, 19, 4)) Then
+                                '    errorList.Add("行数(" + lineCount.ToString() + ") 巾1 数値・桁数エラー")
+                                '    Exit While
+                                'End If
                                 '（空白２）
                                 mtm10r001tanka.MTMR001066 = arrayRow(65)
                                 '巾2 数値チェック＆整数・少数桁数チェック(19.4)
-                                mtm10r001tanka.MTMR001067 = arrayRow(66).Replace(",", "").Replace("%", "").Replace("#DIV/0!", "").Replace("#REF!", "").Replace("#VALUE!", "").Replace(" ", "").Replace("　", "").Replace("#NAME?", "").Replace("#N/A", "")
-                                If (mtm10r001tanka.MTMR001067.Length = 1) Then
-                                    mtm10r001tanka.MTMR001067 = mtm10r001tanka.MTMR001067.Replace("-", "")
-                                End If
-                                If (String.IsNullOrEmpty(mtm10r001tanka.MTMR001067)) Then mtm10r001tanka.MTMR001067 = "0"
-                                If (Not Me.Biz01.NumericNumberDigitsCheck(mtm10r001tanka.MTMR001067, 19, 4)) Then
-                                    errorList.Add("行数(" + lineCount.ToString() + ") 巾2 数値・桁数エラー")
-                                    Exit While
-                                End If
+                                mtm10r001tanka.MTMR001067 = "0"
+                                'mtm10r001tanka.MTMR001067 = arrayRow(66).Replace(",", "").Replace("%", "").Replace("#DIV/0!", "").Replace("#REF!", "").Replace("#VALUE!", "").Replace(" ", "").Replace("　", "").Replace("#NAME?", "").Replace("#N/A", "")
+                                'If (mtm10r001tanka.MTMR001067.Length = 1) Then
+                                '    mtm10r001tanka.MTMR001067 = mtm10r001tanka.MTMR001067.Replace("-", "")
+                                'End If
+                                'If (String.IsNullOrEmpty(mtm10r001tanka.MTMR001067)) Then mtm10r001tanka.MTMR001067 = "0"
+                                'If (Not Me.Biz01.NumericNumberDigitsCheck(mtm10r001tanka.MTMR001067, 19, 4)) Then
+                                '    errorList.Add("行数(" + lineCount.ToString() + ") 巾2 数値・桁数エラー")
+                                '    Exit While
+                                'End If
                                 '（空白３）
                                 mtm10r001tanka.MTMR001068 = arrayRow(67)
                                 '長さ 数値チェック＆整数・少数桁数チェック(19.4)
-                                mtm10r001tanka.MTMR001069 = arrayRow(68).Replace(",", "").Replace("%", "").Replace("#DIV/0!", "").Replace("#REF!", "").Replace("#VALUE!", "").Replace(" ", "").Replace("　", "").Replace("#NAME?", "").Replace("#N/A", "")
-                                If (mtm10r001tanka.MTMR001069.Length = 1) Then
-                                    mtm10r001tanka.MTMR001069 = mtm10r001tanka.MTMR001069.Replace("-", "")
-                                End If
-                                If (String.IsNullOrEmpty(mtm10r001tanka.MTMR001069)) Then mtm10r001tanka.MTMR001069 = "0"
-                                If (Not Me.Biz01.NumericNumberDigitsCheck(mtm10r001tanka.MTMR001069, 19, 4)) Then
-                                    errorList.Add("行数(" + lineCount.ToString() + ") 長さ 数値・桁数エラー")
-                                    Exit While
-                                End If
+                                mtm10r001tanka.MTMR001069 = "0"
+                                'mtm10r001tanka.MTMR001069 = arrayRow(68).Replace(",", "").Replace("%", "").Replace("#DIV/0!", "").Replace("#REF!", "").Replace("#VALUE!", "").Replace(" ", "").Replace("　", "").Replace("#NAME?", "").Replace("#N/A", "")
+                                'If (mtm10r001tanka.MTMR001069.Length = 1) Then
+                                '    mtm10r001tanka.MTMR001069 = mtm10r001tanka.MTMR001069.Replace("-", "")
+                                'End If
+                                'If (String.IsNullOrEmpty(mtm10r001tanka.MTMR001069)) Then mtm10r001tanka.MTMR001069 = "0"
+                                'If (Not Me.Biz01.NumericNumberDigitsCheck(mtm10r001tanka.MTMR001069, 19, 4)) Then
+                                '    errorList.Add("行数(" + lineCount.ToString() + ") 長さ 数値・桁数エラー")
+                                '    Exit While
+                                'End If
                                 'M 数値チェック＆整数・少数桁数チェック(19.4)
-                                mtm10r001tanka.MTMR001070 = arrayRow(69).Replace(",", "").Replace("%", "").Replace("#DIV/0!", "").Replace("#REF!", "").Replace("#VALUE!", "").Replace(" ", "").Replace("　", "").Replace("#NAME?", "").Replace("#N/A", "")
-                                If (mtm10r001tanka.MTMR001070.Length = 1) Then
-                                    mtm10r001tanka.MTMR001070 = mtm10r001tanka.MTMR001070.Replace("-", "")
-                                End If
-                                If (String.IsNullOrEmpty(mtm10r001tanka.MTMR001070)) Then mtm10r001tanka.MTMR001070 = "0"
-                                If (Not Me.Biz01.NumericNumberDigitsCheck(mtm10r001tanka.MTMR001070, 19, 4)) Then
-                                    errorList.Add("行数(" + lineCount.ToString() + ") M 数値・桁数エラー")
-                                    Exit While
-                                End If
+                                mtm10r001tanka.MTMR001070 = "0"
+                                'mtm10r001tanka.MTMR001070 = arrayRow(69).Replace(",", "").Replace("%", "").Replace("#DIV/0!", "").Replace("#REF!", "").Replace("#VALUE!", "").Replace(" ", "").Replace("　", "").Replace("#NAME?", "").Replace("#N/A", "")
+                                'If (mtm10r001tanka.MTMR001070.Length = 1) Then
+                                '    mtm10r001tanka.MTMR001070 = mtm10r001tanka.MTMR001070.Replace("-", "")
+                                'End If
+                                'If (String.IsNullOrEmpty(mtm10r001tanka.MTMR001070)) Then mtm10r001tanka.MTMR001070 = "0"
+                                'If (Not Me.Biz01.NumericNumberDigitsCheck(mtm10r001tanka.MTMR001070, 19, 4)) Then
+                                '    errorList.Add("行数(" + lineCount.ToString() + ") M 数値・桁数エラー")
+                                '    Exit While
+                                'End If
                                 '+表示 数値チェック＆整数・少数桁数チェック(19.4)
-                                mtm10r001tanka.MTMR001071 = arrayRow(70).Replace(",", "").Replace("%", "").Replace("#DIV/0!", "").Replace("#REF!", "").Replace("#VALUE!", "").Replace(" ", "").Replace("　", "").Replace("#NAME?", "").Replace("#N/A", "")
-                                If (mtm10r001tanka.MTMR001071.Length = 1) Then
-                                    mtm10r001tanka.MTMR001071 = mtm10r001tanka.MTMR001071.Replace("-", "")
-                                End If
-                                If (String.IsNullOrEmpty(mtm10r001tanka.MTMR001071)) Then mtm10r001tanka.MTMR001071 = "0"
-                                If (Not Me.Biz01.NumericNumberDigitsCheck(mtm10r001tanka.MTMR001071, 19, 4)) Then
-                                    errorList.Add("行数(" + lineCount.ToString() + ") +表示 数値・桁数エラー")
-                                    Exit While
-                                End If
+                                mtm10r001tanka.MTMR001071 = "0"
+                                'mtm10r001tanka.MTMR001071 = arrayRow(70).Replace(",", "").Replace("%", "").Replace("#DIV/0!", "").Replace("#REF!", "").Replace("#VALUE!", "").Replace(" ", "").Replace("　", "").Replace("#NAME?", "").Replace("#N/A", "")
+                                'If (mtm10r001tanka.MTMR001071.Length = 1) Then
+                                '    mtm10r001tanka.MTMR001071 = mtm10r001tanka.MTMR001071.Replace("-", "")
+                                'End If
+                                'If (String.IsNullOrEmpty(mtm10r001tanka.MTMR001071)) Then mtm10r001tanka.MTMR001071 = "0"
+                                'If (Not Me.Biz01.NumericNumberDigitsCheck(mtm10r001tanka.MTMR001071, 19, 4)) Then
+                                '    errorList.Add("行数(" + lineCount.ToString() + ") +表示 数値・桁数エラー")
+                                '    Exit While
+                                'End If
                                 'ｽﾘｯﾄ 数値チェック＆整数・少数桁数チェック(19.4)
-                                mtm10r001tanka.MTMR001072 = arrayRow(71).Replace(",", "").Replace("%", "").Replace("#DIV/0!", "").Replace("#REF!", "").Replace("#VALUE!", "").Replace(" ", "").Replace("　", "").Replace("#NAME?", "").Replace("#N/A", "")
-                                If (mtm10r001tanka.MTMR001072.Length = 1) Then
-                                    mtm10r001tanka.MTMR001072 = mtm10r001tanka.MTMR001072.Replace("-", "")
-                                End If
-                                If (String.IsNullOrEmpty(mtm10r001tanka.MTMR001072)) Then mtm10r001tanka.MTMR001072 = "0"
-                                If (Not Me.Biz01.NumericNumberDigitsCheck(mtm10r001tanka.MTMR001072, 19, 4)) Then
-                                    errorList.Add("行数(" + lineCount.ToString() + ") ｽﾘｯﾄ 数値・桁数エラー")
-                                    Exit While
-                                End If
+                                mtm10r001tanka.MTMR001072 = "0"
+                                'mtm10r001tanka.MTMR001072 = arrayRow(71).Replace(",", "").Replace("%", "").Replace("#DIV/0!", "").Replace("#REF!", "").Replace("#VALUE!", "").Replace(" ", "").Replace("　", "").Replace("#NAME?", "").Replace("#N/A", "")
+                                'If (mtm10r001tanka.MTMR001072.Length = 1) Then
+                                '    mtm10r001tanka.MTMR001072 = mtm10r001tanka.MTMR001072.Replace("-", "")
+                                'End If
+                                'If (String.IsNullOrEmpty(mtm10r001tanka.MTMR001072)) Then mtm10r001tanka.MTMR001072 = "0"
+                                'If (Not Me.Biz01.NumericNumberDigitsCheck(mtm10r001tanka.MTMR001072, 19, 4)) Then
+                                '    errorList.Add("行数(" + lineCount.ToString() + ") ｽﾘｯﾄ 数値・桁数エラー")
+                                '    Exit While
+                                'End If
                                 '備考 桁数チェック(50)
-                                mtm10r001tanka.MTMR001073 = arrayRow(72).Replace("#DIV/0!", "").Replace("#REF!", "").Replace("#NAME?", "")
-                                If (Not Me.Biz01.StringNumberDigitsCheck(mtm10r001tanka.MTMR001073, 50)) Then
-                                    errorList.Add("行数(" + lineCount.ToString() + ") 備考 桁数エラー")
-                                    Exit While
-                                End If
+                                mtm10r001tanka.MTMR001073 = ""
+                                'mtm10r001tanka.MTMR001073 = arrayRow(72).Replace("#DIV/0!", "").Replace("#REF!", "").Replace("#NAME?", "")
+                                'If (Not Me.Biz01.StringNumberDigitsCheck(mtm10r001tanka.MTMR001073, 50)) Then
+                                '    errorList.Add("行数(" + lineCount.ToString() + ") 備考 桁数エラー")
+                                '    Exit While
+                                'End If
                                 '㎡計算 数値チェック＆整数・少数桁数チェック(19.4)
                                 mtm10r001tanka.MTMR001074 = arrayRow(73).Replace(",", "").Replace("%", "").Replace("#DIV/0!", "").Replace("#REF!", "").Replace("#VALUE!", "").Replace(" ", "").Replace("　", "").Replace("#NAME?", "").Replace("#N/A", "")
                                 If (mtm10r001tanka.MTMR001074.Length = 1) Then
@@ -982,33 +996,36 @@ Public Class FormMTM01
                                     Exit While
                                 End If
                                 '改定単価 数値チェック＆整数・少数桁数チェック(19.4)
-                                mtm10r001tanka.MTMR001075 = arrayRow(74).Replace(",", "").Replace("%", "").Replace("#DIV/0!", "").Replace("#REF!", "").Replace("#VALUE!", "").Replace(" ", "").Replace("　", "").Replace("#NAME?", "").Replace("#N/A", "")
-                                If (mtm10r001tanka.MTMR001075.Length = 1) Then
-                                    mtm10r001tanka.MTMR001075 = mtm10r001tanka.MTMR001075.Replace("-", "")
-                                End If
-                                If (String.IsNullOrEmpty(mtm10r001tanka.MTMR001075)) Then mtm10r001tanka.MTMR001075 = "0"
-                                If (Not Me.Biz01.NumericNumberDigitsCheck(mtm10r001tanka.MTMR001075, 19, 4)) Then
-                                    errorList.Add("行数(" + lineCount.ToString() + ") 改定単価 数値・桁数エラー")
-                                    Exit While
-                                End If
+                                mtm10r001tanka.MTMR001075 = "0"
+                                'mtm10r001tanka.MTMR001075 = arrayRow(74).Replace(",", "").Replace("%", "").Replace("#DIV/0!", "").Replace("#REF!", "").Replace("#VALUE!", "").Replace(" ", "").Replace("　", "").Replace("#NAME?", "").Replace("#N/A", "")
+                                'If (mtm10r001tanka.MTMR001075.Length = 1) Then
+                                '    mtm10r001tanka.MTMR001075 = mtm10r001tanka.MTMR001075.Replace("-", "")
+                                'End If
+                                'If (String.IsNullOrEmpty(mtm10r001tanka.MTMR001075)) Then mtm10r001tanka.MTMR001075 = "0"
+                                'If (Not Me.Biz01.NumericNumberDigitsCheck(mtm10r001tanka.MTMR001075, 19, 4)) Then
+                                '    errorList.Add("行数(" + lineCount.ToString() + ") 改定単価 数値・桁数エラー")
+                                '    Exit While
+                                'End If
                                 '値上がり率 数値チェック＆整数・少数桁数チェック(5.1)
-                                mtm10r001tanka.MTMR001076 = arrayRow(75).Replace(",", "").Replace("%", "").Replace("#DIV/0!", "").Replace("#REF!", "").Replace("#VALUE!", "").Replace(" ", "").Replace("　", "").Replace("#NAME?", "").Replace("#N/A", "")
-                                If (mtm10r001tanka.MTMR001076.Length = 1) Then
-                                    mtm10r001tanka.MTMR001076 = mtm10r001tanka.MTMR001076.Replace("-", "")
-                                End If
-                                If (String.IsNullOrEmpty(mtm10r001tanka.MTMR001076)) Then mtm10r001tanka.MTMR001076 = "0"
-                                Dim decMTMR001076 As Decimal = 0.0
-                                If Decimal.TryParse(mtm10r001tanka.MTMR001076, decMTMR001076) Then mtm10r001tanka.MTMR001076 = decMTMR001076.ToString("0.0")
-                                If (Not Me.Biz01.NumericNumberDigitsCheck(mtm10r001tanka.MTMR001076, 5, 1)) Then
-                                    errorList.Add("行数(" + lineCount.ToString() + ") 値上がり率 数値・桁数エラー")
-                                    Exit While
-                                End If
+                                mtm10r001tanka.MTMR001076 = "0"
+                                'mtm10r001tanka.MTMR001076 = arrayRow(75).Replace(",", "").Replace("%", "").Replace("#DIV/0!", "").Replace("#REF!", "").Replace("#VALUE!", "").Replace(" ", "").Replace("　", "").Replace("#NAME?", "").Replace("#N/A", "")
+                                'If (mtm10r001tanka.MTMR001076.Length = 1) Then
+                                '    mtm10r001tanka.MTMR001076 = mtm10r001tanka.MTMR001076.Replace("-", "")
+                                'End If
+                                'If (String.IsNullOrEmpty(mtm10r001tanka.MTMR001076)) Then mtm10r001tanka.MTMR001076 = "0"
+                                'Dim decMTMR001076 As Decimal = 0.0
+                                'If Decimal.TryParse(mtm10r001tanka.MTMR001076, decMTMR001076) Then mtm10r001tanka.MTMR001076 = decMTMR001076.ToString("0.0")
+                                'If (Not Me.Biz01.NumericNumberDigitsCheck(mtm10r001tanka.MTMR001076, 5, 1)) Then
+                                '    errorList.Add("行数(" + lineCount.ToString() + ") 値上がり率 数値・桁数エラー")
+                                '    Exit While
+                                'End If
                                 '備考 桁数チェック(50)
-                                mtm10r001tanka.MTMR001077 = arrayRow(76).Replace("#DIV/0!", "").Replace("#REF!", "").Replace("#NAME?", "")
-                                If (Not Me.Biz01.StringNumberDigitsCheck(mtm10r001tanka.MTMR001077, 50)) Then
-                                    errorList.Add("行数(" + lineCount.ToString() + ") 備考 桁数エラー")
-                                    Exit While
-                                End If
+                                mtm10r001tanka.MTMR001077 = ""
+                                'mtm10r001tanka.MTMR001077 = arrayRow(76).Replace("#DIV/0!", "").Replace("#REF!", "").Replace("#NAME?", "")
+                                'If (Not Me.Biz01.StringNumberDigitsCheck(mtm10r001tanka.MTMR001077, 50)) Then
+                                '    errorList.Add("行数(" + lineCount.ToString() + ") 備考 桁数エラー")
+                                '    Exit While
+                                'End If
 
                                 '重複チェック
                                 If (Me.Biz01.KakakuDataCheck(mtm10r001tanka, mtm10r003jitsukou.MTMR003001)) Then
@@ -1073,21 +1090,59 @@ Public Class FormMTM01
                 End If
 
                 '取込ファイルをバックアップへ移動
-                If (Me.Biz01.BackUpfileMove(mtm10r003jitsukou.MTMR003010) = False) Then
-                    msgLineBacupFIle = "【失敗】取込ファイルのバックアップ失敗(手動バックアップして下さい)"
+                Dim errBackupMsg As String = ""
+                If (Me.Biz01.BackUpfileMove(mtm10r003jitsukou.MTMR003010, errBackupMsg) = False) Then
+                    If (String.IsNullOrEmpty(errBackupMsg)) Then
+                        msgLineBacupFIle = "【失敗】取込ファイルのバックアップ失敗(手動バックアップして下さい)"
+                    Else
+                        msgLineBacupFIle = "【失敗】取込ファイルのバックアップ失敗(手動バックアップして下さい)" & vbLf & errBackupMsg
+                    End If
                 Else
                     msgLineBacupFIle = "【成功】取込ファイルのバックアップ完了"
                 End If
 
                 'タスクスケジュール登録（見積一斉送信、システム間連携）
+                serversetting.ServerStartup = ConfigurationManager.AppSettings("TASK_SERVER_STARTUP")
+                serversetting.ServerIp = ConfigurationManager.AppSettings("TASK_SERVER_IP")
+                serversetting.ConnectionUser = ConfigurationManager.AppSettings("TASK_USER")
+                serversetting.ConnectionPassword = ConfigurationManager.AppSettings("TASK_PASSD")
+                serversetting.StartupUser = ConfigurationManager.AppSettings("TASK_STARTUP_USER")
+                serversetting.StartupPassword = ConfigurationManager.AppSettings("TASK_STARTUP_PASS")
+
+                'If (String.IsNullOrEmpty(serversetting.ServerIp)) And
+                '       (String.IsNullOrEmpty(serversetting.ConnectionUser)) And
+                '       (String.IsNullOrEmpty(serversetting.ConnectionPassword)) And
+                '       (String.IsNullOrEmpty(serversetting.StartupUser)) And
+                '       (String.IsNullOrEmpty(serversetting.StartupPassword)) Then
+                '    msgLineTaskMitsumori = "【失敗】一斉送信日時のタスクスケジュール登録失敗(手動実行して下さい）"
+                'Else
+                '    Dim taskMitsumoriErrorList = Me.BizCom.RegistTask(mtm10r003jitsukou, serversetting, 1)
+                '    If taskMitsumoriErrorList.Count > 0 Then
+                '        For Each errorMessage As String In taskMitsumoriErrorList
+                '            msgLineTaskMitsumori = "【失敗】一斉送信日時のタスクスケジュール登録失敗(手動実行して下さい）"
+                '        Next
+                '    Else
+                '        msgLineTaskMitsumori = "【成功】一斉送信日時のタスクスケジュール登録完了"
+                '    End If
+                'End If
+                'If (bl002) Then
+                '    Dim taskSysteErrorList = Me.BizCom.RegistTask(mtm10r003jitsukou, serversetting, 2)
+                '    If taskSysteErrorList.Count > 0 Then
+                '        For Each errorMessage As String In taskSysteErrorList
+                '            msgLineTaskSystem = "【失敗】更新データ日時のタスクスケジュール登録失敗(手動実行して下さい）"
+                '        Next
+                '    Else
+                '        msgLineTaskSystem = "【成功】更新データ日時のタスクスケジュール登録完了"
+                '    End If
+                'End If
                 If (bl001) Then
 
-                    serversetting.ServerStartup = ConfigurationManager.AppSettings("TASK_SERVER_STARTUP")
-                    serversetting.ServerIp = ConfigurationManager.AppSettings("TASK_SERVER_IP")
-                    serversetting.ConnectionUser = ConfigurationManager.AppSettings("TASK_USER")
-                    serversetting.ConnectionPassword = ConfigurationManager.AppSettings("TASK_PASSD")
-                    serversetting.StartupUser = ConfigurationManager.AppSettings("TASK_STARTUP_USER")
-                    serversetting.StartupPassword = ConfigurationManager.AppSettings("TASK_STARTUP_PASS")
+                    'serversetting.ServerStartup = ConfigurationManager.AppSettings("TASK_SERVER_STARTUP")
+                    'serversetting.ServerIp = ConfigurationManager.AppSettings("TASK_SERVER_IP")
+                    'serversetting.ConnectionUser = ConfigurationManager.AppSettings("TASK_USER")
+                    'serversetting.ConnectionPassword = ConfigurationManager.AppSettings("TASK_PASSD")
+                    'serversetting.StartupUser = ConfigurationManager.AppSettings("TASK_STARTUP_USER")
+                    'serversetting.StartupPassword = ConfigurationManager.AppSettings("TASK_STARTUP_PASS")
 
                     If (String.IsNullOrEmpty(serversetting.ServerIp)) And
                        (String.IsNullOrEmpty(serversetting.ConnectionUser)) And

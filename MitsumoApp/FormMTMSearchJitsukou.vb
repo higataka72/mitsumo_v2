@@ -328,38 +328,38 @@ Public Class FormMTMSearchJitsukou
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     Private Sub DataGridView001_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView001.CellContentClick
-        If e.RowIndex > -1 Then
-            If e.ColumnIndex = 0 Then
-                Dim selectRow As DataGridViewRow = Me.DataGridView001.Rows(e.RowIndex)
-                Me.Selected = New Models.MTM10R003JITSUKOU With {
-                    .MTMR003001 = selectRow.Cells("MTMR003001").Value,
-                    .MTMR003002 = selectRow.Cells("MTMR003002").Value.ToString.Trim,
-                    .MTMR003003 = selectRow.Cells("MTMR003003").Value.ToString,
-                    .MTMR003004 = selectRow.Cells("MTMR003004").Value.ToString,
-                    .MTMR003005 = selectRow.Cells("MTMR003005").Value.ToString,
-                    .MTMR003005_2 = selectRow.Cells("MTMR003005_2").Value.ToString,
-                    .MTMR003006 = selectRow.Cells("MTMR003006").Value.ToString,
-                    .MTMR003006_2 = selectRow.Cells("MTMR003006_2").Value.ToString,
-                    .MTMR003007 = selectRow.Cells("MTMR003007").Value.ToString,
-                    .MTMR003008 = selectRow.Cells("MTMR003008").Value.ToString,
-                    .MTMR003009 = selectRow.Cells("MTMR003009").Value.ToString,
-                    .MTMR003010 = selectRow.Cells("MTMR003010").Value.ToString,
-                    .MTMR003011 = selectRow.Cells("MTMR003011").Value.ToString,
-                    .MTMR003012 = selectRow.Cells("MTMR003012").Value.ToString,
-                    .MTMR003013 = selectRow.Cells("MTMR003013").Value.ToString,
-                    .MTMR003014 = selectRow.Cells("MTMR003014").Value.ToString,
-                    .MTMR003015 = selectRow.Cells("MTMR003015").Value.ToString,
-                    .MTMR003016 = selectRow.Cells("MTMR003016").Value.ToString,
-                    .MTMR003017 = selectRow.Cells("MTMR003017").Value.ToString,
-                    .MTMR003018 = selectRow.Cells("MTMR003018").Value,
-                    .MTMR003019 = selectRow.Cells("MTMR003019").Value.ToString,
-                    .MTMR003020 = selectRow.Cells("MTMR003020").Value.ToString,
-                    .MTMR003021 = selectRow.Cells("MTMR003021").Value.ToString
-                }
-                Me.DialogResult = DialogResult.OK
-                Me.Close()
-            End If
-        End If
+        'If e.RowIndex > -1 Then
+        '    If e.ColumnIndex = 0 Then
+        '        Dim selectRow As DataGridViewRow = Me.DataGridView001.Rows(e.RowIndex)
+        '        Me.Selected = New Models.MTM10R003JITSUKOU With {
+        '            .MTMR003001 = selectRow.Cells("MTMR003001").Value,
+        '            .MTMR003002 = selectRow.Cells("MTMR003002").Value.ToString.Trim,
+        '            .MTMR003003 = selectRow.Cells("MTMR003003").Value.ToString,
+        '            .MTMR003004 = selectRow.Cells("MTMR003004").Value.ToString,
+        '            .MTMR003005 = selectRow.Cells("MTMR003005").Value.ToString,
+        '            .MTMR003005_2 = selectRow.Cells("MTMR003005_2").Value.ToString,
+        '            .MTMR003006 = selectRow.Cells("MTMR003006").Value.ToString,
+        '            .MTMR003006_2 = selectRow.Cells("MTMR003006_2").Value.ToString,
+        '            .MTMR003007 = selectRow.Cells("MTMR003007").Value.ToString,
+        '            .MTMR003008 = selectRow.Cells("MTMR003008").Value.ToString,
+        '            .MTMR003009 = selectRow.Cells("MTMR003009").Value.ToString,
+        '            .MTMR003010 = selectRow.Cells("MTMR003010").Value.ToString,
+        '            .MTMR003011 = selectRow.Cells("MTMR003011").Value.ToString,
+        '            .MTMR003012 = selectRow.Cells("MTMR003012").Value.ToString,
+        '            .MTMR003013 = selectRow.Cells("MTMR003013").Value.ToString,
+        '            .MTMR003014 = selectRow.Cells("MTMR003014").Value.ToString,
+        '            .MTMR003015 = selectRow.Cells("MTMR003015").Value.ToString,
+        '            .MTMR003016 = selectRow.Cells("MTMR003016").Value.ToString,
+        '            .MTMR003017 = selectRow.Cells("MTMR003017").Value.ToString,
+        '            .MTMR003018 = selectRow.Cells("MTMR003018").Value,
+        '            .MTMR003019 = selectRow.Cells("MTMR003019").Value.ToString,
+        '            .MTMR003020 = selectRow.Cells("MTMR003020").Value.ToString,
+        '            .MTMR003021 = selectRow.Cells("MTMR003021").Value.ToString
+        '        }
+        '        Me.DialogResult = DialogResult.OK
+        '        Me.Close()
+        '    End If
+        'End If
     End Sub
     ''' <summary>
     ''' ボタンイベント
@@ -425,6 +425,43 @@ Public Class FormMTMSearchJitsukou
                 }
             Me.DialogResult = DialogResult.OK
             Me.Close()
+        End If
+    End Sub
+
+    Private Sub DataGridView001_KeyDown(sender As Object, e As KeyEventArgs) Handles DataGridView001.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            Dim selectRowIndex As Integer = DataGridView001.CurrentCell.RowIndex
+            If selectRowIndex > -1 Then
+                Dim selectRow As DataGridViewRow = Me.DataGridView001.Rows(selectRowIndex)
+                Me.Selected = New Models.MTM10R003JITSUKOU With {
+                    .MTMR003001 = selectRow.Cells("MTMR003001").Value,
+                    .MTMR003002 = selectRow.Cells("MTMR003002").Value.ToString.Trim,
+                    .MTMR003003 = selectRow.Cells("MTMR003003").Value.ToString,
+                    .MTMR003004 = selectRow.Cells("MTMR003004").Value.ToString,
+                    .MTMR003005 = selectRow.Cells("MTMR003005").Value.ToString,
+                    .MTMR003005_2 = selectRow.Cells("MTMR003005_2").Value.ToString,
+                    .MTMR003006 = selectRow.Cells("MTMR003006").Value.ToString,
+                    .MTMR003006_2 = selectRow.Cells("MTMR003006_2").Value.ToString,
+                    .MTMR003007 = selectRow.Cells("MTMR003007").Value.ToString,
+                    .MTMR003008 = selectRow.Cells("MTMR003008").Value.ToString,
+                    .MTMR003009 = selectRow.Cells("MTMR003009").Value.ToString,
+                    .MTMR003010 = selectRow.Cells("MTMR003010").Value.ToString,
+                    .MTMR003011 = selectRow.Cells("MTMR003011").Value.ToString,
+                    .MTMR003012 = selectRow.Cells("MTMR003012").Value.ToString,
+                    .MTMR003013 = selectRow.Cells("MTMR003013").Value.ToString,
+                    .MTMR003014 = selectRow.Cells("MTMR003014").Value.ToString,
+                    .MTMR003015 = selectRow.Cells("MTMR003015").Value.ToString,
+                    .MTMR003016 = selectRow.Cells("MTMR003016").Value.ToString,
+                    .MTMR003017 = selectRow.Cells("MTMR003017").Value.ToString,
+                    .MTMR003018 = selectRow.Cells("MTMR003018").Value,
+                    .MTMR003019 = selectRow.Cells("MTMR003019").Value.ToString,
+                    .MTMR003020 = selectRow.Cells("MTMR003020").Value.ToString,
+                    .MTMR003021 = selectRow.Cells("MTMR003021").Value.ToString,
+                    .MTMR003022 = selectRow.Cells("MTMR003022").Value.ToString.Trim
+                }
+                Me.DialogResult = DialogResult.OK
+                Me.Close()
+            End If
         End If
     End Sub
 End Class

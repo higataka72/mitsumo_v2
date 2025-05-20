@@ -25,6 +25,8 @@ Partial Class FormMTMSearchTankaV2
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormMTMSearchTankaV2))
         Me.ButtonClose = New System.Windows.Forms.Button()
         Me.DataGridView001 = New C1.Win.C1FlexGrid.C1FlexGrid()
+        Me.Label15 = New System.Windows.Forms.Label()
+        Me.Label13 = New System.Windows.Forms.Label()
         CType(Me.DataGridView001, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -51,11 +53,32 @@ Partial Class FormMTMSearchTankaV2
         Me.DataGridView001.AutoClipboard = True
         Me.DataGridView001.ClipboardCopyMode = C1.Win.C1FlexGrid.ClipboardCopyModeEnum.DataAndColumnHeaders
         Me.DataGridView001.ColumnInfo = "10,1,0,0,0,-1,Columns:"
-        Me.DataGridView001.Location = New System.Drawing.Point(12, 12)
+        Me.DataGridView001.Location = New System.Drawing.Point(12, 36)
         Me.DataGridView001.Name = "DataGridView001"
         Me.DataGridView001.SelectionMode = C1.Win.C1FlexGrid.SelectionModeEnum.Row
-        Me.DataGridView001.Size = New System.Drawing.Size(873, 434)
+        Me.DataGridView001.Size = New System.Drawing.Size(873, 410)
         Me.DataGridView001.TabIndex = 6
+        '
+        'Label15
+        '
+        Me.Label15.AutoSize = True
+        Me.Label15.Font = New System.Drawing.Font("メイリオ", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.Label15.Location = New System.Drawing.Point(3, 10)
+        Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(251, 20)
+        Me.Label15.TabIndex = 51
+        Me.Label15.Text = "【Ｆ3キー：全フィルターを解除します】"
+        '
+        'Label13
+        '
+        Me.Label13.AutoSize = True
+        Me.Label13.Font = New System.Drawing.Font("メイリオ", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.Label13.Location = New System.Drawing.Point(244, 9)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(381, 20)
+        Me.Label13.TabIndex = 52
+        Me.Label13.Text = "【Ｆ5キー：並び替えクリア（並び替えは下線タイトルのみ）】"
+        Me.Label13.Visible = False
         '
         'FormMTMSearchTankaV2
         '
@@ -63,6 +86,8 @@ Partial Class FormMTMSearchTankaV2
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi
         Me.AutoScroll = True
         Me.ClientSize = New System.Drawing.Size(901, 507)
+        Me.Controls.Add(Me.Label13)
+        Me.Controls.Add(Me.Label15)
         Me.Controls.Add(Me.DataGridView001)
         Me.Controls.Add(Me.ButtonClose)
         Me.Font = New System.Drawing.Font("ＭＳ 明朝", 12.0!)
@@ -75,9 +100,12 @@ Partial Class FormMTMSearchTankaV2
         Me.Text = "[mitsumo]単価台帳参照"
         CType(Me.DataGridView001, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
     Friend WithEvents ButtonClose As Button
     Friend WithEvents DataGridView001 As C1.Win.C1FlexGrid.C1FlexGrid
+    Friend WithEvents Label15 As Label
+    Friend WithEvents Label13 As Label
 End Class

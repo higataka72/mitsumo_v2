@@ -24,6 +24,7 @@ Partial Class FormMTM02
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormMTM02))
         Me.TabPage002 = New System.Windows.Forms.TabPage()
+        Me.Label17 = New System.Windows.Forms.Label()
         Me.ButtonClose2 = New System.Windows.Forms.Button()
         Me.ButtonSearch002 = New System.Windows.Forms.Button()
         Me.GroupBox004 = New System.Windows.Forms.GroupBox()
@@ -103,6 +104,8 @@ Partial Class FormMTM02
         Me.ButtonOffice002 = New System.Windows.Forms.Button()
         Me.TextBox025 = New System.Windows.Forms.TextBox()
         Me.TabPage001 = New System.Windows.Forms.TabPage()
+        Me.Label18 = New System.Windows.Forms.Label()
+        Me.Label16 = New System.Windows.Forms.Label()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.Label15 = New System.Windows.Forms.Label()
         Me.ButtonSearch001_old = New System.Windows.Forms.Button()
@@ -173,6 +176,7 @@ Partial Class FormMTM02
         'TabPage002
         '
         Me.TabPage002.BackColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.TabPage002.Controls.Add(Me.Label17)
         Me.TabPage002.Controls.Add(Me.ButtonClose2)
         Me.TabPage002.Controls.Add(Me.ButtonSearch002)
         Me.TabPage002.Controls.Add(Me.GroupBox004)
@@ -185,6 +189,16 @@ Partial Class FormMTM02
         Me.TabPage002.Size = New System.Drawing.Size(988, 507)
         Me.TabPage002.TabIndex = 1
         Me.TabPage002.Text = "個別指定"
+        '
+        'Label17
+        '
+        Me.Label17.AutoSize = True
+        Me.Label17.Font = New System.Drawing.Font("メイリオ", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.Label17.Location = New System.Drawing.Point(13, 481)
+        Me.Label17.Name = "Label17"
+        Me.Label17.Size = New System.Drawing.Size(225, 20)
+        Me.Label17.TabIndex = 54
+        Me.Label17.Text = "【Ｆ3キー：対象虫眼鏡をクリック】"
         '
         'ButtonClose2
         '
@@ -976,6 +990,8 @@ Partial Class FormMTM02
         'TabPage001
         '
         Me.TabPage001.BackColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.TabPage001.Controls.Add(Me.Label18)
+        Me.TabPage001.Controls.Add(Me.Label16)
         Me.TabPage001.Controls.Add(Me.TextBox1)
         Me.TabPage001.Controls.Add(Me.Label15)
         Me.TabPage001.Controls.Add(Me.ButtonSearch001_old)
@@ -1040,6 +1056,26 @@ Partial Class FormMTM02
         Me.TabPage001.TabIndex = 0
         Me.TabPage001.Text = "条件指定"
         '
+        'Label18
+        '
+        Me.Label18.AutoSize = True
+        Me.Label18.Font = New System.Drawing.Font("メイリオ", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.Label18.Location = New System.Drawing.Point(792, 241)
+        Me.Label18.Name = "Label18"
+        Me.Label18.Size = New System.Drawing.Size(181, 20)
+        Me.Label18.TabIndex = 54
+        Me.Label18.Text = "（全角スペースでAND検索）"
+        '
+        'Label16
+        '
+        Me.Label16.AutoSize = True
+        Me.Label16.Font = New System.Drawing.Font("メイリオ", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.Label16.Location = New System.Drawing.Point(6, 482)
+        Me.Label16.Name = "Label16"
+        Me.Label16.Size = New System.Drawing.Size(225, 20)
+        Me.Label16.TabIndex = 53
+        Me.Label16.Text = "【Ｆ3キー：対象虫眼鏡をクリック】"
+        '
         'TextBox1
         '
         Me.TextBox1.Font = New System.Drawing.Font("メイリオ", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
@@ -1064,12 +1100,13 @@ Partial Class FormMTM02
         Me.ButtonSearch001_old.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.ButtonSearch001_old.Font = New System.Drawing.Font("メイリオ", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.ButtonSearch001_old.ForeColor = System.Drawing.Color.Red
-        Me.ButtonSearch001_old.Location = New System.Drawing.Point(26, 462)
+        Me.ButtonSearch001_old.Location = New System.Drawing.Point(523, 463)
         Me.ButtonSearch001_old.Name = "ButtonSearch001_old"
         Me.ButtonSearch001_old.Size = New System.Drawing.Size(263, 39)
         Me.ButtonSearch001_old.TabIndex = 50
         Me.ButtonSearch001_old.Text = "検索(旧)[本番時は消します]"
         Me.ButtonSearch001_old.UseVisualStyleBackColor = False
+        Me.ButtonSearch001_old.Visible = False
         '
         'ButtonClose
         '
@@ -1606,6 +1643,7 @@ Partial Class FormMTM02
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "[mitsumo]価格入力検索"
         Me.TabPage002.ResumeLayout(False)
+        Me.TabPage002.PerformLayout()
         Me.GroupBox004.ResumeLayout(False)
         Me.GroupBox004.PerformLayout()
         Me.GroupBox003.ResumeLayout(False)
@@ -1759,4 +1797,7 @@ Partial Class FormMTM02
     Friend WithEvents ButtonSearch001_old As Button
     Friend WithEvents TextBox1 As TextBox
     Friend WithEvents Label15 As Label
+    Friend WithEvents Label17 As Label
+    Friend WithEvents Label16 As Label
+    Friend WithEvents Label18 As Label
 End Class

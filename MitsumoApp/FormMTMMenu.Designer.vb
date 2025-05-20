@@ -28,7 +28,6 @@ Partial Class FormMTMMenu
         Me.ButtonAdmin = New System.Windows.Forms.Button()
         Me.ButtonKensho01 = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
-        Me.Label1 = New System.Windows.Forms.Label()
         Me.ButtonMTM06 = New System.Windows.Forms.Button()
         Me.ButtonMTM01 = New System.Windows.Forms.Button()
         Me.ButtonMTM04 = New System.Windows.Forms.Button()
@@ -47,7 +46,7 @@ Partial Class FormMTMMenu
         Me.LabelVer.Name = "LabelVer"
         Me.LabelVer.Size = New System.Drawing.Size(65, 18)
         Me.LabelVer.TabIndex = 2
-        Me.LabelVer.Text = "ver : 2.00"
+        Me.LabelVer.Text = "ver : 2.05"
         '
         'ButtonUser
         '
@@ -105,20 +104,8 @@ Partial Class FormMTMMenu
         Me.Button1.UseVisualStyleBackColor = True
         Me.Button1.Visible = False
         '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("メイリオ", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label1.ForeColor = System.Drawing.Color.Red
-        Me.Label1.Location = New System.Drawing.Point(12, 9)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(251, 36)
-        Me.Label1.TabIndex = 11
-        Me.Label1.Text = "MITSUMO-V2 検証中"
-        '
         'ButtonMTM06
         '
-        Me.ButtonMTM06.Enabled = False
         Me.ButtonMTM06.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.ButtonMTM06.Font = New System.Drawing.Font("メイリオ", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.ButtonMTM06.Image = CType(resources.GetObject("ButtonMTM06.Image"), System.Drawing.Image)
@@ -175,7 +162,6 @@ Partial Class FormMTMMenu
         '
         'ButtonMTM03
         '
-        Me.ButtonMTM03.Enabled = False
         Me.ButtonMTM03.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.ButtonMTM03.Font = New System.Drawing.Font("メイリオ", 12.0!)
         Me.ButtonMTM03.Image = CType(resources.GetObject("ButtonMTM03.Image"), System.Drawing.Image)
@@ -242,7 +228,6 @@ Partial Class FormMTMMenu
         Me.BackColor = System.Drawing.SystemColors.ButtonHighlight
         Me.ClientSize = New System.Drawing.Size(720, 488)
         Me.Controls.Add(Me.ButtonMTM06)
-        Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.ButtonKensho01)
         Me.Controls.Add(Me.ButtonAdmin)
@@ -278,6 +263,5 @@ Partial Class FormMTMMenu
     Friend WithEvents ButtonAdmin As Button
     Friend WithEvents ButtonKensho01 As Button
     Friend WithEvents Button1 As Button
-    Friend WithEvents Label1 As Label
     Friend WithEvents ButtonMTM06 As Button
 End Class

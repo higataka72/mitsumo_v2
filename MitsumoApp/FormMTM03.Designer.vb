@@ -155,6 +155,7 @@ Partial Class FormMTM03
         Me.ButtonPreview = New System.Windows.Forms.Button()
         Me.ButtonSend = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
+        Me.Label16 = New System.Windows.Forms.Label()
         Me.TabControl1.SuspendLayout()
         Me.TabPage001.SuspendLayout()
         Me.Panel002.SuspendLayout()
@@ -1599,6 +1600,16 @@ Partial Class FormMTM03
         Me.Button1.Text = "案内文書プレビュー"
         Me.Button1.UseVisualStyleBackColor = False
         '
+        'Label16
+        '
+        Me.Label16.AutoSize = True
+        Me.Label16.Font = New System.Drawing.Font("メイリオ", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.Label16.Location = New System.Drawing.Point(12, 525)
+        Me.Label16.Name = "Label16"
+        Me.Label16.Size = New System.Drawing.Size(225, 20)
+        Me.Label16.TabIndex = 112
+        Me.Label16.Text = "【Ｆ3キー：対象虫眼鏡をクリック】"
+        '
         'FormMTM03
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -1606,6 +1617,7 @@ Partial Class FormMTM03
         Me.AutoScroll = True
         Me.BackColor = System.Drawing.SystemColors.ButtonHighlight
         Me.ClientSize = New System.Drawing.Size(1007, 552)
+        Me.Controls.Add(Me.Label16)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.ButtonSend)
         Me.Controls.Add(Me.ButtonClose)
@@ -1635,6 +1647,7 @@ Partial Class FormMTM03
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
@@ -1770,4 +1783,5 @@ Partial Class FormMTM03
     Friend WithEvents Panel001 As Panel
     Friend WithEvents Panel002 As Panel
     Friend WithEvents Button1 As Button
+    Friend WithEvents Label16 As Label
 End Class

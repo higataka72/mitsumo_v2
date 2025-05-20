@@ -1753,51 +1753,61 @@ Namespace Biz
                 body = tokuisakiName + vbCrLf
                 body += tantouName + vbCrLf
                 body += vbCrLf
-                body += "　　お世話になっております。" + vbCrLf
-                body += "　　もりや産業の" + resultElement.TantoName + "です。" + vbCrLf
+                body += "お世話になっております。" + vbCrLf
+                body += "もりや産業の" + resultElement.TantoName + "です。" + vbCrLf
                 body += vbCrLf
-                body += "　　この度、下記の商品の価格改定がございますので" + vbCrLf
-                body += "　　改定見積書を添付致します。" + vbCrLf
-                body += "　　ご査証いただきますようよろしくお願い致します。" + vbCrLf
+                body += "この度、下記の商品の価格改定がございますので" + vbCrLf
+                body += "改定見積書を添付致します。" + vbCrLf
+                body += "ご査証いただきますようよろしくお願い致します。" + vbCrLf
 
                 '担当者毎に自由メール文項目を追加（前文）
                 Dim MailTemp = GetDataMail(resultElement.LoginId.Trim)
+                If (Not String.IsNullOrEmpty(MailTemp.MTMR006002)) OrElse
+                    (Not String.IsNullOrEmpty(MailTemp.MTMR006003)) OrElse
+                    (Not String.IsNullOrEmpty(MailTemp.MTMR006004)) Then
+                    body += vbCrLf
+                End If
                 If (Not String.IsNullOrEmpty(MailTemp.MTMR006002)) Then
-                    body += "　　" + MailTemp.MTMR006002 + vbCrLf
+                    body += "" + MailTemp.MTMR006002 + vbCrLf
                 End If
                 If (Not String.IsNullOrEmpty(MailTemp.MTMR006003)) Then
-                    body += "　　" + MailTemp.MTMR006003 + vbCrLf
+                    body += "" + MailTemp.MTMR006003 + vbCrLf
                 End If
                 If (Not String.IsNullOrEmpty(MailTemp.MTMR006004)) Then
-                    body += "　　" + MailTemp.MTMR006004 + vbCrLf
+                    body += "" + MailTemp.MTMR006004 + vbCrLf
                 End If
 
                 body += vbCrLf
-                body += "　　　　該当商品：　" + resultElement.JitsukouKakakuNyuuryokuName + vbCrLf
-                body += "　　　　改定日：　" + resultElement.NeageDate + " " + resultElement.Kaiteijitsusi + vbCrLf
+                body += "該当商品：　" + resultElement.JitsukouKakakuNyuuryokuName + vbCrLf
+                body += "改定日：　" + resultElement.NeageDate + " " + resultElement.Kaiteijitsusi + vbCrLf
 
                 '担当者毎に自由メール文項目を追加（後文）
+                If (Not String.IsNullOrEmpty(MailTemp.MTMR006005)) OrElse
+                    (Not String.IsNullOrEmpty(MailTemp.MTMR006006)) OrElse
+                    (Not String.IsNullOrEmpty(MailTemp.MTMR006007)) Then
+                    body += vbCrLf
+                End If
                 If (Not String.IsNullOrEmpty(MailTemp.MTMR006005)) Then
-                    body += "　　　　" + MailTemp.MTMR006005 + vbCrLf
+                    body += "" + MailTemp.MTMR006005 + vbCrLf
                 End If
                 If (Not String.IsNullOrEmpty(MailTemp.MTMR006006)) Then
-                    body += "　　　　" + MailTemp.MTMR006006 + vbCrLf
+                    body += "" + MailTemp.MTMR006006 + vbCrLf
                 End If
                 If (Not String.IsNullOrEmpty(MailTemp.MTMR006007)) Then
-                    body += "　　　　" + MailTemp.MTMR006007 + vbCrLf
+                    body += "" + MailTemp.MTMR006007 + vbCrLf
                 End If
 
                 body += vbCrLf
-                body += "　　以上よろしくお願い致します。" + vbCrLf
+                body += "以上よろしくお願い致します。" + vbCrLf
                 body += vbCrLf
-                body += "　　--------------------------------" + vbCrLf
-                body += "　　もりや産業株式会社" + vbCrLf
-                body += "　　　　" + resultElement.EigyosyoName + vbCrLf
-                body += "　　　　" + resultElement.TantoName + vbCrLf
+                body += "--------------------------------" + vbCrLf
+                body += "もりや産業株式会社" + vbCrLf
+                body += "" + resultElement.EigyosyoName + vbCrLf
+                body += "" + resultElement.TantoName + vbCrLf
                 body += vbCrLf
-                body += "　　　　住所　" + resultElement.Address + vbCrLf
-                body += "　　　　" + resultElement.PhoneFax + vbCrLf
-                body += "　　　　メール　" + resultElement.MailFrom + vbCrLf
+                body += "住所　" + resultElement.Address + vbCrLf
+                body += "" + resultElement.PhoneFax + vbCrLf
+                body += "メール　" + resultElement.MailFrom + vbCrLf
 
                 'Dim body As String = tokuisakiName + vbCrLf _
                 '    + tantouName + vbCrLf _
@@ -1832,15 +1842,15 @@ Namespace Biz
                 mailMessage.Headers.Add("Content-Transfer-Encoding", "7bit")
 
                 '案内文も添付する
-                'If (Not String.IsNullOrEmpty(annaiFilePath)) Then
-                '    If File.Exists(annaiFilePath) Then
-                '        Dim annaiFileName = Path.GetFileName(annaiFilePath)
-                '        Dim attach1 As New System.Net.Mail.Attachment(annaiFilePath, MediaTypeNames.Application.Pdf)
-                '        Dim disposition1 As ContentDisposition = attach1.ContentDisposition
-                '        disposition1.FileName = EncordB(annaiFileName)
-                '        mailMessage.Attachments.Add(attach1)
-                '    End If
-                'End If
+                If (Not String.IsNullOrEmpty(annaiFilePath)) Then
+                    If File.Exists(annaiFilePath) Then
+                        Dim annaiFileName = Path.GetFileName(annaiFilePath)
+                        Dim attach1 As New System.Net.Mail.Attachment(annaiFilePath, MediaTypeNames.Application.Pdf)
+                        Dim disposition1 As ContentDisposition = attach1.ContentDisposition
+                        disposition1.FileName = EncordB(annaiFileName)
+                        mailMessage.Attachments.Add(attach1)
+                    End If
+                End If
 
                 Dim attach2 As New System.Net.Mail.Attachment(filePath, MediaTypeNames.Application.Pdf)
                 Dim disposition2 As ContentDisposition = attach2.ContentDisposition
@@ -2098,15 +2108,15 @@ Namespace Biz
                 'mailMessage.AlternateViews.Add(altView)
 
                 '案内文も添付する
-                'If (Not String.IsNullOrEmpty(annaiFilePath)) Then
-                '    If File.Exists(annaiFilePath) Then
-                '        Dim annaiFileName = Path.GetFileName(annaiFilePath)
-                '        Dim attach1 As New System.Net.Mail.Attachment(annaiFilePath, MediaTypeNames.Application.Pdf)
-                '        Dim disposition1 As ContentDisposition = attach1.ContentDisposition
-                '        disposition1.FileName = EncordB(annaiFileName)
-                '        mailMessage.Attachments.Add(attach1)
-                '    End If
-                'End If
+                If (Not String.IsNullOrEmpty(annaiFilePath)) Then
+                    If File.Exists(annaiFilePath) Then
+                        Dim annaiFileName = Path.GetFileName(annaiFilePath)
+                        Dim attach1 As New System.Net.Mail.Attachment(annaiFilePath, MediaTypeNames.Application.Pdf)
+                        Dim disposition1 As ContentDisposition = attach1.ContentDisposition
+                        disposition1.FileName = EncordB(annaiFileName)
+                        mailMessage.Attachments.Add(attach1)
+                    End If
+                End If
 
                 Dim attach As New System.Net.Mail.Attachment(filePath, MediaTypeNames.Application.Pdf)
                 Dim disposition As ContentDisposition = attach.ContentDisposition

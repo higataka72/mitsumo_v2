@@ -93,17 +93,17 @@ Public Class FormMTMSearchBumon
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     Private Sub DataGridView001_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView001.CellContentClick
-        If e.RowIndex > -1 Then
-            If e.ColumnIndex = 0 Then
-                Dim selectRow As DataGridViewRow = Me.DataGridView001.Rows(e.RowIndex)
-                Me.Selected = New Models.HAN10M015BUMON With {
-                    .HANM015001 = selectRow.Cells("HANM015001").Value.ToString.Trim,
-                    .HANM015002 = selectRow.Cells("HANM015002").Value.ToString.Trim
-                    }
-                Me.DialogResult = DialogResult.OK
-                Me.Close()
-            End If
-        End If
+        'If e.RowIndex > -1 Then
+        '    If e.ColumnIndex = 0 Then
+        '        Dim selectRow As DataGridViewRow = Me.DataGridView001.Rows(e.RowIndex)
+        '        Me.Selected = New Models.HAN10M015BUMON With {
+        '            .HANM015001 = selectRow.Cells("HANM015001").Value.ToString.Trim,
+        '            .HANM015002 = selectRow.Cells("HANM015002").Value.ToString.Trim
+        '            }
+        '        Me.DialogResult = DialogResult.OK
+        '        Me.Close()
+        '    End If
+        'End If
     End Sub
 
     Private Sub DataGridView001_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView001.CellDoubleClick
@@ -115,6 +115,21 @@ Public Class FormMTMSearchBumon
                     }
             Me.DialogResult = DialogResult.OK
             Me.Close()
+        End If
+    End Sub
+
+    Private Sub DataGridView001_KeyDown(sender As Object, e As KeyEventArgs) Handles DataGridView001.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            Dim selectRowIndex As Integer = DataGridView001.CurrentCell.RowIndex
+            If selectRowIndex > -1 Then
+                Dim selectRow As DataGridViewRow = Me.DataGridView001.Rows(selectRowIndex)
+                Me.Selected = New Models.HAN10M015BUMON With {
+                    .HANM015001 = selectRow.Cells("HANM015001").Value.ToString.Trim,
+                    .HANM015002 = selectRow.Cells("HANM015002").Value.ToString.Trim
+                    }
+                Me.DialogResult = DialogResult.OK
+                Me.Close()
+            End If
         End If
     End Sub
 End Class

@@ -53,6 +53,10 @@ Public Class FormMTMSearchUriageV2
         Me.Height = Screen.GetBounds(Me).Height \ 3
         Me.Top = 0
         Me.Left = 0
+        DataGridView001.Styles.Highlight.BackColor = Color.White
+        DataGridView001.Styles.Highlight.ForeColor = Color.Black
+        DataGridView001.Styles.Focus.BackColor = Color.White
+        DataGridView001.Styles.Focus.ForeColor = Color.Black
     End Sub
     ''' <summary>
     ''' データ設定
@@ -306,6 +310,9 @@ Public Class FormMTMSearchUriageV2
     ''' <param name="e"></param>
     Private Sub FormMTMSearchUriage_KeyDown(sender As Object, e As KeyEventArgs) Handles MyBase.KeyDown
         If Me.DataGridView001.Rows.Count > 0 Then
+            If e.KeyCode = Keys.F3 Then
+                DataGridView001.FilterDefinition = String.Empty
+            End If
             If e.KeyCode = Keys.F5 Then
                 DataGridView001.SortDefinition = String.Empty
             End If

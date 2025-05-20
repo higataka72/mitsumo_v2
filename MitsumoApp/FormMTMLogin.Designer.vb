@@ -66,7 +66,6 @@ Partial Class FormMTMLogin
         Me.TextBox001.Name = "TextBox001"
         Me.TextBox001.Size = New System.Drawing.Size(279, 27)
         Me.TextBox001.TabIndex = 0
-        Me.TextBox001.Text = "admin"
         '
         'TextBox002
         '
@@ -78,7 +77,6 @@ Partial Class FormMTMLogin
         Me.TextBox002.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
         Me.TextBox002.Size = New System.Drawing.Size(279, 27)
         Me.TextBox002.TabIndex = 1
-        Me.TextBox002.Text = "mitsumo23"
         '
         'ButtonLogin
         '

@@ -222,29 +222,29 @@ Public Class FormMTMSearchTokui
     End Sub
 
     Private Sub DataGridView001_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView001.CellContentClick
-        If e.RowIndex > -1 Then
-            If e.ColumnIndex = 0 Then
-                Dim selectRow As DataGridViewRow = Me.DataGridView001.Rows(e.RowIndex)
-                Me.Selected = New Models.HAN10M001TOKUI With {
-                    .HANM001001 = selectRow.Cells("HANM001001").Value.ToString.Trim,
-                    .HANM001002 = selectRow.Cells("HANM001002").Value,
-                    .HANM001003 = selectRow.Cells("HANM001003").Value.ToString.Trim,
-                    .HANM001004 = selectRow.Cells("HANM001004").Value.ToString.Trim,
-                    .HANM001005 = selectRow.Cells("HANM001005").Value.ToString.Trim,
-                    .HANM001006 = selectRow.Cells("HANM001006").Value.ToString.Trim,
-                    .HANM001007 = selectRow.Cells("HANM001007").Value.ToString.Trim,
-                    .HANM001008 = selectRow.Cells("HANM001008").Value.ToString.Trim,
-                    .HANM001009 = selectRow.Cells("HANM001009").Value.ToString.Trim,
-                    .HANM001010 = selectRow.Cells("HANM001010").Value.ToString.Trim,
-                    .HANM001011 = selectRow.Cells("HANM001011").Value.ToString.Trim,
-                    .HANM001012 = selectRow.Cells("HANM001012").Value.ToString.Trim,
-                    .HANM001013 = selectRow.Cells("HANM001013").Value.ToString.Trim,
-                    .HANM001014 = selectRow.Cells("HANM001014").Value.ToString.Trim
-                    }
-                Me.DialogResult = DialogResult.OK
-                Me.Close()
-            End If
-        End If
+        'If e.RowIndex > -1 Then
+        '    If e.ColumnIndex = 0 Then
+        '        Dim selectRow As DataGridViewRow = Me.DataGridView001.Rows(e.RowIndex)
+        '        Me.Selected = New Models.HAN10M001TOKUI With {
+        '            .HANM001001 = selectRow.Cells("HANM001001").Value.ToString.Trim,
+        '            .HANM001002 = selectRow.Cells("HANM001002").Value,
+        '            .HANM001003 = selectRow.Cells("HANM001003").Value.ToString.Trim,
+        '            .HANM001004 = selectRow.Cells("HANM001004").Value.ToString.Trim,
+        '            .HANM001005 = selectRow.Cells("HANM001005").Value.ToString.Trim,
+        '            .HANM001006 = selectRow.Cells("HANM001006").Value.ToString.Trim,
+        '            .HANM001007 = selectRow.Cells("HANM001007").Value.ToString.Trim,
+        '            .HANM001008 = selectRow.Cells("HANM001008").Value.ToString.Trim,
+        '            .HANM001009 = selectRow.Cells("HANM001009").Value.ToString.Trim,
+        '            .HANM001010 = selectRow.Cells("HANM001010").Value.ToString.Trim,
+        '            .HANM001011 = selectRow.Cells("HANM001011").Value.ToString.Trim,
+        '            .HANM001012 = selectRow.Cells("HANM001012").Value.ToString.Trim,
+        '            .HANM001013 = selectRow.Cells("HANM001013").Value.ToString.Trim,
+        '            .HANM001014 = selectRow.Cells("HANM001014").Value.ToString.Trim
+        '            }
+        '        Me.DialogResult = DialogResult.OK
+        '        Me.Close()
+        '    End If
+        'End If
     End Sub
     ''' <summary>
     ''' 検索ボタン押下
@@ -277,6 +277,33 @@ Public Class FormMTMSearchTokui
                     }
             Me.DialogResult = DialogResult.OK
             Me.Close()
+        End If
+    End Sub
+
+    Private Sub DataGridView001_KeyDown(sender As Object, e As KeyEventArgs) Handles DataGridView001.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            Dim selectRowIndex As Integer = DataGridView001.CurrentCell.RowIndex
+            If selectRowIndex > -1 Then
+                Dim selectRow As DataGridViewRow = Me.DataGridView001.Rows(selectRowIndex)
+                Me.Selected = New Models.HAN10M001TOKUI With {
+                    .HANM001001 = selectRow.Cells("HANM001001").Value.ToString.Trim,
+                    .HANM001002 = selectRow.Cells("HANM001002").Value,
+                    .HANM001003 = selectRow.Cells("HANM001003").Value.ToString.Trim,
+                    .HANM001004 = selectRow.Cells("HANM001004").Value.ToString.Trim,
+                    .HANM001005 = selectRow.Cells("HANM001005").Value.ToString.Trim,
+                    .HANM001006 = selectRow.Cells("HANM001006").Value.ToString.Trim,
+                    .HANM001007 = selectRow.Cells("HANM001007").Value.ToString.Trim,
+                    .HANM001008 = selectRow.Cells("HANM001008").Value.ToString.Trim,
+                    .HANM001009 = selectRow.Cells("HANM001009").Value.ToString.Trim,
+                    .HANM001010 = selectRow.Cells("HANM001010").Value.ToString.Trim,
+                    .HANM001011 = selectRow.Cells("HANM001011").Value.ToString.Trim,
+                    .HANM001012 = selectRow.Cells("HANM001012").Value.ToString.Trim,
+                    .HANM001013 = selectRow.Cells("HANM001013").Value.ToString.Trim,
+                    .HANM001014 = selectRow.Cells("HANM001014").Value.ToString.Trim
+                    }
+                Me.DialogResult = DialogResult.OK
+                Me.Close()
+            End If
         End If
     End Sub
 End Class

@@ -51,6 +51,8 @@ Partial Class FormMTM02RegistV2
         Me.Label14 = New System.Windows.Forms.Label()
         Me.DataGridView001 = New C1.Win.C1FlexGrid.C1FlexGrid()
         Me.ButtonCopy = New System.Windows.Forms.Button()
+        Me.Label15 = New System.Windows.Forms.Label()
+        Me.Label12 = New System.Windows.Forms.Label()
         CType(Me.DataGridView001, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -160,7 +162,7 @@ Partial Class FormMTM02RegistV2
         Me.CheckBox001.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.CheckBox001.AutoSize = True
         Me.CheckBox001.Font = New System.Drawing.Font("メイリオ", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.CheckBox001.Location = New System.Drawing.Point(969, 94)
+        Me.CheckBox001.Location = New System.Drawing.Point(963, 90)
         Me.CheckBox001.Name = "CheckBox001"
         Me.CheckBox001.Size = New System.Drawing.Size(93, 24)
         Me.CheckBox001.TabIndex = 27
@@ -171,7 +173,7 @@ Partial Class FormMTM02RegistV2
         '
         Me.TextBox006.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TextBox006.Font = New System.Drawing.Font("メイリオ", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TextBox006.Location = New System.Drawing.Point(65, 465)
+        Me.TextBox006.Location = New System.Drawing.Point(65, 470)
         Me.TextBox006.Name = "TextBox006"
         Me.TextBox006.ReadOnly = True
         Me.TextBox006.Size = New System.Drawing.Size(123, 24)
@@ -183,7 +185,7 @@ Partial Class FormMTM02RegistV2
         Me.Label6.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("メイリオ", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label6.Location = New System.Drawing.Point(2, 468)
+        Me.Label6.Location = New System.Drawing.Point(2, 473)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(61, 20)
         Me.Label6.TabIndex = 29
@@ -193,7 +195,7 @@ Partial Class FormMTM02RegistV2
         '
         Me.TextBox007.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TextBox007.Font = New System.Drawing.Font("メイリオ", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TextBox007.Location = New System.Drawing.Point(296, 465)
+        Me.TextBox007.Location = New System.Drawing.Point(296, 470)
         Me.TextBox007.Name = "TextBox007"
         Me.TextBox007.ReadOnly = True
         Me.TextBox007.Size = New System.Drawing.Size(123, 24)
@@ -205,7 +207,7 @@ Partial Class FormMTM02RegistV2
         Me.Label7.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label7.AutoSize = True
         Me.Label7.Font = New System.Drawing.Font("メイリオ", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label7.Location = New System.Drawing.Point(196, 468)
+        Me.Label7.Location = New System.Drawing.Point(196, 473)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(100, 20)
         Me.Label7.TabIndex = 31
@@ -215,7 +217,7 @@ Partial Class FormMTM02RegistV2
         '
         Me.TextBox008.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TextBox008.Font = New System.Drawing.Font("メイリオ", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TextBox008.Location = New System.Drawing.Point(518, 465)
+        Me.TextBox008.Location = New System.Drawing.Point(518, 470)
         Me.TextBox008.Name = "TextBox008"
         Me.TextBox008.ReadOnly = True
         Me.TextBox008.Size = New System.Drawing.Size(123, 24)
@@ -227,7 +229,7 @@ Partial Class FormMTM02RegistV2
         Me.Label8.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label8.AutoSize = True
         Me.Label8.Font = New System.Drawing.Font("メイリオ", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label8.Location = New System.Drawing.Point(431, 468)
+        Me.Label8.Location = New System.Drawing.Point(431, 473)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(87, 20)
         Me.Label8.TabIndex = 33
@@ -237,7 +239,7 @@ Partial Class FormMTM02RegistV2
         '
         Me.TextBox009.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TextBox009.Font = New System.Drawing.Font("メイリオ", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TextBox009.Location = New System.Drawing.Point(736, 465)
+        Me.TextBox009.Location = New System.Drawing.Point(736, 470)
         Me.TextBox009.Name = "TextBox009"
         Me.TextBox009.ReadOnly = True
         Me.TextBox009.Size = New System.Drawing.Size(123, 24)
@@ -249,7 +251,7 @@ Partial Class FormMTM02RegistV2
         Me.Label9.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label9.AutoSize = True
         Me.Label9.Font = New System.Drawing.Font("メイリオ", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label9.Location = New System.Drawing.Point(649, 468)
+        Me.Label9.Location = New System.Drawing.Point(649, 473)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(87, 20)
         Me.Label9.TabIndex = 35
@@ -259,7 +261,7 @@ Partial Class FormMTM02RegistV2
         '
         Me.TextBox010.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TextBox010.Font = New System.Drawing.Font("メイリオ", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.TextBox010.Location = New System.Drawing.Point(936, 465)
+        Me.TextBox010.Location = New System.Drawing.Point(936, 470)
         Me.TextBox010.Name = "TextBox010"
         Me.TextBox010.ReadOnly = True
         Me.TextBox010.Size = New System.Drawing.Size(123, 24)
@@ -271,7 +273,7 @@ Partial Class FormMTM02RegistV2
         Me.Label10.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label10.AutoSize = True
         Me.Label10.Font = New System.Drawing.Font("メイリオ", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label10.Location = New System.Drawing.Point(871, 468)
+        Me.Label10.Location = New System.Drawing.Point(871, 473)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(65, 20)
         Me.Label10.TabIndex = 37
@@ -283,7 +285,7 @@ Partial Class FormMTM02RegistV2
         Me.Label11.AutoSize = True
         Me.Label11.Font = New System.Drawing.Font("メイリオ", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.Label11.ForeColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.Label11.Location = New System.Drawing.Point(551, 510)
+        Me.Label11.Location = New System.Drawing.Point(551, 515)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(308, 20)
         Me.Label11.TabIndex = 39
@@ -296,7 +298,7 @@ Partial Class FormMTM02RegistV2
         Me.ButtonRegist.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.ButtonRegist.Font = New System.Drawing.Font("メイリオ", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.ButtonRegist.ForeColor = System.Drawing.SystemColors.Control
-        Me.ButtonRegist.Location = New System.Drawing.Point(883, 500)
+        Me.ButtonRegist.Location = New System.Drawing.Point(883, 505)
         Me.ButtonRegist.Name = "ButtonRegist"
         Me.ButtonRegist.Size = New System.Drawing.Size(85, 39)
         Me.ButtonRegist.TabIndex = 40
@@ -310,7 +312,7 @@ Partial Class FormMTM02RegistV2
         Me.ButtonClose.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.ButtonClose.Font = New System.Drawing.Font("メイリオ", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.ButtonClose.ForeColor = System.Drawing.SystemColors.Control
-        Me.ButtonClose.Location = New System.Drawing.Point(974, 500)
+        Me.ButtonClose.Location = New System.Drawing.Point(974, 505)
         Me.ButtonClose.Name = "ButtonClose"
         Me.ButtonClose.Size = New System.Drawing.Size(85, 39)
         Me.ButtonClose.TabIndex = 41
@@ -321,7 +323,7 @@ Partial Class FormMTM02RegistV2
         '
         Me.Label13.AutoSize = True
         Me.Label13.Font = New System.Drawing.Font("メイリオ", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label13.Location = New System.Drawing.Point(-2, 98)
+        Me.Label13.Location = New System.Drawing.Point(230, 91)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(381, 20)
         Me.Label13.TabIndex = 45
@@ -331,11 +333,11 @@ Partial Class FormMTM02RegistV2
         '
         Me.Label14.AutoSize = True
         Me.Label14.Font = New System.Drawing.Font("メイリオ", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label14.Location = New System.Drawing.Point(385, 98)
+        Me.Label14.Location = New System.Drawing.Point(628, 91)
         Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(308, 20)
+        Me.Label14.Size = New System.Drawing.Size(438, 20)
         Me.Label14.TabIndex = 46
-        Me.Label14.Text = "【明細ダブルクリック：売上履歴・単価台帳参照】"
+        Me.Label14.Text = "【★得意先名、商品名の明細ダブルクリック：売上履歴・単価台帳参照】"
         '
         'DataGridView001
         '
@@ -345,10 +347,10 @@ Partial Class FormMTM02RegistV2
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.DataGridView001.AutoClipboard = True
         Me.DataGridView001.ColumnInfo = resources.GetString("DataGridView001.ColumnInfo")
-        Me.DataGridView001.Location = New System.Drawing.Point(8, 124)
+        Me.DataGridView001.Location = New System.Drawing.Point(8, 134)
         Me.DataGridView001.Name = "DataGridView001"
         Me.DataGridView001.ShowCellLabels = True
-        Me.DataGridView001.Size = New System.Drawing.Size(1050, 323)
+        Me.DataGridView001.Size = New System.Drawing.Size(1050, 324)
         Me.DataGridView001.TabIndex = 47
         '
         'ButtonCopy
@@ -358,13 +360,33 @@ Partial Class FormMTM02RegistV2
         Me.ButtonCopy.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.ButtonCopy.Font = New System.Drawing.Font("メイリオ", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.ButtonCopy.ForeColor = System.Drawing.SystemColors.Control
-        Me.ButtonCopy.Location = New System.Drawing.Point(6, 500)
+        Me.ButtonCopy.Location = New System.Drawing.Point(6, 505)
         Me.ButtonCopy.Name = "ButtonCopy"
         Me.ButtonCopy.Size = New System.Drawing.Size(207, 39)
         Me.ButtonCopy.TabIndex = 48
         Me.ButtonCopy.TabStop = False
         Me.ButtonCopy.Text = "明細コピー(ヘッダー付)"
         Me.ButtonCopy.UseVisualStyleBackColor = False
+        '
+        'Label15
+        '
+        Me.Label15.AutoSize = True
+        Me.Label15.Font = New System.Drawing.Font("メイリオ", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.Label15.Location = New System.Drawing.Point(2, 91)
+        Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(212, 20)
+        Me.Label15.TabIndex = 50
+        Me.Label15.Text = "【Ｆ3キー：全フィルターを解除】"
+        '
+        'Label12
+        '
+        Me.Label12.AutoSize = True
+        Me.Label12.Font = New System.Drawing.Font("メイリオ", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.Label12.Location = New System.Drawing.Point(2, 111)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(368, 20)
+        Me.Label12.TabIndex = 51
+        Me.Label12.Text = "【フィルター：Trueはチェックあり　Falseはチェックなし】"
         '
         'FormMTM02RegistV2
         '
@@ -373,6 +395,8 @@ Partial Class FormMTM02RegistV2
         Me.AutoScroll = True
         Me.BackColor = System.Drawing.SystemColors.ButtonHighlight
         Me.ClientSize = New System.Drawing.Size(1068, 551)
+        Me.Controls.Add(Me.Label12)
+        Me.Controls.Add(Me.Label15)
         Me.Controls.Add(Me.ButtonCopy)
         Me.Controls.Add(Me.DataGridView001)
         Me.Controls.Add(Me.Label14)
@@ -441,4 +465,6 @@ Partial Class FormMTM02RegistV2
     Friend WithEvents Label14 As Label
     Friend WithEvents DataGridView001 As C1.Win.C1FlexGrid.C1FlexGrid
     Friend WithEvents ButtonCopy As Button
+    Friend WithEvents Label15 As Label
+    Friend WithEvents Label12 As Label
 End Class

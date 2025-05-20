@@ -1,4 +1,5 @@
 ﻿Imports System.Configuration
+Imports System.Text.RegularExpressions
 Imports C1.Win.C1FlexGrid
 Imports MitsumoLib
 
@@ -66,8 +67,11 @@ Public Class FormMTM02RegistV2
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     Private Sub FormMTM02Regist_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        'Gridの設定
         DataGridView001.Font = New Font(“メイリオ”, 9)
         DataGridView001.AllowSorting = AllowSortingEnum.Auto
+        ' フィルタの設定
+        AddHandler DataGridView001.MouseClick, AddressOf DataGridView001_MouseClick
         Me.SetHeader()
         Me.SetDataV2()
         Me.SetDataGridColumnV2()
@@ -81,6 +85,14 @@ Public Class FormMTM02RegistV2
         DataGridView001.ScrollBars = ScrollBars.None
         DataGridView001.ScrollBars = ScrollBars.Both
         Me.WindowState = FormWindowState.Maximized
+
+        'コンテキストメニュー
+        'Dim cm As ContextMenuStrip = New ContextMenuStrip()
+        '' コンテキストメニューにメニュー項目を追加します
+        'cm.Items.Add("売上履歴")
+        'cm.Items.Add("単価台帳参照")
+        '' インスタンスをContextMenuStripプロパティに割り当てます 
+        'DataGridView001.ContextMenuStrip = cm
     End Sub
 
     ''' <summary>
@@ -113,24 +125,33 @@ Public Class FormMTM02RegistV2
         DataGridView001.Rows.Fixed = 2
         DataGridView001.Cols.Frozen = 12
         DataGridView001.Cols.Frozen = 12
+        DataGridView001.Rows(0).Height = 80
+        DataGridView001.Rows.DefaultSize = 20
         'DataGridView001.EditOptions = EditFlags.All
 
         ' -------- FlexGridのスタイル --------
         ' checkBoxStyle1　列ヘッダーにチェックボックスを設定
         Dim checkBoxStyle1 As CellStyle = DataGridView001.Styles.Add("CheckBoxStyle1")
-        checkBoxStyle1.BackColor = Color.LightSeaGreen
+        checkBoxStyle1.BackColor = Color.MediumTurquoise
         checkBoxStyle1.ForeColor = Color.White
         checkBoxStyle1.TextAlign = TextAlignEnum.CenterCenter
         checkBoxStyle1.Font = New Font("メイリオ", 8, FontStyle.Underline)
         checkBoxStyle1.DataType = GetType(Boolean)
         checkBoxStyle1.ImageAlign = ImageAlignEnum.CenterCenter
 
-        ' checkBoxStyle1　列ヘッダーにチェックボックスを設定なし（ノーマル）
+        ' checkBoxStyle2　列ヘッダーにチェックボックスを設定なし（ノーマル）
         Dim checkBoxStyle2 As CellStyle = DataGridView001.Styles.Add("CheckBoxStyle2")
-        checkBoxStyle2.BackColor = Color.LightSeaGreen
+        checkBoxStyle2.BackColor = Color.MediumTurquoise
         checkBoxStyle2.ForeColor = Color.White
         checkBoxStyle2.TextAlign = TextAlignEnum.CenterCenter
         checkBoxStyle2.Font = New Font("メイリオ", 8, FontStyle.Underline)
+
+        ' checkBoxStyle3　列ヘッダーにチェックボックスを設定なし（ノーマル）
+        Dim checkBoxStyle3 As CellStyle = DataGridView001.Styles.Add("checkBoxStyle3")
+        checkBoxStyle3.BackColor = Color.MediumTurquoise
+        checkBoxStyle3.ForeColor = Color.White
+        checkBoxStyle3.TextAlign = TextAlignEnum.CenterCenter
+        checkBoxStyle3.Font = New Font("メイリオ", 8, FontStyle.Regular)
 
         ' NewStyle1
         Dim newStyle1 As CellStyle = DataGridView001.Styles.Add("NewStyle1")
@@ -143,7 +164,7 @@ Public Class FormMTM02RegistV2
         newStyle1_1.BackColor = Color.LightSeaGreen
         newStyle1_1.ForeColor = Color.White
         newStyle1_1.TextAlign = TextAlignEnum.CenterCenter
-        newStyle1_1.Font = New Font("メイリオ", 8, FontStyle.Underline)
+        newStyle1_1.Font = New Font("メイリオ", 9, FontStyle.Underline)
 
         Dim newStyle2 As CellStyle = DataGridView001.Styles.Add("NewStyle2")
         newStyle2.BackColor = Color.LightSeaGreen
@@ -157,23 +178,31 @@ Public Class FormMTM02RegistV2
         newStyle3.TextAlign = TextAlignEnum.CenterCenter
         newStyle3.Font = New Font("メイリオ", 9, FontStyle.Underline)
 
+        ' checkBoxStyle1　列ヘッダーにチェックボックスを設定合体
+        Dim checkBoxStyleNew As CellStyle = DataGridView001.Styles.Add("checkBoxStyleNew")
+        checkBoxStyleNew.BackColor = Color.LightSeaGreen
+        checkBoxStyleNew.ForeColor = Color.White
+        checkBoxStyleNew.TextAlign = TextAlignEnum.CenterCenter
+        checkBoxStyleNew.Font = New Font("メイリオ", 8, FontStyle.Underline)
+        checkBoxStyleNew.DataType = GetType(Boolean)
+        'checkBoxStyle1.ImageAlign = ImageAlignEnum.CenterCenter
+
         ' -------- FlexGridの各項目設定 --------
         ' ヘッダーの設定
-
         DataGridView001.Cols(1).Caption = "確定"
         DataGridView001.Cols(1).DataType = GetType(Boolean)
         DataGridView001.Cols(1).Name = "MTMR002085"
-        DataGridView001.Cols(1).Width = 30
+        DataGridView001.Cols(1).Width = 40
         DataGridView001.Cols(1).TextAlign = TextAlignEnum.CenterCenter
         DataGridView001.Cols(1).Style.BackColor = Color.White
         DataGridView001.SetCellStyle(0, 1, newStyle1_1)
         DataGridView001.SetCellStyle(1, 1, "checkBoxStyle1")
 
-        DataGridView001.Cols(2).Caption = "印刷なし"
+        DataGridView001.Cols(2).Caption = "印刷無"
         DataGridView001.Cols(2).DataType = GetType(Boolean)
         DataGridView001.Cols(2).Name = "MTMR002086"
         DataGridView001.Cols(2).AllowSorting = False
-        DataGridView001.Cols(2).Width = 30
+        DataGridView001.Cols(2).Width = 40
         DataGridView001.Cols(2).TextAlign = TextAlignEnum.CenterCenter
         DataGridView001.Cols(2).Style.BackColor = Color.White
         DataGridView001.SetCellStyle(0, 2, newStyle1)
@@ -232,12 +261,13 @@ Public Class FormMTM02RegistV2
         DataGridView001.Cols(7).AllowEditing = False
         DataGridView001.Cols(7).Style.BackColor = Color.LightGray
         DataGridView001.SetCellStyle(0, 7, newStyle2)
-        DataGridView001.SetCellStyle(1, 7, "checkBoxStyle2")
+        DataGridView001(1, 7) = "ﾀﾞﾌﾞﾙｸﾘｯｸで売上履歴・単価台帳を開く"
+        DataGridView001.SetCellStyle(1, 7, "checkBoxStyle3")
 
         DataGridView001.Cols(8).Caption = "ﾗﾝｸ"
         DataGridView001.Cols(8).DataType = GetType(String)
         DataGridView001.Cols(8).Name = "MTMR002007"
-        DataGridView001.Cols(8).Width = 40
+        DataGridView001.Cols(8).Width = 45
         DataGridView001.Cols(8).TextAlign = TextAlignEnum.LeftCenter
         DataGridView001.Cols(8).AllowEditing = False
         DataGridView001.Cols(8).Style.BackColor = Color.LightGray
@@ -259,11 +289,13 @@ Public Class FormMTM02RegistV2
         DataGridView001.Cols(10).DataType = GetType(String)
         DataGridView001.Cols(10).Name = "MTMR002016"
         DataGridView001.Cols(10).Width = 240
+        DataGridView001.Cols(10).AllowFiltering = AllowFiltering.Default
         DataGridView001.Cols(10).TextAlign = TextAlignEnum.LeftCenter
         DataGridView001.Cols(10).AllowEditing = False
         DataGridView001.Cols(10).Style.BackColor = Color.LightGray
         DataGridView001.SetCellStyle(0, 10, newStyle3)
-        DataGridView001.SetCellStyle(1, 10, "checkBoxStyle2")
+        DataGridView001(1, 10) = "ﾀﾞﾌﾞﾙｸﾘｯｸで売上履歴・単価台帳を開く"
+        DataGridView001.SetCellStyle(1, 10, "checkBoxStyle3")
 
         DataGridView001.Cols(11).Caption = "規格"
         DataGridView001.Cols(11).DataType = GetType(String)
@@ -436,6 +468,7 @@ Public Class FormMTM02RegistV2
         DataGridView001.Cols(25).Name = "MTMR002031"
         DataGridView001.Cols(25).AllowSorting = False
         DataGridView001.Cols(25).Style.Format = "N4"
+        DataGridView001.Cols(24).Format = "###,###,##0.00"
         DataGridView001.Cols(25).Width = 90
         DataGridView001.Cols(25).TextAlign = TextAlignEnum.RightCenter
         DataGridView001.Cols(25).AllowEditing = False
@@ -491,7 +524,7 @@ Public Class FormMTM02RegistV2
         DataGridView001.Cols(30).DataType = GetType(Integer)
         DataGridView001.Cols(30).Name = "MTMR002036_ARARI"
         DataGridView001.Cols(30).Style.Format = "N1"
-        DataGridView001.Cols(30).Width = 50
+        DataGridView001.Cols(30).Width = 55
         DataGridView001.Cols(30).TextAlign = TextAlignEnum.RightCenter
         DataGridView001.Cols(30).AllowEditing = False
         DataGridView001.Cols(30).Style.BackColor = Color.LightGray
@@ -502,7 +535,7 @@ Public Class FormMTM02RegistV2
         DataGridView001.Cols(31).DataType = GetType(Integer)
         DataGridView001.Cols(31).Name = "MTMR002036UP"
         DataGridView001.Cols(31).Style.Format = "N1"
-        DataGridView001.Cols(31).Width = 50
+        DataGridView001.Cols(31).Width = 55
         DataGridView001.Cols(31).TextAlign = TextAlignEnum.RightCenter
         DataGridView001.Cols(31).AllowEditing = False
         DataGridView001.Cols(31).Style.BackColor = Color.LightGray
@@ -514,7 +547,7 @@ Public Class FormMTM02RegistV2
         DataGridView001.Cols(32).Name = "MTMR002037"
         DataGridView001.Cols(32).AllowSorting = False
         DataGridView001.Cols(32).Style.Format = "N1"
-        DataGridView001.Cols(32).Width = 50
+        DataGridView001.Cols(32).Width = 55
         DataGridView001.Cols(32).TextAlign = TextAlignEnum.RightCenter
         DataGridView001.Cols(32).AllowEditing = False
         DataGridView001.Cols(32).Style.BackColor = Color.LightGray
@@ -1132,6 +1165,9 @@ Public Class FormMTM02RegistV2
     ''' <param name="e"></param>
     Private Sub FormMTM02Regist_KeyDown(sender As Object, e As KeyEventArgs) Handles MyBase.KeyDown
         If Me.DataGridView001.Rows.Count > 0 Then
+            If e.KeyCode = Keys.F3 Then
+                DataGridView001.FilterDefinition = String.Empty
+            End If
             If e.KeyCode = Keys.F5 Then
                 DataGridView001.SortDefinition = String.Empty
             End If
@@ -1163,52 +1199,68 @@ Public Class FormMTM02RegistV2
     Private Sub DataGridView001_CellChecked(sender As Object, e As RowColEventArgs) Handles DataGridView001.CellChecked
         If e.Row = 1 AndAlso e.Col = 1 Then
             For row As Integer = DataGridView001.Rows.Fixed To DataGridView001.Rows.Count - 1
-                DataGridView001.SetCellCheck(row, 1, DataGridView001.GetCellCheck(e.Row, e.Col))
+                If DataGridView001.Rows(row).Visible Then
+                    DataGridView001.SetCellCheck(row, 1, DataGridView001.GetCellCheck(e.Row, e.Col))
+                End If
             Next
         End If
         If e.Row = 1 AndAlso e.Col = 2 Then
             For row As Integer = DataGridView001.Rows.Fixed To DataGridView001.Rows.Count - 1
-                DataGridView001.SetCellCheck(row, 2, DataGridView001.GetCellCheck(e.Row, e.Col))
+                If DataGridView001.Rows(row).Visible Then
+                    DataGridView001.SetCellCheck(row, 2, DataGridView001.GetCellCheck(e.Row, e.Col))
+                End If
             Next
         End If
         If e.Row = 1 AndAlso e.Col = 51 Then
             For row As Integer = DataGridView001.Rows.Fixed To DataGridView001.Rows.Count - 1
-                DataGridView001.SetCellCheck(row, 51, DataGridView001.GetCellCheck(e.Row, e.Col))
+                If DataGridView001.Rows(row).Visible Then
+                    DataGridView001.SetCellCheck(row, 51, DataGridView001.GetCellCheck(e.Row, e.Col))
+                End If
             Next
             'メールが全てTrueならFAXは全てFalseにする（逆も処理も行う）
             Dim checkCol51 = DataGridView001.GetCellCheck(e.Row, e.Col)
             If (checkCol51 = CheckEnum.Checked) Then
                 DataGridView001.SetCellCheck(1, 52, CheckEnum.Unchecked)
                 For row As Integer = DataGridView001.Rows.Fixed To DataGridView001.Rows.Count - 1
-                    DataGridView001.SetCellCheck(row, 52, CheckEnum.Unchecked)
+                    If DataGridView001.Rows(row).Visible Then
+                        DataGridView001.SetCellCheck(row, 52, CheckEnum.Unchecked)
+                    End If
                 Next
             Else
                 DataGridView001.SetCellCheck(1, 52, CheckEnum.Checked)
                 For row As Integer = DataGridView001.Rows.Fixed To DataGridView001.Rows.Count - 1
-                    DataGridView001.SetCellCheck(row, 52, CheckEnum.Checked)
+                    If DataGridView001.Rows(row).Visible Then
+                        DataGridView001.SetCellCheck(row, 52, CheckEnum.Checked)
+                    End If
                 Next
             End If
         End If
 
         If e.Row = 1 AndAlso e.Col = 52 Then
             For row As Integer = DataGridView001.Rows.Fixed To DataGridView001.Rows.Count - 1
-                DataGridView001.SetCellCheck(row, 52, DataGridView001.GetCellCheck(e.Row, e.Col))
+                If DataGridView001.Rows(row).Visible Then
+                    DataGridView001.SetCellCheck(row, 52, DataGridView001.GetCellCheck(e.Row, e.Col))
+                End If
             Next
             'FAXが全てTrueならメールは全てFalseにする（逆も処理も行う）
             Dim checkCol52 = DataGridView001.GetCellCheck(e.Row, e.Col)
             If (checkCol52 = CheckEnum.Checked) Then
                 DataGridView001.SetCellCheck(1, 51, CheckEnum.Unchecked)
                 For row As Integer = DataGridView001.Rows.Fixed To DataGridView001.Rows.Count - 1
-                    DataGridView001.SetCellCheck(row, 51, CheckEnum.Unchecked)
+                    If DataGridView001.Rows(row).Visible Then
+                        DataGridView001.SetCellCheck(row, 51, CheckEnum.Unchecked)
+                    End If
                 Next
             Else
                 DataGridView001.SetCellCheck(1, 51, CheckEnum.Checked)
                 For row As Integer = DataGridView001.Rows.Fixed To DataGridView001.Rows.Count - 1
-                    DataGridView001.SetCellCheck(row, 51, CheckEnum.Checked)
+                    If DataGridView001.Rows(row).Visible Then
+                        DataGridView001.SetCellCheck(row, 51, CheckEnum.Checked)
+                    End If
                 Next
             End If
         End If
-        If e.Row > 1 AndAlso e.Col = 51 Then
+        If e.Row > 0 AndAlso e.Col = 51 Then
             Dim checkCol51Val = DataGridView001.GetCellCheck(e.Row, e.Col)
             If (checkCol51Val = CheckEnum.Checked) Then
                 DataGridView001.SetCellCheck(e.Row, 52, CheckEnum.Unchecked)
@@ -1216,7 +1268,7 @@ Public Class FormMTM02RegistV2
                 DataGridView001.SetCellCheck(e.Row, 52, CheckEnum.Checked)
             End If
         End If
-        If e.Row > 1 AndAlso e.Col = 52 Then
+        If e.Row > 0 AndAlso e.Col = 52 Then
             Dim checkCol52Val = DataGridView001.GetCellCheck(e.Row, e.Col)
             If (checkCol52Val = CheckEnum.Checked) Then
                 DataGridView001.SetCellCheck(e.Row, 51, CheckEnum.Unchecked)
@@ -1242,12 +1294,14 @@ Public Class FormMTM02RegistV2
     Private Sub DataGridView001_ValidateEdit(sender As Object, e As ValidateEditEventArgs) Handles DataGridView001.ValidateEdit
         'ロット桁数
         If e.Col = 12 Then
-            If Not DataGridView001.Editor.Text Is Nothing Then
-                Dim strMTMR002017 = DataGridView001.Editor.Text
-                If (Not strMTMR002017 Is DBNull.Value) AndAlso (Not String.IsNullOrEmpty(strMTMR002017)) Then
-                    If (Not Me.Biz02.StringNumberByteDigitsCheck(strMTMR002017, 12)) Then
-                        MessageBox.Show("ロットが12バイトを超えています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                        e.Cancel = True
+            If Not DataGridView001.Editor Is Nothing Then
+                If Not DataGridView001.Editor.Text Is Nothing Then
+                    Dim strMTMR002017 = DataGridView001.Editor.Text
+                    If (Not strMTMR002017 Is DBNull.Value) AndAlso (Not String.IsNullOrEmpty(strMTMR002017)) Then
+                        If (Not Me.Biz02.StringNumberByteDigitsCheck(strMTMR002017, 12)) Then
+                            MessageBox.Show("ロットが12バイトを超えています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                            e.Cancel = True
+                        End If
                     End If
                 End If
             End If
@@ -1331,10 +1385,10 @@ Public Class FormMTM02RegistV2
                             End If
                         End If
                         If (decMTMR002031 = 0.0) Then
-                            DataGridView001.SetData(e.Row, 25, decMTMR002031.ToString("0.0"))
+                            DataGridView001.SetData(e.Row, 25, decMTMR002031.ToString("0.00"))
                             DataGridView001.FinishEditing()
                         Else
-                            DataGridView001.SetData(e.Row, 25, decMTMR002031)
+                            DataGridView001.SetData(e.Row, 25, decMTMR002031.ToString("0.00"))
                             DataGridView001.FinishEditing()
                         End If
                         '新粗利率計算
@@ -1349,7 +1403,7 @@ Public Class FormMTM02RegistV2
                             DataGridView001.SetData(e.Row, 30, decMTMR002036_ARARI.ToString("0.0"))
                             DataGridView001.FinishEditing()
                         Else
-                            DataGridView001.SetData(e.Row, 30, decMTMR002036_ARARI)
+                            DataGridView001.SetData(e.Row, 30, decMTMR002036_ARARI.ToString("0.0"))
                             DataGridView001.FinishEditing()
                         End If
                         '新粗利率アップ計算
@@ -1364,7 +1418,7 @@ Public Class FormMTM02RegistV2
                             DataGridView001.SetData(e.Row, 31, decMTMR002036UP.ToString("0.0"))
                             DataGridView001.FinishEditing()
                         Else
-                            DataGridView001.SetData(e.Row, 31, decMTMR002036UP)
+                            DataGridView001.SetData(e.Row, 31, decMTMR002036UP.ToString("0.0"))
                             DataGridView001.FinishEditing()
                         End If
                     End If
@@ -1399,10 +1453,10 @@ Public Class FormMTM02RegistV2
                             End If
                         End If
                         If (decMTMR002034 = 0.0) Then
-                            DataGridView001.SetData(e.Row, 28, decMTMR002034.ToString("0.0"))
+                            DataGridView001.SetData(e.Row, 28, decMTMR002034.ToString("0.00"))
                             DataGridView001.FinishEditing()
                         Else
-                            DataGridView001.SetData(e.Row, 28, decMTMR002034)
+                            DataGridView001.SetData(e.Row, 28, decMTMR002034.ToString("0.00"))
                             DataGridView001.FinishEditing()
                         End If
                         '新粗利率計算
@@ -1417,7 +1471,7 @@ Public Class FormMTM02RegistV2
                             DataGridView001.SetData(e.Row, 30, decMTMR002036_ARARI.ToString("0.0"))
                             DataGridView001.FinishEditing()
                         Else
-                            DataGridView001.SetData(e.Row, 30, decMTMR002036_ARARI)
+                            DataGridView001.SetData(e.Row, 30, decMTMR002036_ARARI.ToString("0.0"))
                             DataGridView001.FinishEditing()
                         End If
                         '新粗利率アップ計算
@@ -1432,7 +1486,7 @@ Public Class FormMTM02RegistV2
                             DataGridView001.SetData(e.Row, 31, decMTMR002036UP.ToString("0.0"))
                             DataGridView001.FinishEditing()
                         Else
-                            DataGridView001.SetData(e.Row, 31, decMTMR002036UP)
+                            DataGridView001.SetData(e.Row, 31, decMTMR002036UP.ToString("0.0"))
                             DataGridView001.FinishEditing()
                         End If
                         '値上率計算
@@ -1447,7 +1501,7 @@ Public Class FormMTM02RegistV2
                             DataGridView001.SetData(e.Row, 32, decMTMR002037.ToString("0.0"))
                             DataGridView001.FinishEditing()
                         Else
-                            DataGridView001.SetData(e.Row, 32, decMTMR002037)
+                            DataGridView001.SetData(e.Row, 32, decMTMR002037.ToString("0.0"))
                             DataGridView001.FinishEditing()
                         End If
                     End If
@@ -1537,19 +1591,22 @@ Public Class FormMTM02RegistV2
 
         If (Not IsNothing(DataGridView001.RowSel)) Then
             Dim intSelectRow As Integer
+            Dim intSelectCol As Integer
             intSelectRow = DataGridView001.RowSel
-            If (intSelectRow >= 2) Then
+            intSelectCol = DataGridView001.ColSel
+            If (intSelectRow >= 2 And (intSelectCol = 7 OrElse intSelectCol = 10)) Then
                 formSelect.selectMTMR002001 = DataGridView001(intSelectRow, 6).ToString()
                 formSelect.selectMTMR002002 = DataGridView001(intSelectRow, 9).ToString()
                 formSelect.selectMTMR002003 = DataGridView001(intSelectRow, 11).ToString()
+
+
+                Dim result As DialogResult = formSelect.ShowDialog()
+                If result = DialogResult.OK Then
+                End If
+
+                formSelect.Dispose()
             End If
         End If
-
-        Dim result As DialogResult = formSelect.ShowDialog()
-        If result = DialogResult.OK Then
-        End If
-
-        formSelect.Dispose()
     End Sub
     ''' <summary>
     ''' グリッドイベントKeyDown
@@ -1558,19 +1615,142 @@ Public Class FormMTM02RegistV2
     ''' <param name="e"></param>
     Private Sub DataGridView001_KeyDown(sender As Object, e As KeyEventArgs) Handles DataGridView001.KeyDown
         If e.KeyCode = Keys.C AndAlso e.Control Then
-            Me.WindowState = FormWindowState.Normal
-            Me.WindowState = FormWindowState.Maximized
+            'Me.WindowState = FormWindowState.Normal
+            'Me.WindowState = FormWindowState.Maximized
             'DataGridView001.Refresh()
+            If (CheckBox001.Checked) Then
+                CheckBox001.Checked = False
+                CheckBox001.Checked = True
+            Else
+                CheckBox001.Checked = True
+                CheckBox001.Checked = False
+            End If
         End If
+
+        '一括チェック(列ないのF2)
+        'If e.KeyCode = Keys.F2 Then
+        '    If (Not IsNothing(DataGridView001.RowSel)) Then
+        '        Dim intSelectRow As Integer
+        '        Dim intSelectCol As Integer
+        '        intSelectRow = DataGridView001.RowSel
+        '        intSelectCol = DataGridView001.ColSel
+        '        If intSelectRow > 0 AndAlso intSelectCol = 1 Then
+        '            For row As Integer = DataGridView001.Rows.Fixed To DataGridView001.Rows.Count - 1
+        '                DataGridView001.SetCellCheck(row, 1, DataGridView001.GetCellCheck(intSelectRow, intSelectCol))
+        '            Next
+        '        End If
+        '        If intSelectRow > 0 AndAlso intSelectCol = 2 Then
+        '            For row As Integer = DataGridView001.Rows.Fixed To DataGridView001.Rows.Count - 1
+        '                DataGridView001.SetCellCheck(row, 2, DataGridView001.GetCellCheck(intSelectRow, intSelectCol))
+        '            Next
+        '        End If
+        '        If intSelectRow > 0 AndAlso intSelectCol = 51 Then
+        '            For row As Integer = DataGridView001.Rows.Fixed To DataGridView001.Rows.Count - 1
+        '                DataGridView001.SetCellCheck(row, 51, DataGridView001.GetCellCheck(intSelectRow, intSelectCol))
+        '            Next
+        '            'メールが全てTrueならFAXは全てFalseにする（逆も処理も行う）
+        '            Dim checkCol51 = DataGridView001.GetCellCheck(intSelectRow, intSelectCol)
+        '            If (checkCol51 = CheckEnum.Checked) Then
+        '                DataGridView001.SetCellCheck(1, 52, CheckEnum.Unchecked)
+        '                For row As Integer = DataGridView001.Rows.Fixed To DataGridView001.Rows.Count - 1
+        '                    DataGridView001.SetCellCheck(row, 52, CheckEnum.Unchecked)
+        '                Next
+        '            Else
+        '                DataGridView001.SetCellCheck(1, 52, CheckEnum.Checked)
+        '                For row As Integer = DataGridView001.Rows.Fixed To DataGridView001.Rows.Count - 1
+        '                    DataGridView001.SetCellCheck(row, 52, CheckEnum.Checked)
+        '                Next
+        '            End If
+        '        End If
+
+        '        If intSelectRow > 0 AndAlso intSelectCol = 52 Then
+        '            For row As Integer = DataGridView001.Rows.Fixed To DataGridView001.Rows.Count - 1
+        '                DataGridView001.SetCellCheck(row, 52, DataGridView001.GetCellCheck(intSelectRow, intSelectCol))
+        '            Next
+        '            'FAXが全てTrueならメールは全てFalseにする（逆も処理も行う）
+        '            Dim checkCol52 = DataGridView001.GetCellCheck(intSelectRow, intSelectCol)
+        '            If (checkCol52 = CheckEnum.Checked) Then
+        '                DataGridView001.SetCellCheck(1, 51, CheckEnum.Unchecked)
+        '                For row As Integer = DataGridView001.Rows.Fixed To DataGridView001.Rows.Count - 1
+        '                    DataGridView001.SetCellCheck(row, 51, CheckEnum.Unchecked)
+        '                Next
+        '            Else
+        '                DataGridView001.SetCellCheck(1, 51, CheckEnum.Checked)
+        '                For row As Integer = DataGridView001.Rows.Fixed To DataGridView001.Rows.Count - 1
+        '                    DataGridView001.SetCellCheck(row, 51, CheckEnum.Checked)
+        '                Next
+        '            End If
+        '        End If
+        '        If intSelectRow > 0 AndAlso intSelectCol = 51 Then
+        '            Dim checkCol51Val = DataGridView001.GetCellCheck(intSelectRow, intSelectCol)
+        '            If (checkCol51Val = CheckEnum.Checked) Then
+        '                DataGridView001.SetCellCheck(intSelectRow, 52, CheckEnum.Unchecked)
+        '            Else
+        '                DataGridView001.SetCellCheck(intSelectRow, 52, CheckEnum.Checked)
+        '            End If
+        '        End If
+        '        If intSelectRow > 0 AndAlso intSelectCol = 52 Then
+        '            Dim checkCol52Val = DataGridView001.GetCellCheck(intSelectRow, intSelectCol)
+        '            If (checkCol52Val = CheckEnum.Checked) Then
+        '                DataGridView001.SetCellCheck(intSelectRow, 51, CheckEnum.Unchecked)
+        '            Else
+        '                DataGridView001.SetCellCheck(intSelectRow, 51, CheckEnum.Checked)
+        '            End If
+        '        End If
+        '    End If
+        'End If
     End Sub
 
     Private Sub ButtonCopy_Click(sender As Object, e As EventArgs) Handles ButtonCopy.Click
-        DataGridView001.ClipboardCopyMode = ClipboardCopyModeEnum.DataAndAllHeaders
-        Dim cr As CellRange = DataGridView001.GetCellRange(0, 1, DataGridView001.Rows.Count - 1, DataGridView001.Cols.Count - 1)
-        Dim obj As Object = cr.Clip
-        Clipboard.SetDataObject(obj, True)
-        DataGridView001.ClipboardCopyMode = ClipboardCopyModeEnum.DataOnly
-        'DataGridView001.SaveExcel("C:\Temp\test.xlsx", FileFlags.AsDisplayed Or FileFlags.AsDisplayed)
+        ' 選択したセル範囲のCellRangeオブジェクトを取得します
+        Dim cr As C1.Win.C1FlexGrid.CellRange
+        cr = DataGridView001.GetCellRange(0, 1, DataGridView001.Rows.Count - 1, DataGridView001.Cols.Count - 1)
+        Dim StrCopy = ""
+
+        For i = cr.r1 To cr.r2
+            If i <> 1 Then
+                If DataGridView001.Rows(i).Visible = True Then
+                    For j = cr.c1 To cr.c2
+                        If DataGridView001.Cols(j).Visible = True Then
+                            StrCopy = StrCopy & DataGridView001(i, j).ToString()
+
+                            If j <> cr.c2 Then
+                                StrCopy = StrCopy & Microsoft.VisualBasic.Constants.vbTab
+                            End If
+                        End If
+                    Next
+
+                    StrCopy = StrCopy & Microsoft.VisualBasic.Constants.vbLf
+                End If
+            End If
+        Next
+        ' クリップボードに設定します
+        Clipboard.SetDataObject(StrCopy)
+
+        'DataGridView001.ClipboardCopyMode = ClipboardCopyModeEnum.DataAndAllHeaders
+        ''DataGridView001.Rows.Remove(1)
+        'Dim cr As CellRange = DataGridView001.GetCellRange(0, 1, DataGridView001.Rows.Count - 1, DataGridView001.Cols.Count - 1)
+        'Dim obj As Object = cr.Clip
+        'Clipboard.SetDataObject(obj, True)
+        'DataGridView001.ClipboardCopyMode = ClipboardCopyModeEnum.DataOnly
+        ''DataGridView001.SaveExcel("C:\Temp\test.xlsx", FileFlags.AsDisplayed Or FileFlags.AsDisplayed)
+    End Sub
+
+    Private Sub DataGridView001_MouseClick(sender As Object, e As MouseEventArgs) Handles DataGridView001.MouseClick
+        If DataGridView001.HitTest(e.Location).Type = HitTestTypeEnum.FilterIcon Then
+            For Each frm As Form In Application.OpenForms
+                If frm.Name = "FilterEditorForm" AndAlso frm.GetType().ToString() = "C1.Win.C1FlexGrid.FilterEditorForm" Then
+                    Dim wFrm As Integer = 600
+                    frm.MaximumSize = New Size(wFrm, 600)
+                    frm.Width = wFrm
+                    frm.Controls(1).Width = frm.Width
+                End If
+            Next
+        End If
+    End Sub
+
+    Private Sub Label14_Click(sender As Object, e As EventArgs) Handles Label14.Click
+
     End Sub
 End Class
 

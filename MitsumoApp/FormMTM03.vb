@@ -31,6 +31,48 @@ Public Class FormMTM03
         Me.RadioButton004.Checked = True
         Me.TextBox003.Text = Me.FormMenu.ModelMtmUser.MTMM002001.Trim
         Me.TextBox004.Text = Me.FormMenu.ModelMtmUser.MTMM002002
+
+        'TextBox005のLostFocusイベントハンドラを追加する
+        AddHandler TextBox005.LostFocus, AddressOf TextBox005_LostFocus
+        'TextBox009のLostFocusイベントハンドラを追加する
+        AddHandler TextBox009.LostFocus, AddressOf TextBox009_LostFocus
+        'TextBox013のLostFocusイベントハンドラを追加する
+        AddHandler TextBox013.LostFocus, AddressOf TextBox013_LostFocus
+        'TextBox017のLostFocusイベントハンドラを追加する
+        AddHandler TextBox017.LostFocus, AddressOf TextBox017_LostFocus
+
+    End Sub
+    'LostFocusイベントハンドラ
+    Private Sub TextBox005_LostFocus(ByVal sender As Object, ByVal e As EventArgs)
+        If (Not String.IsNullOrEmpty(Trim(Me.TextBox005.Text))) Then
+            If (String.IsNullOrEmpty(Trim(Me.TextBox007.Text))) Then
+                Me.TextBox007.Text = Me.TextBox005.Text
+            End If
+        End If
+    End Sub
+    'LostFocusイベントハンドラ
+    Private Sub TextBox009_LostFocus(ByVal sender As Object, ByVal e As EventArgs)
+        If (Not String.IsNullOrEmpty(Trim(Me.TextBox009.Text))) Then
+            If (String.IsNullOrEmpty(Trim(Me.TextBox011.Text))) Then
+                Me.TextBox011.Text = Me.TextBox009.Text
+            End If
+        End If
+    End Sub
+    'LostFocusイベントハンドラ
+    Private Sub TextBox013_LostFocus(ByVal sender As Object, ByVal e As EventArgs)
+        If (Not String.IsNullOrEmpty(Trim(Me.TextBox013.Text))) Then
+            If (String.IsNullOrEmpty(Trim(Me.TextBox015.Text))) Then
+                Me.TextBox015.Text = Me.TextBox013.Text
+            End If
+        End If
+    End Sub
+    'LostFocusイベントハンドラ
+    Private Sub TextBox017_LostFocus(ByVal sender As Object, ByVal e As EventArgs)
+        If (Not String.IsNullOrEmpty(Trim(Me.TextBox017.Text))) Then
+            If (String.IsNullOrEmpty(Trim(Me.TextBox019.Text))) Then
+                Me.TextBox019.Text = Me.TextBox017.Text
+            End If
+        End If
     End Sub
 
     ''' <summary>
@@ -373,6 +415,7 @@ Public Class FormMTM03
         If result = DialogResult.OK Then
             Me.TextBox001.Text = formSearch.Selected.MTMR003001
             Me.TextBox002.Text = formSearch.Selected.MTMR003002
+            Me.TextBox001.Focus()
         End If
 
         formSearch.Dispose()
@@ -390,6 +433,7 @@ Public Class FormMTM03
         If result = DialogResult.OK Then
             Me.TextBox003.Text = formSearch.Selected.MTMM002001
             Me.TextBox004.Text = formSearch.Selected.MTMM002002
+            Me.TextBox003.Focus()
         End If
 
         formSearch.Dispose()
@@ -407,6 +451,7 @@ Public Class FormMTM03
         If result = DialogResult.OK Then
             Me.TextBox005.Text = formSearch.Selected.HANM036001
             Me.TextBox006.Text = formSearch.Selected.HANM036002
+            Me.TextBox005.Focus()
         End If
 
         formSearch.Dispose()
@@ -424,6 +469,7 @@ Public Class FormMTM03
         If result = DialogResult.OK Then
             Me.TextBox007.Text = formSearch.Selected.HANM036001
             Me.TextBox008.Text = formSearch.Selected.HANM036002
+            Me.TextBox007.Focus()
         End If
 
         formSearch.Dispose()
@@ -441,6 +487,7 @@ Public Class FormMTM03
         If result = DialogResult.OK Then
             Me.TextBox009.Text = formSearch.Selected.HANM015001
             Me.TextBox010.Text = formSearch.Selected.HANM015002
+            Me.TextBox009.Focus()
         End If
 
         formSearch.Dispose()
@@ -458,6 +505,7 @@ Public Class FormMTM03
         If result = DialogResult.OK Then
             Me.TextBox011.Text = formSearch.Selected.HANM015001
             Me.TextBox012.Text = formSearch.Selected.HANM015002
+            Me.TextBox011.Focus()
         End If
 
         formSearch.Dispose()
@@ -475,6 +523,7 @@ Public Class FormMTM03
         If result = DialogResult.OK Then
             Me.TextBox013.Text = formSearch.Selected.HANM004001
             Me.TextBox014.Text = formSearch.Selected.HANM004002
+            Me.TextBox013.Focus()
         End If
 
         formSearch.Dispose()
@@ -492,6 +541,7 @@ Public Class FormMTM03
         If result = DialogResult.OK Then
             Me.TextBox015.Text = formSearch.Selected.HANM004001
             Me.TextBox016.Text = formSearch.Selected.HANM004002
+            Me.TextBox015.Focus()
         End If
 
         formSearch.Dispose()
@@ -509,6 +559,7 @@ Public Class FormMTM03
         If result = DialogResult.OK Then
             Me.TextBox017.Text = formSearch.Selected.HANM001003
             Me.TextBox018.Text = formSearch.Selected.HANM001004
+            Me.TextBox017.Focus()
         End If
 
         formSearch.Dispose()
@@ -526,6 +577,7 @@ Public Class FormMTM03
         If result = DialogResult.OK Then
             Me.TextBox019.Text = formSearch.Selected.HANM001003
             Me.TextBox020.Text = formSearch.Selected.HANM001004
+            Me.TextBox019.Focus()
         End If
 
         formSearch.Dispose()
@@ -543,6 +595,7 @@ Public Class FormMTM03
         If result = DialogResult.OK Then
             Me.TextBox021.Text = formSearch.Selected.HANM036001
             Me.TextBox022.Text = formSearch.Selected.HANM036002
+            Me.TextBox021.Focus()
         End If
 
         formSearch.Dispose()
@@ -560,6 +613,7 @@ Public Class FormMTM03
         If result = DialogResult.OK Then
             Me.TextBox023.Text = formSearch.Selected.HANM036001
             Me.TextBox024.Text = formSearch.Selected.HANM036002
+            Me.TextBox023.Focus()
         End If
 
         formSearch.Dispose()
@@ -577,6 +631,7 @@ Public Class FormMTM03
         If result = DialogResult.OK Then
             Me.TextBox025.Text = formSearch.Selected.HANM036001
             Me.TextBox026.Text = formSearch.Selected.HANM036002
+            Me.TextBox025.Focus()
         End If
 
         formSearch.Dispose()
@@ -594,6 +649,7 @@ Public Class FormMTM03
         If result = DialogResult.OK Then
             Me.TextBox027.Text = formSearch.Selected.HANM036001
             Me.TextBox028.Text = formSearch.Selected.HANM036002
+            Me.TextBox027.Focus()
         End If
 
         formSearch.Dispose()
@@ -611,6 +667,7 @@ Public Class FormMTM03
         If result = DialogResult.OK Then
             Me.TextBox029.Text = formSearch.Selected.HANM036001
             Me.TextBox030.Text = formSearch.Selected.HANM036002
+            Me.TextBox029.Focus()
         End If
 
         formSearch.Dispose()
@@ -628,6 +685,7 @@ Public Class FormMTM03
         If result = DialogResult.OK Then
             Me.TextBox031.Text = formSearch.Selected.HANM036001
             Me.TextBox032.Text = formSearch.Selected.HANM036002
+            Me.TextBox031.Focus()
         End If
 
         formSearch.Dispose()
@@ -645,6 +703,7 @@ Public Class FormMTM03
         If result = DialogResult.OK Then
             Me.TextBox033.Text = formSearch.Selected.HANM015001
             Me.TextBox034.Text = formSearch.Selected.HANM015002
+            Me.TextBox033.Focus()
         End If
 
         formSearch.Dispose()
@@ -662,6 +721,7 @@ Public Class FormMTM03
         If result = DialogResult.OK Then
             Me.TextBox035.Text = formSearch.Selected.HANM015001
             Me.TextBox036.Text = formSearch.Selected.HANM015002
+            Me.TextBox035.Focus()
         End If
 
         formSearch.Dispose()
@@ -679,6 +739,7 @@ Public Class FormMTM03
         If result = DialogResult.OK Then
             Me.TextBox037.Text = formSearch.Selected.HANM015001
             Me.TextBox038.Text = formSearch.Selected.HANM015002
+            Me.TextBox037.Focus()
         End If
 
         formSearch.Dispose()
@@ -696,6 +757,7 @@ Public Class FormMTM03
         If result = DialogResult.OK Then
             Me.TextBox039.Text = formSearch.Selected.HANM015001
             Me.TextBox040.Text = formSearch.Selected.HANM015002
+            Me.TextBox039.Focus()
         End If
 
         formSearch.Dispose()
@@ -713,6 +775,7 @@ Public Class FormMTM03
         If result = DialogResult.OK Then
             Me.TextBox041.Text = formSearch.Selected.HANM015001
             Me.TextBox042.Text = formSearch.Selected.HANM015002
+            Me.TextBox041.Focus()
         End If
 
         formSearch.Dispose()
@@ -730,6 +793,7 @@ Public Class FormMTM03
         If result = DialogResult.OK Then
             Me.TextBox043.Text = formSearch.Selected.HANM015001
             Me.TextBox044.Text = formSearch.Selected.HANM015002
+            Me.TextBox043.Focus()
         End If
 
         formSearch.Dispose()
@@ -747,6 +811,7 @@ Public Class FormMTM03
         If result = DialogResult.OK Then
             Me.TextBox045.Text = formSearch.Selected.HANM004001
             Me.TextBox046.Text = formSearch.Selected.HANM004002
+            Me.TextBox045.Focus()
         End If
 
         formSearch.Dispose()
@@ -764,6 +829,7 @@ Public Class FormMTM03
         If result = DialogResult.OK Then
             Me.TextBox047.Text = formSearch.Selected.HANM004001
             Me.TextBox048.Text = formSearch.Selected.HANM004002
+            Me.TextBox047.Focus()
         End If
 
         formSearch.Dispose()
@@ -781,6 +847,7 @@ Public Class FormMTM03
         If result = DialogResult.OK Then
             Me.TextBox049.Text = formSearch.Selected.HANM004001
             Me.TextBox050.Text = formSearch.Selected.HANM004002
+            Me.TextBox049.Focus()
         End If
 
         formSearch.Dispose()
@@ -798,6 +865,7 @@ Public Class FormMTM03
         If result = DialogResult.OK Then
             Me.TextBox051.Text = formSearch.Selected.HANM004001
             Me.TextBox052.Text = formSearch.Selected.HANM004002
+            Me.TextBox051.Focus()
         End If
 
         formSearch.Dispose()
@@ -815,6 +883,7 @@ Public Class FormMTM03
         If result = DialogResult.OK Then
             Me.TextBox053.Text = formSearch.Selected.HANM004001
             Me.TextBox054.Text = formSearch.Selected.HANM004002
+            Me.TextBox053.Focus()
         End If
 
         formSearch.Dispose()
@@ -832,6 +901,7 @@ Public Class FormMTM03
         If result = DialogResult.OK Then
             Me.TextBox055.Text = formSearch.Selected.HANM004001
             Me.TextBox056.Text = formSearch.Selected.HANM004002
+            Me.TextBox055.Focus()
         End If
 
         formSearch.Dispose()
@@ -849,6 +919,7 @@ Public Class FormMTM03
         If result = DialogResult.OK Then
             Me.TextBox058.Text = formSearch.Selected.HANM001003
             Me.TextBox059.Text = formSearch.Selected.HANM001004
+            Me.TextBox058.Focus()
         End If
 
         formSearch.Dispose()
@@ -866,6 +937,7 @@ Public Class FormMTM03
         If result = DialogResult.OK Then
             Me.TextBox060.Text = formSearch.Selected.HANM001003
             Me.TextBox061.Text = formSearch.Selected.HANM001004
+            Me.TextBox060.Focus()
         End If
 
         formSearch.Dispose()
@@ -883,6 +955,7 @@ Public Class FormMTM03
         If result = DialogResult.OK Then
             Me.TextBox062.Text = formSearch.Selected.HANM001003
             Me.TextBox063.Text = formSearch.Selected.HANM001004
+            Me.TextBox062.Focus()
         End If
 
         formSearch.Dispose()
@@ -900,6 +973,7 @@ Public Class FormMTM03
         If result = DialogResult.OK Then
             Me.TextBox064.Text = formSearch.Selected.HANM001003
             Me.TextBox065.Text = formSearch.Selected.HANM001004
+            Me.TextBox064.Focus()
         End If
 
         formSearch.Dispose()
@@ -917,6 +991,7 @@ Public Class FormMTM03
         If result = DialogResult.OK Then
             Me.TextBox066.Text = formSearch.Selected.HANM001003
             Me.TextBox067.Text = formSearch.Selected.HANM001004
+            Me.TextBox066.Focus()
         End If
 
         formSearch.Dispose()
@@ -934,6 +1009,7 @@ Public Class FormMTM03
         If result = DialogResult.OK Then
             Me.TextBox068.Text = formSearch.Selected.HANM001003
             Me.TextBox069.Text = formSearch.Selected.HANM001004
+            Me.TextBox068.Focus()
         End If
 
         formSearch.Dispose()
@@ -954,10 +1030,6 @@ Public Class FormMTM03
     Private Sub TextBox005_TextChanged(sender As Object, e As EventArgs) Handles TextBox005.TextChanged
         If (String.IsNullOrEmpty(Trim(Me.TextBox005.Text))) Then
             Me.TextBox006.Text = ""
-        Else
-            If (String.IsNullOrEmpty(Trim(Me.TextBox007.Text))) Then
-                Me.TextBox007.Text = Me.TextBox005.Text
-            End If
         End If
     End Sub
 
@@ -970,10 +1042,6 @@ Public Class FormMTM03
     Private Sub TextBox009_TextChanged(sender As Object, e As EventArgs) Handles TextBox009.TextChanged
         If (String.IsNullOrEmpty(Trim(Me.TextBox009.Text))) Then
             Me.TextBox010.Text = ""
-        Else
-            If (String.IsNullOrEmpty(Trim(Me.TextBox011.Text))) Then
-                Me.TextBox011.Text = Me.TextBox009.Text
-            End If
         End If
     End Sub
 
@@ -986,10 +1054,6 @@ Public Class FormMTM03
     Private Sub TextBox013_TextChanged(sender As Object, e As EventArgs) Handles TextBox013.TextChanged
         If (String.IsNullOrEmpty(Trim(Me.TextBox013.Text))) Then
             Me.TextBox014.Text = ""
-        Else
-            If (String.IsNullOrEmpty(Trim(Me.TextBox015.Text))) Then
-                Me.TextBox015.Text = Me.TextBox013.Text
-            End If
         End If
     End Sub
 
@@ -1002,10 +1066,6 @@ Public Class FormMTM03
     Private Sub TextBox017_TextChanged(sender As Object, e As EventArgs) Handles TextBox017.TextChanged
         If (String.IsNullOrEmpty(Trim(Me.TextBox017.Text))) Then
             Me.TextBox018.Text = ""
-        Else
-            If (String.IsNullOrEmpty(Trim(Me.TextBox018.Text))) Then
-                Me.TextBox019.Text = Me.TextBox017.Text
-            End If
         End If
     End Sub
 

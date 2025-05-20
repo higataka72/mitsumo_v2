@@ -158,50 +158,60 @@ Public Class FormMTM06
             body = "株式会社　サンプル産業" + vbCrLf
             body += "サンプル事業部 御中" + vbCrLf
             body += vbCrLf
-            body += "　　お世話になっております。" + vbCrLf
-            body += "　　もりや産業の" + tantouName + "です。" + vbCrLf
+            body += "お世話になっております。" + vbCrLf
+            body += "もりや産業の" + tantouName + "です。" + vbCrLf
             body += vbCrLf
-            body += "　　この度、下記の商品の価格改定がございますので" + vbCrLf
-            body += "　　改定見積書を添付致します。" + vbCrLf
-            body += "　　ご査証いただきますようよろしくお願い致します。" + vbCrLf
+            body += "この度、下記の商品の価格改定がございますので" + vbCrLf
+            body += "改定見積書を添付致します。" + vbCrLf
+            body += "ご査証いただきますようよろしくお願い致します。" + vbCrLf
 
             '前文の内容を埋め込み
+            If (Not String.IsNullOrEmpty(Me.TextBox001.Text)) OrElse
+                    (Not String.IsNullOrEmpty(Me.TextBox002.Text)) OrElse
+                    (Not String.IsNullOrEmpty(Me.TextBox003.Text)) Then
+                body += vbCrLf
+            End If
             If (Not String.IsNullOrEmpty(Me.TextBox001.Text)) Then
-                body += "　　" + Me.TextBox001.Text + vbCrLf
+                body += "" + Me.TextBox001.Text + vbCrLf
             End If
             If (Not String.IsNullOrEmpty(Me.TextBox002.Text)) Then
-                body += "　　" + Me.TextBox002.Text + vbCrLf
+                body += "" + Me.TextBox002.Text + vbCrLf
             End If
-            If (Not String.IsNullOrEmpty(Me.TextBox002.Text)) Then
-                body += "　　" + Me.TextBox002.Text + vbCrLf
+            If (Not String.IsNullOrEmpty(Me.TextBox003.Text)) Then
+                body += "" + Me.TextBox003.Text + vbCrLf
             End If
 
             body += vbCrLf
-            body += "　　　　該当商品：　（テスト用）サンプルテープ　価格改定" + vbCrLf
-            body += "　　　　改定日：　2025年02月20日　受注分より" + vbCrLf
+            body += "該当商品：　（テスト用）サンプルテープ　価格改定" + vbCrLf
+            body += "改定日：　2025年02月20日　受注分より" + vbCrLf
 
             '後文の内容を埋め込み
+            If (Not String.IsNullOrEmpty(Me.TextBox004.Text)) OrElse
+                    (Not String.IsNullOrEmpty(Me.TextBox005.Text)) OrElse
+                    (Not String.IsNullOrEmpty(Me.TextBox006.Text)) Then
+                body += vbCrLf
+            End If
             If (Not String.IsNullOrEmpty(Me.TextBox004.Text)) Then
-                body += "　　　　" + Me.TextBox004.Text + vbCrLf
+                body += "" + Me.TextBox004.Text + vbCrLf
             End If
             If (Not String.IsNullOrEmpty(Me.TextBox005.Text)) Then
-                body += "　　　　" + Me.TextBox005.Text + vbCrLf
+                body += "" + Me.TextBox005.Text + vbCrLf
             End If
             If (Not String.IsNullOrEmpty(Me.TextBox006.Text)) Then
-                body += "　　　　" + Me.TextBox006.Text + vbCrLf
+                body += "" + Me.TextBox006.Text + vbCrLf
             End If
 
             body += vbCrLf
-            body += "　　以上よろしくお願い致します。" + vbCrLf
+            body += "以上よろしくお願い致します。" + vbCrLf
             body += vbCrLf
-            body += "　　--------------------------------" + vbCrLf
-            body += "　　もりや産業株式会社" + vbCrLf
-            body += "　　　　東京支部　営業部" + vbCrLf
-            body += "　　　　" + tantouName + vbCrLf
+            body += "--------------------------------" + vbCrLf
+            body += "もりや産業株式会社" + vbCrLf
+            body += "東京支店　営業部" + vbCrLf
+            body += "もりや　太郎" + vbCrLf
             body += vbCrLf
-            body += "　　　　住所　東京都江東区亀戸３丁目３７番７号" + vbCrLf
-            body += "　　　　TEL.03-5626-6131 FAX.03-5626-3741" + vbCrLf
-            body += "　　　　メール　sample@sample.co.jp" + vbCrLf
+            body += "住所　東京都江東区亀戸３丁目３７番７号" + vbCrLf
+            body += "TEL.03-5626-6131 FAX.03-5626-3741" + vbCrLf
+            body += "メール　sample@moriyas.co.jp" + vbCrLf
 
             Dim formMailPreview As New FormMTMMailPreview
             formMailPreview.RichTextBox001.Text = body

@@ -1,4 +1,5 @@
-﻿Imports AdvanceSoftware.VBReport
+﻿Imports System.IO
+Imports AdvanceSoftware.VBReport
 
 Namespace Biz
     ''' <summary>
@@ -363,24 +364,77 @@ Namespace Biz
                         '見積書ヘッダー作成
                         With CellReport
                             'ヘッダーの出力
-                            .Cell("**Hed01").Value = rec.KakakuNyuuryokuNo + "-" + rec.TokuisakiCode.Trim
+                            .Cell("**Hed01").Value = "M" + rec.KakakuNyuuryokuNo + "-" + rec.TokuisakiCode.Trim
                             .Cell("**PrintedAt").Value = Date.Now.ToString("yyyy/MM/dd")
+
+                            '修正後のCompanyNameの設定
                             Dim tokuisakiName As String
-                            Dim spelling As String = ""
+                            Dim atesakiName As String
+                            Dim spelling1 As String = ""
+                            Dim spelling2 As String = ""
+                            Dim pattern As String = "2"
                             If Not String.IsNullOrEmpty(Trim(rec.AtesakiName)) Then
                                 If rec.AtesakiName.LastIndexOf("様") = (rec.AtesakiName.Length - 1) Then
-                                    tokuisakiName = rec.TokuisakiName1 + "　" + rec.TokuisakiName2 + "　" + rec.AtesakiName
-                                    spelling = ""
+                                    tokuisakiName = rec.TokuisakiName1 + "　" + rec.TokuisakiName2
+                                    atesakiName = rec.AtesakiName
+                                    spelling1 = ""
+                                    spelling2 = ""
+                                    pattern = "1"
                                 Else
-                                    tokuisakiName = rec.TokuisakiName1 + "　" + rec.TokuisakiName2 + "　" + rec.AtesakiName
-                                    spelling = "御中"
+                                    tokuisakiName = rec.TokuisakiName1 + "　" + rec.TokuisakiName2
+                                    atesakiName = rec.AtesakiName
+                                    spelling1 = ""
+                                    spelling2 = "御中"
+                                    pattern = "2"
                                 End If
                             Else
                                 tokuisakiName = rec.TokuisakiName1 + "　" + rec.TokuisakiName2
-                                spelling = "御中"
+                                atesakiName = ""
+                                spelling1 = "御中"
+                                spelling2 = ""
+                                pattern = "3"
                             End If
-                            .Cell("**CompanyName").Value = tokuisakiName
-                            .Cell("**Spelling").Value = spelling
+                            '.Cell("BA6:BF8").Drawing.AddImage(Path.Combine(templatePath, "社印.EMF"))
+                            .Cell("**CompanyName1").Value = tokuisakiName
+                            .Cell("**CompanyName2").Value = atesakiName
+                            If pattern = "1" Then
+                                .Cell("**Spelling1").Value = spelling1
+                                .Cell("**Spelling2").Value = spelling2
+                                '.Cell("C5").Attr.Box(BoxType.Under, BorderStyle.Thin, xlColor.Black)
+                                '.Cell("AE5").Attr.Box(BoxType.Under, BorderStyle.Thin, xlColor.Black)
+                                .Cell("C6").Attr.Box(BoxType.Under, BorderStyle.Thin, xlColor.Black)
+                            ElseIf pattern = "2" Then
+                                .Cell("**Spelling1").Value = spelling1
+                                .Cell("**Spelling2").Value = spelling2
+                                .Cell("C6").Attr.Box(BoxType.Under, BorderStyle.Thin, xlColor.Black)
+                                .Cell("AE6").Attr.Box(BoxType.Under, BorderStyle.Thin, xlColor.Black)
+                                '.Cell("C6").Attr.Box(BoxType.Under, BorderStyle.Thin, xlColor.Black)
+                            ElseIf pattern = "3" Then
+                                .Cell("**Spelling1").Value = spelling1
+                                .Cell("**Spelling2").Value = spelling2
+                                .Cell("C5").Attr.Box(BoxType.Under, BorderStyle.Thin, xlColor.Black)
+                                .Cell("AE5").Attr.Box(BoxType.Under, BorderStyle.Thin, xlColor.Black)
+                            End If
+
+                            '修正前のCompanyNameの設定
+                            'Dim tokuisakiName As String
+                            'Dim spelling As String = ""
+                            'If Not String.IsNullOrEmpty(Trim(rec.AtesakiName)) Then
+                            '    If rec.AtesakiName.LastIndexOf("様") = (rec.AtesakiName.Length - 1) Then
+                            '        tokuisakiName = rec.TokuisakiName1 + "　" + rec.TokuisakiName2 + "　" + rec.AtesakiName
+                            '        spelling = ""
+                            '    Else
+                            '        tokuisakiName = rec.TokuisakiName1 + "　" + rec.TokuisakiName2 + "　" + rec.AtesakiName
+                            '        spelling = "御中"
+                            '    End If
+                            'Else
+                            '    tokuisakiName = rec.TokuisakiName1 + "　" + rec.TokuisakiName2
+                            '    spelling = "御中"
+                            'End If
+                            ''.Cell("BA6:BF8").Drawing.AddImage(Path.Combine(templatePath, "社印.EMF"))
+                            '.Cell("**CompanyName").Value = tokuisakiName
+                            '.Cell("**Spelling").Value = spelling
+
                             .Cell("**FaxNo").Value = rec.AtesakiFaxNo
                             .Cell("**Subject").Value = rec.JitsukouKakakuNyuuryokuName
                             .Cell("**RevisedImplementationDate").Value = rec.NeageDate + "　" + rec.Kaiteijitsusi
@@ -534,32 +588,34 @@ Namespace Biz
                                     .Cell("C" & rowNo).Attr.Box(BoxType.Left, BorderStyle.Thin, xlColor.Black)
                                 Else
                                     .Cell("C" & rowNo).Attr.Box(BoxType.Left, BorderStyle.Thin, xlColor.Black)
-                                    .Cell("C" & rowNo).Attr.Box(BoxType.Over, BorderStyle.Thin, xlColor.Black)
+                                    .Cell("C" & rowNo).Attr.Box(BoxType.Right, BorderStyle.Hair, xlColor.Black)
                                     .Cell("C" & rowNo).Value = detail.RowId
                                 End If
                                 '商品名の列
-                                .Cell("E" & rowNo).Attr.Box(BoxType.Left, BorderStyle.Thin, xlColor.Black)
+                                .Cell("E" & rowNo).Attr.Box(BoxType.Left, BorderStyle.Hair, xlColor.Black)
+                                .Cell("E" & rowNo).Attr.Box(BoxType.Right, BorderStyle.Hair, xlColor.Black)
                                 .Cell("E" & rowNo).Value = detail.SyohinName.Trim
                                 '入数の列
-                                .Cell("Y" & rowNo).Attr.Box(BoxType.Left, BorderStyle.Thin, xlColor.Black)
+                                .Cell("Y" & rowNo).Attr.Box(BoxType.Left, BorderStyle.Hair, xlColor.Black)
+                                .Cell("Y" & rowNo).Attr.Box(BoxType.Right, BorderStyle.Hair, xlColor.Black)
                                 .Cell("Y" & rowNo).Value = detail.Irisu
                                 '単位の列
-                                .Cell("AB" & rowNo).Attr.Box(BoxType.Left, BorderStyle.Thin, xlColor.Black)
+                                .Cell("AB" & rowNo).Attr.Box(BoxType.Left, BorderStyle.Hair, xlColor.Black)
                                 .Cell("AB" & rowNo).Value = detail.Tanni
                                 'ロットの列
-                                .Cell("AE" & rowNo).Attr.Box(BoxType.Left, BorderStyle.Thin, xlColor.Black)
+                                .Cell("AE" & rowNo).Attr.Box(BoxType.Left, BorderStyle.Hair, xlColor.Black)
                                 .Cell("AE" & rowNo).Value = detail.Lot.Trim
                                 '新単価の列
-                                .Cell("AH" & rowNo).Attr.Box(BoxType.Left, BorderStyle.Thin, xlColor.Black)
+                                .Cell("AH" & rowNo).Attr.Box(BoxType.Left, BorderStyle.Hair, xlColor.Black)
                                 .Cell("AH" & rowNo).Value = detail.NewTanka
                                 '旧単価の列
-                                .Cell("AN" & rowNo).Attr.Box(BoxType.Left, BorderStyle.Thin, xlColor.Black)
+                                .Cell("AN" & rowNo).Attr.Box(BoxType.Left, BorderStyle.Hair, xlColor.Black)
                                 .Cell("AN" & rowNo).Value = detail.OldTanka
                                 '最終実績の列
-                                .Cell("AT" & rowNo).Attr.Box(BoxType.Left, BorderStyle.Thin, xlColor.Black)
+                                .Cell("AT" & rowNo).Attr.Box(BoxType.Left, BorderStyle.Hair, xlColor.Black)
                                 .Cell("AT" & rowNo).Value = detail.SaisyuDate
                                 '備考の列
-                                .Cell("AY" & rowNo).Attr.Box(BoxType.Left, BorderStyle.Thin, xlColor.Black)
+                                .Cell("AY" & rowNo).Attr.Box(BoxType.Left, BorderStyle.Hair, xlColor.Black)
                                 .Cell("BN" & rowNo).Attr.Box(BoxType.Right, BorderStyle.Thin, xlColor.Black)
                                 .Cell("AY" & rowNo).Value = detail.Bikou
                                 '納品先履歴を表示するか、行削除するかを判断
@@ -569,24 +625,24 @@ Namespace Biz
                                 Else
                                     '納品先履歴の列
                                     .Cell("C" & rowNo + 1).Attr.Box(BoxType.Left, BorderStyle.Thin, xlColor.Black)
-                                    .Cell("C" & rowNo + 1).Attr.Box(BoxType.Over, BorderStyle.Thin, xlColor.Black)
+                                    .Cell("C" & rowNo + 1).Attr.Box(BoxType.Over, BorderStyle.Hair, xlColor.Black)
                                     .Cell("C" & rowNo + 1).Attr.Box(BoxType.Under, BorderStyle.Thin, xlColor.Black)
                                     .Cell("BN" & rowNo + 1).Attr.Box(BoxType.Right, BorderStyle.Thin, xlColor.Black)
-                                    .Cell("E" & rowNo + 1).Attr.Box(BoxType.Over, BorderStyle.Thin, xlColor.Black)
+                                    .Cell("E" & rowNo + 1).Attr.Box(BoxType.Over, BorderStyle.Hair, xlColor.Black)
                                     .Cell("E" & rowNo + 1).Attr.Box(BoxType.Under, BorderStyle.Thin, xlColor.Black)
                                     .Cell("E" & rowNo + 1).Value = detail.NohinHistory
                                 End If
                                 'ページの最終行なら罫線
                                 If pageMaxNum = detail.PageVal Then
-                                    .Cell("C" & rowNo).Attr.Box(BoxType.Under, BorderStyle.Thin, xlColor.Black)
-                                    .Cell("E" & rowNo).Attr.Box(BoxType.Under, BorderStyle.Thin, xlColor.Black)
-                                    .Cell("Y" & rowNo).Attr.Box(BoxType.Under, BorderStyle.Thin, xlColor.Black)
-                                    .Cell("AB" & rowNo).Attr.Box(BoxType.Under, BorderStyle.Thin, xlColor.Black)
-                                    .Cell("AE" & rowNo).Attr.Box(BoxType.Under, BorderStyle.Thin, xlColor.Black)
-                                    .Cell("AH" & rowNo).Attr.Box(BoxType.Under, BorderStyle.Thin, xlColor.Black)
-                                    .Cell("AN" & rowNo).Attr.Box(BoxType.Under, BorderStyle.Thin, xlColor.Black)
-                                    .Cell("AT" & rowNo).Attr.Box(BoxType.Under, BorderStyle.Thin, xlColor.Black)
-                                    .Cell("AY" & rowNo).Attr.Box(BoxType.Under, BorderStyle.Thin, xlColor.Black)
+                                    .Cell("C" & rowNo).Attr.Box(BoxType.Under, BorderStyle.Hair, xlColor.Black)
+                                    .Cell("E" & rowNo).Attr.Box(BoxType.Under, BorderStyle.Hair, xlColor.Black)
+                                    .Cell("Y" & rowNo).Attr.Box(BoxType.Under, BorderStyle.Hair, xlColor.Black)
+                                    .Cell("AB" & rowNo).Attr.Box(BoxType.Under, BorderStyle.Hair, xlColor.Black)
+                                    .Cell("AE" & rowNo).Attr.Box(BoxType.Under, BorderStyle.Hair, xlColor.Black)
+                                    .Cell("AH" & rowNo).Attr.Box(BoxType.Under, BorderStyle.Hair, xlColor.Black)
+                                    .Cell("AN" & rowNo).Attr.Box(BoxType.Under, BorderStyle.Hair, xlColor.Black)
+                                    .Cell("AT" & rowNo).Attr.Box(BoxType.Under, BorderStyle.Hair, xlColor.Black)
+                                    .Cell("AY" & rowNo).Attr.Box(BoxType.Under, BorderStyle.Hair, xlColor.Black)
                                 End If
                                 rowNo += 2
                             End With
@@ -657,24 +713,77 @@ Namespace Biz
                         '見積書ヘッダー作成
                         With CellReport
                             'ヘッダーの出力
-                            .Cell("**Hed01").Value = rec.KakakuNyuuryokuNo + "-" + rec.TokuisakiCode.Trim
+                            .Cell("**Hed01").Value = "M" + rec.KakakuNyuuryokuNo + "-" + rec.TokuisakiCode.Trim
                             .Cell("**PrintedAt").Value = Date.Now.ToString("yyyy/MM/dd")
+
+                            '修正後のCompanyNameの設定
                             Dim tokuisakiName As String
-                            Dim spelling As String = ""
+                            Dim atesakiName As String
+                            Dim spelling1 As String = ""
+                            Dim spelling2 As String = ""
+                            Dim pattern As String = "2"
                             If Not String.IsNullOrEmpty(Trim(rec.AtesakiName)) Then
                                 If rec.AtesakiName.LastIndexOf("様") = (rec.AtesakiName.Length - 1) Then
-                                    tokuisakiName = rec.TokuisakiName1 + "　" + rec.TokuisakiName2 + "　" + rec.AtesakiName
-                                    spelling = ""
+                                    tokuisakiName = rec.TokuisakiName1 + "　" + rec.TokuisakiName2
+                                    atesakiName = rec.AtesakiName
+                                    spelling1 = ""
+                                    spelling2 = ""
+                                    pattern = "1"
                                 Else
-                                    tokuisakiName = rec.TokuisakiName1 + "　" + rec.TokuisakiName2 + "　" + rec.AtesakiName
-                                    spelling = "御中"
+                                    tokuisakiName = rec.TokuisakiName1 + "　" + rec.TokuisakiName2
+                                    atesakiName = rec.AtesakiName
+                                    spelling1 = ""
+                                    spelling2 = "御中"
+                                    pattern = "2"
                                 End If
                             Else
                                 tokuisakiName = rec.TokuisakiName1 + "　" + rec.TokuisakiName2
-                                spelling = "御中"
+                                atesakiName = ""
+                                spelling1 = "御中"
+                                spelling2 = ""
+                                pattern = "3"
                             End If
-                            .Cell("**CompanyName").Value = tokuisakiName
-                            .Cell("**Spelling").Value = spelling
+                            '.Cell("BA6:BF8").Drawing.AddImage(Path.Combine(templatePath, "社印.EMF"))
+                            .Cell("**CompanyName1").Value = tokuisakiName
+                            .Cell("**CompanyName2").Value = atesakiName
+                            If pattern = "1" Then
+                                .Cell("**Spelling1").Value = spelling1
+                                .Cell("**Spelling2").Value = spelling2
+                                '.Cell("C5").Attr.Box(BoxType.Under, BorderStyle.Thin, xlColor.Black)
+                                '.Cell("AE5").Attr.Box(BoxType.Under, BorderStyle.Thin, xlColor.Black)
+                                .Cell("C6").Attr.Box(BoxType.Under, BorderStyle.Thin, xlColor.Black)
+                            ElseIf pattern = "2" Then
+                                .Cell("**Spelling1").Value = spelling1
+                                .Cell("**Spelling2").Value = spelling2
+                                .Cell("C6").Attr.Box(BoxType.Under, BorderStyle.Thin, xlColor.Black)
+                                .Cell("AE6").Attr.Box(BoxType.Under, BorderStyle.Thin, xlColor.Black)
+                                '.Cell("C6").Attr.Box(BoxType.Under, BorderStyle.Thin, xlColor.Black)
+                            ElseIf pattern = "3" Then
+                                .Cell("**Spelling1").Value = spelling1
+                                .Cell("**Spelling2").Value = spelling2
+                                .Cell("C5").Attr.Box(BoxType.Under, BorderStyle.Thin, xlColor.Black)
+                                .Cell("AE5").Attr.Box(BoxType.Under, BorderStyle.Thin, xlColor.Black)
+                            End If
+
+                            '修正前のCompanyNameの設定
+                            'Dim tokuisakiName As String
+                            'Dim spelling As String = ""
+                            'If Not String.IsNullOrEmpty(Trim(rec.AtesakiName)) Then
+                            '    If rec.AtesakiName.LastIndexOf("様") = (rec.AtesakiName.Length - 1) Then
+                            '        tokuisakiName = rec.TokuisakiName1 + "　" + rec.TokuisakiName2 + "　" + rec.AtesakiName
+                            '        spelling = ""
+                            '    Else
+                            '        tokuisakiName = rec.TokuisakiName1 + "　" + rec.TokuisakiName2 + "　" + rec.AtesakiName
+                            '        spelling = "御中"
+                            '    End If
+                            'Else
+                            '    tokuisakiName = rec.TokuisakiName1 + "　" + rec.TokuisakiName2
+                            '    spelling = "御中"
+                            'End If
+                            ''.Cell("BA6:BF8").Drawing.AddImage(Path.Combine(templatePath, "社印.EMF"))
+                            '.Cell("**CompanyName").Value = tokuisakiName
+                            '.Cell("**Spelling").Value = spelling
+
                             .Cell("**FaxNo").Value = rec.AtesakiFaxNo
                             .Cell("**Subject").Value = rec.JitsukouKakakuNyuuryokuName
                             .Cell("**RevisedImplementationDate").Value = rec.NeageDate + "　" + rec.Kaiteijitsusi
@@ -828,32 +937,34 @@ Namespace Biz
                                     .Cell("C" & rowNo).Attr.Box(BoxType.Left, BorderStyle.Thin, xlColor.Black)
                                 Else
                                     .Cell("C" & rowNo).Attr.Box(BoxType.Left, BorderStyle.Thin, xlColor.Black)
-                                    .Cell("C" & rowNo).Attr.Box(BoxType.Over, BorderStyle.Thin, xlColor.Black)
+                                    .Cell("C" & rowNo).Attr.Box(BoxType.Right, BorderStyle.Hair, xlColor.Black)
                                     .Cell("C" & rowNo).Value = detail.RowId
                                 End If
                                 '商品名の列
-                                .Cell("E" & rowNo).Attr.Box(BoxType.Left, BorderStyle.Thin, xlColor.Black)
+                                .Cell("E" & rowNo).Attr.Box(BoxType.Left, BorderStyle.Hair, xlColor.Black)
+                                .Cell("E" & rowNo).Attr.Box(BoxType.Right, BorderStyle.Hair, xlColor.Black)
                                 .Cell("E" & rowNo).Value = detail.SyohinName.Trim
                                 '入数の列
-                                .Cell("Y" & rowNo).Attr.Box(BoxType.Left, BorderStyle.Thin, xlColor.Black)
+                                .Cell("Y" & rowNo).Attr.Box(BoxType.Left, BorderStyle.Hair, xlColor.Black)
+                                .Cell("Y" & rowNo).Attr.Box(BoxType.Right, BorderStyle.Hair, xlColor.Black)
                                 .Cell("Y" & rowNo).Value = detail.Irisu
                                 '単位の列
-                                .Cell("AB" & rowNo).Attr.Box(BoxType.Left, BorderStyle.Thin, xlColor.Black)
+                                .Cell("AB" & rowNo).Attr.Box(BoxType.Left, BorderStyle.Hair, xlColor.Black)
                                 .Cell("AB" & rowNo).Value = detail.Tanni
                                 'ロットの列
-                                .Cell("AE" & rowNo).Attr.Box(BoxType.Left, BorderStyle.Thin, xlColor.Black)
+                                .Cell("AE" & rowNo).Attr.Box(BoxType.Left, BorderStyle.Hair, xlColor.Black)
                                 .Cell("AE" & rowNo).Value = detail.Lot.Trim
                                 '新単価の列
-                                .Cell("AH" & rowNo).Attr.Box(BoxType.Left, BorderStyle.Thin, xlColor.Black)
+                                .Cell("AH" & rowNo).Attr.Box(BoxType.Left, BorderStyle.Hair, xlColor.Black)
                                 .Cell("AH" & rowNo).Value = detail.NewTanka
                                 '旧単価の列
-                                .Cell("AN" & rowNo).Attr.Box(BoxType.Left, BorderStyle.Thin, xlColor.Black)
+                                .Cell("AN" & rowNo).Attr.Box(BoxType.Left, BorderStyle.Hair, xlColor.Black)
                                 .Cell("AN" & rowNo).Value = detail.OldTanka
                                 '最終実績の列
-                                .Cell("AT" & rowNo).Attr.Box(BoxType.Left, BorderStyle.Thin, xlColor.Black)
+                                .Cell("AT" & rowNo).Attr.Box(BoxType.Left, BorderStyle.Hair, xlColor.Black)
                                 .Cell("AT" & rowNo).Value = detail.SaisyuDate
                                 '備考の列
-                                .Cell("AY" & rowNo).Attr.Box(BoxType.Left, BorderStyle.Thin, xlColor.Black)
+                                .Cell("AY" & rowNo).Attr.Box(BoxType.Left, BorderStyle.Hair, xlColor.Black)
                                 .Cell("BN" & rowNo).Attr.Box(BoxType.Right, BorderStyle.Thin, xlColor.Black)
                                 .Cell("AY" & rowNo).Value = detail.Bikou
                                 '納品先履歴を表示するか、行削除するかを判断
@@ -863,24 +974,24 @@ Namespace Biz
                                 Else
                                     '納品先履歴の列
                                     .Cell("C" & rowNo + 1).Attr.Box(BoxType.Left, BorderStyle.Thin, xlColor.Black)
-                                    .Cell("C" & rowNo + 1).Attr.Box(BoxType.Over, BorderStyle.Thin, xlColor.Black)
+                                    .Cell("C" & rowNo + 1).Attr.Box(BoxType.Over, BorderStyle.Hair, xlColor.Black)
                                     .Cell("C" & rowNo + 1).Attr.Box(BoxType.Under, BorderStyle.Thin, xlColor.Black)
                                     .Cell("BN" & rowNo + 1).Attr.Box(BoxType.Right, BorderStyle.Thin, xlColor.Black)
-                                    .Cell("E" & rowNo + 1).Attr.Box(BoxType.Over, BorderStyle.Thin, xlColor.Black)
+                                    .Cell("E" & rowNo + 1).Attr.Box(BoxType.Over, BorderStyle.Hair, xlColor.Black)
                                     .Cell("E" & rowNo + 1).Attr.Box(BoxType.Under, BorderStyle.Thin, xlColor.Black)
                                     .Cell("E" & rowNo + 1).Value = detail.NohinHistory
                                 End If
                                 'ページの最終行なら罫線
                                 If pageMaxNum = detail.PageVal Then
-                                    .Cell("C" & rowNo).Attr.Box(BoxType.Under, BorderStyle.Thin, xlColor.Black)
-                                    .Cell("E" & rowNo).Attr.Box(BoxType.Under, BorderStyle.Thin, xlColor.Black)
-                                    .Cell("Y" & rowNo).Attr.Box(BoxType.Under, BorderStyle.Thin, xlColor.Black)
-                                    .Cell("AB" & rowNo).Attr.Box(BoxType.Under, BorderStyle.Thin, xlColor.Black)
-                                    .Cell("AE" & rowNo).Attr.Box(BoxType.Under, BorderStyle.Thin, xlColor.Black)
-                                    .Cell("AH" & rowNo).Attr.Box(BoxType.Under, BorderStyle.Thin, xlColor.Black)
-                                    .Cell("AN" & rowNo).Attr.Box(BoxType.Under, BorderStyle.Thin, xlColor.Black)
-                                    .Cell("AT" & rowNo).Attr.Box(BoxType.Under, BorderStyle.Thin, xlColor.Black)
-                                    .Cell("AY" & rowNo).Attr.Box(BoxType.Under, BorderStyle.Thin, xlColor.Black)
+                                    .Cell("C" & rowNo).Attr.Box(BoxType.Under, BorderStyle.Hair, xlColor.Black)
+                                    .Cell("E" & rowNo).Attr.Box(BoxType.Under, BorderStyle.Hair, xlColor.Black)
+                                    .Cell("Y" & rowNo).Attr.Box(BoxType.Under, BorderStyle.Hair, xlColor.Black)
+                                    .Cell("AB" & rowNo).Attr.Box(BoxType.Under, BorderStyle.Hair, xlColor.Black)
+                                    .Cell("AE" & rowNo).Attr.Box(BoxType.Under, BorderStyle.Hair, xlColor.Black)
+                                    .Cell("AH" & rowNo).Attr.Box(BoxType.Under, BorderStyle.Hair, xlColor.Black)
+                                    .Cell("AN" & rowNo).Attr.Box(BoxType.Under, BorderStyle.Hair, xlColor.Black)
+                                    .Cell("AT" & rowNo).Attr.Box(BoxType.Under, BorderStyle.Hair, xlColor.Black)
+                                    .Cell("AY" & rowNo).Attr.Box(BoxType.Under, BorderStyle.Hair, xlColor.Black)
                                 End If
                                 rowNo += 2
                             End With

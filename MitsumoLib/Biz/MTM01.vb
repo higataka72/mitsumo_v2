@@ -673,11 +673,12 @@ Namespace Biz
         ''' ファイルバックアップ
         ''' </summary>
         ''' <returns>String</returns>
-        Public Function BackUpfileMove(targetFile As String) As Boolean
+        Public Function BackUpfileMove(targetFile As String, ByRef errMsg As String) As Boolean
             Dim reMTMM001012 As String = ""
             Dim check As Boolean = False
             Dim dtToday As DateTime = DateTime.Now
             Dim strfileName As String
+            errMsg = ""
 
             Try
                 '取込済データ退避フォルダ取得
@@ -703,13 +704,14 @@ Namespace Biz
                         strfileName = Path.GetFileNameWithoutExtension(targetFile)
                         strfileName = strfileName + dtToday.ToString("yyyyMMddHHmmss") + ".txt"
                         '退避フォルダ移動
-                        File.Move(targetFile, reMTMM001012 + "\\" + strfileName)
+                        File.Move(targetFile, reMTMM001012 + "//" + strfileName)
                         check = True
                     End If
                 End If
 
             Catch ex As Exception
                 check = False
+                errMsg = ex.Message
                 Return check
             Finally
                 Me.connection.Close()
