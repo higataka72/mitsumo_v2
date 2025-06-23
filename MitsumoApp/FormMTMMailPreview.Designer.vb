@@ -137,9 +137,9 @@ Partial Class FormMTMMailPreview
         Me.Label7.Font = New System.Drawing.Font("メイリオ", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.Label7.Location = New System.Drawing.Point(89, 102)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(412, 20)
+        Me.Label7.Size = New System.Drawing.Size(229, 20)
         Me.Label7.TabIndex = 126
-        Me.Label7.Text = "（テスト用）サンプル　セロハンテープ　価格改定　お見積書の送付"
+        Me.Label7.Text = "(｛価格入力名｝)改定お見積書の送付"
         '
         'FormMTMMailPreview
         '

@@ -155,11 +155,11 @@ Public Class FormMTM06
 
             '本文文字列作成
             Dim body As String
-            body = "株式会社　サンプル産業" + vbCrLf
-            body += "サンプル事業部 御中" + vbCrLf
+            body = "｛得意先名｝" + vbCrLf
+            body += "｛得意先名事業所名｝　御中" + vbCrLf
             body += vbCrLf
             body += "お世話になっております。" + vbCrLf
-            body += "もりや産業の" + tantouName + "です。" + vbCrLf
+            body += "もりや産業の｛営業担当者名｝です。" + vbCrLf
             body += vbCrLf
             body += "この度、下記の商品の価格改定がございますので" + vbCrLf
             body += "改定見積書を添付致します。" + vbCrLf
@@ -182,8 +182,8 @@ Public Class FormMTM06
             End If
 
             body += vbCrLf
-            body += "該当商品：　（テスト用）サンプルテープ　価格改定" + vbCrLf
-            body += "改定日：　2025年02月20日　受注分より" + vbCrLf
+            body += "該当商品：｛価格入力名｝" + vbCrLf
+            body += "改定日：　｛改定日分｝より" + vbCrLf
 
             '後文の内容を埋め込み
             If (Not String.IsNullOrEmpty(Me.TextBox004.Text)) OrElse
@@ -206,12 +206,12 @@ Public Class FormMTM06
             body += vbCrLf
             body += "--------------------------------" + vbCrLf
             body += "もりや産業株式会社" + vbCrLf
-            body += "東京支店　営業部" + vbCrLf
-            body += "もりや　太郎" + vbCrLf
+            body += "｛営業担当所属先名｝" + vbCrLf
+            body += "｛営業担当名｝" + vbCrLf
             body += vbCrLf
-            body += "住所　東京都江東区亀戸３丁目３７番７号" + vbCrLf
-            body += "TEL.03-5626-6131 FAX.03-5626-3741" + vbCrLf
-            body += "メール　sample@moriyas.co.jp" + vbCrLf
+            body += "住所　｛営業担当所属先住所｝" + vbCrLf
+            body += "TEL.｛営業担当所属先TEL｝ FAX.｛営業担当所属先FAX｝" + vbCrLf
+            body += "メール　｛営業担当者MAIL｝" + vbCrLf
 
             Dim formMailPreview As New FormMTMMailPreview
             formMailPreview.RichTextBox001.Text = body

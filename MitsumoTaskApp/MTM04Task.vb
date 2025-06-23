@@ -908,7 +908,7 @@ Class MTM04Task
             Log.Info("スクリプト出力...開始")
             Console.WriteLine("スクリプト出力中...")
             Dim fileDirectory As String = Biz04.FileDirectory()
-            Dim OutputErrorList = Biz04.SqlScriptOutput(fileDirectory,
+            Dim OutputErrorList = Biz04.SqlScriptOutput2(fileDirectory,
                                                         SearchCondition.KakakuNyuuryokuNo,
                                                         tableHAN10R006MITSUMORIH,
                                                         tableHAN10R007MITSUMORIM,

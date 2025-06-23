@@ -34,12 +34,14 @@ Namespace Biz
                         command.Connection = Me.connection
                         command.Transaction = transaction
                         '連番管理テーブルをロックして更新
-                        command.CommandText = "SELECT HANC021005 " _
-                                            + "FROM HAN10C021RENBAN "
+                        'command.CommandText = "SELECT HANC021005 " _
+                        '                    + "FROM HAN10C021RENBAN "
+                        command.CommandText = "SELECT MITSUMORI_NO_SEQ " _
+                                            + "FROM MRY_SEQ010 "
                         command.Parameters.Clear()
                         Dim reader As SqlDataReader = command.ExecuteReader
                         If reader.Read = True Then
-                            If Not Decimal.TryParse(reader.Item("HANC021005").ToString(), renbanStart) Then
+                            If Not Decimal.TryParse(reader.Item("MITSUMORI_NO_SEQ").ToString(), renbanStart) Then
                                 errorList.Add("連番管理テーブルから採番できません")
                                 Return errorList
                             End If
@@ -50,7 +52,8 @@ Namespace Biz
                         reader.Close()
 
                         '連番管理テーブルを更新
-                        command.CommandText = "UPDATE HAN10C021RENBAN SET HANC021005 = @HANC021005 "
+                        'command.CommandText = "UPDATE HAN10C021RENBAN SET HANC021005 = @HANC021005 "
+                        command.CommandText = "UPDATE MRY_SEQ010 SET MITSUMORI_NO_SEQ = @HANC021005 "
                         command.Parameters.Clear()
                         command.Parameters.Add(New SqlParameter("@HANC021005", renbanMax))
                         command.ExecuteNonQuery()

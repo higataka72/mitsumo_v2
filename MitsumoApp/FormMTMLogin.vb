@@ -134,13 +134,16 @@ Public Class FormMTMLogin
 
             If fileDate < sevenDaysAgo Then
                 Try
-                    Dim comparison As String = file.FullName
-                    Dim result As Boolean = comparison.Contains("プレビュー")
+                    'Dim comparison As String = file.FullName
+                    'Dim result As Boolean = comparison.Contains("プレビュー")
 
-                    If (result) Then
-                        System.IO.File.Delete(file.FullName)
-                        Console.WriteLine("File deleted: " & file.FullName)
-                    End If
+                    'If (result) Then
+                    '    System.IO.File.Delete(file.FullName)
+                    '    Console.WriteLine("File deleted: " & file.FullName)
+                    'End If
+
+                    System.IO.File.Delete(file.FullName)
+                    Console.WriteLine("File deleted: " & file.FullName)
 
                 Catch ex As Exception
                     Console.WriteLine("Error deleting file: " & ex.Message)

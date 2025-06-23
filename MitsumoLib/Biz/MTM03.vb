@@ -527,7 +527,8 @@ Namespace Biz
 
                 Dim cls = New MTM03Print
                 'Dim ret = cls.Print2(result, outputPath, templatePath, createPdf)
-                Dim ret = cls.PrintPreview(result, outputPath, templatePath, createPdf)
+                'Dim ret = cls.PrintPreview(result, outputPath, templatePath, createPdf)
+                Dim ret = cls.PrintPreview2(result, outputPath, templatePath, createPdf)
 
 
             Catch ex As Exception
@@ -1729,6 +1730,11 @@ Namespace Biz
             Result.ElementList.Add(resultElement)
 
             Dim ret = cls.Print(Result, outputPath, templatePath, fileName)
+            'Dim sendMailNotFlag = True
+            'If sendMailNotFlag Then
+            '    Return errorList
+            '    Exit Function
+            'End If
             'Dim pdfErrorList = Me.OutputAttachmentPdf(kakakuNyuuryokuNo, resultElement, filePath)
             'If pdfErrorList.Count > 0 Then
             '    Return pdfErrorList
@@ -2046,6 +2052,11 @@ Namespace Biz
             Result.ElementList.Add(resultElement)
 
             Dim ret = cls.Print(Result, outputPath, templatePath, fileName)
+            'Dim sendMailNotFlag = True
+            'If sendMailNotFlag Then
+            '    Return errorList
+            '    Exit Function
+            'End If
             'Dim pdfErrorList = Me.OutputAttachmentPdf(kakakuNyuuryokuNo, resultElement, filePath)
             'If pdfErrorList.Count > 0 Then
             '    Return pdfErrorList

@@ -578,12 +578,19 @@ Namespace Biz
                 Me.connection.Open()
                 Using command As New SqlCommand
                     command.Connection = Me.connection
-                    command.CommandText = "SELECT FORMAT(SUM((MTMR002004 * MTMR002030)),'N4') AS PRICE_TOTAL " _
+                    '②mitsumo　見積明細　スプリクト　消費税行の修正依頼
+                    command.CommandText = "SELECT FORMAT(SUM((1 * MTMR002030)),'N0') AS PRICE_TOTAL " _
                                             + "FROM MTM10R002KAKAKU " _
                                             + "WHERE MTMR002080 = @MTMR002080 " _
                                             + "AND (LTRIM(RTRIM(MTMR002085)) != '' AND MTMR002085 IS NOT NULL AND MTMR002085 != '0') " _
                                             + "AND LTRIM(RTRIM(MTMR002001)) =  @MTMR002001 " _
                                             + "AND LTRIM(RTRIM(MTMR002032)) =  @MTMR002032 "
+                    'command.CommandText = "SELECT FORMAT(SUM((MTMR002004 * MTMR002030)),'N4') AS PRICE_TOTAL " _
+                    '                        + "FROM MTM10R002KAKAKU " _
+                    '                        + "WHERE MTMR002080 = @MTMR002080 " _
+                    '                        + "AND (LTRIM(RTRIM(MTMR002085)) != '' AND MTMR002085 IS NOT NULL AND MTMR002085 != '0') " _
+                    '                        + "AND LTRIM(RTRIM(MTMR002001)) =  @MTMR002001 " _
+                    '                        + "AND LTRIM(RTRIM(MTMR002032)) =  @MTMR002032 "
                     command.Parameters.Clear()
                     command.Parameters.Add(New SqlParameter("@MTMR002080", scMTMR002080))
                     command.Parameters.Add(New SqlParameter("@MTMR002001", scMTMR002001))
@@ -863,8 +870,10 @@ Namespace Biz
                         command.Connection = Me.connection
                         command.Transaction = transaction
                         '連番管理テーブルをロックして更新
-                        command.CommandText = "SELECT HANC021002 " _
-                                            + "FROM HAN10C021RENBAN "
+                        'command.CommandText = "SELECT HANC021002 " _
+                        '                    + "FROM HAN10C021RENBAN "
+                        command.CommandText = "SELECT MITSUMORI_NO_SEQ " _
+                                            + "FROM MRY_SEQ010 "
                         command.Parameters.Clear()
                         Dim reader As SqlDataReader = command.ExecuteReader
                         If reader.Read = True Then
@@ -879,7 +888,8 @@ Namespace Biz
                         reader.Close()
 
                         '連番管理テーブルを更新
-                        command.CommandText = "UPDATE HAN10C021RENBAN SET HANC021002 = @HANC021002 "
+                        command.CommandText = "UPDATE MRY_SEQ010 SET MITSUMORI_NO_SEQ = @HANC021002 "
+                        'command.CommandText = "UPDATE HAN10C021RENBAN SET HANC021002 = @HANC021002 "
                         command.Parameters.Clear()
                         command.Parameters.Add(New SqlParameter("@HANC021002", renbanMax))
                         command.ExecuteNonQuery()
@@ -1515,6 +1525,563 @@ Namespace Biz
                     Dim sw2_2 As StreamWriter = New StreamWriter(fileDirectory + "\" + kakakuNo + "_" + fileNameHAN10R030KAKUCHO_M + "_" + dtToday + ".sql", False, System.Text.Encoding.Default)
                     For Each dataRow As DataRow In tableHAN10R030KAKUCHO_M.Rows
                         inserHAN10R030KAKUCHO_M = "INSERT INTO HAN10R030KAKUCHO VALUES ( "
+                        inserHAN10R030KAKUCHO_M += dataRow("HANR030001") + ", "
+                        inserHAN10R030KAKUCHO_M += dataRow("HANR030002") + ", "
+                        inserHAN10R030KAKUCHO_M += dataRow("HANR030003") + ", "
+                        inserHAN10R030KAKUCHO_M += dataRow("HANR030004") + ", "
+                        inserHAN10R030KAKUCHO_M += dataRow("HANR030005") + ", "
+                        inserHAN10R030KAKUCHO_M += dataRow("HANR030006") + ", "
+                        inserHAN10R030KAKUCHO_M += "'" + dataRow("HANR030007") + "', "
+                        If (dataRow("HANR030005") = "0") Then
+                            inserHAN10R030KAKUCHO_M += "'" + dataRow("HANR030008") + "', "
+                        Else
+                            inserHAN10R030KAKUCHO_M += " '', "
+                        End If
+                        inserHAN10R030KAKUCHO_M += "'" + dataRow("HANR030009") + "', "
+                        inserHAN10R030KAKUCHO_M += "'" + dataRow("HANR030010") + "', "
+                        inserHAN10R030KAKUCHO_M += "'" + dataRow("HANR030011") + "', "
+                        inserHAN10R030KAKUCHO_M += "'" + dataRow("HANR030012") + "', "
+                        inserHAN10R030KAKUCHO_M += "'" + dataRow("HANR030013") + "', "
+                        inserHAN10R030KAKUCHO_M += "'" + dataRow("HANR030014") + "', "
+                        inserHAN10R030KAKUCHO_M += "'" + dataRow("HANR030015") + "', "
+                        inserHAN10R030KAKUCHO_M += "'" + dataRow("HANR030016") + "', "
+                        inserHAN10R030KAKUCHO_M += "'" + dataRow("HANR030017") + "', "
+                        inserHAN10R030KAKUCHO_M += "'" + dataRow("HANR030018") + "', "
+                        inserHAN10R030KAKUCHO_M += "'" + dataRow("HANR030019") + "', "
+                        inserHAN10R030KAKUCHO_M += "'" + dataRow("HANR030020") + "', "
+                        inserHAN10R030KAKUCHO_M += "'" + dataRow("HANR030021") + "', "
+                        inserHAN10R030KAKUCHO_M += "'" + dataRow("HANR030022") + "', "
+                        inserHAN10R030KAKUCHO_M += "'" + dataRow("HANR030023") + "', "
+                        inserHAN10R030KAKUCHO_M += "'" + dataRow("HANR030024") + "', "
+                        inserHAN10R030KAKUCHO_M += "'" + dataRow("HANR030025") + "', "
+                        inserHAN10R030KAKUCHO_M += "'" + dataRow("HANR030026") + "', "
+                        inserHAN10R030KAKUCHO_M += dataRow("HANR030999") + ", "
+                        inserHAN10R030KAKUCHO_M += dataRow("HANR030INS") + ", "
+                        inserHAN10R030KAKUCHO_M += dataRow("HANR030UPD")
+                        inserHAN10R030KAKUCHO_M += ");"
+                        sw2_2.Write(inserHAN10R030KAKUCHO_M)
+                        sw2_2.Write(vbCrLf)
+                    Next
+                    sw2_2.Close()
+
+                End If
+
+                If (outputTanka) Then
+                    '数量別単価台帳スクリプト生成
+                    Dim sw3 As StreamWriter = New StreamWriter(fileDirectory + "\" + kakakuNo + "_" + fileNameHAN98MA02SUTANKA + "_" + dtToday + ".sql", False, System.Text.Encoding.Default)
+                    Dim sw3err As StreamWriter = New StreamWriter(fileDirectory + "\" + kakakuNo + "_" + fileNameHAN98MA02SUTANKA_ERR + "_" + dtToday + ".sql", False, System.Text.Encoding.Default)
+                    Dim sw3Rows As Decimal = 0
+                    Dim sw3errRows As Decimal = 0
+                    For Each dataRow As DataRow In tableHAN98MA02SUTANKA.Rows
+                        If DataCheckSutanka(dataRow("HANMA02001"), dataRow("HANMA02002"), dataRow("HANMA02003"), dataRow("HANMA02005")) Then
+                            sw3Rows += 1
+                            updateHAN98MA02SUTANKA = "UPDATE  HAN98MA02SUTANKA SET "
+                            If (Not dataRow("HANMA02009").ToString() = "0") Then
+                                updateHAN98MA02SUTANKA += "HANMA02009 = " + dataRow("HANMA02009") + ","
+                            End If
+                            If (Not dataRow("HANMA02010").ToString() = "0") Then
+                                updateHAN98MA02SUTANKA += "HANMA02010 = " + dataRow("HANMA02010") + ","
+                            End If
+                            If (Not dataRow("HANMA02009").ToString() = 0) Then
+                                updateHAN98MA02SUTANKA += "HANMA02011 = " + dataRow("HANMA02011") + ","
+                            End If
+                            If (Not dataRow("HANMA02010").ToString() = 0) Then
+                                updateHAN98MA02SUTANKA += "HANMA02012 = " + dataRow("HANMA02012") + " "
+                            End If
+                            updateHAN98MA02SUTANKA += "WHERE "
+                            updateHAN98MA02SUTANKA += "HANMA02001 = '" + dataRow("HANMA02001") + "' "
+                            updateHAN98MA02SUTANKA += "AND HANMA02002 = '" + dataRow("HANMA02002") + "' "
+                            updateHAN98MA02SUTANKA += "AND HANMA02003 = '" + dataRow("HANMA02003") + "' "
+                            updateHAN98MA02SUTANKA += "AND HANMA02004 = 0 "
+                            updateHAN98MA02SUTANKA += "AND HANMA02005 = " + dataRow("HANMA02005") + " "
+                            updateHAN98MA02SUTANKA += "AND HANMA02006 = " + dataRow("HANMA02006")
+                            sw3.Write(updateHAN98MA02SUTANKA)
+                            sw3.Write(vbCrLf)
+                        Else
+                            sw3errRows += 1
+                            updateHAN98MA02SUTANKA = "UPDATE  HAN98MA02SUTANKA SET "
+                            If (Not dataRow("HANMA02009").ToString() = "0") Then
+                                updateHAN98MA02SUTANKA += "HANMA02009 = " + dataRow("HANMA02009") + ","
+                            End If
+                            If (Not dataRow("HANMA02010").ToString() = "0") Then
+                                updateHAN98MA02SUTANKA += "HANMA02010 = " + dataRow("HANMA02010") + ","
+                            End If
+                            If (Not dataRow("HANMA02009").ToString() = 0) Then
+                                updateHAN98MA02SUTANKA += "HANMA02011 = " + dataRow("HANMA02011") + ","
+                            End If
+                            If (Not dataRow("HANMA02010").ToString() = 0) Then
+                                updateHAN98MA02SUTANKA += "HANMA02012 = " + dataRow("HANMA02012") + " "
+                            End If
+                            updateHAN98MA02SUTANKA += "WHERE "
+                            updateHAN98MA02SUTANKA += "HANMA02001 = '" + dataRow("HANMA02001") + "' "
+                            updateHAN98MA02SUTANKA += "AND HANMA02002 = '" + dataRow("HANMA02002") + "' "
+                            updateHAN98MA02SUTANKA += "AND HANMA02003 = '" + dataRow("HANMA02003") + "' "
+                            updateHAN98MA02SUTANKA += "AND HANMA02004 = 0 "
+                            updateHAN98MA02SUTANKA += "AND HANMA02005 = " + dataRow("HANMA02005") + " "
+                            updateHAN98MA02SUTANKA += "AND HANMA02006 = " + dataRow("HANMA02006")
+                            sw3err.Write(updateHAN98MA02SUTANKA)
+                            sw3err.Write(vbCrLf)
+                        End If
+                    Next
+                    sw3.Close()
+                    sw3err.Close()
+                    'ゴミファイル削除
+                    If (sw3Rows = 0) Then
+                        File.Delete(fileDirectory + "\" + kakakuNo + "_" + fileNameHAN98MA02SUTANKA + "_" + dtToday + ".sql")
+                    End If
+                    If (sw3errRows = 0) Then
+                        File.Delete(fileDirectory + "\" + kakakuNo + "_" + fileNameHAN98MA02SUTANKA_ERR + "_" + dtToday + ".sql")
+                    End If
+
+                    '単価台帳スクリプト生成
+                    Dim sw4 As StreamWriter = New StreamWriter(fileDirectory + "\" + kakakuNo + "_" + fileNameHAN98MA01TANKA + "_" + dtToday + ".sql", False, System.Text.Encoding.Default)
+                    Dim sw4Rows As Decimal = 0
+                    Dim sw4errRows As Decimal = 0
+                    For Each dataRow As DataRow In tableHAN98MA01TANKA.Rows
+                        If DataCheckTanka(dataRow("HANMA01001"), dataRow("HANMA01002"), dataRow("HANMA01003")) Then
+                            sw4Rows += 1
+                            updateHAN98MA01TANKA = "UPDATE  HAN98MA01TANKA SET "
+                            If (Not dataRow("HANMA01020").ToString() = "0") Then
+                                updateHAN98MA01TANKA += "HANMA01020 = " + dataRow("HANMA01020") + ","
+                            End If
+                            If (Not dataRow("HANMA01021").ToString() = "0") Then
+                                updateHAN98MA01TANKA += "HANMA01021 = " + dataRow("HANMA01021") + ","
+                            End If
+                            updateHAN98MA01TANKA += "HANMA01029 = 0,"
+                            updateHAN98MA01TANKA += "HANMA01030 = 0,"
+                            'updateHAN98MA01TANKA += "HANMA01029 = " + dataRow("HANMA01029") + ","
+                            'updateHAN98MA01TANKA += "HANMA01030 = " + dataRow("HANMA01030") + ","
+                            updateHAN98MA01TANKA += "HANMA01034 = 'BULK UPDATE',"
+                            updateHAN98MA01TANKA += "HANMA01035 = " + dataRow("HANMA01035") + "000000,"
+
+                            updateHAN98MA01TANKA += "HANMA01036 = '" + dataRow("HANMA01036") + "', "
+                            updateHAN98MA01TANKA += "HANMA01038 = " + dataRow("HANMA01029") + ", "
+                            updateHAN98MA01TANKA += "HANMA01039 = " + dataRow("HANMA01030") + ", "
+                            updateHAN98MA01TANKA += "HANMA01UPD = " + dataRow("HANMA01UPD") + " "
+
+                            'updateHAN98MA01TANKA += "HANMA01036 = '" + dataRow("HANMA01036") + "' "
+                            'If (dataRow("HANMA01029") = 0) Then
+                            '    updateHAN98MA01TANKA += ",HANMA01038 = " + dataRow("HANMA01038") + " "
+                            '    updateHAN98MA01TANKA += ",HANMA01039 = " + dataRow("HANMA01039") + " "
+                            '    updateHAN98MA01TANKA += ",HANMA01UPD = " + dataRow("HANMA01UPD") + " "
+                            'End If
+                            updateHAN98MA01TANKA += "WHERE "
+                            updateHAN98MA01TANKA += "HANMA01001 = '" + dataRow("HANMA01001") + "' "
+                            updateHAN98MA01TANKA += "AND HANMA01002 = '" + dataRow("HANMA01002") + "' "
+                            updateHAN98MA01TANKA += "AND HANMA01003 = '" + dataRow("HANMA01003") + "' "
+                            sw4.Write(updateHAN98MA01TANKA)
+                            sw4.Write(vbCrLf)
+                        Else
+                            Dim sw4err As StreamWriter = New StreamWriter(fileDirectory + "\" + kakakuNo + "_" + fileNameHAN98MA01TANKA_ERR +
+                                                                      "_" + dataRow("HANMA01001") +
+                                                                      "_" + dataRow("HANMA01002") +
+                                                                      "_" + dataRow("HANMA01003") +
+                                                                      "_" + dtToday + ".sql", False, System.Text.Encoding.Default)
+                            sw4errRows += 1
+                            updateHAN98MA01TANKA = "UPDATE  HAN98MA01TANKA SET "
+                            If (Not dataRow("HANMA01020").ToString() = "0") Then
+                                updateHAN98MA01TANKA += "HANMA01020 = " + dataRow("HANMA01020") + ","
+                            End If
+                            If (Not dataRow("HANMA01021").ToString() = "0") Then
+                                updateHAN98MA01TANKA += "HANMA01021 = " + dataRow("HANMA01021") + ","
+                            End If
+                            updateHAN98MA01TANKA += "HANMA01029 = 0,"
+                            updateHAN98MA01TANKA += "HANMA01030 = 0,"
+                            'updateHAN98MA01TANKA += "HANMA01029 = " + dataRow("HANMA01029") + ","
+                            'updateHAN98MA01TANKA += "HANMA01030 = " + dataRow("HANMA01030") + ","
+                            updateHAN98MA01TANKA += "HANMA01034 = 'BULK UPDATE',"
+                            updateHAN98MA01TANKA += "HANMA01035 = " + dataRow("HANMA01035") + "000000,"
+
+                            updateHAN98MA01TANKA += "HANMA01036 = '" + dataRow("HANMA01036") + "', "
+                            updateHAN98MA01TANKA += "HANMA01038 = " + dataRow("HANMA01029") + ","
+                            updateHAN98MA01TANKA += "HANMA01039 = " + dataRow("HANMA01030") + ","
+                            updateHAN98MA01TANKA += "HANMA01UPD = " + dataRow("HANMA01UPD") + " "
+
+                            'updateHAN98MA01TANKA += "HANMA01036 = '" + dataRow("HANMA01036") + "' "
+                            'If (dataRow("HANMA01029") = 0) Then
+                            '    updateHAN98MA01TANKA += ",HANMA01038 = " + dataRow("HANMA01038") + " "
+                            '    updateHAN98MA01TANKA += ",HANMA01039 = " + dataRow("HANMA01039") + " "
+                            '    updateHAN98MA01TANKA += ",HANMA01UPD = " + dataRow("HANMA01UPD") + " "
+                            'End If
+                            updateHAN98MA01TANKA += "WHERE "
+                            updateHAN98MA01TANKA += "HANMA01001 = '" + dataRow("HANMA01001") + "' "
+                            updateHAN98MA01TANKA += "AND HANMA01002 = '" + dataRow("HANMA01002") + "' "
+                            updateHAN98MA01TANKA += "AND HANMA01003 = '" + dataRow("HANMA01003") + "' "
+                            sw4err.Write(updateHAN98MA01TANKA)
+                            sw4err.Write(vbCrLf)
+                            sw4err.Close()
+                        End If
+                    Next
+                    sw4.Close()
+                    'ゴミファイル削除
+                    If (sw4Rows = 0) Then
+                        File.Delete(fileDirectory + "\" + kakakuNo + "_" + fileNameHAN98MA01TANKA + "_" + dtToday + ".sql")
+                    End If
+                End If
+            Catch ex As Exception
+                errorList.Add("スクリプトの作成に失敗しました")
+                errorList.Add(ex.Message())
+                Return errorList
+            End Try
+
+            Return errorList
+        End Function
+
+        ''' <summary>
+        ''' スクリプト作成
+        ''' 2025/06/23 ③mitsumo X 新見積システム「韋駄天」の相談にて対応
+        ''' </summary>
+        ''' <param name="fileDirectory"></param>
+        ''' <param name="tableHAN10R006MITSUMORIH"></param>
+        ''' <param name="tableHAN10R007MITSUMORIM"></param>
+        ''' <param name="tableHAN98MA01TANKA"></param>
+        ''' <param name="tableHAN98MA02SUTANKA"></param>
+        ''' <param name="sysError"></param>
+        ''' <returns>List</returns>
+        Public Function SqlScriptOutput2(ByVal fileDirectory As String,
+                                        ByVal kakakuNo As String,
+                                        ByVal tableHAN10R006MITSUMORIH As DataTable,
+                                        ByVal tableHAN10R007MITSUMORIM As DataTable,
+                                        ByVal tableHAN10R030KAKUCHO_H As DataTable,
+                                        ByVal tableHAN10R030KAKUCHO_M As DataTable,
+                                        ByVal tableHAN98MA01TANKA As DataTable,
+                                        ByVal tableHAN98MA02SUTANKA As DataTable,
+                                        ByRef sysError As String,
+                                        ByVal outputTanka As Boolean,
+                                        ByVal outputMitsumori As Boolean) As List(Of String)
+            Dim errorList As New List(Of String)
+
+            Dim insertHAN10R006MITSUMORIH As String
+            Dim fileNameHAN10R007MITSUMORIH As String = "MITSUMORIH_INS"
+            Dim insertHAN10R007MITSUMORIM As String
+            Dim fileNameHAN10R007MITSUMORIM As String = "MITSUMORIM_INS"
+            '明細拡張テーブル（ヘッダ、明細）04/17
+            Dim inserHAN10R030KAKUCHO_H As String
+            Dim fileNameHAN10R030KAKUCHO_H As String = "KAKUCHO_HEADER_INS"
+            Dim inserHAN10R030KAKUCHO_M As String
+            Dim fileNameHAN10R030KAKUCHO_M As String = "KAKUCHO_DETAIL_INS"
+            Dim updateHAN98MA01TANKA As String
+            Dim fileNameHAN98MA01TANKA As String = "TANKA_UPD"
+            Dim fileNameHAN98MA01TANKA_ERR As String = "TANKA_UPD_"
+            Dim updateHAN98MA02SUTANKA As String
+            Dim fileNameHAN98MA02SUTANKA As String = "SUTANKA_UPD"
+            Dim fileNameHAN98MA02SUTANKA_ERR As String = "SUTANKA_UPD_ERR"
+            Dim dtToday = DateTime.Now.ToString("yyyyMMdd")
+            Dim captureToday = DateTime.Now                   '今日日付
+            'Dim captureNo = captureToday.ToString("hhmmssfff")
+
+            'ディレクトリチェック
+            ' 指定したフォルダがあるかどうか確認する
+            If Not Directory.Exists(fileDirectory) Then
+                ' 指定したフォルダ名を作成する
+                Directory.CreateDirectory(fileDirectory)
+            End If
+
+            Try
+                If (outputMitsumori) Then
+                    '見積ヘッダースクリプト生成
+                    Dim sw1 As StreamWriter = New StreamWriter(fileDirectory + "\" + kakakuNo + "_" + fileNameHAN10R007MITSUMORIH + "_" + dtToday + ".sql", False, System.Text.Encoding.Default)
+                    For Each dataRow As DataRow In tableHAN10R006MITSUMORIH.Rows
+                        insertHAN10R006MITSUMORIH = "INSERT INTO MRY_T010 VALUES ( "
+                        insertHAN10R006MITSUMORIH += "'" + dataRow("HANR006001") + "', "
+                        insertHAN10R006MITSUMORIH += dataRow("HANR006002") + ", "
+                        insertHAN10R006MITSUMORIH += dataRow("HANR006003") + ", "
+                        insertHAN10R006MITSUMORIH += dataRow("HANR006004") + ", "
+                        insertHAN10R006MITSUMORIH += dataRow("HANR006005") + ", "
+                        insertHAN10R006MITSUMORIH += "'" + dataRow("HANR006006") + "', "
+                        insertHAN10R006MITSUMORIH += "'" + dataRow("HANR006007") + "', "
+                        insertHAN10R006MITSUMORIH += "'" + dataRow("HANR006008") + "', "
+                        insertHAN10R006MITSUMORIH += "'" + dataRow("HANR006009") + "', "
+                        insertHAN10R006MITSUMORIH += dataRow("HANR006010") + ", "
+                        insertHAN10R006MITSUMORIH += "'" + dataRow("HANR006011") + "', "
+                        insertHAN10R006MITSUMORIH += "'" + dataRow("HANR006012") + "', "
+                        insertHAN10R006MITSUMORIH += dataRow("HANR006013") + ", "
+                        insertHAN10R006MITSUMORIH += "'" + dataRow("HANR006014") + "', "
+                        insertHAN10R006MITSUMORIH += "'" + dataRow("HANR006015") + "', "
+                        insertHAN10R006MITSUMORIH += dataRow("HANR006016") + ", "
+                        insertHAN10R006MITSUMORIH += dataRow("HANR006017") + ", "
+                        insertHAN10R006MITSUMORIH += dataRow("HANR006018") + ", "
+                        insertHAN10R006MITSUMORIH += "'" + dataRow("HANR006019") + "', "
+                        insertHAN10R006MITSUMORIH += "'" + dataRow("HANR006020") + "', "
+                        insertHAN10R006MITSUMORIH += "'" + dataRow("HANR006021") + "', "
+                        insertHAN10R006MITSUMORIH += "'" + dataRow("HANR006022") + "', "
+                        insertHAN10R006MITSUMORIH += "'" + dataRow("HANR006023") + "', "
+                        insertHAN10R006MITSUMORIH += "'" + dataRow("HANR006024") + "', "
+                        insertHAN10R006MITSUMORIH += "'" + dataRow("HANR006025") + "', "
+                        insertHAN10R006MITSUMORIH += dataRow("HANR006026") + ", "
+                        insertHAN10R006MITSUMORIH += dataRow("HANR006027") + ", "
+                        insertHAN10R006MITSUMORIH += dataRow("HANR006028") + ", "
+                        insertHAN10R006MITSUMORIH += dataRow("HANR006029") + ", "
+                        insertHAN10R006MITSUMORIH += dataRow("HANR006030") + ", "
+                        insertHAN10R006MITSUMORIH += dataRow("HANR006031") + ", "
+                        insertHAN10R006MITSUMORIH += dataRow("HANR006032") + ", "
+                        insertHAN10R006MITSUMORIH += dataRow("HANR006033") + ", "
+                        insertHAN10R006MITSUMORIH += dataRow("HANR006034") + ", "
+                        insertHAN10R006MITSUMORIH += dataRow("HANR006035") + ", "
+                        insertHAN10R006MITSUMORIH += dataRow("HANR006036") + ", "
+                        insertHAN10R006MITSUMORIH += dataRow("HANR006037") + ", "
+                        insertHAN10R006MITSUMORIH += dataRow("HANR006038") + ", "
+                        insertHAN10R006MITSUMORIH += dataRow("HANR006039") + ", "
+                        insertHAN10R006MITSUMORIH += "'" + dataRow("HANR006040") + "', "
+                        insertHAN10R006MITSUMORIH += "'" + dataRow("HANR006041") + "', "
+                        insertHAN10R006MITSUMORIH += "'" + dataRow("HANR006042") + "', "
+                        insertHAN10R006MITSUMORIH += "'" + dataRow("HANR006043") + "', "
+                        insertHAN10R006MITSUMORIH += dataRow("HANR006044") + ", "
+                        insertHAN10R006MITSUMORIH += "'" + dataRow("HANR006045") + "', "
+                        insertHAN10R006MITSUMORIH += dataRow("HANR006046") + ", "
+                        insertHAN10R006MITSUMORIH += dataRow("HANR006047") + ", "
+                        insertHAN10R006MITSUMORIH += dataRow("HANR006999") + ", "
+                        insertHAN10R006MITSUMORIH += dataRow("HANR006048") + ", "
+                        insertHAN10R006MITSUMORIH += dataRow("HANR006049") + ", "
+                        insertHAN10R006MITSUMORIH += dataRow("HANR006050") + ", "
+                        insertHAN10R006MITSUMORIH += dataRow("HANR006051") + ", "
+                        insertHAN10R006MITSUMORIH += "'" + dataRow("HANR006052") + "', "
+                        insertHAN10R006MITSUMORIH += "'" + dataRow("HANR006053") + "', "
+                        insertHAN10R006MITSUMORIH += dataRow("HANR006911") + ", "
+                        insertHAN10R006MITSUMORIH += dataRow("HANR006914") + ", "
+                        insertHAN10R006MITSUMORIH += dataRow("HANR006915") + ", "
+                        insertHAN10R006MITSUMORIH += "'" + dataRow("HANR006916") + "', "
+                        insertHAN10R006MITSUMORIH += "'" + dataRow("HANR006917") + "', "
+                        insertHAN10R006MITSUMORIH += dataRow("HANR006918") + ", "
+                        insertHAN10R006MITSUMORIH += "'" + dataRow("HANR006919") + "', "
+                        insertHAN10R006MITSUMORIH += dataRow("HANR006INS") + ", "
+                        insertHAN10R006MITSUMORIH += dataRow("HANR006UPD") + ", "
+                        insertHAN10R006MITSUMORIH += dataRow("HANR006054") + ", "
+                        insertHAN10R006MITSUMORIH += dataRow("HANR006055") + ", "
+                        insertHAN10R006MITSUMORIH += dataRow("HANR006056") + ", "
+                        insertHAN10R006MITSUMORIH += dataRow("HANR006057") + ", "
+                        insertHAN10R006MITSUMORIH += dataRow("HANR006058") + ", "
+                        insertHAN10R006MITSUMORIH += dataRow("HANR006059") + ", "
+                        insertHAN10R006MITSUMORIH += dataRow("HANR006060") + ", "
+                        insertHAN10R006MITSUMORIH += dataRow("HANR006061") + ", "
+                        insertHAN10R006MITSUMORIH += dataRow("HANR006062") + ", "
+                        insertHAN10R006MITSUMORIH += dataRow("HANR006063") + ", "
+                        insertHAN10R006MITSUMORIH += dataRow("HANR006064") + ", "
+                        insertHAN10R006MITSUMORIH += dataRow("HANR006065") + ", "
+                        insertHAN10R006MITSUMORIH += dataRow("HANR006066") + ", "
+                        insertHAN10R006MITSUMORIH += dataRow("HANR006067") + ", "
+                        insertHAN10R006MITSUMORIH += "'" + dataRow("HANR006A001") + "', "
+                        insertHAN10R006MITSUMORIH += dataRow("HANR006A002") + ", "
+                        insertHAN10R006MITSUMORIH += dataRow("HANR006A003") + ", "
+                        insertHAN10R006MITSUMORIH += dataRow("HANR006A004") + ", "
+                        insertHAN10R006MITSUMORIH += "'" + dataRow("HANR006A005") + "', "
+                        insertHAN10R006MITSUMORIH += "'" + dataRow("HANR006A006") + "', "
+                        insertHAN10R006MITSUMORIH += "'" + dataRow("HANR006A007") + "', "
+                        insertHAN10R006MITSUMORIH += "'" + dataRow("HANR006A008") + "', "
+                        insertHAN10R006MITSUMORIH += "'" + dataRow("HANR006A009") + "', "
+                        insertHAN10R006MITSUMORIH += "'" + dataRow("HANR006A010") + "', "
+                        insertHAN10R006MITSUMORIH += dataRow("HANR006A011") + ", "
+                        insertHAN10R006MITSUMORIH += dataRow("HANR006A012") + ", "
+                        insertHAN10R006MITSUMORIH += dataRow("HANR006A013") + ", "
+                        insertHAN10R006MITSUMORIH += dataRow("HANR006A014") + ", "
+                        insertHAN10R006MITSUMORIH += "'" + dataRow("HANR006A015") + "', "
+                        insertHAN10R006MITSUMORIH += dataRow("HANR006A016") + ", "
+                        insertHAN10R006MITSUMORIH += dataRow("HANR006A017") + ", "
+                        insertHAN10R006MITSUMORIH += dataRow("HANR006A018") + ", "
+                        insertHAN10R006MITSUMORIH += dataRow("HANR006A019") + ", "
+                        insertHAN10R006MITSUMORIH += "'" + dataRow("HANR006A020") + "', "
+                        insertHAN10R006MITSUMORIH += "'" + dataRow("HANR006A021") + "', "
+                        insertHAN10R006MITSUMORIH += dataRow("HANR006A022") + ", "
+                        insertHAN10R006MITSUMORIH += "'" + dataRow("HANR006A023") + "', "
+                        insertHAN10R006MITSUMORIH += "'" + dataRow("HANR006A024") + "', "
+                        insertHAN10R006MITSUMORIH += dataRow("HANR006A025") + ", "
+                        insertHAN10R006MITSUMORIH += "'" + dataRow("HANR006A026") + "', "
+                        insertHAN10R006MITSUMORIH += "'" + dataRow("HANR006A027") + "', "
+                        insertHAN10R006MITSUMORIH += dataRow("HANR006A028") + ", "
+                        insertHAN10R006MITSUMORIH += dataRow("HANR006A029") + ", "
+                        insertHAN10R006MITSUMORIH += dataRow("HANR006A030") + ", "
+                        insertHAN10R006MITSUMORIH += dataRow("HANR006A031") + ", "
+                        insertHAN10R006MITSUMORIH += dataRow("HANR006A032") + ", "
+                        insertHAN10R006MITSUMORIH += dataRow("HANR006A033") + ", "
+                        insertHAN10R006MITSUMORIH += dataRow("HANR006A034") + ", "
+                        insertHAN10R006MITSUMORIH += dataRow("HANR006A035") + ", "
+                        insertHAN10R006MITSUMORIH += dataRow("HANR006A036") + ", "
+                        insertHAN10R006MITSUMORIH += "'" + dataRow("HANR006A037") + "', "
+                        insertHAN10R006MITSUMORIH += "'" + dataRow("HANR006A038") + "', "
+                        insertHAN10R006MITSUMORIH += "'" + dataRow("HANR006A039") + "', "
+                        insertHAN10R006MITSUMORIH += "'" + dataRow("HANR006A040") + "', "
+                        insertHAN10R006MITSUMORIH += "'" + dataRow("HANR006A041") + "', "
+                        insertHAN10R006MITSUMORIH += "'" + dataRow("HANR006A042") + "', "
+                        insertHAN10R006MITSUMORIH += "'" + dataRow("HANR006A043") + "', "
+                        insertHAN10R006MITSUMORIH += "'" + dataRow("HANR006A044") + "', "
+                        insertHAN10R006MITSUMORIH += "'" + dataRow("HANR006A045") + "', "
+                        insertHAN10R006MITSUMORIH += "'" + dataRow("HANR006A046") + "', "
+                        insertHAN10R006MITSUMORIH += "'" + dataRow("HANR006A047") + "', "
+                        insertHAN10R006MITSUMORIH += "'" + dataRow("HANR006A048") + "', "
+                        insertHAN10R006MITSUMORIH += "'" + dataRow("HANR006A049") + "', "
+                        insertHAN10R006MITSUMORIH += "'" + dataRow("HANR006A050") + "', "
+                        insertHAN10R006MITSUMORIH += "'" + dataRow("HANR006A051") + "', "
+                        insertHAN10R006MITSUMORIH += "'" + dataRow("HANR006A052") + "', "
+                        insertHAN10R006MITSUMORIH += "'" + dataRow("HANR006A053") + "', "
+                        insertHAN10R006MITSUMORIH += "'" + dataRow("HANR006A054") + "', "
+                        insertHAN10R006MITSUMORIH += "'" + dataRow("HANR006A055") + "', "
+                        insertHAN10R006MITSUMORIH += "'" + dataRow("HANR006A056") + "', "
+                        insertHAN10R006MITSUMORIH += "'" + dataRow("HANR006A057") + "', "
+                        insertHAN10R006MITSUMORIH += "'" + dataRow("HANR006A058") + "', "
+                        insertHAN10R006MITSUMORIH += "'" + dataRow("HANR006A059") + "', "
+                        insertHAN10R006MITSUMORIH += "'" + dataRow("HANR006A060") + "', "
+                        insertHAN10R006MITSUMORIH += "'" + dataRow("HANR006A061") + "', "
+                        insertHAN10R006MITSUMORIH += "'" + dataRow("HANR006A062") + "', "
+                        insertHAN10R006MITSUMORIH += "'" + dataRow("HANR006A063") + "', "
+                        insertHAN10R006MITSUMORIH += "'" + dataRow("HANR006A064") + "', "
+                        insertHAN10R006MITSUMORIH += "'" + dataRow("HANR006A065") + "', "
+                        insertHAN10R006MITSUMORIH += "'" + dataRow("HANR006A066") + "', "
+                        insertHAN10R006MITSUMORIH += dataRow("HANR006A067")
+                        insertHAN10R006MITSUMORIH += ");"
+                        sw1.Write(insertHAN10R006MITSUMORIH)
+                        sw1.Write(vbCrLf)
+                    Next
+                    sw1.Close()
+
+                    '明細拡張テーブル（ヘッダー）スクリプト生成
+                    Dim sw1_2 As StreamWriter = New StreamWriter(fileDirectory + "\" + kakakuNo + "_" + fileNameHAN10R030KAKUCHO_H + "_" + dtToday + ".sql", False, System.Text.Encoding.Default)
+                    For Each dataRow As DataRow In tableHAN10R030KAKUCHO_H.Rows
+                        inserHAN10R030KAKUCHO_H = "INSERT INTO MRY_T012 VALUES ( "
+                        inserHAN10R030KAKUCHO_H += dataRow("HANR030001") + ", "
+                        inserHAN10R030KAKUCHO_H += dataRow("HANR030002") + ", "
+                        inserHAN10R030KAKUCHO_H += dataRow("HANR030003") + ", "
+                        inserHAN10R030KAKUCHO_H += dataRow("HANR030004") + ", "
+                        inserHAN10R030KAKUCHO_H += dataRow("HANR030005") + ", "
+                        inserHAN10R030KAKUCHO_H += dataRow("HANR030006") + ", "
+                        inserHAN10R030KAKUCHO_H += "'" + dataRow("HANR030007") + "', "
+                        inserHAN10R030KAKUCHO_H += "'" + dataRow("HANR030008") + "', "
+                        inserHAN10R030KAKUCHO_H += "'" + dataRow("HANR030009") + "', "
+                        inserHAN10R030KAKUCHO_H += "'" + dataRow("HANR030010") + "', "
+                        inserHAN10R030KAKUCHO_H += "'" + dataRow("HANR030011") + "', "
+                        inserHAN10R030KAKUCHO_H += "'" + dataRow("HANR030012") + "', "
+                        inserHAN10R030KAKUCHO_H += "'" + dataRow("HANR030013") + "', "
+                        inserHAN10R030KAKUCHO_H += "'" + dataRow("HANR030014") + "', "
+                        inserHAN10R030KAKUCHO_H += "'" + dataRow("HANR030015") + "', "
+                        'inserHAN10R030KAKUCHO_H += "'" + dataRow("HANR030016") + "', "
+                        inserHAN10R030KAKUCHO_H += "'05', "
+                        inserHAN10R030KAKUCHO_H += "'" + dataRow("HANR030017") + "', "
+                        inserHAN10R030KAKUCHO_H += "'" + dataRow("HANR030018") + "', "
+                        inserHAN10R030KAKUCHO_H += "'" + dataRow("HANR030019") + "', "
+                        inserHAN10R030KAKUCHO_H += "'" + dataRow("HANR030020") + "', "
+                        inserHAN10R030KAKUCHO_H += "'" + dataRow("HANR030021") + "', "
+                        inserHAN10R030KAKUCHO_H += "'" + dataRow("HANR030022") + "', "
+                        inserHAN10R030KAKUCHO_H += "'" + dataRow("HANR030023") + "', "
+                        inserHAN10R030KAKUCHO_H += "'" + dataRow("HANR030024") + "', "
+                        inserHAN10R030KAKUCHO_H += "'" + dataRow("HANR030025") + "', "
+                        inserHAN10R030KAKUCHO_H += "'" + dataRow("HANR030026") + "', "
+                        inserHAN10R030KAKUCHO_H += dataRow("HANR030999") + ", "
+                        inserHAN10R030KAKUCHO_H += dataRow("HANR030INS") + ", "
+                        inserHAN10R030KAKUCHO_H += dataRow("HANR030UPD")
+                        inserHAN10R030KAKUCHO_H += ");"
+                        sw1_2.Write(inserHAN10R030KAKUCHO_H)
+                        sw1_2.Write(vbCrLf)
+                    Next
+                    sw1_2.Close()
+
+                    '見積明細テーブル用のスクリプト生成
+                    Dim sw2 As StreamWriter = New StreamWriter(fileDirectory + "\" + kakakuNo + "_" + fileNameHAN10R007MITSUMORIM + "_" + dtToday + ".sql", False, System.Text.Encoding.Default)
+                    For Each dataRow As DataRow In tableHAN10R007MITSUMORIM.Rows
+                        insertHAN10R007MITSUMORIM = "INSERT INTO MRY_T011 VALUES ( "
+                        insertHAN10R007MITSUMORIM += dataRow("HANR007001") + ", "
+                        insertHAN10R007MITSUMORIM += dataRow("HANR007002") + ", "
+                        insertHAN10R007MITSUMORIM += dataRow("HANR007003") + ", "
+                        insertHAN10R007MITSUMORIM += dataRow("HANR007004") + ", "
+                        insertHAN10R007MITSUMORIM += dataRow("HANR007005") + ", "
+                        insertHAN10R007MITSUMORIM += "'" + dataRow("HANR007006") + "', "
+                        insertHAN10R007MITSUMORIM += "'" + dataRow("HANR007007") + "', "
+                        insertHAN10R007MITSUMORIM += "'" + dataRow("HANR007008") + "', "
+                        insertHAN10R007MITSUMORIM += dataRow("HANR007009") + ", "
+                        insertHAN10R007MITSUMORIM += dataRow("HANR007010") + ", "
+                        insertHAN10R007MITSUMORIM += "'" + dataRow("HANR007011") + "', "
+                        insertHAN10R007MITSUMORIM += dataRow("HANR007012") + ", "
+                        insertHAN10R007MITSUMORIM += dataRow("HANR007013") + ", "
+                        insertHAN10R007MITSUMORIM += dataRow("HANR007014") + ", "
+                        insertHAN10R007MITSUMORIM += dataRow("HANR007015") + ", "
+                        insertHAN10R007MITSUMORIM += dataRow("HANR007016") + ", "
+                        insertHAN10R007MITSUMORIM += dataRow("HANR007017") + ", "
+                        insertHAN10R007MITSUMORIM += dataRow("HANR007018") + ", "
+                        insertHAN10R007MITSUMORIM += dataRow("HANR007019") + ", "
+                        insertHAN10R007MITSUMORIM += dataRow("HANR007020") + ", "
+                        insertHAN10R007MITSUMORIM += dataRow("HANR007021") + ", "
+                        insertHAN10R007MITSUMORIM += dataRow("HANR007022") + ", "
+                        insertHAN10R007MITSUMORIM += dataRow("HANR007023") + ", "
+                        insertHAN10R007MITSUMORIM += dataRow("HANR007024") + ", "
+                        insertHAN10R007MITSUMORIM += dataRow("HANR007025") + ", "
+                        insertHAN10R007MITSUMORIM += dataRow("HANR007026") + ", "
+                        insertHAN10R007MITSUMORIM += dataRow("HANR007027") + ", "
+                        insertHAN10R007MITSUMORIM += dataRow("HANR007028") + ", "
+                        insertHAN10R007MITSUMORIM += "'" + dataRow("HANR007029") + "', "
+                        insertHAN10R007MITSUMORIM += "'" + dataRow("HANR007030") + "', "
+                        insertHAN10R007MITSUMORIM += "'" + dataRow("HANR007031") + "', "
+                        insertHAN10R007MITSUMORIM += "'" + dataRow("HANR007032") + "', "
+                        insertHAN10R007MITSUMORIM += "'" + dataRow("HANR007033") + "', "
+                        insertHAN10R007MITSUMORIM += dataRow("HANR007034") + ", "
+                        insertHAN10R007MITSUMORIM += dataRow("HANR007035") + ", "
+                        insertHAN10R007MITSUMORIM += dataRow("HANR007036") + ", "
+                        insertHAN10R007MITSUMORIM += "'" + dataRow("HANR007037") + "', "
+                        insertHAN10R007MITSUMORIM += "'" + dataRow("HANR007038") + "', "
+                        insertHAN10R007MITSUMORIM += "'" + dataRow("HANR007039") + "', "
+                        insertHAN10R007MITSUMORIM += "'" + dataRow("HANR007040") + "', "
+                        insertHAN10R007MITSUMORIM += "'" + dataRow("HANR007041") + "', "
+                        insertHAN10R007MITSUMORIM += dataRow("HANR007042") + ", "
+                        insertHAN10R007MITSUMORIM += dataRow("HANR007999") + ", "
+                        insertHAN10R007MITSUMORIM += dataRow("HANR007043") + ", "
+                        insertHAN10R007MITSUMORIM += "'" + dataRow("HANR007044") + "', "
+                        insertHAN10R007MITSUMORIM += "'" + dataRow("HANR007045") + "', "
+                        insertHAN10R007MITSUMORIM += "'" + dataRow("HANR007046") + "', "
+                        insertHAN10R007MITSUMORIM += "'" + dataRow("HANR007047") + "', "
+                        insertHAN10R007MITSUMORIM += "'" + dataRow("HANR007048") + "', "
+                        insertHAN10R007MITSUMORIM += "'" + dataRow("HANR007049") + "', "
+                        insertHAN10R007MITSUMORIM += dataRow("HANR007050") + ", "
+                        insertHAN10R007MITSUMORIM += dataRow("HANR007051") + ", "
+                        insertHAN10R007MITSUMORIM += dataRow("HANR007052") + ", "
+                        insertHAN10R007MITSUMORIM += dataRow("HANR007INS") + ", "
+                        insertHAN10R007MITSUMORIM += dataRow("HANR007UPD") + ", "
+                        insertHAN10R007MITSUMORIM += dataRow("HANR007053") + ", "
+                        insertHAN10R007MITSUMORIM += dataRow("HANR007054") + ", "
+                        insertHAN10R007MITSUMORIM += dataRow("HANR007055") + ", "
+                        insertHAN10R007MITSUMORIM += dataRow("HANR007056") + ", "
+                        insertHAN10R007MITSUMORIM += dataRow("HANR007057") + ", "
+                        insertHAN10R007MITSUMORIM += dataRow("HANR007058") + ", "
+                        insertHAN10R007MITSUMORIM += dataRow("HANR007059") + ", "
+                        insertHAN10R007MITSUMORIM += dataRow("HANR007060") + ", "
+                        insertHAN10R007MITSUMORIM += dataRow("HANR007061") + ", "
+                        insertHAN10R007MITSUMORIM += dataRow("HANR007062") + ", "
+                        insertHAN10R007MITSUMORIM += "'" + dataRow("HANR007063") + "', "
+                        insertHAN10R007MITSUMORIM += dataRow("HANR007A001") + ", "
+                        insertHAN10R007MITSUMORIM += "'" + dataRow("HANR007A002") + "', "
+                        insertHAN10R007MITSUMORIM += "'" + dataRow("HANR007A003") + "', "
+                        insertHAN10R007MITSUMORIM += "'" + dataRow("HANR007A004") + "', "
+                        insertHAN10R007MITSUMORIM += "'" + dataRow("HANR007A005") + "', "
+                        insertHAN10R007MITSUMORIM += dataRow("HANR007A006") + ", "
+                        insertHAN10R007MITSUMORIM += dataRow("HANR007A007") + ", "
+                        insertHAN10R007MITSUMORIM += dataRow("HANR007A008") + ", "
+                        insertHAN10R007MITSUMORIM += dataRow("HANR007A009") + ", "
+                        insertHAN10R007MITSUMORIM += dataRow("HANR007A010") + ", "
+                        insertHAN10R007MITSUMORIM += dataRow("HANR007A011") + ", "
+                        insertHAN10R007MITSUMORIM += "'" + dataRow("HANR007A012") + "', "
+                        insertHAN10R007MITSUMORIM += dataRow("HANR007A013") + ", "
+                        insertHAN10R007MITSUMORIM += dataRow("HANR007A014") + ", "
+                        insertHAN10R007MITSUMORIM += dataRow("HANR007A015") + ", "
+                        insertHAN10R007MITSUMORIM += "'" + dataRow("HANR007A016") + "', "
+                        insertHAN10R007MITSUMORIM += "'" + dataRow("HANR007A017") + "', "
+                        insertHAN10R007MITSUMORIM += "'" + dataRow("HANR007A018") + "',"
+                        '10項目を追加
+                        insertHAN10R007MITSUMORIM += "' ',"
+                        insertHAN10R007MITSUMORIM += "' ',"
+                        insertHAN10R007MITSUMORIM += "' ',"
+                        insertHAN10R007MITSUMORIM += "' ',"
+                        insertHAN10R007MITSUMORIM += "' ',"
+                        insertHAN10R007MITSUMORIM += "'0.000',"
+                        insertHAN10R007MITSUMORIM += "'0.000',"
+                        insertHAN10R007MITSUMORIM += "'0.000',"
+                        insertHAN10R007MITSUMORIM += "'0.000',"
+                        insertHAN10R007MITSUMORIM += "'0.000'"
+                        insertHAN10R007MITSUMORIM += ");"
+                        sw2.Write(insertHAN10R007MITSUMORIM)
+                        sw2.Write(vbCrLf)
+                    Next
+                    sw2.Close()
+
+                    '明細拡張テーブル（明細）スクリプト生成
+                    Dim sw2_2 As StreamWriter = New StreamWriter(fileDirectory + "\" + kakakuNo + "_" + fileNameHAN10R030KAKUCHO_M + "_" + dtToday + ".sql", False, System.Text.Encoding.Default)
+                    For Each dataRow As DataRow In tableHAN10R030KAKUCHO_M.Rows
+                        inserHAN10R030KAKUCHO_M = "INSERT INTO MRY_T012 VALUES ( "
                         inserHAN10R030KAKUCHO_M += dataRow("HANR030001") + ", "
                         inserHAN10R030KAKUCHO_M += dataRow("HANR030002") + ", "
                         inserHAN10R030KAKUCHO_M += dataRow("HANR030003") + ", "

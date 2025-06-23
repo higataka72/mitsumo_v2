@@ -1040,7 +1040,7 @@ Public Class FormMTM04
             '------------------------
             dialogProgress.Message = "スクリプト出力中"
             Dim fileDirectory As String = Me.TextBox013.Text
-            Dim OutputErrorList = Me.Biz04.SqlScriptOutput(fileDirectory,
+            Dim OutputErrorList = Me.Biz04.SqlScriptOutput2(fileDirectory,
                                                            Me.SearchCondition.KakakuNyuuryokuNo,
                                                            tableHAN10R006MITSUMORIH,
                                                            tableHAN10R007MITSUMORIM,

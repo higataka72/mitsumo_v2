@@ -46,7 +46,7 @@ Partial Class FormMTMMenu
         Me.LabelVer.Name = "LabelVer"
         Me.LabelVer.Size = New System.Drawing.Size(65, 18)
         Me.LabelVer.TabIndex = 2
-        Me.LabelVer.Text = "ver : 2.05"
+        Me.LabelVer.Text = "ver : 2.12"
         '
         'ButtonUser
         '
