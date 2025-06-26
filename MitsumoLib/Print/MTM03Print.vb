@@ -331,6 +331,9 @@ Namespace Biz
             'PrintItem.PrintType = "見積書" '出力時のファイル名
             PrintItem.PrintType = createPdf '出力時のファイル名
 
+            Dim PageTotalNumber As Integer = 1
+            Dim PageNumber As Integer = 1
+
             'テンプレートファイルのチェック
 
             PrintItem.TemplateFilePath = PrintCommon.CombineFolderAndFile(1, PrintItem)
@@ -352,7 +355,7 @@ Namespace Biz
 
                     Dim totalCount As Double = 0
                     For Each rec As MTM03SearchResultElement In result.ElementList
-
+                        PageNumber = 1
                         totalCount += 1
                         'If totalCount <> 3 Then
                         '    Continue For
@@ -557,6 +560,9 @@ Namespace Biz
 
                         Next
 
+                        '合計ページ数を設定
+                        PageTotalNumber = pageCounter
+
                         '見積書明細
                         Dim rowNo = 16
                         Dim targetPage As Integer = 1
@@ -565,6 +571,8 @@ Namespace Biz
                             '改ページ判断
                             If detail.PageNo <> targetPage Then  '１ページ以外
                                 If detail.PageNo <> 1 Then
+                                    'ページを付ける
+                                    PageNumber += 1
                                     'ページ替え処理
                                     rowNo = 5
                                     CellReport.Page.End()
@@ -582,6 +590,9 @@ Namespace Biz
                                                 .Select(Function(n) n.PageVal).Max()
 
                             With CellReport
+
+                                'ページカウンターを付ける
+                                '.Cell("**page").Value = PageNumber & "/" & PageTotalNumber
 
                                 'Noの列
                                 If detail.RowId = 0 Then
@@ -1024,7 +1035,7 @@ Namespace Biz
             'プリント設定
             PrintItem.ErrorCode = ""  'エラーコードを初期化
             PrintItem.TemplateDirectory = templatePath 'テンプレートファイルパス
-            PrintItem.TemplateFileName = "MTM03Preview.xlsx"  'テンプレートファイル名
+            PrintItem.TemplateFileName = "MTM03.xlsx"  'テンプレートファイル名
 
             PrintItem.OutputDirectory = outputPath
             PrintItem.PrintType = "見積書" '出力時のファイル名
@@ -1290,7 +1301,7 @@ Namespace Biz
                             With CellReport
 
                                 'ページカウンターを付ける
-                                .Cell("**page").Value = PageNumber & "/" & PageTotalNumber
+                                '.Cell("**page").Value = PageNumber & "/" & PageTotalNumber
 
                                 'Noの列
                                 If detail.RowId = 0 Then
