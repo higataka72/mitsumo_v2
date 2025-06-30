@@ -117,7 +117,8 @@ Namespace Biz
                 Me.connection.Open()
                 Using command As New SqlCommand
                     command.Connection = Me.connection
-                    command.CommandText = "SELECT * FROM HAN10C021RENBAN"
+                    'command.CommandText = "SELECT * FROM HAN10C021RENBAN"
+                    command.CommandText = "SELECT * FROM MRY_SEQ010"
                     Dim reader As SqlDataReader = command.ExecuteReader
                     If reader.Read = True Then
                         result = True
