@@ -53,9 +53,12 @@ Namespace Biz
 
                         '連番管理テーブルを更新
                         'command.CommandText = "UPDATE HAN10C021RENBAN SET HANC021005 = @HANC021005 "
-                        command.CommandText = "UPDATE MRY_SEQ010 SET MITSUMORI_NO_SEQ = @HANC021005 "
+                        command.CommandText = "UPDATE MRY_SEQ010 SET MITSUMORI_NO_SEQ = @HANC021005, UPDATE_DATE = @UPDATE_DATE, UPDATE_USER_ID = @UPDATE_USER_ID "
                         command.Parameters.Clear()
                         command.Parameters.Add(New SqlParameter("@HANC021005", renbanMax))
+                        command.Parameters.Add(New SqlParameter("@UPDATE_DATE", DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss.fffffff")))
+                        'command.Parameters.Add(New SqlParameter("@UPDATE_DATE", DateTime.Now))
+                        command.Parameters.Add(New SqlParameter("@UPDATE_USER_ID", "MITSUMO"))
                         command.ExecuteNonQuery()
 
                         transaction.Commit()

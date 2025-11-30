@@ -284,7 +284,12 @@
         ''' 変更履歴 最終更新操作時刻
         ''' </summary>
         ''' <returns></returns>
-        Public Property HANR006915 As Decimal
+        Public Property HANR006915 As String
+        '''' <summary>
+        '''' 変更履歴 最終更新操作時刻
+        '''' </summary>
+        '''' <returns></returns>
+        'Public Property HANR006915 As Decimal
         ''' <summary>
         ''' 変更履歴 最終更新ログインID
         ''' </summary>

@@ -399,7 +399,7 @@ Public Class FormMTM04
                 '成約日時(価格入力データの見積書送付フラグ（日付）をセット)
                 han10r007mitsumorim.HANR007A011 = conditionsDetailDate  　　　　　　　　　　　'成約日時
                 '成約者ID(起動時のログインIDをセット)
-                han10r007mitsumorim.HANR007A012 = "BULK UPDATE"  　　　'成約者ID
+                han10r007mitsumorim.HANR007A012 = "MITSUMO"  　　　'成約者ID
                 'han10r007mitsumorim.HANR007A013 = rowTanka("MTMR002019").ToString().Trim()   '見積数量（ロット）
                 han10r007mitsumorim.HANR007A013 = Me.Biz04.LotProcessAnswer(tableMTM10R001TANKA _
                                                                            , rowTanka("MTMR002001").ToString().Trim() _
@@ -688,7 +688,7 @@ Public Class FormMTM04
                     han10r006mitsumorih.HANR006005 = dtToday.ToString("yyyyMMdd") '操作日付(年月日)
                     'ログインＩＤ(起動時のログインIDをセット)
                     'han10r006mitsumorih.HANR006006 = Me.FormMenu.ModelMtmUser.MTMM002001 'ログインＩＤ
-                    han10r006mitsumorih.HANR006006 = "BULK UPDATE" 'ログインＩＤ
+                    han10r006mitsumorih.HANR006006 = "MITSUMO" 'ログインＩＤ
                     '0パディング対応
                     Dim intHANR006007 As Integer = 0
                     Dim strHANR006007 As String = rowTanka("MTMR002012").ToString()
@@ -703,19 +703,25 @@ Public Class FormMTM04
                         strHANR006008 = intHANR006008.ToString("D6")
                     End If
                     han10r006mitsumorih.HANR006008 = strHANR006008 '部課コード
-                    han10r006mitsumorih.HANR006009 = "000000" '納品先コード(04/15)
+                    han10r006mitsumorih.HANR006009 = "" '納品先コード(04/15)
                     han10r006mitsumorih.HANR006010 = "0" '納期日(年月日)
                     han10r006mitsumorih.HANR006011 = " " '納期(手入力)
                     '支払条件(７－２．支払条件のセットについて) ☆課題10
                     han10r006mitsumorih.HANR006012 = Me.Biz04.PaymentTermsSearch(rowTanka("MTMR002001").ToString().Trim())
                     han10r006mitsumorih.HANR006013 = "0" '有効期限(年月日)
                     han10r006mitsumorih.HANR006014 = "見積日より１カ月" '有効期限(手入力)
+                    'mtm10r004renkei.MTMR004003 = Me.Biz04.DeliveryConvert(mtm10r004renkei.MTMR004003)
+                    'If (mtm10r004renkei.MTMR004003.Length > 36) Then
+                    '    mtm10r004renkei.MTMR004003 = mtm10r004renkei.MTMR004003.Substring(0, 36)
+                    'End If
                     han10r006mitsumorih.HANR006015 = mtm10r004renkei.MTMR004003 '要件
+                    'han10r006mitsumorih.HANR006015 = mtm10r004renkei.MTMR004003 '要件
                     han10r006mitsumorih.HANR006016 = "0" '消費税計算区分
                     '消費税率の引き当て
                     '-新税率実施日＞新単価更新日（売）の時、旧税率
                     '-新税率実施日≦新単価更新日（売）の時、新税率
-                    han10r006mitsumorih.HANR006017 = han10r007mitsumorim.HANR007025  '消費税率
+                    han10r006mitsumorih.HANR006017 = "0.00"  '消費税率
+                    'han10r006mitsumorih.HANR006017 = han10r007mitsumorim.HANR007025  '消費税率
                     '見積書行数
                     han10r006mitsumorih.HANR006018 = Me.Biz04.GetDataPriceSpecify(mtm10r004renkei.MTMR004002 _
                                                                                 , rowTanka("MTMR002001").ToString().Trim() _
@@ -812,11 +818,19 @@ Public Class FormMTM04
                     han10r006mitsumorih.HANR006053 = " "  '原価集計サブコード
                     han10r006mitsumorih.HANR006911 = "0"  '履歴№
                     han10r006mitsumorih.HANR006914 = dtToday.ToString("yyyyMMdd")  '最終更新操作日付
-                    han10r006mitsumorih.HANR006915 = dtToday.ToString("HHmmss")  '最終更新操作時刻
+                    han10r006mitsumorih.HANR006915 = dtToday.ToString("yyyyMMddHHmmss.fff")  '最終更新操作時刻
+                    If Not String.IsNullOrEmpty(han10r006mitsumorih.HANR006915) Then
+                        han10r006mitsumorih.HANR006915 = han10r006mitsumorih.HANR006915.Substring(8)
+                        'コンマを除去
+                        han10r006mitsumorih.HANR006915 = han10r006mitsumorih.HANR006915.Replace(".", "")
+                    End If
+                    'han10r006mitsumorih.HANR006915 = dtToday.ToString("HHmmss.fff")  '最終更新操作時刻
+                    'han10r006mitsumorih.HANR006915 = dtToday.ToString("HHmmss")  '最終更新操作時刻
                     '最終更新ログインID(起動時のログインIDをセット)
                     'han10r006mitsumorih.HANR006916 = Me.FormMenu.ModelMtmUser.MTMM002001 '最終更新ログインID
-                    han10r006mitsumorih.HANR006916 = "BULK UPDATE" '最終更新ログインID
-                    han10r006mitsumorih.HANR006917 = "OSK.X1.HAN.A00080" '操作プログラムID
+                    han10r006mitsumorih.HANR006916 = "MITSUMO" '最終更新ログインID
+                    han10r006mitsumorih.HANR006917 = "MITSUMO" '操作プログラムID
+                    'han10r006mitsumorih.HANR006917 = "OSK.X1.HAN.A00080" '操作プログラムID
                     han10r006mitsumorih.HANR006918 = "0" '操作プログラムID枝番
                     han10r006mitsumorih.HANR006919 = "MOBILE9999X" '操作コンピュータ名
                     '日付設定(整数:西暦年月日時分秒 小数:ミリ秒)
@@ -838,7 +852,7 @@ Public Class FormMTM04
                     han10r006mitsumorih.HANR006066 = "0" '消費税分類
                     han10r006mitsumorih.HANR006067 = "0" '副税率優先採用区分
                     '作成者ID(起動時のログインIDをセット)
-                    han10r006mitsumorih.HANR006A001 = "BULK UPDATE" '作成者ID
+                    han10r006mitsumorih.HANR006A001 = "MITSUMO" '作成者ID
                     han10r006mitsumorih.HANR006A002 = "2" '見積種別
                     han10r006mitsumorih.HANR006A003 = rowTanka("MTMR002032").ToString() '単価変更日付（売上）
                     han10r006mitsumorih.HANR006A004 = rowTanka("MTMR002035").ToString() '単価変更日付（仕入）
@@ -846,16 +860,18 @@ Public Class FormMTM04
                     han10r006mitsumorih.HANR006A005 = Me.Biz04.FareSearch(mtm10r004renkei.MTMR004002)
                     han10r006mitsumorih.HANR006A006 = "10002" '備考コード(04/15)
                     han10r006mitsumorih.HANR006A007 = "以上、よろしくお願い申し上げます。" '備考
-                    han10r006mitsumorih.HANR006A008 = "0" '社内メモコード
+                    han10r006mitsumorih.HANR006A008 = "99999" '社内メモコード
+                    'han10r006mitsumorih.HANR006A008 = "0" '社内メモコード
                     han10r006mitsumorih.HANR006A009 = "mitsumo" '社内メモ
                     han10r006mitsumorih.HANR006A010 = " " '添付フォルダパス
-                    han10r006mitsumorih.HANR006A011 = "0" '成約行数
+                    han10r006mitsumorih.HANR006A011 = han10r006mitsumorih.HANR006018 '成約行数
+                    'han10r006mitsumorih.HANR006A011 = "0" '成約行数
                     '単価台帳参照行数
                     han10r006mitsumorih.HANR006A012 = han10r006mitsumorih.HANR006018
                     han10r006mitsumorih.HANR006A013 = "1" '成約区分
                     han10r006mitsumorih.HANR006A014 = conditionsDetailDate2 '成約日時
                     '成約者ID(起動時のログインIDをセット)
-                    han10r006mitsumorih.HANR006A015 = "BULK UPDATE" '成約者ID
+                    han10r006mitsumorih.HANR006A015 = "MITSUMO" '成約者ID
                     han10r006mitsumorih.HANR006A016 = "0" '見積書印刷日時
                     han10r006mitsumorih.HANR006A017 = "0" '見積書送信区分
                     han10r006mitsumorih.HANR006A018 = "0" '見積書個別編集区分
@@ -863,13 +879,13 @@ Public Class FormMTM04
                     han10r006mitsumorih.HANR006A020 = " " '見積書送信者ID
                     '登録者ID(起動時のログインIDをセット)
                     'han10r006mitsumorih.HANR006A021 = Me.FormMenu.ModelMtmUser.MTMM002001 '登録者ID
-                    han10r006mitsumorih.HANR006A021 = "BULK UPDATE" '登録者ID
+                    han10r006mitsumorih.HANR006A021 = "MITSUMO" '登録者ID
                     '日付設定(整数:西暦年月日時分秒 小数:ミリ秒)
                     han10r006mitsumorih.HANR006A022 = dtToday.ToString("yyyyMMddHHmmss.fff") '登録日時
                     han10r006mitsumorih.HANR006A023 = "MOBILE9999X" '登録端末
                     '更新者ID(起動時のログインIDをセット)
                     'han10r006mitsumorih.HANR006A024 = Me.FormMenu.ModelMtmUser.MTMM002001 '更新者ID
-                    han10r006mitsumorih.HANR006A024 = "BULK UPDATE" '更新者ID
+                    han10r006mitsumorih.HANR006A024 = "MITSUMO" '更新者ID
                     '日付設定(整数:西暦年月日時分秒 小数:ミリ秒)
                     han10r006mitsumorih.HANR006A025 = dtToday.ToString("yyyyMMddHHmmss.fff") '更新日時
                     han10r006mitsumorih.HANR006A026 = "MOBILE9999X" '更新端末

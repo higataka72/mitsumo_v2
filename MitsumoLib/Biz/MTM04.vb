@@ -888,10 +888,13 @@ Namespace Biz
                         reader.Close()
 
                         '連番管理テーブルを更新
-                        command.CommandText = "UPDATE MRY_SEQ010 SET MITSUMORI_NO_SEQ = @HANC021002 "
+                        command.CommandText = "UPDATE MRY_SEQ010 SET MITSUMORI_NO_SEQ = @HANC021002, UPDATE_DATE = @UPDATE_DATE, UPDATE_USER_ID = @UPDATE_USER_ID "
                         'command.CommandText = "UPDATE HAN10C021RENBAN SET HANC021002 = @HANC021002 "
                         command.Parameters.Clear()
                         command.Parameters.Add(New SqlParameter("@HANC021002", renbanMax))
+                        command.Parameters.Add(New SqlParameter("@UPDATE_DATE", DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss.fffffff")))
+                        'command.Parameters.Add(New SqlParameter("@UPDATE_DATE", DateTime.Now))
+                        command.Parameters.Add(New SqlParameter("@UPDATE_USER_ID", "MITSUMO"))
                         command.ExecuteNonQuery()
 
                         Dim rowsMitsumoriM As DataRow()
