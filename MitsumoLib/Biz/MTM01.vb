@@ -367,6 +367,7 @@ Namespace Biz
                             + ", MTMR003005" _ '一斉送信日時
                             + ", MTMR003006" _ '更新日時
                             + ", MTMR003007" _ '締切日
+                            + ", MTMR003023" _ '仕入先実施日
                             + ", MTMR003008" _ '運賃の指定
                             + ", MTMR003009" _ '案内文
                             + ", MTMR003010" _ '取込元ファイル名
@@ -390,6 +391,7 @@ Namespace Biz
                             + ", @MTMR003005" _
                             + ", @MTMR003006" _
                             + ", @MTMR003007" _
+                            + ", @MTMR003023" _
                             + ", @MTMR003008" _
                             + ", @MTMR003009" _
                             + ", @MTMR003010" _
@@ -416,6 +418,7 @@ Namespace Biz
                         command.Parameters.Add(New SqlParameter("@MTMR003005", mtm10r003jitsukou.MTMR003005 + mtm10r003jitsukou.MTMR003005_2))
                         command.Parameters.Add(New SqlParameter("@MTMR003006", mtm10r003jitsukou.MTMR003006 + mtm10r003jitsukou.MTMR003006_2))
                         command.Parameters.Add(New SqlParameter("@MTMR003007", mtm10r003jitsukou.MTMR003007))
+                        command.Parameters.Add(New SqlParameter("@MTMR003023", mtm10r003jitsukou.MTMR003023))
                         command.Parameters.Add(New SqlParameter("@MTMR003008", mtm10r003jitsukou.MTMR003008))
                         command.Parameters.Add(New SqlParameter("@MTMR003009", mtm10r003jitsukou.MTMR003009))
                         command.Parameters.Add(New SqlParameter("@MTMR003010", mtm10r003jitsukou.MTMR003010))
@@ -554,7 +557,7 @@ Namespace Biz
                 Using command As New SqlCommand
                     command.Connection = Me.connection
                     command.CommandText = "SELECT " _
-                                        + "JTK.MTMR003001, JTK.MTMR003002, JTK.MTMR003003, JTK.MTMR003004, JTK.MTMR003005, JTK.MTMR003006, JTK.MTMR003007, " _
+                                        + "JTK.MTMR003001, JTK.MTMR003002, JTK.MTMR003003, JTK.MTMR003004, JTK.MTMR003005, JTK.MTMR003006, JTK.MTMR003007, JTK.MTMR003023, " _
                                         + "JTK.MTMR003008, JTK.MTMR003009, JTK.MTMR003010, JTK.MTMR003011, JTK.MTMR003012, JTK.MTMR003013, JTK.MTMR003014, " _
                                         + "JTK.MTMR003015, JTK.MTMR003016, JTK.MTMR003017, JTK.MTMR003021, JTK.MTMR003022 " _
                                         + "FROM MTM10R003JITSUKOU JTK " _
@@ -572,6 +575,7 @@ Namespace Biz
                         reMTM10R003JITSUKOU.MTMR003005 = reader.Item("MTMR003005").ToString()      '一斉送信日時
                         reMTM10R003JITSUKOU.MTMR003006 = reader.Item("MTMR003006").ToString()      '更新日時
                         reMTM10R003JITSUKOU.MTMR003007 = reader.Item("MTMR003007").ToString()      '締切日
+                        reMTM10R003JITSUKOU.MTMR003023 = reader.Item("MTMR003023").ToString()      '仕入先実施日
                         reMTM10R003JITSUKOU.MTMR003021 = reader.Item("MTMR003021").ToString()      '改定実施日
                         reMTM10R003JITSUKOU.MTMR003008 = reader.Item("MTMR003008").ToString()      '運賃の指定
                         reMTM10R003JITSUKOU.MTMR003009 = reader.Item("MTMR003009").ToString()      '案内文

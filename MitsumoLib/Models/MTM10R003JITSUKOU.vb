@@ -120,6 +120,11 @@
         ''' </summary>
         ''' <returns></returns>
         Public Property MTMR003021 As String
+        ''' <summary>
+        ''' 仕入先実施日
+        ''' </summary>
+        ''' <returns></returns>
+        Public Property MTMR003023 As String
 
     End Class
 End Namespace

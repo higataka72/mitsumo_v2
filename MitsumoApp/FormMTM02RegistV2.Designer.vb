@@ -143,9 +143,9 @@ Partial Class FormMTM02RegistV2
         Me.Label4.Font = New System.Drawing.Font("メイリオ", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.Label4.Location = New System.Drawing.Point(9, 63)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(58, 24)
+        Me.Label4.Size = New System.Drawing.Size(90, 24)
         Me.Label4.TabIndex = 25
-        Me.Label4.Text = "締切日"
+        Me.Label4.Text = "社内締切日"
         '
         'TextBox005
         '

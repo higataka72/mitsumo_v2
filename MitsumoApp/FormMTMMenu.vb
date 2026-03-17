@@ -48,6 +48,7 @@ Public Class FormMTMMenu
         Me.ButtonMTM02.Visible = True
         Me.ButtonMTM03.Visible = True
         Me.ButtonMTM06.Visible = True
+        Me.ButtonMTM07.Visible = True
         '管理者
         Me.ButtonMTM01.Visible = False
         Me.ButtonMTM04.Visible = False
@@ -67,6 +68,7 @@ Public Class FormMTMMenu
         Me.ButtonMTM02.Visible = False
         Me.ButtonMTM03.Visible = False
         Me.ButtonMTM06.Visible = False
+        Me.ButtonMTM07.Visible = False
         '管理者
         Me.ButtonMTM01.Visible = True
         Me.ButtonMTM04.Visible = True
@@ -86,6 +88,7 @@ Public Class FormMTMMenu
         Me.ButtonMTM02.Visible = True
         Me.ButtonMTM03.Visible = True
         Me.ButtonMTM06.Visible = True
+        Me.ButtonMTM07.Visible = True
         '管理者
         Me.ButtonMTM01.Visible = False
         Me.ButtonMTM04.Visible = False
@@ -154,6 +157,16 @@ Public Class FormMTMMenu
         Me.Hide()
         Dim formUser As New FormMTMUser(Me)
         formUser.Show()
+    End Sub
+    ''' <summary>
+    ''' 未確定・未送信確認ボタン押下処理
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    Private Sub ButtonMTM07_Click(sender As Object, e As EventArgs) Handles ButtonMTM07.Click
+        Me.Hide()
+        Dim form07 As New FormMTM07(Me)
+        form07.Show()
     End Sub
     ''' <summary>
     ''' 検証SQLボタン押下
@@ -229,4 +242,9 @@ Public Class FormMTMMenu
         Dim form06 As New FormMTM06(Me)
         form06.Show()
     End Sub
+
+    Private Sub LabelVer_Click(sender As Object, e As EventArgs) Handles LabelVer.Click
+
+    End Sub
+
 End Class

@@ -173,6 +173,7 @@ Namespace Biz
                                         + ",MTMR003006 = @MTMR003006 " _
                                         + ",MTMR003021 = @MTMR003021 " _
                                         + ",MTMR003007 = @MTMR003007 " _
+                                        + ",MTMR003023 = @MTMR003023 " _
                                         + ",MTMR003008 = @MTMR003008 " _
                                         + ",MTMR003009 = @MTMR003009 " _
                                         + ",MTMR003010 = @MTMR003010 " _
@@ -193,6 +194,7 @@ Namespace Biz
                         command.Parameters.Add(New SqlParameter("@MTMR003006", mtm10r003jitsukou.MTMR003006 + mtm10r003jitsukou.MTMR003006_2))
                         command.Parameters.Add(New SqlParameter("@MTMR003021", mtm10r003jitsukou.MTMR003021))
                         command.Parameters.Add(New SqlParameter("@MTMR003007", mtm10r003jitsukou.MTMR003007))
+                        command.Parameters.Add(New SqlParameter("@MTMR003023", mtm10r003jitsukou.MTMR003023))
                         command.Parameters.Add(New SqlParameter("@MTMR003008", mtm10r003jitsukou.MTMR003008))
                         command.Parameters.Add(New SqlParameter("@MTMR003009", mtm10r003jitsukou.MTMR003009))
                         command.Parameters.Add(New SqlParameter("@MTMR003010", mtm10r003jitsukou.MTMR003010))
@@ -275,6 +277,7 @@ Namespace Biz
                         + ", CASE WHEN MTMR003006 IS NOT NULL AND REPLACE(MTMR003006, ' ', '') <> '' THEN SUBSTRING(MTMR003006, 1, 4) + '/' + SUBSTRING(MTMR003006, 5, 2) + '/' + SUBSTRING(MTMR003006, 7, 2) ELSE '' END AS MTMR003006" _
                         + ", CASE WHEN MTMR003006 IS NOT NULL AND REPLACE(MTMR003006, ' ', '') <> '' THEN SUBSTRING(MTMR003006, 9, 2) ELSE '' END AS MTMR003006_2" _
                         + ", CASE WHEN MTMR003006 IS NOT NULL AND REPLACE(MTMR003007, ' ', '') <> '' THEN SUBSTRING(MTMR003007, 1, 4) + '/' + SUBSTRING(MTMR003007, 5, 2) + '/' + SUBSTRING(MTMR003007, 7, 2) ELSE '' END AS MTMR003007" _
+                        + ", CASE WHEN MTMR003023 IS NOT NULL AND REPLACE(MTMR003023, ' ', '') <> '' THEN SUBSTRING(MTMR003023, 1, 4) + '/' + SUBSTRING(MTMR003023, 5, 2) + '/' + SUBSTRING(MTMR003023, 7, 2) ELSE '' END AS MTMR003023" _
                         + ", MTMR003008" _
                         + ", MTMR003009" _
                         + ", MTMR003010" _

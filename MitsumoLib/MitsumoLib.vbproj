@@ -138,6 +138,7 @@
   <ItemGroup>
     <Compile Include="Biz\BaseBiz.vb" />
     <Compile Include="Biz\MTM01.vb" />
+    <Compile Include="Biz\MTM07.vb" />
     <Compile Include="Biz\MTM02.vb" />
     <Compile Include="Biz\MTM03.vb" />
     <Compile Include="Biz\MTM04.vb" />

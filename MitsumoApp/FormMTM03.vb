@@ -320,6 +320,17 @@ Public Class FormMTM03
     Private Sub ButtonSend_Click(sender As Object, e As EventArgs) Handles ButtonSend.Click
         Dim searchCondition = Me.CreateSearchCondition
 
+        '送信判断のメッセージ
+        Dim dr As DialogResult = MessageBox.Show(
+                                "送信しますか？",
+                                "確認",
+                                MessageBoxButtons.YesNo,
+                                MessageBoxIcon.Question)
+
+        If dr = DialogResult.No Then
+            Exit Sub
+        End If
+
         Dim dialogProgress As New DialogMTMProgress
         dialogProgress.Show(Me)
 
@@ -410,7 +421,10 @@ Public Class FormMTM03
     ''' <param name="e"></param>
     Private Sub Button001_Click(sender As Object, e As EventArgs) Handles Button001.Click
         Dim formSearch As New FormMTMSearchJitsukou
-        Dim result As DialogResult = formSearch.ShowDialog()
+        formSearch.LoginText = Me.TextBox003.Text
+        formSearch.FormMTM02Disp = False
+        formSearch.FormMTM03Disp = True
+        Dim result As DialogResult = formSearch.ShowDialog(Me)
 
         If result = DialogResult.OK Then
             Me.TextBox001.Text = formSearch.Selected.MTMR003001

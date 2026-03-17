@@ -36,6 +36,7 @@ Partial Class FormMTMMenu
         Me.ButtonMTM05 = New System.Windows.Forms.Button()
         Me.ButtonMTM02 = New System.Windows.Forms.Button()
         Me.ButtonClose = New System.Windows.Forms.Button()
+        Me.ButtonMTM07 = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'LabelVer
@@ -46,7 +47,7 @@ Partial Class FormMTMMenu
         Me.LabelVer.Name = "LabelVer"
         Me.LabelVer.Size = New System.Drawing.Size(65, 18)
         Me.LabelVer.TabIndex = 2
-        Me.LabelVer.Text = "ver : 2.16"
+        Me.LabelVer.Text = "ver : 2.20"
         '
         'ButtonUser
         '
@@ -220,6 +221,20 @@ Partial Class FormMTMMenu
         Me.ButtonClose.Text = "  終了"
         Me.ButtonClose.UseVisualStyleBackColor = False
         '
+        'ButtonMTM07
+        '
+        Me.ButtonMTM07.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.ButtonMTM07.Font = New System.Drawing.Font("メイリオ", 12.0!)
+        Me.ButtonMTM07.Image = CType(resources.GetObject("ButtonMTM07.Image"), System.Drawing.Image)
+        Me.ButtonMTM07.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.ButtonMTM07.Location = New System.Drawing.Point(404, 248)
+        Me.ButtonMTM07.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.ButtonMTM07.Name = "ButtonMTM07"
+        Me.ButtonMTM07.Size = New System.Drawing.Size(257, 87)
+        Me.ButtonMTM07.TabIndex = 13
+        Me.ButtonMTM07.Text = "  未確定・未送信確認"
+        Me.ButtonMTM07.UseVisualStyleBackColor = True
+        '
         'FormMTMMenu
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(96.0!, 96.0!)
@@ -227,6 +242,7 @@ Partial Class FormMTMMenu
         Me.AutoScroll = True
         Me.BackColor = System.Drawing.SystemColors.ButtonHighlight
         Me.ClientSize = New System.Drawing.Size(720, 488)
+        Me.Controls.Add(Me.ButtonMTM07)
         Me.Controls.Add(Me.ButtonMTM06)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.ButtonKensho01)
@@ -264,4 +280,5 @@ Partial Class FormMTMMenu
     Friend WithEvents ButtonKensho01 As Button
     Friend WithEvents Button1 As Button
     Friend WithEvents ButtonMTM06 As Button
+    Friend WithEvents ButtonMTM07 As Button
 End Class

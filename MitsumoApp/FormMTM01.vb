@@ -91,6 +91,9 @@ Public Class FormMTM01
         Me.DatePicker003.Format = DateTimePickerFormat.Custom
         Me.DatePicker003.CustomFormat = " "
         Me.DatePicker003.Checked = False
+        Me.DatePicker004.Format = DateTimePickerFormat.Custom
+        Me.DatePicker004.CustomFormat = " "
+        Me.DatePicker004.Checked = False
     End Sub
 
     ''' <summary>
@@ -266,6 +269,8 @@ Public Class FormMTM01
         Dim bl002 As Boolean = Me.DatePicker002.Checked
         Dim dt003 As Date = Me.DatePicker003.Value
         Dim bl003 As Boolean = Me.DatePicker003.Checked
+        Dim dt004 As Date = Me.DatePicker004.Value
+        Dim bl004 As Boolean = Me.DatePicker004.Checked
 
         Dim chk001 As Boolean = Me.CheckBox001.Checked
         Dim chk002 As Boolean = Me.CheckBox002.Checked
@@ -310,6 +315,13 @@ Public Class FormMTM01
                 End If
             Else
                 mtm10r003jitsukou.MTMR003007 = ""
+            End If
+            If (bl004) Then
+                If Not IsNothing(dt004) Then
+                    mtm10r003jitsukou.MTMR003023 = dt004.ToString("yyyyMMdd")
+                End If
+            Else
+                mtm10r003jitsukou.MTMR003023 = ""
             End If
             mtm10r003jitsukou.MTMR003021 = txt010
             mtm10r003jitsukou.MTMR003008 = txt007
@@ -1336,6 +1348,12 @@ Public Class FormMTM01
                     Else
                         Me.DatePicker003.CustomFormat = " "
                     End If
+                    Dim txtDatePicker004 As Date                                                       '仕入先実施日
+                    If (Me.Biz01.GetDate(mtm10r003jitsukou.MTMR003023, txtDatePicker004)) Then
+                        Me.DatePicker004.Value = txtDatePicker004.Year & "-" & txtDatePicker004.Month & "-" & txtDatePicker004.Day
+                    Else
+                        Me.DatePicker004.CustomFormat = " "
+                    End If
                     Me.TextBox010.Text = mtm10r003jitsukou.MTMR003021                                  '改定実施日
                     Me.TextBox007.Text = mtm10r003jitsukou.MTMR003008                                  '運賃の指定
                     Me.TextBox008.Text = mtm10r003jitsukou.MTMR003009                                  '案内文
@@ -1412,6 +1430,8 @@ Public Class FormMTM01
             Me.DatePicker002.CustomFormat = " "
             Me.DatePicker003.Format = DateTimePickerFormat.Custom
             Me.DatePicker003.CustomFormat = " "
+            Me.DatePicker004.Format = DateTimePickerFormat.Custom
+            Me.DatePicker004.CustomFormat = " "
             Me.CheckBox001.Checked = False
             Me.CheckBox002.Checked = False
             Me.CheckBox003.Checked = False
@@ -1472,5 +1492,30 @@ Public Class FormMTM01
         Dim result As DialogResult = formPreview.ShowDialog()
 
         formPreview.Dispose()
+    End Sub
+    ''' <summary>
+    ''' 日付変更処理（仕入先実施日）
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    Private Sub DatePicker004_ValueChanged(sender As Object, e As EventArgs) Handles DatePicker004.ValueChanged
+        If IsNothing(Me.DatePicker004.Value) Then
+            Me.DatePicker004.Format = DateTimePickerFormat.Custom
+            Me.DatePicker004.CustomFormat = " "
+        Else
+            Me.DatePicker004.Format = DateTimePickerFormat.Long
+        End If
+    End Sub
+    ''' <summary>
+    ''' データピッカーイベント
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    Private Sub DatePicker004_KeyDown(sender As Object, e As KeyEventArgs) Handles DatePicker004.KeyDown
+        If e.KeyValue = Keys.Delete Then
+            Me.DatePicker004.Format = DateTimePickerFormat.Custom
+            Me.DatePicker004.CustomFormat = " "
+            Me.DatePicker004.Checked = False
+        End If
     End Sub
 End Class

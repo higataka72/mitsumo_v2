@@ -118,10 +118,22 @@
     <Compile Include="FormMTM01.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormMTM07.Designer.vb">
+      <DependentUpon>FormMTM07.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormMTM07.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormMTM02.Designer.vb">
       <DependentUpon>FormMTM02.vb</DependentUpon>
     </Compile>
     <Compile Include="FormMTM02.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormMTM07ViewV2.Designer.vb">
+      <DependentUpon>FormMTM07ViewV2.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormMTM07ViewV2.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormMTM02RegistV2.Designer.vb">
@@ -302,8 +314,14 @@
     <EmbeddedResource Include="FormMTM01.resx">
       <DependentUpon>FormMTM01.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormMTM07.resx">
+      <DependentUpon>FormMTM07.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormMTM02.resx">
       <DependentUpon>FormMTM02.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormMTM07ViewV2.resx">
+      <DependentUpon>FormMTM07ViewV2.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormMTM02RegistV2.resx">
       <DependentUpon>FormMTM02RegistV2.vb</DependentUpon>

@@ -3,6 +3,10 @@ Imports MitsumoLib
 Public Class FormMTMSearchJitsukou
 
     Public Property Selected As Models.MTM10R003JITSUKOU
+    ' 親から値を受け取るためのプロパティ
+    Public Property LoginText As String
+    Public Property FormMTM02Disp As Boolean
+    Public Property FormMTM03Disp As Boolean
 
     ''' <summary>
     ''' 価格入力番号検索ビジネスロジック
@@ -28,8 +32,31 @@ Public Class FormMTMSearchJitsukou
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     Private Sub FormMTMJitsukouIdx_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        Dim ForForm As String = "NOT_FROM"
+        If Me.Owner IsNot Nothing Then
+            ' 呼び出し元の名前を取得
+            ForForm = Me.Owner.Name
+        End If
+
         Me.SetDataGridColumn()
-        Me.SetData()
+        If (ForForm = "NOT_FROM") Then
+            Button2.Text = "表示対象(F11)"
+            Me.SetData()
+        Else
+            Dim LoginID As String = ""
+            LoginID = LoginText
+            If (ForForm = "FormMTM02") Then
+                '価格入力の初期表示用
+                Button2.Text = "表示対象(F11)※締切内＆未確定"
+                Me.SetData3(LoginID)
+            ElseIf (ForForm = "FormMTM03") Then
+                '見積送信の初期表示用
+                Button2.Text = "表示対象(F11)※締切内＆未送信"
+                Me.SetData5(LoginID)
+            End If
+        End If
+        'Me.SetData()
         DataGridView001.Font = New Font(“メイリオ”, 10)
     End Sub
 
@@ -52,7 +79,7 @@ Public Class FormMTMSearchJitsukou
         'column001.HeaderCell.Style.Font = New Font("メイリオ", 12, FontStyle.Underline)
         'Me.DataGridView001.Columns.Add(column001)
         Dim column002 As New DataGridViewTextBoxColumn With {
-                .HeaderText = "締切日",
+                .HeaderText = "社内締切日",
                 .DataPropertyName = "MTMR003007",
                 .Name = "MTMR003007"
             }
@@ -60,6 +87,15 @@ Public Class FormMTMSearchJitsukou
         column002.ReadOnly = True
         column002.SortMode = DataGridViewColumnSortMode.NotSortable
         Me.DataGridView001.Columns.Add(column002)
+        Dim column002_2 As New DataGridViewTextBoxColumn With {
+                .HeaderText = "仕入先実施日",
+                .DataPropertyName = "MTMR003023",
+                .Name = "MTMR003023"
+            }
+        column002_2.Width = 120
+        column002_2.ReadOnly = True
+        column002_2.SortMode = DataGridViewColumnSortMode.NotSortable
+        Me.DataGridView001.Columns.Add(column002_2)
         Dim column003 As New DataGridViewTextBoxColumn With {
                 .HeaderText = "価格入力名",
                 .DataPropertyName = "MTMR003002",
@@ -83,7 +119,7 @@ Public Class FormMTMSearchJitsukou
                 .DataPropertyName = "MTMR003005_KETUGOU",
                 .Name = "MTMR003005_KETUGOU"
             }
-        column003_1.Width = 180
+        column003_1.Width = 160
         column003_1.ReadOnly = True
         column003_1.SortMode = DataGridViewColumnSortMode.NotSortable
         Me.DataGridView001.Columns.Add(column003_1)
@@ -296,6 +332,26 @@ Public Class FormMTMSearchJitsukou
         column024.Visible = False
         column024.SortMode = DataGridViewColumnSortMode.NotSortable
         Me.DataGridView001.Columns.Add(column024)
+        Dim column025 As New DataGridViewTextBoxColumn With {
+                .HeaderText = "未確定明細数",
+                .DataPropertyName = "MTMR002080_CNT",
+                .Name = "MTMR002080_CNT"
+            }
+        column025.Width = 120
+        column025.ReadOnly = True
+        column025.Visible = FormMTM02Disp
+        column025.SortMode = DataGridViewColumnSortMode.NotSortable
+        Me.DataGridView001.Columns.Add(column025)
+        Dim column026 As New DataGridViewTextBoxColumn With {
+                .HeaderText = "未送信明細数",
+                .DataPropertyName = "MTMR002080_CNT2",
+                .Name = "MTMR002080_CNT2"
+            }
+        column026.Width = 120
+        column026.ReadOnly = True
+        column026.Visible = FormMTM03Disp
+        column026.SortMode = DataGridViewColumnSortMode.NotSortable
+        Me.DataGridView001.Columns.Add(column026)
 
     End Sub
     ''' <summary>
@@ -310,6 +366,34 @@ Public Class FormMTMSearchJitsukou
     ''' </summary>
     Public Sub SetData2()
         Me.DataGridView001.DataSource = Me.BizSearchJitsukou.GetJitsukouAll()
+        Me.DataGridView001.CurrentCell = Nothing
+    End Sub
+    ''' <summary>
+    ''' データ設定（価格入力用-初期表示）
+    ''' </summary>
+    Public Sub SetData3(ByVal strLoginID As String)
+        Me.DataGridView001.DataSource = Me.BizSearchJitsukou.GetJitsukou2(strLoginID)
+        Me.DataGridView001.CurrentCell = Nothing
+    End Sub
+    ''' <summary>
+    ''' データ設定（価格入力用-検索表示）
+    ''' </summary>
+    Public Sub SetData4(ByVal strLoginID As String)
+        Me.DataGridView001.DataSource = Me.BizSearchJitsukou.GetJitsukouAll2(strLoginID)
+        Me.DataGridView001.CurrentCell = Nothing
+    End Sub
+    ''' <summary>
+    ''' データ設定（見積送信用-初期表示）
+    ''' </summary>
+    Public Sub SetData5(ByVal strLoginID As String)
+        Me.DataGridView001.DataSource = Me.BizSearchJitsukou.GetJitsukou3(strLoginID)
+        Me.DataGridView001.CurrentCell = Nothing
+    End Sub
+    ''' <summary>
+    ''' データ設定（見積送信用-検索表示）
+    ''' </summary>
+    Public Sub SetData6(ByVal strLoginID As String)
+        Me.DataGridView001.DataSource = Me.BizSearchJitsukou.GetJitsukouAll3(strLoginID)
         Me.DataGridView001.CurrentCell = Nothing
     End Sub
 
@@ -367,7 +451,28 @@ Public Class FormMTMSearchJitsukou
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        Me.SetData2()
+        Dim ForForm As String = "NOT_FROM"
+        If Me.Owner IsNot Nothing Then
+            ' 呼び出し元の名前を取得
+            ForForm = Me.Owner.Name
+        End If
+
+        If (ForForm = "NOT_FROM") Then
+            Me.SetData2()
+        Else
+            Dim LoginID As String = ""
+            LoginID = LoginText
+            If (ForForm = "FormMTM02") Then
+                '価格入力の初期表示用
+                Button2.Text = "表示対象(F11)※締切内＆未確定"
+                Me.SetData4(LoginID)
+            ElseIf (ForForm = "FormMTM03") Then
+                '見積送信の初期表示用
+                Button2.Text = "表示対象(F11)※締切内＆未送信"
+                Me.SetData6(LoginID)
+            End If
+        End If
+        'Me.SetData2()
         DataGridView001.Font = New Font(“メイリオ”, 10)
     End Sub
     ''' <summary>
@@ -376,11 +481,39 @@ Public Class FormMTMSearchJitsukou
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     Private Sub FormMTMSearchJitsukou_KeyDown(sender As Object, e As KeyEventArgs) Handles MyBase.KeyDown
+        Dim ForForm As String = "NOT_FROM"
+        If Me.Owner IsNot Nothing Then
+            ' 呼び出し元の名前を取得
+            ForForm = Me.Owner.Name
+        End If
+
         If e.KeyCode = Keys.F12 Then
-            Me.SetData2()
+            If (ForForm = "NOT_FROM") Then
+                Me.SetData2()
+            Else
+                '価格入力の初期表示用
+                Dim LoginID As String = ""
+                LoginID = LoginText
+                Me.SetData4(LoginID)
+            End If
+            'Me.SetData2()
             DataGridView001.Font = New Font(“メイリオ”, 10)
         ElseIf e.KeyCode = Keys.F11 Then
-            Me.SetData()
+            If (ForForm = "NOT_FROM") Then
+                Me.SetData()
+            Else
+                Dim LoginID As String = ""
+                LoginID = LoginText
+                If (ForForm = "FormMTM02") Then
+                    '価格入力の初期表示用
+                    Button2.Text = "表示対象(F11)※締切内＆未確定"
+                    Me.SetData3(LoginID)
+                ElseIf (ForForm = "FormMTM03") Then
+                    '見積送信の初期表示用
+                    Button2.Text = "表示対象(F11)※締切内＆未送信"
+                    Me.SetData5(LoginID)
+                End If
+            End If
             DataGridView001.Font = New Font(“メイリオ”, 10)
         End If
     End Sub
@@ -390,7 +523,28 @@ Public Class FormMTMSearchJitsukou
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
-        Me.SetData()
+        Dim ForForm As String = "NOT_FROM"
+        If Me.Owner IsNot Nothing Then
+            ' 呼び出し元の名前を取得
+            ForForm = Me.Owner.Name
+        End If
+        If (ForForm = "NOT_FROM") Then
+            Me.SetData()
+        Else
+            '価格入力の初期表示用
+            Dim LoginID As String = ""
+            LoginID = LoginText
+            If (ForForm = "FormMTM02") Then
+                '価格入力の初期表示用
+                Button2.Text = "表示対象(F11)※締切内＆未確定"
+                Me.SetData3(LoginID)
+            ElseIf (ForForm = "FormMTM03") Then
+                '見積送信の初期表示用
+                Button2.Text = "表示対象(F11)※締切内＆未送信"
+                Me.SetData5(LoginID)
+            End If
+        End If
+        'Me.SetData()
         DataGridView001.Font = New Font(“メイリオ”, 10)
     End Sub
 
@@ -407,6 +561,7 @@ Public Class FormMTMSearchJitsukou
                     .MTMR003006 = selectRow.Cells("MTMR003006").Value.ToString,
                     .MTMR003006_2 = selectRow.Cells("MTMR003006_2").Value.ToString,
                     .MTMR003007 = selectRow.Cells("MTMR003007").Value.ToString,
+                    .MTMR003023 = selectRow.Cells("MTMR003023").Value.ToString,
                     .MTMR003008 = selectRow.Cells("MTMR003008").Value.ToString,
                     .MTMR003009 = selectRow.Cells("MTMR003009").Value.ToString,
                     .MTMR003010 = selectRow.Cells("MTMR003010").Value.ToString,
@@ -443,6 +598,7 @@ Public Class FormMTMSearchJitsukou
                     .MTMR003006 = selectRow.Cells("MTMR003006").Value.ToString,
                     .MTMR003006_2 = selectRow.Cells("MTMR003006_2").Value.ToString,
                     .MTMR003007 = selectRow.Cells("MTMR003007").Value.ToString,
+                    .MTMR003023 = selectRow.Cells("MTMR003023").Value.ToString,
                     .MTMR003008 = selectRow.Cells("MTMR003008").Value.ToString,
                     .MTMR003009 = selectRow.Cells("MTMR003009").Value.ToString,
                     .MTMR003010 = selectRow.Cells("MTMR003010").Value.ToString,

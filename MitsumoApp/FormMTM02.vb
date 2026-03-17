@@ -334,7 +334,10 @@ Public Class FormMTM02
     ''' <param name="e"></param>
     Private Sub ButtonCostInputNumber_Click(sender As Object, e As EventArgs) Handles ButtonCostInputNumber.Click
         Dim formSearch As New FormMTMSearchJitsukou
-        Dim result As DialogResult = formSearch.ShowDialog()
+        formSearch.LoginText = Me.TextBox003.Text
+        formSearch.FormMTM02Disp = True
+        formSearch.FormMTM03Disp = False
+        Dim result As DialogResult = formSearch.ShowDialog(Me)
 
         If result = DialogResult.OK Then
             Me.TextBox001.Text = formSearch.Selected.MTMR003001
