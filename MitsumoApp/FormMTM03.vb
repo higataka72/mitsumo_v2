@@ -347,7 +347,8 @@ Public Class FormMTM03
                 .MailHost = ConfigurationManager.AppSettings("MAIL_HOST"),
                 .MailPort = ConfigurationManager.AppSettings("MAIL_PORT"),
                 .MailUser = ConfigurationManager.AppSettings("MAIL_USER"),
-                .MailPass = ConfigurationManager.AppSettings("MAIL_PASS")
+                .MailPass = ConfigurationManager.AppSettings("MAIL_PASS"),
+                .MailEnvelope = ConfigurationManager.AppSettings("MAIL_ENVELOPE")
                 }
 
             Dim executionAsm As Reflection.Assembly = Reflection.Assembly.GetExecutingAssembly
@@ -367,7 +368,8 @@ Public Class FormMTM03
                 For Each resultElement In sendMailData.SearchResult.ElementList
                     dialogProgress.Message = "送信中/得意先.." & resultElement.TokuisakiCode.Trim()
                     If (searchCondition.OutputNum = "0" Or searchCondition.OutputNum = "1") And resultElement.SoushinKubun = "1" Then
-                        Dim sendMailErrorList = Me.Biz03.SendMail(searchCondition.KakakuNyuuryokuNo, mailInfo, resultElement, executingPath + "\" + pdfDir, executingPath + "\" + pdfTemplateDir)
+                        'Dim sendMailErrorList = Me.Biz03.SendMail(searchCondition.KakakuNyuuryokuNo, mailInfo, resultElement, executingPath + "\" + pdfDir, executingPath + "\" + pdfTemplateDir)
+                        Dim sendMailErrorList = Me.Biz03.SendMail2(searchCondition.KakakuNyuuryokuNo, mailInfo, resultElement, executingPath + "\" + pdfDir, executingPath + "\" + pdfTemplateDir)
                         If sendMailErrorList.Count > 0 Then
                             sendMailData.ErrorList.AddRange(sendMailErrorList)
                             Exit For

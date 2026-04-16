@@ -1883,6 +1883,259 @@ Namespace Biz
             Return errorList
         End Function
 
+        ''' <summary>
+        ''' メール本文送信処理
+        ''' </summary>
+        ''' <param name="mailInfo"></param>
+        ''' <param name="resultElement"></param>
+        ''' <param name="outputPath"></param>
+        ''' <returns></returns>
+        Public Function SendMail2(ByVal kakakuNyuuryokuNo As String, ByVal mailInfo As MTM03MailInfo, ByVal resultElement As MTM03SearchResultElement,
+                                 ByVal outputPath As String, templatePath As String) As List(Of String)
+
+            Dim cls = New MTM03Print
+            '案内文を実行管理テーブルから取得
+            Dim annaiFilePath As String = GetAnnaiFilePath(resultElement.KakakuNyuuryokuNo)
+
+            Dim errorList As New List(Of String)
+            If Not System.IO.Directory.Exists(outputPath) Then
+                System.IO.Directory.CreateDirectory(outputPath)
+            End If
+
+            Dim tokuisakiName As String
+            Dim tantouName As String
+            Dim tantouLastPosition As Integer = 1
+            Dim tantouLastStr As String = 1
+
+            If Not String.IsNullOrEmpty(Trim(resultElement.AtesakiName)) Then
+                tokuisakiName = resultElement.TokuisakiName1 + "　" + resultElement.TokuisakiName2
+            Else
+                tokuisakiName = resultElement.TokuisakiName1 + "　" + resultElement.TokuisakiName2 + "　御中"
+            End If
+
+            If Not String.IsNullOrEmpty(Trim(resultElement.AtesakiName)) Then
+                tantouLastStr = resultElement.AtesakiName.Substring(resultElement.AtesakiName.Length - tantouLastPosition)
+                If (tantouLastStr.Contains("様")) Then
+                    tantouName = resultElement.AtesakiName
+                Else
+                    tantouName = resultElement.AtesakiName + "　御中"
+                End If
+            Else
+                tantouName = resultElement.AtesakiName
+            End If
+
+            'フォルダ命名の変更対応
+            Dim folder2 As String = "\" + resultElement.KakakuNyuuryokuNo.Trim + " _御見積書_" + resultElement.JitsukouKakakuNyuuryokuName
+            outputPath = outputPath + folder2
+            If Not System.IO.Directory.Exists(outputPath) Then
+                System.IO.Directory.CreateDirectory(outputPath)
+            End If
+
+            Dim fileName = resultElement.KakakuNyuuryokuNo.Trim + "_御見積書_" + resultElement.TokuisakiName1.Trim + "様_" + Date.Now.ToString("yyyyMMddHHmm") + ".pdf"
+            Dim filePath = outputPath & "\" & fileName
+
+            'print関数へ渡すためリストへ詰める
+            Dim Result As New MTM03SearchResult
+            Result.ElementList.Add(resultElement)
+
+            Dim ret = cls.Print(Result, outputPath, templatePath, fileName)
+            'Dim sendMailNotFlag = True
+            'If sendMailNotFlag Then
+            '    Return errorList
+            '    Exit Function
+            'End If
+            'Dim pdfErrorList = Me.OutputAttachmentPdf(kakakuNyuuryokuNo, resultElement, filePath)
+            'If pdfErrorList.Count > 0 Then
+            '    Return pdfErrorList
+            '    Exit Function
+            'End If
+
+            Dim mailMessage As New System.Net.Mail.MailMessage
+            Dim smtpClient As New System.Net.Mail.SmtpClient()
+            Dim myEnc As Encoding = Encoding.GetEncoding("iso-2022-jp")
+
+            Try
+                '--------------------
+                'mailMessage.From = New System.Net.Mail.MailAddress(resultElement.MailFrom)
+                Dim envelopeFrom As String = ResolveEnvelopeAddress(mailInfo)
+                Dim visibleFrom As String = resultElement.MailFrom
+
+                If String.IsNullOrWhiteSpace(visibleFrom) Then
+                    Throw New ApplicationException("送信元メールアドレス(resultElement.MailFrom)が未設定です。")
+                End If
+
+                ' 見かけ上のFromは営業アドレス
+                mailMessage.From = New System.Net.Mail.MailAddress(visibleFrom)
+
+                ' 返信先も営業アドレス
+                mailMessage.ReplyToList.Clear()
+                mailMessage.ReplyToList.Add(New System.Net.Mail.MailAddress(visibleFrom))
+
+                ' Envelope-From側に寄せる
+                mailMessage.Sender = New System.Net.Mail.MailAddress(envelopeFrom)
+                '--------------------
+
+                '--------------------
+                'Dim toList = resultElement.MailTo.Split(",")
+                'For Each mailTo As String In toList
+                '    mailMessage.To.Add(New System.Net.Mail.MailAddress(mailTo.Trim))
+                'Next
+                Dim toList = resultElement.MailTo.Split(","c)
+                For Each mailTo As String In toList
+                    If Not String.IsNullOrWhiteSpace(mailTo) Then
+                        mailMessage.To.Add(New System.Net.Mail.MailAddress(mailTo.Trim()))
+                    End If
+                Next
+                '--------------------
+
+                '--------------------
+                'mailMessage.Subject = "（" + resultElement.JitsukouKakakuNyuuryokuName + "）改定お見積書の送付"
+                mailMessage.Subject = "（" + resultElement.JitsukouKakakuNyuuryokuName + "）改定お見積書の送付"
+                mailMessage.SubjectEncoding = myEnc
+                mailMessage.HeadersEncoding = myEnc
+                '--------------------
+
+                Dim body As String
+                body = tokuisakiName + vbCrLf
+                body += tantouName + vbCrLf
+                body += vbCrLf
+                body += "お世話になっております。" + vbCrLf
+                body += "もりや産業の" + resultElement.TantoName + "です。" + vbCrLf
+                body += vbCrLf
+                body += "この度、下記の商品の価格改定がございますので" + vbCrLf
+                body += "改定見積書を添付致します。" + vbCrLf
+                body += "ご査証いただきますようよろしくお願い致します。" + vbCrLf
+
+                '担当者毎に自由メール文項目を追加（前文）
+                Dim MailTemp = GetDataMail(resultElement.LoginId.Trim)
+                If (Not String.IsNullOrEmpty(MailTemp.MTMR006002)) OrElse
+                    (Not String.IsNullOrEmpty(MailTemp.MTMR006003)) OrElse
+                    (Not String.IsNullOrEmpty(MailTemp.MTMR006004)) Then
+                    body += vbCrLf
+                End If
+                If (Not String.IsNullOrEmpty(MailTemp.MTMR006002)) Then
+                    body += "" + MailTemp.MTMR006002 + vbCrLf
+                End If
+                If (Not String.IsNullOrEmpty(MailTemp.MTMR006003)) Then
+                    body += "" + MailTemp.MTMR006003 + vbCrLf
+                End If
+                If (Not String.IsNullOrEmpty(MailTemp.MTMR006004)) Then
+                    body += "" + MailTemp.MTMR006004 + vbCrLf
+                End If
+
+                body += vbCrLf
+                body += "該当商品：　" + resultElement.JitsukouKakakuNyuuryokuName + vbCrLf
+                body += "改定日：　" + resultElement.NeageDate + " " + resultElement.Kaiteijitsusi + vbCrLf
+
+                '担当者毎に自由メール文項目を追加（後文）
+                If (Not String.IsNullOrEmpty(MailTemp.MTMR006005)) OrElse
+                    (Not String.IsNullOrEmpty(MailTemp.MTMR006006)) OrElse
+                    (Not String.IsNullOrEmpty(MailTemp.MTMR006007)) Then
+                    body += vbCrLf
+                End If
+                If (Not String.IsNullOrEmpty(MailTemp.MTMR006005)) Then
+                    body += "" + MailTemp.MTMR006005 + vbCrLf
+                End If
+                If (Not String.IsNullOrEmpty(MailTemp.MTMR006006)) Then
+                    body += "" + MailTemp.MTMR006006 + vbCrLf
+                End If
+                If (Not String.IsNullOrEmpty(MailTemp.MTMR006007)) Then
+                    body += "" + MailTemp.MTMR006007 + vbCrLf
+                End If
+
+                body += vbCrLf
+                body += "以上よろしくお願い致します。" + vbCrLf
+                body += vbCrLf
+                body += "--------------------------------" + vbCrLf
+                body += "もりや産業株式会社" + vbCrLf
+                body += "" + resultElement.EigyosyoName + vbCrLf
+                body += "" + resultElement.TantoName + vbCrLf
+                body += vbCrLf
+                body += "住所　" + resultElement.Address + vbCrLf
+                body += "" + resultElement.PhoneFax + vbCrLf
+                body += "メール　" + resultElement.MailFrom + vbCrLf
+
+                '--------------------
+                'Dim altView As AlternateView = AlternateView.CreateAlternateViewFromString(body, myEnc, System.Net.Mime.MediaTypeNames.Text.Plain)
+                'altView.TransferEncoding = System.Net.Mime.TransferEncoding.SevenBit
+                'mailMessage.AlternateViews.Add(altView)
+                'mailMessage.Headers.Add("Content-Transfer-Encoding", "7bit")
+                Dim altView As AlternateView = AlternateView.CreateAlternateViewFromString(body, myEnc, System.Net.Mime.MediaTypeNames.Text.Plain)
+                altView.TransferEncoding = System.Net.Mime.TransferEncoding.SevenBit
+                mailMessage.AlternateViews.Add(altView)
+                mailMessage.BodyEncoding = myEnc
+                mailMessage.Headers.Add("Content-Transfer-Encoding", "7bit")
+                '--------------------
+
+                '案内文も添付する
+                If (Not String.IsNullOrEmpty(annaiFilePath)) Then
+                    If File.Exists(annaiFilePath) Then
+                        Dim annaiFileName = Path.GetFileName(annaiFilePath)
+                        Dim attach1 As New System.Net.Mail.Attachment(annaiFilePath, MediaTypeNames.Application.Pdf)
+                        Dim disposition1 As ContentDisposition = attach1.ContentDisposition
+                        disposition1.FileName = EncordB(annaiFileName)
+                        mailMessage.Attachments.Add(attach1)
+                    End If
+                End If
+
+                Dim attach2 As New System.Net.Mail.Attachment(filePath, MediaTypeNames.Application.Pdf)
+                Dim disposition2 As ContentDisposition = attach2.ContentDisposition
+                disposition2.FileName = EncordB(fileName)
+                mailMessage.Attachments.Add(attach2)
+
+                '--------------------
+                'gmailのSMTPサーバの設定
+                'smtpClient.Host = mailInfo.MailHost
+                'smtpClient.Port = Integer.Parse(mailInfo.MailPort)
+                'smtpClient.DeliveryMethod = System.Net.Mail.SmtpDeliveryMethod.Network
+                ''ユーザー名,パスワード
+                'smtpClient.Credentials = New System.Net.NetworkCredential(mailInfo.MailUser, mailInfo.MailPass)
+                ''SSL
+                'smtpClient.EnableSsl = False
+                'smtpClient.Timeout = 10000
+                'smtpClient.Send(mailMessage)
+                smtpClient.Host = mailInfo.MailHost
+                smtpClient.Port = Integer.Parse(mailInfo.MailPort)
+                smtpClient.DeliveryMethod = System.Net.Mail.SmtpDeliveryMethod.Network
+                smtpClient.UseDefaultCredentials = False
+                'ユーザー名,パスワード
+                smtpClient.Credentials = New System.Net.NetworkCredential(mailInfo.MailUser, mailInfo.MailPass)
+                'SSL
+                smtpClient.EnableSsl = False
+                smtpClient.Timeout = 10000
+                smtpClient.Send(mailMessage)
+                '--------------------
+            Catch ex As Exception
+                errorList.Add(ex.Message)
+            Finally
+                mailMessage.Dispose()
+                smtpClient.Dispose()
+            End Try
+
+            Return errorList
+        End Function
+
+        ''' <summary>
+        ''' Envelope-From に使用するメールアドレスを解決する
+        ''' 優先順位:
+        ''' 1. App.config の MAIL_ENVELOPE
+        ''' 2. mailInfo.MailUser がメールアドレス形式ならそれを利用
+        ''' 3. どちらも不可なら例外
+        ''' </summary>
+        Private Function ResolveEnvelopeAddress(mailInfo As MTM03MailInfo) As String
+            Dim envelope As String = mailInfo.MailEnvelope
+
+            If Not String.IsNullOrWhiteSpace(envelope) Then
+                Return envelope.Trim()
+            End If
+
+            ' MAIL_USER がメールアドレス形式なら暫定的に利用
+            If Not String.IsNullOrWhiteSpace(mailInfo.MailUser) AndAlso mailInfo.MailUser.Contains("@") Then
+                Return mailInfo.MailUser.Trim()
+            End If
+
+            Throw New ApplicationException("MAIL_ENVELOPE が未設定です。MAIL_USER がユーザーID運用のため、Envelope-From に使用するメールアドレスを設定してください。")
+        End Function
 
         ''' <summary>
         ''' 添付用PDF出力
@@ -2623,6 +2876,8 @@ Namespace Biz
         Public Property MailUser As String = ""
 
         Public Property MailPass As String = ""
+        Public Property MailEnvelope As String
+
     End Class
 
     Public Class MTM03PreviewData

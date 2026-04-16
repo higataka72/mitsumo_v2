@@ -383,6 +383,9 @@ Public Class FormMTM01
 
                 Dim dtStart = DateTime.Now
 
+                'Dim importFilePath As String = CreateTrimmedImportFile(mtm10r003jitsukou.MTMR003010)
+                'Using parser As New TextFieldParser(importFilePath, Encoding.GetEncoding("Shift_JIS"))
+
                 Using parser As New TextFieldParser(mtm10r003jitsukou.MTMR003010, Encoding.GetEncoding("Shift_JIS"))
                     parser.TextFieldType = FieldType.Delimited
                     parser.SetDelimiters(vbTab)
@@ -1518,4 +1521,51 @@ Public Class FormMTM01
             Me.DatePicker004.Checked = False
         End If
     End Sub
+
+    Private Function CreateTrimmedImportFile(sourcePath As String) As String
+        Dim tempPath As String = System.IO.Path.Combine(
+            System.IO.Path.GetDirectoryName(sourcePath),
+            System.IO.Path.GetFileNameWithoutExtension(sourcePath) & "_trimmed" &
+            System.IO.Path.GetExtension(sourcePath))
+
+        Dim lines As New List(Of String)
+
+        Using sr As New System.IO.StreamReader(sourcePath, Encoding.GetEncoding("Shift_JIS"))
+            While Not sr.EndOfStream
+                Dim line As String = sr.ReadLine()
+
+                If line Is Nothing Then
+                    lines.Add("")
+                Else
+                    lines.Add(line)
+                End If
+            End While
+        End Using
+
+        ' 末尾の空行 / タブだけ / 空白だけの行を削除
+        For i As Integer = lines.Count - 1 To 0 Step -1
+            Dim wk As String = lines(i)
+
+            If wk Is Nothing Then
+                lines.RemoveAt(i)
+                Continue For
+            End If
+
+            ' タブ・半角空白・全角空白を除去して空なら不要行
+            Dim check As String = wk.Replace(vbTab, "").Replace(" ", "").Replace("　", "")
+            If check = "" Then
+                lines.RemoveAt(i)
+            Else
+                Exit For
+            End If
+        Next
+
+        Using sw As New System.IO.StreamWriter(tempPath, False, Encoding.GetEncoding("Shift_JIS"))
+            For Each line As String In lines
+                sw.WriteLine(line)
+            Next
+        End Using
+
+        Return tempPath
+    End Function
 End Class

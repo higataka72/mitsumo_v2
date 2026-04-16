@@ -1094,6 +1094,16 @@ Public Class FormMTM02RegistV2
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     Private Sub ButtonRegist_Click(sender As Object, e As EventArgs) Handles ButtonRegist.Click
+
+        '編集のみ抽出の検証
+        'グリッドの編集を確定させる
+        'Me.DataGridView001.FinishEditing()
+
+        ''DataTableの変更行（追加・更新・削除）のみを取得
+        'Dim dataTable As DataTable = Me.DataGridView001.DataSource
+        'Dim changesTable As DataTable = dataTable.GetChanges()
+        'End
+
         Dim updateErrorList = Me.Biz02.Update(Me.DataGridView001.DataSource)
         If updateErrorList.Count > 0 Then
             For Each errorMessage As String In updateErrorList
@@ -1706,6 +1716,8 @@ Public Class FormMTM02RegistV2
         Dim cr As C1.Win.C1FlexGrid.CellRange
         cr = DataGridView001.GetCellRange(0, 1, DataGridView001.Rows.Count - 1, DataGridView001.Cols.Count - 1)
         Dim StrCopy = ""
+        '文字列内の改行対応
+        'Dim StrValue = ""
 
         For i = cr.r1 To cr.r2
             If i <> 1 Then
@@ -1725,6 +1737,34 @@ Public Class FormMTM02RegistV2
             End If
         Next
         ' クリップボードに設定します
+        Clipboard.SetDataObject(StrCopy)
+
+        '文字列内の改行対応
+        'For i = cr.r1 To cr.r2
+        '    If i <> 1 Then
+        '        If DataGridView001.Rows(i).Visible = True Then
+        '            For j = cr.c1 To cr.c2
+        '                If DataGridView001.Cols(j).Visible = True Then
+        '                    StrValue = DataGridView001(i, j).ToString()
+        '                    If InStr(1, StrValue, vbCrLf) > 0 Or InStr(1, StrValue, vbLf) > 0 Then
+        '                        StrValue = Replace(StrValue, vbCr, " ")
+        '                        StrValue = Replace(StrValue, vbLf, " ")
+        '                        StrCopy = StrCopy & StrValue
+        '                    Else
+        '                        StrCopy = StrCopy & DataGridView001(i, j).ToString()
+        '                    End If
+
+        '                    If j <> cr.c2 Then
+        '                        StrCopy = StrCopy & Microsoft.VisualBasic.Constants.vbTab
+        '                    End If
+        '                End If
+        '            Next
+
+        '            StrCopy = StrCopy & Microsoft.VisualBasic.Constants.vbLf
+        '        End If
+        '    End If
+        'Next
+        '' クリップボードに設定します
         Clipboard.SetDataObject(StrCopy)
 
         'DataGridView001.ClipboardCopyMode = ClipboardCopyModeEnum.DataAndAllHeaders

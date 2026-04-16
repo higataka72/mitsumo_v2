@@ -369,7 +369,11 @@ Namespace Biz
                             'command.Parameters.Add(New SqlParameter("@MTMR002086", row.Item("MTMR002086")))
 
                             command.Parameters.Add(New SqlParameter("@MTMR002017", row.Item("MTMR002017").ToString()))
-                            command.Parameters.Add(New SqlParameter("@MTMR002030", row.Item("MTMR002030").ToString.Replace(",", "")))
+                            If (String.IsNullOrEmpty(row.Item("MTMR002030").ToString)) Then
+                                command.Parameters.Add(New SqlParameter("@MTMR002030", "0"))
+                            Else
+                                command.Parameters.Add(New SqlParameter("@MTMR002030", row.Item("MTMR002030").ToString.Replace(",", "0")))
+                            End If
                             command.Parameters.Add(New SqlParameter("@MTMR002031", row.Item("MTMR002031").ToString.Replace(",", "")))
                             If (String.IsNullOrEmpty(row.Item("MTMR002032").ToString)) Then
                                 command.Parameters.Add(New SqlParameter("@MTMR002032", 0))
@@ -377,7 +381,11 @@ Namespace Biz
                                 command.Parameters.Add(New SqlParameter("@MTMR002032", If(Date.TryParse(row.Item("MTMR002032").ToString, dt), Integer.Parse(dt.ToString("yyyyMMdd")), SqlTypes.SqlDecimal.Null)))
 
                             End If
-                            command.Parameters.Add(New SqlParameter("@MTMR002033", row.Item("MTMR002033").ToString.Replace(",", "")))
+                            If (String.IsNullOrEmpty(row.Item("MTMR002033").ToString)) Then
+                                command.Parameters.Add(New SqlParameter("@MTMR002033", "0"))
+                            Else
+                                command.Parameters.Add(New SqlParameter("@MTMR002033", row.Item("MTMR002033").ToString.Replace(",", "0")))
+                            End If
                             command.Parameters.Add(New SqlParameter("@MTMR002034", row.Item("MTMR002034").ToString.Replace(",", "")))
                             If (String.IsNullOrEmpty(row.Item("MTMR002035").ToString)) Then
                                 command.Parameters.Add(New SqlParameter("@MTMR002035", 0))

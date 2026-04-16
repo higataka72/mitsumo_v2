@@ -43,7 +43,8 @@ Public Class MTM03Task
                 .MailHost = ConfigurationManager.AppSettings("MAIL_HOST"),
                 .MailPort = ConfigurationManager.AppSettings("MAIL_PORT"),
                 .MailUser = ConfigurationManager.AppSettings("MAIL_USER"),
-                .MailPass = ConfigurationManager.AppSettings("MAIL_PASS")
+                .MailPass = ConfigurationManager.AppSettings("MAIL_PASS"),
+                .MailEnvelope = ConfigurationManager.AppSettings("MAIL_ENVELOPE")
                 }
 
             Dim executionAsm As Reflection.Assembly = Reflection.Assembly.GetExecutingAssembly
@@ -57,7 +58,8 @@ Public Class MTM03Task
             If sendMailData.SearchResult.ElementList.Count > 0 Then
                 For Each resultElement In sendMailData.SearchResult.ElementList
                     If (searchCondition.OutputNum = "0" Or searchCondition.OutputNum = "1") And resultElement.SoushinKubun = "1" Then
-                        Dim sendMailErrorList = biz03.SendMail(searchCondition.KakakuNyuuryokuNo, mailInfo, resultElement, executingPath + "/" + pdfDir, executingPath + "/" + pdfTemplateDir)
+                        'Dim sendMailErrorList = biz03.SendMail(searchCondition.KakakuNyuuryokuNo, mailInfo, resultElement, executingPath + "/" + pdfDir, executingPath + "/" + pdfTemplateDir)
+                        Dim sendMailErrorList = biz03.SendMail2(searchCondition.KakakuNyuuryokuNo, mailInfo, resultElement, executingPath + "/" + pdfDir, executingPath + "/" + pdfTemplateDir)
                         If sendMailErrorList.Count > 0 Then
                             sendMailData.ErrorList.AddRange(sendMailErrorList)
                             Exit For
