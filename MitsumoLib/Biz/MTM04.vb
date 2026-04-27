@@ -699,9 +699,11 @@ Namespace Biz
             Dim first As Boolean = True
             Dim beforeValue As Decimal = 0 '１つ前のロットの見積数量
             Try
+                Dim value3 As String = scHANMA01003.Replace("'", "''")
+
                 rowsLot = tblMTM10R001TANKA.Select("MTMR002001 = '" & scHANMA01001 &
                                                    "' and MTMR002002 = '" & scHANMA01002 &
-                                                   "' and MTMR002003 = '" & scHANMA01003 & "'",
+                                                   "' and MTMR002003 = '" & value3 & "'",
                                                    "MTMR002004 asc")
 
                 If rowsLot.Count() > 1 Then

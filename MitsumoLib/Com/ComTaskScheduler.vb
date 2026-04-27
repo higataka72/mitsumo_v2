@@ -77,10 +77,37 @@
                     If Not String.IsNullOrEmpty(mtm10r003jitsukou.MTMR003006_2) Then
                         If Double.TryParse(mtm10r003jitsukou.MTMR003006_2, dbl) Then
                             If Not ((dbl < 0) Or (dbl > 23)) Then
-                                tsskdateTime = mtm10r003jitsukou.MTMR003006_2.PadLeft(2, "0"c) & ":00"
+                                Dim minuteStr As String = DateTime.Now.Minute.ToString("00")
+
+                                tsskdateTime = mtm10r003jitsukou.MTMR003006_2.PadLeft(2, "0"c) _
+                                               & ":" _
+                                               & minuteStr
+                                'tsskdateTime = mtm10r003jitsukou.MTMR003006_2.PadLeft(2, "0"c) & ":00"
                             End If
                         End If
                     End If
+                    'If Not String.IsNullOrEmpty(mtm10r003jitsukou.MTMR003006_2) Then
+                    '    Dim timeStr As String = mtm10r003jitsukou.MTMR003006_2.Trim()
+
+                    '    '4桁チェック
+                    '    If timeStr.Length = 4 Then
+                    '        Dim hourStr As String = timeStr.Substring(0, 2)
+                    '        Dim minuteStr As String = timeStr.Substring(2, 2)
+                    '        Dim hour As Integer
+                    '        Dim minute As Integer
+                    '        If Integer.TryParse(hourStr, hour) AndAlso Integer.TryParse(minuteStr, minute) Then
+                    '            '時間：0～23
+                    '            '分　：0～59
+                    '            If hour >= 0 AndAlso hour <= 23 _
+                    '               AndAlso minute >= 0 AndAlso minute <= 59 Then
+
+                    '                tsskdateTime = hourStr.PadLeft(2, "0"c) _
+                    '                                & ":" _
+                    '                                & minuteStr.PadLeft(2, "0"c)
+                    '            End If
+                    '        End If
+                    '    End If
+                    'End If
 
                     '起動チェック
                     '(日付不正)

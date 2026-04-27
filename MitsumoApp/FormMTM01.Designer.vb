@@ -59,7 +59,6 @@ Partial Class FormMTM01
         Me.TextBox005 = New System.Windows.Forms.TextBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.TextBox006 = New System.Windows.Forms.TextBox()
-        Me.Label6 = New System.Windows.Forms.Label()
         Me.ButtonClose = New System.Windows.Forms.Button()
         Me.Button001 = New System.Windows.Forms.Button()
         Me.ButtonPreview = New System.Windows.Forms.Button()
@@ -69,6 +68,7 @@ Partial Class FormMTM01
         Me.Label13 = New System.Windows.Forms.Label()
         Me.DatePicker004 = New System.Windows.Forms.DateTimePicker()
         Me.Label14 = New System.Windows.Forms.Label()
+        Me.Label6 = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -432,15 +432,6 @@ Partial Class FormMTM01
         Me.TextBox006.Size = New System.Drawing.Size(81, 27)
         Me.TextBox006.TabIndex = 10
         '
-        'Label6
-        '
-        Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(434, 206)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(24, 16)
-        Me.Label6.TabIndex = 36
-        Me.Label6.Text = "時"
-        '
         'ButtonClose
         '
         Me.ButtonClose.BackColor = System.Drawing.Color.MediumTurquoise
@@ -530,6 +521,15 @@ Partial Class FormMTM01
         Me.Label14.Size = New System.Drawing.Size(106, 24)
         Me.Label14.TabIndex = 44
         Me.Label14.Text = "仕入先実施日"
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Location = New System.Drawing.Point(434, 209)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(24, 16)
+        Me.Label6.TabIndex = 36
+        Me.Label6.Text = "時"
         '
         'FormMTM01
         '
@@ -626,7 +626,6 @@ Partial Class FormMTM01
     Friend WithEvents TextBox005 As TextBox
     Friend WithEvents Label5 As Label
     Friend WithEvents TextBox006 As TextBox
-    Friend WithEvents Label6 As Label
     Friend WithEvents ButtonClose As Button
     Friend WithEvents Button001 As Button
     Friend WithEvents ButtonPreview As Button
@@ -636,4 +635,5 @@ Partial Class FormMTM01
     Friend WithEvents Label13 As Label
     Friend WithEvents DatePicker004 As DateTimePicker
     Friend WithEvents Label14 As Label
+    Friend WithEvents Label6 As Label
 End Class

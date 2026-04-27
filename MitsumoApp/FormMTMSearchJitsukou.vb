@@ -1,4 +1,5 @@
 ﻿Imports System.Configuration
+Imports System.Text
 Imports MitsumoLib
 Public Class FormMTMSearchJitsukou
 
@@ -85,7 +86,7 @@ Public Class FormMTMSearchJitsukou
             }
         column002.Width = 120
         column002.ReadOnly = True
-        column002.SortMode = DataGridViewColumnSortMode.NotSortable
+        column002.SortMode = DataGridViewColumnSortMode.Automatic
         Me.DataGridView001.Columns.Add(column002)
         Dim column002_2 As New DataGridViewTextBoxColumn With {
                 .HeaderText = "仕入先実施日",
@@ -94,7 +95,7 @@ Public Class FormMTMSearchJitsukou
             }
         column002_2.Width = 120
         column002_2.ReadOnly = True
-        column002_2.SortMode = DataGridViewColumnSortMode.NotSortable
+        column002_2.SortMode = DataGridViewColumnSortMode.Automatic
         Me.DataGridView001.Columns.Add(column002_2)
         Dim column003 As New DataGridViewTextBoxColumn With {
                 .HeaderText = "価格入力名",
@@ -103,7 +104,7 @@ Public Class FormMTMSearchJitsukou
             }
         column003.Width = 400
         column003.ReadOnly = True
-        column003.SortMode = DataGridViewColumnSortMode.NotSortable
+        column003.SortMode = DataGridViewColumnSortMode.Automatic
         Me.DataGridView001.Columns.Add(column003)
         Dim column003_2 As New DataGridViewTextBoxColumn With {
                 .HeaderText = "メモ（社内用）",
@@ -112,7 +113,7 @@ Public Class FormMTMSearchJitsukou
             }
         column003_2.Width = 300
         column003_2.ReadOnly = True
-        column003_2.SortMode = DataGridViewColumnSortMode.NotSortable
+        column003_2.SortMode = DataGridViewColumnSortMode.Automatic
         Me.DataGridView001.Columns.Add(column003_2)
         Dim column003_1 As New DataGridViewTextBoxColumn With {
                 .HeaderText = "一斉送信日時",
@@ -121,7 +122,7 @@ Public Class FormMTMSearchJitsukou
             }
         column003_1.Width = 160
         column003_1.ReadOnly = True
-        column003_1.SortMode = DataGridViewColumnSortMode.NotSortable
+        column003_1.SortMode = DataGridViewColumnSortMode.Automatic
         Me.DataGridView001.Columns.Add(column003_1)
         Dim column004 As New DataGridViewTextBoxColumn With {
                 .HeaderText = "取込担当者コード",
@@ -190,7 +191,7 @@ Public Class FormMTMSearchJitsukou
             }
         column010.Width = 120
         column010.ReadOnly = True
-        column010.SortMode = DataGridViewColumnSortMode.NotSortable
+        column010.SortMode = DataGridViewColumnSortMode.Automatic
         Me.DataGridView001.Columns.Add(column010)
         Dim column011 As New DataGridViewTextBoxColumn With {
                     .HeaderText = "運賃の指定",
@@ -340,7 +341,7 @@ Public Class FormMTMSearchJitsukou
         column025.Width = 120
         column025.ReadOnly = True
         column025.Visible = FormMTM02Disp
-        column025.SortMode = DataGridViewColumnSortMode.NotSortable
+        column025.SortMode = DataGridViewColumnSortMode.Automatic
         Me.DataGridView001.Columns.Add(column025)
         Dim column026 As New DataGridViewTextBoxColumn With {
                 .HeaderText = "未送信明細数",
@@ -350,7 +351,7 @@ Public Class FormMTMSearchJitsukou
         column026.Width = 120
         column026.ReadOnly = True
         column026.Visible = FormMTM03Disp
-        column026.SortMode = DataGridViewColumnSortMode.NotSortable
+        column026.SortMode = DataGridViewColumnSortMode.Automatic
         Me.DataGridView001.Columns.Add(column026)
 
     End Sub
@@ -396,7 +397,27 @@ Public Class FormMTMSearchJitsukou
         Me.DataGridView001.DataSource = Me.BizSearchJitsukou.GetJitsukouAll3(strLoginID)
         Me.DataGridView001.CurrentCell = Nothing
     End Sub
-
+    ''' <summary>
+    ''' データ設定（価格入力名検索用-標準用）
+    ''' </summary>
+    Public Sub SetData7()
+        Me.DataGridView001.DataSource = Me.BizSearchJitsukou.GetJitsukouAll4(Me.TextBox001.Text)
+        Me.DataGridView001.CurrentCell = Nothing
+    End Sub
+    ''' <summary>
+    ''' データ設定（価格入力名検索用-価格入力用-検索表示）
+    ''' </summary>
+    Public Sub SetData8(ByVal strLoginID As String)
+        Me.DataGridView001.DataSource = Me.BizSearchJitsukou.GetJitsukouAll5(strLoginID, Me.TextBox001.Text)
+        Me.DataGridView001.CurrentCell = Nothing
+    End Sub
+    ''' <summary>
+    ''' データ設定（価格入力名検索用-見積送信用-検索表示）
+    ''' </summary>
+    Public Sub SetData9(ByVal strLoginID As String)
+        Me.DataGridView001.DataSource = Me.BizSearchJitsukou.GetJitsukouAll6(strLoginID, Me.TextBox001.Text)
+        Me.DataGridView001.CurrentCell = Nothing
+    End Sub
     ''' <summary>
     ''' 閉じるボタンクリック処理
     ''' </summary>
@@ -620,4 +641,72 @@ Public Class FormMTMSearchJitsukou
             End If
         End If
     End Sub
+    ''' <summary>
+    ''' 検索ボタン押下
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    Private Sub ButtonSearch_Click(sender As Object, e As EventArgs) Handles ButtonSearch.Click
+
+        Dim originalDtCopy As DataTable = CType(DataGridView001.DataSource, DataTable)
+        Dim originalDt As DataTable = CType(DataGridView001.DataSource, DataTable)
+        If originalDt Is Nothing Then Exit Sub
+
+        Dim keyword As String = TextBox001.Text
+
+        ' 検索条件が空なら元データを表示
+        If String.IsNullOrWhiteSpace(keyword) Then
+            DataGridView001.DataSource = originalDt
+            Exit Sub
+        End If
+
+        ' 検索文字を正規化
+        keyword = NormalizeText(keyword)
+
+        ' 半角スペース・全角スペースで分割（AND条件）
+        Dim keywords As String() =
+        keyword.Split({" "c, "　"c}, StringSplitOptions.RemoveEmptyEntries)
+
+        ' 価格入力名
+        Dim targetColumnName As String = "MTMR003002"
+
+        Dim filteredRows = originalDt.AsEnumerable().
+        Where(Function(row)
+                  Dim cellValue As String = ""
+
+                  If Not row.IsNull(targetColumnName) Then
+                      cellValue = NormalizeText(row(targetColumnName).ToString())
+                  End If
+
+                  Return keywords.All(Function(word) cellValue.Contains(word))
+              End Function).ToList()
+
+        If filteredRows.Count > 0 Then
+            DataGridView001.DataSource = filteredRows.CopyToDataTable()
+        Else
+            MessageBox.Show("該当するデータがありません。", "検索結果", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            'DataGridView001.DataSource = originalDtCopy.Clone()
+        End If
+
+    End Sub
+
+    Private Function NormalizeText(ByVal text As String) As String
+        If String.IsNullOrEmpty(text) Then Return ""
+
+        ' 全角半角を統一
+        Dim normalized As String =
+        text.Normalize(NormalizationForm.FormKC)
+
+        ' ひらがな → カタカナ
+        normalized = StrConv(normalized, VbStrConv.Katakana)
+
+        ' 小文字統一
+        normalized = normalized.ToLower()
+
+        ' 前後空白除去
+        normalized = normalized.Trim()
+
+        Return normalized
+    End Function
+
 End Class

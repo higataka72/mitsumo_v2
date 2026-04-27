@@ -52,7 +52,6 @@ Public Class FormMTM04
     ''' <param name="e"></param>
     <Obsolete>
     Private Sub ButtonExecute_Click(sender As Object, e As EventArgs) Handles ButtonExecute.Click
-
         '画面初期設定
         Dim txt001 As String = Me.TextBox001.Text.Trim
         Dim txt002 As String = Me.TextBox002.Text.Trim
@@ -180,6 +179,7 @@ Public Class FormMTM04
             End If
 
             For Each rowTanka As DataRow In tableMTM10R001TANKA.Rows
+
                 Dim han10r007mitsumorim As New Models.HAN10R007MITSUMORIM
                 Dim han10r006mitsumorih As New Models.HAN10R006MITSUMORIH
                 '明細拡張テーブル（ヘッダ、明細）04/17

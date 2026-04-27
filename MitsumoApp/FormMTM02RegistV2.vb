@@ -1208,6 +1208,7 @@ Public Class FormMTM02RegistV2
     ''' <param name="e"></param>
     Private Sub DataGridView001_CellChecked(sender As Object, e As RowColEventArgs) Handles DataGridView001.CellChecked
         If e.Row = 1 AndAlso e.Col = 1 Then
+            DataGridView001.SortDefinition = String.Empty
             For row As Integer = DataGridView001.Rows.Fixed To DataGridView001.Rows.Count - 1
                 If DataGridView001.Rows(row).Visible Then
                     DataGridView001.SetCellCheck(row, 1, DataGridView001.GetCellCheck(e.Row, e.Col))

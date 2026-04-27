@@ -372,7 +372,7 @@ Namespace Biz
                             If (String.IsNullOrEmpty(row.Item("MTMR002030").ToString)) Then
                                 command.Parameters.Add(New SqlParameter("@MTMR002030", "0"))
                             Else
-                                command.Parameters.Add(New SqlParameter("@MTMR002030", row.Item("MTMR002030").ToString.Replace(",", "0")))
+                                command.Parameters.Add(New SqlParameter("@MTMR002030", row.Item("MTMR002030").ToString.Replace(",", "")))
                             End If
                             command.Parameters.Add(New SqlParameter("@MTMR002031", row.Item("MTMR002031").ToString.Replace(",", "")))
                             If (String.IsNullOrEmpty(row.Item("MTMR002032").ToString)) Then
@@ -384,7 +384,7 @@ Namespace Biz
                             If (String.IsNullOrEmpty(row.Item("MTMR002033").ToString)) Then
                                 command.Parameters.Add(New SqlParameter("@MTMR002033", "0"))
                             Else
-                                command.Parameters.Add(New SqlParameter("@MTMR002033", row.Item("MTMR002033").ToString.Replace(",", "0")))
+                                command.Parameters.Add(New SqlParameter("@MTMR002033", row.Item("MTMR002033").ToString.Replace(",", "")))
                             End If
                             command.Parameters.Add(New SqlParameter("@MTMR002034", row.Item("MTMR002034").ToString.Replace(",", "")))
                             If (String.IsNullOrEmpty(row.Item("MTMR002035").ToString)) Then

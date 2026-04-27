@@ -82,11 +82,40 @@ Namespace Biz
             If Not String.IsNullOrEmpty(mtm10r003jitsukou.MTMR003006_2) Then
                 If Double.TryParse(mtm10r003jitsukou.MTMR003006_2, dbl) Then
                     If (dbl < 0) Then errorList.Add("更新時間の数値が0-24ではありません")
+                    If (dbl < 0) Then errorList.Add("更新時間の数値が0-24ではありません")
                     If (dbl > 24) Then errorList.Add("更新時間の数値が0-24ではありません")
                 Else
                     errorList.Add("一斉送信時間が数値ではありません")
                 End If
             End If
+            'If String.IsNullOrWhiteSpace(mtm10r003jitsukou.MTMR003006_2) Then
+            '    errorList.Add("更新時間が空です")
+            'Else
+            '    ' 桁数チェック（4桁）
+            '    If mtm10r003jitsukou.MTMR003006_2.Length <> 4 Then
+            '        errorList.Add("更新時間は4桁（HHmm）で入力してください")
+            '    Else
+            '        ' 数値チェック
+            '        If Not Integer.TryParse(mtm10r003jitsukou.MTMR003006_2, Nothing) Then
+            '            errorList.Add("更新時間は数値で入力してください")
+            '        Else
+            '            ' 時・分を分解
+            '            Dim hour As Integer
+            '            Dim minute As Integer
+            '            hour = Integer.Parse(mtm10r003jitsukou.MTMR003006_2.Substring(0, 2))
+            '            minute = Integer.Parse(mtm10r003jitsukou.MTMR003006_2.Substring(2, 2))
+            '            ' 時間チェック
+            '            If hour < 0 OrElse hour > 24 Then
+            '                errorList.Add("更新時間の時間は0～24で入力してください")
+            '            End If
+
+            '            ' 分チェック
+            '            If minute < 0 OrElse minute > 59 Then
+            '                errorList.Add("更新時間の分は0～59で入力してください")
+            '            End If
+            '        End If
+            '    End If
+            'End If
 
             If String.IsNullOrWhiteSpace(mtm10r003jitsukou.MTMR003006) Then
                 errorList.Add("更新日が空です")
@@ -275,7 +304,7 @@ Namespace Biz
                         + ", CASE WHEN MTMR003005 IS NOT NULL AND REPLACE(MTMR003005, ' ', '') <> '' THEN SUBSTRING(MTMR003005, 1, 4) + '/' + SUBSTRING(MTMR003005, 5, 2) + '/' + SUBSTRING(MTMR003005, 7, 2) ELSE '' END AS MTMR003005" _
                         + ", CASE WHEN MTMR003005 IS NOT NULL AND REPLACE(MTMR003005, ' ', '') <> '' THEN SUBSTRING(MTMR003005, 9, 2) ELSE '' END AS MTMR003005_2" _
                         + ", CASE WHEN MTMR003006 IS NOT NULL AND REPLACE(MTMR003006, ' ', '') <> '' THEN SUBSTRING(MTMR003006, 1, 4) + '/' + SUBSTRING(MTMR003006, 5, 2) + '/' + SUBSTRING(MTMR003006, 7, 2) ELSE '' END AS MTMR003006" _
-                        + ", CASE WHEN MTMR003006 IS NOT NULL AND REPLACE(MTMR003006, ' ', '') <> '' THEN SUBSTRING(MTMR003006, 9, 2) ELSE '' END AS MTMR003006_2" _
+                        + ", CASE WHEN MTMR003006 IS NOT NULL AND REPLACE(MTMR003006, ' ', '') <> '' THEN SUBSTRING(MTMR003006, 9, 4) ELSE '' END AS MTMR003006_2" _
                         + ", CASE WHEN MTMR003006 IS NOT NULL AND REPLACE(MTMR003007, ' ', '') <> '' THEN SUBSTRING(MTMR003007, 1, 4) + '/' + SUBSTRING(MTMR003007, 5, 2) + '/' + SUBSTRING(MTMR003007, 7, 2) ELSE '' END AS MTMR003007" _
                         + ", CASE WHEN MTMR003023 IS NOT NULL AND REPLACE(MTMR003023, ' ', '') <> '' THEN SUBSTRING(MTMR003023, 1, 4) + '/' + SUBSTRING(MTMR003023, 5, 2) + '/' + SUBSTRING(MTMR003023, 7, 2) ELSE '' END AS MTMR003023" _
                         + ", MTMR003008" _

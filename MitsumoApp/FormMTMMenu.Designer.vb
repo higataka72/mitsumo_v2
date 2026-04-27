@@ -45,9 +45,9 @@ Partial Class FormMTMMenu
         Me.LabelVer.Font = New System.Drawing.Font("メイリオ", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.LabelVer.Location = New System.Drawing.Point(629, 23)
         Me.LabelVer.Name = "LabelVer"
-        Me.LabelVer.Size = New System.Drawing.Size(65, 18)
+        Me.LabelVer.Size = New System.Drawing.Size(58, 18)
         Me.LabelVer.TabIndex = 2
-        Me.LabelVer.Text = "ver : 2.31"
+        Me.LabelVer.Text = "ver : 2.4"
         '
         'ButtonUser
         '
