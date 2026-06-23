@@ -1151,15 +1151,25 @@ Public Class FormMTM04
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     Private Sub Button002_Click(sender As Object, e As EventArgs) Handles Button002.Click
-        Dim formSearch As New FormMTMSearchUser
+        Dim formSearch As New FormMTMSearchTanto
         Dim result As DialogResult = formSearch.ShowDialog()
 
         If result = DialogResult.OK Then
-            Me.TextBox003.Text = formSearch.Selected.MTMM002001
-            Me.TextBox004.Text = formSearch.Selected.MTMM002002
+            Me.TextBox003.Text = formSearch.Selected.HANM004001
+            Me.TextBox004.Text = formSearch.Selected.HANM004002
+            Me.TextBox003.Focus()
         End If
 
         formSearch.Dispose()
+        'Dim formSearch As New FormMTMSearchUser
+        'Dim result As DialogResult = formSearch.ShowDialog()
+
+        'If result = DialogResult.OK Then
+        '    Me.TextBox003.Text = formSearch.Selected.MTMM002001
+        '    Me.TextBox004.Text = formSearch.Selected.MTMM002002
+        'End If
+
+        'formSearch.Dispose()
     End Sub
     ''' <summary>
     ''' 担当者検索2ボタン押下処理
@@ -1167,15 +1177,25 @@ Public Class FormMTM04
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     Private Sub Button003_Click(sender As Object, e As EventArgs) Handles Button003.Click
-        Dim formSearch As New FormMTMSearchUser
+        Dim formSearch As New FormMTMSearchTanto
         Dim result As DialogResult = formSearch.ShowDialog()
 
         If result = DialogResult.OK Then
-            Me.TextBox005.Text = formSearch.Selected.MTMM002001
-            Me.TextBox006.Text = formSearch.Selected.MTMM002002
+            Me.TextBox005.Text = formSearch.Selected.HANM004001
+            Me.TextBox006.Text = formSearch.Selected.HANM004002
+            Me.TextBox005.Focus()
         End If
 
         formSearch.Dispose()
+        'Dim formSearch As New FormMTMSearchUser
+        'Dim result As DialogResult = formSearch.ShowDialog()
+
+        'If result = DialogResult.OK Then
+        '    Me.TextBox005.Text = formSearch.Selected.MTMM002001
+        '    Me.TextBox006.Text = formSearch.Selected.MTMM002002
+        'End If
+
+        'formSearch.Dispose()
     End Sub
     ''' <summary>
     ''' 営業所検索ボタン押下処理
@@ -1234,10 +1254,33 @@ Public Class FormMTM04
         Me.TextBox009.Text = ""
         Me.TextBox010.Text = ""
         Me.TextBox011.Text = ""
-        Me.TextBox011.Text = ""
+        Me.TextBox012.Text = ""
         '取込ファイル名を取得してセット
         Me.TextBox013.Text = Me.Biz04.OutputFileNameSearch()
 
+        'TextBox003のLostFocusイベントハンドラを追加する
+        AddHandler TextBox003.LostFocus, AddressOf TextBox003_LostFocus
+
+        'TextBox007のLostFocusイベントハンドラを追加する
+        AddHandler TextBox009.LostFocus, AddressOf TextBox009_LostFocus
+
+    End Sub
+
+    'LostFocusイベントハンドラ
+    Private Sub TextBox003_LostFocus(ByVal sender As Object, ByVal e As EventArgs)
+        If (Not String.IsNullOrEmpty(Trim(Me.TextBox003.Text))) Then
+            If (String.IsNullOrEmpty(Trim(Me.TextBox005.Text))) Then
+                Me.TextBox005.Text = Me.TextBox003.Text
+            End If
+        End If
+    End Sub
+    'LostFocusイベントハンドラ
+    Private Sub TextBox009_LostFocus(ByVal sender As Object, ByVal e As EventArgs)
+        If (Not String.IsNullOrEmpty(Trim(Me.TextBox009.Text))) Then
+            If (String.IsNullOrEmpty(Trim(Me.TextBox011.Text))) Then
+                Me.TextBox011.Text = Me.TextBox009.Text
+            End If
+        End If
     End Sub
     ''' <summary>
     ''' 得意先コード検索ボタンクリック処理(FROM)
@@ -1251,6 +1294,7 @@ Public Class FormMTM04
         If result = DialogResult.OK Then
             Me.TextBox009.Text = formSearch.Selected.HANM001003
             Me.TextBox010.Text = formSearch.Selected.HANM001004
+            Me.TextBox009.Focus()
         End If
 
         formSearch.Dispose()
@@ -1346,6 +1390,30 @@ Public Class FormMTM04
     Private Sub TextBox011_TextChanged(sender As Object, e As EventArgs) Handles TextBox011.TextChanged
         If (String.IsNullOrEmpty(Trim(Me.TextBox011.Text))) Then
             Me.TextBox012.Text = ""
+        End If
+    End Sub
+
+    Private Sub TextBox003_KeyDown(sender As Object, e As KeyEventArgs) Handles TextBox003.KeyDown
+        If e.KeyCode = Keys.F3 Then
+            Button002.PerformClick()
+        End If
+        If e.KeyCode = Keys.Enter Then
+            Dim forward As Boolean = e.Modifiers <> Keys.Shift
+            'Me.ProcessTabKey(forward);
+            Me.SelectNextControl(Me.ActiveControl, forward, True, True, True)
+            e.Handled = True
+        End If
+    End Sub
+
+    Private Sub TextBox009_KeyDown(sender As Object, e As KeyEventArgs) Handles TextBox009.KeyDown
+        If e.KeyCode = Keys.F3 Then
+            Button005.PerformClick()
+        End If
+        If e.KeyCode = Keys.Enter Then
+            Dim forward As Boolean = e.Modifiers <> Keys.Shift
+            'Me.ProcessTabKey(forward);
+            Me.SelectNextControl(Me.ActiveControl, forward, True, True, True)
+            e.Handled = True
         End If
     End Sub
 End Class

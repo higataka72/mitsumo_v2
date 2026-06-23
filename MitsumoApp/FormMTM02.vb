@@ -169,7 +169,7 @@ Public Class FormMTM02
     ''' </summary>
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
-    Private Sub ButtonSearch_Click(sender As Object, e As EventArgs) Handles ButtonSearch001.Click, ButtonSearch002.Click
+    Private Sub ButtonSearch_Click(sender As Object, e As EventArgs) Handles ButtonSearch002.Click, ButtonSearch001.Click
         Dim txt001 As String = Me.TextBox001.Text.Trim
         Dim txt003 As String = Me.TextBox003.Text.Trim
         Dim txt005 As String = Me.TextBox005.Text.Trim
@@ -1533,16 +1533,8 @@ Public Class FormMTM02
         End If
     End Sub
 
-    Private Sub TextBox011_KeyDown(sender As Object, e As KeyEventArgs) Handles TextBox011.KeyDown
-        If e.KeyCode = Keys.F3 Then
-            ButtonStaff001.PerformClick()
-        End If
-        If e.KeyCode = Keys.Enter Then
-            Dim forward As Boolean = e.Modifiers <> Keys.Shift
-            'Me.ProcessTabKey(forward);
-            Me.SelectNextControl(Me.ActiveControl, forward, True, True, True)
-            e.Handled = True
-        End If
+    Private Sub TextBox011_KeyDown(sender As Object, e As KeyEventArgs)
+
     End Sub
 
     Private Sub TextBox013_KeyDown(sender As Object, e As KeyEventArgs) Handles TextBox013.KeyDown
@@ -1557,7 +1549,7 @@ Public Class FormMTM02
         End If
     End Sub
 
-    Private Sub TextBox015_KeyDown(sender As Object, e As KeyEventArgs) Handles TextBox015.KeyDown
+    Private Sub TextBox015_KeyDown(sender As Object, e As KeyEventArgs) Handles TextBox015.KeyDown, TextBox011.KeyDown
         If e.KeyCode = Keys.F3 Then
             ButtonCustomer001.PerformClick()
         End If
