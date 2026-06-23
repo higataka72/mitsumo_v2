@@ -213,11 +213,11 @@ Namespace Biz
                         + ", CONVERT(int, ISNULL(MTMR003018, 0)) AS MTMR003018" _
                         + ", CASE WHEN MTMR003019 IS NOT NULL AND REPLACE(MTMR003019, ' ', '') <> '' THEN SUBSTRING(MTMR003019, 1, 2) + ':' + SUBSTRING(MTMR003019, 3, 2) + ':' + SUBSTRING(MTMR003019, 5, 2) ELSE '' END AS MTMR003019" _
                         + ", CASE WHEN MTMR003020 IS NOT NULL AND REPLACE(MTMR003020, ' ', '') <> '' THEN SUBSTRING(MTMR003020, 1, 2) + ':' + SUBSTRING(MTMR003020, 3, 2) + ':' + SUBSTRING(MTMR003020, 5, 2) ELSE '' END AS MTMR003020" _
-                        + ", MTMR002080_CNT" _
+                        + ", CONVERT(int, MTMR002080_CNT) AS MTMR002080_CNT" _
                         + " FROM MTM10R003JITSUKOU"
                     If (Not String.IsNullOrWhiteSpace(strLoginID)) Then
                         command.CommandText += " RIGHT JOIN ("
-                        command.CommandText += " SELECT MTMR002080, ISNULL(CAST(MAX(MTMR002080_CNT) AS varchar(10)), '') AS MTMR002080_CNT "
+                        command.CommandText += " SELECT MTMR002080, CAST(MAX(MTMR002080_CNT) AS int) AS MTMR002080_CNT "
                         command.CommandText += " FROM ( "
                         command.CommandText += "  SELECT "
                         command.CommandText += "   MTMR002080,"
@@ -370,11 +370,11 @@ Namespace Biz
                         + ", CONVERT(int, ISNULL(MTMR003018, 0)) AS MTMR003018" _
                         + ", CASE WHEN MTMR003019 IS NOT NULL AND REPLACE(MTMR003019, ' ', '') <> '' THEN SUBSTRING(MTMR003019, 1, 2) + ':' + SUBSTRING(MTMR003019, 3, 2) + ':' + SUBSTRING(MTMR003019, 5, 2) ELSE '' END AS MTMR003019" _
                         + ", CASE WHEN MTMR003020 IS NOT NULL AND REPLACE(MTMR003020, ' ', '') <> '' THEN SUBSTRING(MTMR003020, 1, 2) + ':' + SUBSTRING(MTMR003020, 3, 2) + ':' + SUBSTRING(MTMR003020, 5, 2) ELSE '' END AS MTMR003020" _
-                        + ", MTMR002080_CNT AS MTMR002080_CNT2" _
+                        + ", CONVERT(int, MTMR002080_CNT) AS MTMR002080_CNT2" _
                         + " FROM MTM10R003JITSUKOU"
                     If (Not String.IsNullOrWhiteSpace(strLoginID)) Then
                         command.CommandText += " RIGHT JOIN ("
-                        command.CommandText += " SELECT MTMR002080, ISNULL(CAST(MAX(MTMR002080_CNT) AS varchar(10)), '') AS MTMR002080_CNT "
+                        command.CommandText += " SELECT MTMR002080, CAST(MAX(MTMR002080_CNT) AS int) AS MTMR002080_CNT "
                         command.CommandText += " FROM ( "
                         command.CommandText += " SELECT MTMR002080,(COUNT(MTMR002087) - SUM(CASE WHEN ISNULL(MTMR002087,0) <> 0 THEN 1 ELSE 0 END)) AS MTMR002080_CNT"
                         command.CommandText += " FROM MTM10R002KAKAKU "
@@ -402,7 +402,7 @@ Namespace Biz
                         'command.CommandText += " ON MTM10R003JITSUKOU.MTMR003001 = TANKA.MTMR002080 "
                     Else
                         command.CommandText += " RIGHT JOIN ("
-                        command.CommandText += " SELECT MTMR002080, ISNULL(CAST(MAX(MTMR002080_CNT) AS varchar(10)), '') AS MTMR002080_CNT "
+                        command.CommandText += " SELECT MTMR002080, CAST(MAX(MTMR002080_CNT) AS int) AS MTMR002080_CNT "
                         command.CommandText += " FROM ( "
                         command.CommandText += " SELECT MTMR002080,(COUNT(MTMR002087) - SUM(CASE WHEN ISNULL(MTMR002087,0) <> 0 THEN 1 ELSE 0 END)) AS MTMR002080_CNT"
                         command.CommandText += " FROM MTM10R002KAKAKU "
@@ -543,7 +543,7 @@ Namespace Biz
                         + " FROM MTM10R003JITSUKOU"
                     If (Not String.IsNullOrWhiteSpace(strLoginID)) Then
                         command.CommandText += " RIGHT JOIN ("
-                        command.CommandText += " SELECT MTMR002080, ISNULL(CAST(MAX(MTMR002080_CNT) AS varchar(10)), '') AS MTMR002080_CNT "
+                        command.CommandText += " SELECT MTMR002080, CAST(MAX(MTMR002080_CNT) AS int) AS MTMR002080_CNT "
                         command.CommandText += " FROM ( "
                         command.CommandText += "  SELECT "
                         command.CommandText += "   MTMR002080,"
@@ -645,11 +645,11 @@ Namespace Biz
                         + ", CONVERT(int, ISNULL(MTMR003018, 0)) AS MTMR003018" _
                         + ", CASE WHEN MTMR003019 IS NOT NULL AND REPLACE(MTMR003019, ' ', '') <> '' THEN SUBSTRING(MTMR003019, 1, 2) + ':' + SUBSTRING(MTMR003019, 3, 2) + ':' + SUBSTRING(MTMR003019, 5, 2) ELSE '' END AS MTMR003019" _
                         + ", CASE WHEN MTMR003020 IS NOT NULL AND REPLACE(MTMR003020, ' ', '') <> '' THEN SUBSTRING(MTMR003020, 1, 2) + ':' + SUBSTRING(MTMR003020, 3, 2) + ':' + SUBSTRING(MTMR003020, 5, 2) ELSE '' END AS MTMR003020" _
-                        + ", MTMR002080_CNT AS MTMR002080_CNT2" _
+                        + ", CONVERT(int, MTMR002080_CNT) AS MTMR002080_CNT2" _
                         + " FROM MTM10R003JITSUKOU"
                     If (Not String.IsNullOrWhiteSpace(strLoginID)) Then
                         command.CommandText += " RIGHT JOIN ("
-                        command.CommandText += " SELECT MTMR002080, ISNULL(CAST(MAX(MTMR002080_CNT) AS varchar(10)), '') AS MTMR002080_CNT "
+                        command.CommandText += " SELECT MTMR002080, CAST(MAX(MTMR002080_CNT) AS int) AS MTMR002080_CNT "
                         command.CommandText += " FROM ( "
                         command.CommandText += " SELECT MTMR002080,(COUNT(MTMR002087) - SUM(CASE WHEN ISNULL(MTMR002087,0) <> 0 THEN 1 ELSE 0 END)) AS MTMR002080_CNT"
                         command.CommandText += " FROM MTM10R002KAKAKU "
@@ -675,7 +675,7 @@ Namespace Biz
 
                     Else
                         command.CommandText += " RIGHT JOIN ("
-                        command.CommandText += " SELECT MTMR002080, ISNULL(CAST(MAX(MTMR002080_CNT) AS varchar(10)), '') AS MTMR002080_CNT "
+                        command.CommandText += " SELECT MTMR002080, CAST(MAX(MTMR002080_CNT) AS int) AS MTMR002080_CNT "
                         command.CommandText += " FROM ( "
                         command.CommandText += " SELECT MTMR002080,(COUNT(MTMR002087) - SUM(CASE WHEN ISNULL(MTMR002087,0) <> 0 THEN 1 ELSE 0 END)) AS MTMR002080_CNT"
                         command.CommandText += " FROM MTM10R002KAKAKU "

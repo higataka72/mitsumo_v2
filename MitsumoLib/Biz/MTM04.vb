@@ -2134,57 +2134,106 @@ Namespace Biz
                     Dim sw3err As StreamWriter = New StreamWriter(fileDirectory + "\" + kakakuNo + "_" + fileNameHAN98MA02SUTANKA_ERR + "_" + dtToday + ".sql", False, System.Text.Encoding.Default)
                     Dim sw3Rows As Decimal = 0
                     Dim sw3errRows As Decimal = 0
+
+                    ' 2026/04/28 仕入実施日が入っていない場合の「,」がWHERE句の前に入る問題の解消
                     For Each dataRow As DataRow In tableHAN98MA02SUTANKA.Rows
-                        If DataCheckSutanka(dataRow("HANMA02001"), dataRow("HANMA02002"), dataRow("HANMA02003"), dataRow("HANMA02005")) Then
-                            sw3Rows += 1
-                            updateHAN98MA02SUTANKA = "UPDATE  HAN98MA02SUTANKA SET "
-                            If (Not dataRow("HANMA02009").ToString() = "0") Then
-                                updateHAN98MA02SUTANKA += "HANMA02009 = " + dataRow("HANMA02009") + ","
+
+                        ' SET句を作成
+                        Dim setList As New List(Of String)
+
+                        If dataRow("HANMA02009").ToString() <> "0" Then
+                            setList.Add("HANMA02009 = " & dataRow("HANMA02009").ToString())
+                        End If
+
+                        If dataRow("HANMA02010").ToString() <> "0" Then
+                            setList.Add("HANMA02010 = " & dataRow("HANMA02010").ToString())
+                        End If
+
+                        If dataRow("HANMA02009").ToString() <> "0" Then
+                            setList.Add("HANMA02011 = " & dataRow("HANMA02011").ToString())
+                        End If
+
+                        If dataRow("HANMA02010").ToString() <> "0" Then
+                            setList.Add("HANMA02012 = " & dataRow("HANMA02012").ToString())
+                        End If
+
+                        ' 更新項目が1件もない場合はUPDATE文を作成しない
+                        If setList.Count > 0 Then
+
+                            updateHAN98MA02SUTANKA = "UPDATE HAN98MA02SUTANKA SET "
+                            updateHAN98MA02SUTANKA &= String.Join(", ", setList)
+                            updateHAN98MA02SUTANKA &= " WHERE "
+                            updateHAN98MA02SUTANKA &= "HANMA02001 = '" & dataRow("HANMA02001").ToString() & "' "
+                            updateHAN98MA02SUTANKA &= "AND HANMA02002 = '" & dataRow("HANMA02002").ToString() & "' "
+                            updateHAN98MA02SUTANKA &= "AND HANMA02003 = '" & dataRow("HANMA02003").ToString() & "' "
+                            updateHAN98MA02SUTANKA &= "AND HANMA02004 = 0 "
+                            updateHAN98MA02SUTANKA &= "AND HANMA02005 = " & dataRow("HANMA02005").ToString() & " "
+                            updateHAN98MA02SUTANKA &= "AND HANMA02006 = " & dataRow("HANMA02006").ToString()
+
+                            If DataCheckSutanka(dataRow("HANMA02001"), dataRow("HANMA02002"), dataRow("HANMA02003"), dataRow("HANMA02005")) Then
+                                sw3Rows += 1
+                                sw3.Write(updateHAN98MA02SUTANKA)
+                                sw3.Write(vbCrLf)
+                            Else
+                                sw3errRows += 1
+                                sw3err.Write(updateHAN98MA02SUTANKA)
+                                sw3err.Write(vbCrLf)
                             End If
-                            If (Not dataRow("HANMA02010").ToString() = "0") Then
-                                updateHAN98MA02SUTANKA += "HANMA02010 = " + dataRow("HANMA02010") + ","
-                            End If
-                            If (Not dataRow("HANMA02009").ToString() = 0) Then
-                                updateHAN98MA02SUTANKA += "HANMA02011 = " + dataRow("HANMA02011") + ","
-                            End If
-                            If (Not dataRow("HANMA02010").ToString() = 0) Then
-                                updateHAN98MA02SUTANKA += "HANMA02012 = " + dataRow("HANMA02012") + " "
-                            End If
-                            updateHAN98MA02SUTANKA += "WHERE "
-                            updateHAN98MA02SUTANKA += "HANMA02001 = '" + dataRow("HANMA02001") + "' "
-                            updateHAN98MA02SUTANKA += "AND HANMA02002 = '" + dataRow("HANMA02002") + "' "
-                            updateHAN98MA02SUTANKA += "AND HANMA02003 = '" + dataRow("HANMA02003") + "' "
-                            updateHAN98MA02SUTANKA += "AND HANMA02004 = 0 "
-                            updateHAN98MA02SUTANKA += "AND HANMA02005 = " + dataRow("HANMA02005") + " "
-                            updateHAN98MA02SUTANKA += "AND HANMA02006 = " + dataRow("HANMA02006")
-                            sw3.Write(updateHAN98MA02SUTANKA)
-                            sw3.Write(vbCrLf)
-                        Else
-                            sw3errRows += 1
-                            updateHAN98MA02SUTANKA = "UPDATE  HAN98MA02SUTANKA SET "
-                            If (Not dataRow("HANMA02009").ToString() = "0") Then
-                                updateHAN98MA02SUTANKA += "HANMA02009 = " + dataRow("HANMA02009") + ","
-                            End If
-                            If (Not dataRow("HANMA02010").ToString() = "0") Then
-                                updateHAN98MA02SUTANKA += "HANMA02010 = " + dataRow("HANMA02010") + ","
-                            End If
-                            If (Not dataRow("HANMA02009").ToString() = 0) Then
-                                updateHAN98MA02SUTANKA += "HANMA02011 = " + dataRow("HANMA02011") + ","
-                            End If
-                            If (Not dataRow("HANMA02010").ToString() = 0) Then
-                                updateHAN98MA02SUTANKA += "HANMA02012 = " + dataRow("HANMA02012") + " "
-                            End If
-                            updateHAN98MA02SUTANKA += "WHERE "
-                            updateHAN98MA02SUTANKA += "HANMA02001 = '" + dataRow("HANMA02001") + "' "
-                            updateHAN98MA02SUTANKA += "AND HANMA02002 = '" + dataRow("HANMA02002") + "' "
-                            updateHAN98MA02SUTANKA += "AND HANMA02003 = '" + dataRow("HANMA02003") + "' "
-                            updateHAN98MA02SUTANKA += "AND HANMA02004 = 0 "
-                            updateHAN98MA02SUTANKA += "AND HANMA02005 = " + dataRow("HANMA02005") + " "
-                            updateHAN98MA02SUTANKA += "AND HANMA02006 = " + dataRow("HANMA02006")
-                            sw3err.Write(updateHAN98MA02SUTANKA)
-                            sw3err.Write(vbCrLf)
                         End If
                     Next
+
+                    ' 2026/04/28 仕入実施日が入っていない場合の「,」がWHERE句の前に入る問題の解消前
+                    'For Each dataRow As DataRow In tableHAN98MA02SUTANKA.Rows
+                    '    If DataCheckSutanka(dataRow("HANMA02001"), dataRow("HANMA02002"), dataRow("HANMA02003"), dataRow("HANMA02005")) Then
+                    '        sw3Rows += 1
+                    '        updateHAN98MA02SUTANKA = "UPDATE  HAN98MA02SUTANKA SET "
+                    '        If (Not dataRow("HANMA02009").ToString() = "0") Then
+                    '            updateHAN98MA02SUTANKA += "HANMA02009 = " + dataRow("HANMA02009") + ","
+                    '        End If
+                    '        If (Not dataRow("HANMA02010").ToString() = "0") Then
+                    '            updateHAN98MA02SUTANKA += "HANMA02010 = " + dataRow("HANMA02010") + ","
+                    '        End If
+                    '        If (Not dataRow("HANMA02009").ToString() = 0) Then
+                    '            updateHAN98MA02SUTANKA += "HANMA02011 = " + dataRow("HANMA02011") + ","
+                    '        End If
+                    '        If (Not dataRow("HANMA02010").ToString() = 0) Then
+                    '            updateHAN98MA02SUTANKA += "HANMA02012 = " + dataRow("HANMA02012") + " "
+                    '        End If
+                    '        updateHAN98MA02SUTANKA += "WHERE "
+                    '        updateHAN98MA02SUTANKA += "HANMA02001 = '" + dataRow("HANMA02001") + "' "
+                    '        updateHAN98MA02SUTANKA += "AND HANMA02002 = '" + dataRow("HANMA02002") + "' "
+                    '        updateHAN98MA02SUTANKA += "AND HANMA02003 = '" + dataRow("HANMA02003") + "' "
+                    '        updateHAN98MA02SUTANKA += "AND HANMA02004 = 0 "
+                    '        updateHAN98MA02SUTANKA += "AND HANMA02005 = " + dataRow("HANMA02005") + " "
+                    '        updateHAN98MA02SUTANKA += "AND HANMA02006 = " + dataRow("HANMA02006")
+                    '        sw3.Write(updateHAN98MA02SUTANKA)
+                    '        sw3.Write(vbCrLf)
+                    '    Else
+                    '        sw3errRows += 1
+                    '        updateHAN98MA02SUTANKA = "UPDATE  HAN98MA02SUTANKA SET "
+                    '        If (Not dataRow("HANMA02009").ToString() = "0") Then
+                    '            updateHAN98MA02SUTANKA += "HANMA02009 = " + dataRow("HANMA02009") + ","
+                    '        End If
+                    '        If (Not dataRow("HANMA02010").ToString() = "0") Then
+                    '            updateHAN98MA02SUTANKA += "HANMA02010 = " + dataRow("HANMA02010") + ","
+                    '        End If
+                    '        If (Not dataRow("HANMA02009").ToString() = 0) Then
+                    '            updateHAN98MA02SUTANKA += "HANMA02011 = " + dataRow("HANMA02011") + ","
+                    '        End If
+                    '        If (Not dataRow("HANMA02010").ToString() = 0) Then
+                    '            updateHAN98MA02SUTANKA += "HANMA02012 = " + dataRow("HANMA02012") + " "
+                    '        End If
+                    '        updateHAN98MA02SUTANKA += "WHERE "
+                    '        updateHAN98MA02SUTANKA += "HANMA02001 = '" + dataRow("HANMA02001") + "' "
+                    '        updateHAN98MA02SUTANKA += "AND HANMA02002 = '" + dataRow("HANMA02002") + "' "
+                    '        updateHAN98MA02SUTANKA += "AND HANMA02003 = '" + dataRow("HANMA02003") + "' "
+                    '        updateHAN98MA02SUTANKA += "AND HANMA02004 = 0 "
+                    '        updateHAN98MA02SUTANKA += "AND HANMA02005 = " + dataRow("HANMA02005") + " "
+                    '        updateHAN98MA02SUTANKA += "AND HANMA02006 = " + dataRow("HANMA02006")
+                    '        sw3err.Write(updateHAN98MA02SUTANKA)
+                    '        sw3err.Write(vbCrLf)
+                    '    End If
+                    'Next
                     sw3.Close()
                     sw3err.Close()
                     'ゴミファイル削除
