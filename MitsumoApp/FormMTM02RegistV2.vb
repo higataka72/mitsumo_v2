@@ -1369,155 +1369,159 @@ Public Class FormMTM02RegistV2
     Private Sub DataGridView001_CellChanged(sender As Object, e As RowColEventArgs) Handles DataGridView001.CellChanged
         Dim dt As Date
 
+        If e.Row < DataGridView001.Rows.Fixed Then
+            Return
+        End If
+
         If e.Col = 24 Then
-            Dim htText = DataGridView001.HitTest()
-            If Not htText.Column = -1 Then
-                Dim colMTMR002030 = DataGridView001(e.Row, 24).ToString()
-                If Not colMTMR002030 Is DBNull.Value Then
-                    Dim formatVal As Decimal
-                    If (Decimal.TryParse(colMTMR002030, formatVal)) Then
-                        DataGridView001.SetData(e.Row, e.Col, formatVal.ToString("0.00"))
+            'Dim htText = DataGridView001.HitTest()
+            'If Not htText.Column = -1 Then
+            Dim colMTMR002030 = DataGridView001(e.Row, 24).ToString()
+            If Not colMTMR002030 Is DBNull.Value Then
+                Dim formatVal As Decimal
+                If (Decimal.TryParse(colMTMR002030, formatVal)) Then
+                    DataGridView001.SetData(e.Row, e.Col, formatVal.ToString("0.00"))
+                    DataGridView001.FinishEditing()
+                    'Me.DataGridView001.Rows(e.RowIndex).Cells("MTMR002030").Value = formatVal.ToString("0.00")
+                    Dim decMTMR002029 As Decimal = 0.00
+                    Dim decMTMR002030 As Decimal = 0.00
+                    Dim decMTMR002031 As Decimal = 0.00
+                    Dim decMTMR002033 As Decimal = 0.00
+                    Dim decMTMR002034 As Decimal = 0.00
+                    Dim decMTMR002036_ARARI As Decimal = 0.0
+                    Dim decMTMR002036UP As Decimal = 0.0
+                    Dim decMTMR002069 As Decimal = 0.00
+                    '新売㎡単価
+                    If Decimal.TryParse(colMTMR002030, decMTMR002030) Then
+                        If Decimal.TryParse(DataGridView001(e.Row, 60).ToString(), decMTMR002069) Then
+                            If (Not decMTMR002030 = 0.00) And (Not decMTMR002069 = 0.00) Then
+                                decMTMR002031 = Math.Round(decMTMR002030 / decMTMR002069, 2, MidpointRounding.AwayFromZero)
+                            End If
+                        End If
+                    End If
+                    If (decMTMR002031 = 0.0) Then
+                        DataGridView001.SetData(e.Row, 25, decMTMR002031.ToString("0.00"))
                         DataGridView001.FinishEditing()
-                        'Me.DataGridView001.Rows(e.RowIndex).Cells("MTMR002030").Value = formatVal.ToString("0.00")
-                        Dim decMTMR002029 As Decimal = 0.00
-                        Dim decMTMR002030 As Decimal = 0.00
-                        Dim decMTMR002031 As Decimal = 0.00
-                        Dim decMTMR002033 As Decimal = 0.00
-                        Dim decMTMR002034 As Decimal = 0.00
-                        Dim decMTMR002036_ARARI As Decimal = 0.0
-                        Dim decMTMR002036UP As Decimal = 0.0
-                        Dim decMTMR002069 As Decimal = 0.00
-                        '新売㎡単価
-                        If Decimal.TryParse(colMTMR002030, decMTMR002030) Then
-                            If Decimal.TryParse(DataGridView001(e.Row, 60).ToString(), decMTMR002069) Then
-                                If (Not decMTMR002030 = 0.00) And (Not decMTMR002069 = 0.00) Then
-                                    decMTMR002031 = Math.Round(decMTMR002030 / decMTMR002069, 2, MidpointRounding.AwayFromZero)
-                                End If
+                    Else
+                        DataGridView001.SetData(e.Row, 25, decMTMR002031.ToString("0.00"))
+                        DataGridView001.FinishEditing()
+                    End If
+                    '新粗利率計算
+                    If Decimal.TryParse(colMTMR002030, decMTMR002030) Then
+                        If Decimal.TryParse(DataGridView001(e.Row, 27).ToString(), decMTMR002033) Then
+                            If (Not decMTMR002030 = 0.00) And (Not decMTMR002033 = 0.00) Then
+                                decMTMR002036_ARARI = Math.Round((decMTMR002030 - decMTMR002033) / decMTMR002030 * 100, 1, MidpointRounding.AwayFromZero)
                             End If
                         End If
-                        If (decMTMR002031 = 0.0) Then
-                            DataGridView001.SetData(e.Row, 25, decMTMR002031.ToString("0.00"))
-                            DataGridView001.FinishEditing()
-                        Else
-                            DataGridView001.SetData(e.Row, 25, decMTMR002031.ToString("0.00"))
-                            DataGridView001.FinishEditing()
-                        End If
-                        '新粗利率計算
-                        If Decimal.TryParse(colMTMR002030, decMTMR002030) Then
-                            If Decimal.TryParse(DataGridView001(e.Row, 27).ToString(), decMTMR002033) Then
-                                If (Not decMTMR002030 = 0.00) And (Not decMTMR002033 = 0.00) Then
-                                    decMTMR002036_ARARI = Math.Round((decMTMR002030 - decMTMR002033) / decMTMR002030 * 100, 1, MidpointRounding.AwayFromZero)
-                                End If
+                    End If
+                    If (decMTMR002036_ARARI = 0.0) Then
+                        DataGridView001.SetData(e.Row, 30, decMTMR002036_ARARI.ToString("0.0"))
+                        DataGridView001.FinishEditing()
+                    Else
+                        DataGridView001.SetData(e.Row, 30, decMTMR002036_ARARI.ToString("0.0"))
+                        DataGridView001.FinishEditing()
+                    End If
+                    '新粗利率アップ計算
+                    If (Not DataGridView001(e.Row, 23).ToString() Is DBNull.Value) Then
+                        If (Decimal.TryParse(DataGridView001(e.Row, 23).ToString(), decMTMR002029)) Then
+                            If (Not decMTMR002036_ARARI = 0.0) And (Not decMTMR002029 = 0.0) Then
+                                decMTMR002036UP = Math.Round((decMTMR002036_ARARI - decMTMR002029), 1, MidpointRounding.AwayFromZero)
                             End If
                         End If
-                        If (decMTMR002036_ARARI = 0.0) Then
-                            DataGridView001.SetData(e.Row, 30, decMTMR002036_ARARI.ToString("0.0"))
-                            DataGridView001.FinishEditing()
-                        Else
-                            DataGridView001.SetData(e.Row, 30, decMTMR002036_ARARI.ToString("0.0"))
-                            DataGridView001.FinishEditing()
-                        End If
-                        '新粗利率アップ計算
-                        If (Not DataGridView001(e.Row, 23).ToString() Is DBNull.Value) Then
-                            If (Decimal.TryParse(DataGridView001(e.Row, 23).ToString(), decMTMR002029)) Then
-                                If (Not decMTMR002036_ARARI = 0.0) And (Not decMTMR002029 = 0.0) Then
-                                    decMTMR002036UP = Math.Round((decMTMR002036_ARARI - decMTMR002029), 1, MidpointRounding.AwayFromZero)
-                                End If
-                            End If
-                        End If
-                        If (decMTMR002036UP = 0.0) Then
-                            DataGridView001.SetData(e.Row, 31, decMTMR002036UP.ToString("0.0"))
-                            DataGridView001.FinishEditing()
-                        Else
-                            DataGridView001.SetData(e.Row, 31, decMTMR002036UP.ToString("0.0"))
-                            DataGridView001.FinishEditing()
-                        End If
+                    End If
+                    If (decMTMR002036UP = 0.0) Then
+                        DataGridView001.SetData(e.Row, 31, decMTMR002036UP.ToString("0.0"))
+                        DataGridView001.FinishEditing()
+                    Else
+                        DataGridView001.SetData(e.Row, 31, decMTMR002036UP.ToString("0.0"))
+                        DataGridView001.FinishEditing()
                     End If
                 End If
             End If
+            'End If
         End If
 
         If e.Col = 27 Then
-            Dim htText = DataGridView001.HitTest()
-            If Not htText.Column = -1 Then
-                Dim calMTMR002033 = DataGridView001(e.Row, e.Col).ToString()
-                If Not calMTMR002033 Is DBNull.Value Then
-                    Dim formatVal As Decimal
-                    If (Decimal.TryParse(calMTMR002033, formatVal)) Then
-                        DataGridView001.SetData(e.Row, e.Col, formatVal.ToString("0.00"))
+            'Dim htText = DataGridView001.HitTest()
+            'If Not htText.Column = -1 Then
+            Dim calMTMR002033 = DataGridView001(e.Row, e.Col).ToString()
+            If Not calMTMR002033 Is DBNull.Value Then
+                Dim formatVal As Decimal
+                If (Decimal.TryParse(calMTMR002033, formatVal)) Then
+                    DataGridView001.SetData(e.Row, e.Col, formatVal.ToString("0.00"))
+                    DataGridView001.FinishEditing()
+                    Dim decMTMR002027 As Decimal = 0.00
+                    Dim decMTMR002029 As Decimal = 0.00
+                    Dim decMTMR002030 As Decimal = 0.00
+                    Dim decMTMR002033 As Decimal = 0.00
+                    Dim decMTMR002034 As Decimal = 0.00
+                    Dim decMTMR002036_ARARI As Decimal = 0.0
+                    Dim decMTMR002036UP As Decimal = 0.0
+                    Dim decMTMR002037 As Decimal = 0.0
+                    Dim decMTMR002069 As Decimal = 0.00
+                    '新仕㎡単価
+                    If Decimal.TryParse(calMTMR002033, decMTMR002033) Then
+                        If Decimal.TryParse(DataGridView001(e.Row, 60).ToString(), decMTMR002069) Then
+                            If (Not decMTMR002033 = 0.00) And (Not decMTMR002069 = 0.00) Then
+                                decMTMR002034 = Math.Round(decMTMR002033 / decMTMR002069, 2, MidpointRounding.AwayFromZero)
+                            End If
+                        End If
+                    End If
+                    If (decMTMR002034 = 0.0) Then
+                        DataGridView001.SetData(e.Row, 28, decMTMR002034.ToString("0.00"))
                         DataGridView001.FinishEditing()
-                        Dim decMTMR002027 As Decimal = 0.00
-                        Dim decMTMR002029 As Decimal = 0.00
-                        Dim decMTMR002030 As Decimal = 0.00
-                        Dim decMTMR002033 As Decimal = 0.00
-                        Dim decMTMR002034 As Decimal = 0.00
-                        Dim decMTMR002036_ARARI As Decimal = 0.0
-                        Dim decMTMR002036UP As Decimal = 0.0
-                        Dim decMTMR002037 As Decimal = 0.0
-                        Dim decMTMR002069 As Decimal = 0.00
-                        '新仕㎡単価
+                    Else
+                        DataGridView001.SetData(e.Row, 28, decMTMR002034.ToString("0.00"))
+                        DataGridView001.FinishEditing()
+                    End If
+                    '新粗利率計算
+                    If Decimal.TryParse(DataGridView001(e.Row, 24).ToString(), decMTMR002030) Then
                         If Decimal.TryParse(calMTMR002033, decMTMR002033) Then
-                            If Decimal.TryParse(DataGridView001(e.Row, 60).ToString(), decMTMR002069) Then
-                                If (Not decMTMR002033 = 0.00) And (Not decMTMR002069 = 0.00) Then
-                                    decMTMR002034 = Math.Round(decMTMR002033 / decMTMR002069, 2, MidpointRounding.AwayFromZero)
-                                End If
+                            If (Not decMTMR002030 = 0.00) And (Not decMTMR002033 = 0.00) Then
+                                decMTMR002036_ARARI = Math.Round((decMTMR002030 - decMTMR002033) / decMTMR002030 * 100, 1, MidpointRounding.AwayFromZero)
                             End If
                         End If
-                        If (decMTMR002034 = 0.0) Then
-                            DataGridView001.SetData(e.Row, 28, decMTMR002034.ToString("0.00"))
-                            DataGridView001.FinishEditing()
-                        Else
-                            DataGridView001.SetData(e.Row, 28, decMTMR002034.ToString("0.00"))
-                            DataGridView001.FinishEditing()
-                        End If
-                        '新粗利率計算
-                        If Decimal.TryParse(DataGridView001(e.Row, 24).ToString(), decMTMR002030) Then
-                            If Decimal.TryParse(calMTMR002033, decMTMR002033) Then
-                                If (Not decMTMR002030 = 0.00) And (Not decMTMR002033 = 0.00) Then
-                                    decMTMR002036_ARARI = Math.Round((decMTMR002030 - decMTMR002033) / decMTMR002030 * 100, 1, MidpointRounding.AwayFromZero)
-                                End If
+                    End If
+                    If (decMTMR002036_ARARI = 0.0) Then
+                        DataGridView001.SetData(e.Row, 30, decMTMR002036_ARARI.ToString("0.0"))
+                        DataGridView001.FinishEditing()
+                    Else
+                        DataGridView001.SetData(e.Row, 30, decMTMR002036_ARARI.ToString("0.0"))
+                        DataGridView001.FinishEditing()
+                    End If
+                    '新粗利率アップ計算
+                    If (Not DataGridView001(e.Row, 23).ToString() Is DBNull.Value) Then
+                        If (Decimal.TryParse(DataGridView001(e.Row, 23).ToString(), decMTMR002029)) Then
+                            If (Not decMTMR002036_ARARI = 0.0) And (Not decMTMR002029 = 0.0) Then
+                                decMTMR002036UP = Math.Round((decMTMR002036_ARARI - decMTMR002029), 1, MidpointRounding.AwayFromZero)
                             End If
                         End If
-                        If (decMTMR002036_ARARI = 0.0) Then
-                            DataGridView001.SetData(e.Row, 30, decMTMR002036_ARARI.ToString("0.0"))
-                            DataGridView001.FinishEditing()
-                        Else
-                            DataGridView001.SetData(e.Row, 30, decMTMR002036_ARARI.ToString("0.0"))
-                            DataGridView001.FinishEditing()
-                        End If
-                        '新粗利率アップ計算
-                        If (Not DataGridView001(e.Row, 23).ToString() Is DBNull.Value) Then
-                            If (Decimal.TryParse(DataGridView001(e.Row, 23).ToString(), decMTMR002029)) Then
-                                If (Not decMTMR002036_ARARI = 0.0) And (Not decMTMR002029 = 0.0) Then
-                                    decMTMR002036UP = Math.Round((decMTMR002036_ARARI - decMTMR002029), 1, MidpointRounding.AwayFromZero)
-                                End If
+                    End If
+                    If (decMTMR002036UP = 0.0) Then
+                        DataGridView001.SetData(e.Row, 31, decMTMR002036UP.ToString("0.0"))
+                        DataGridView001.FinishEditing()
+                    Else
+                        DataGridView001.SetData(e.Row, 31, decMTMR002036UP.ToString("0.0"))
+                        DataGridView001.FinishEditing()
+                    End If
+                    '値上率計算
+                    If (Not DataGridView001(e.Row, 21).ToString() Is DBNull.Value) Then
+                        If (Decimal.TryParse(DataGridView001(e.Row, 21).ToString(), decMTMR002027)) Then
+                            If (Not decMTMR002027 = 0.0) And (Not decMTMR002033 = 0.0) Then
+                                decMTMR002037 = Math.Round((decMTMR002033 / decMTMR002027) * 100, 1, MidpointRounding.AwayFromZero)
                             End If
                         End If
-                        If (decMTMR002036UP = 0.0) Then
-                            DataGridView001.SetData(e.Row, 31, decMTMR002036UP.ToString("0.0"))
-                            DataGridView001.FinishEditing()
-                        Else
-                            DataGridView001.SetData(e.Row, 31, decMTMR002036UP.ToString("0.0"))
-                            DataGridView001.FinishEditing()
-                        End If
-                        '値上率計算
-                        If (Not DataGridView001(e.Row, 21).ToString() Is DBNull.Value) Then
-                            If (Decimal.TryParse(DataGridView001(e.Row, 21).ToString(), decMTMR002027)) Then
-                                If (Not decMTMR002027 = 0.0) And (Not decMTMR002033 = 0.0) Then
-                                    decMTMR002037 = Math.Round((decMTMR002033 / decMTMR002027) * 100, 1, MidpointRounding.AwayFromZero)
-                                End If
-                            End If
-                        End If
-                        If (decMTMR002037 = 0.0) Then
-                            DataGridView001.SetData(e.Row, 32, decMTMR002037.ToString("0.0"))
-                            DataGridView001.FinishEditing()
-                        Else
-                            DataGridView001.SetData(e.Row, 32, decMTMR002037.ToString("0.0"))
-                            DataGridView001.FinishEditing()
-                        End If
+                    End If
+                    If (decMTMR002037 = 0.0) Then
+                        DataGridView001.SetData(e.Row, 32, decMTMR002037.ToString("0.0"))
+                        DataGridView001.FinishEditing()
+                    Else
+                        DataGridView001.SetData(e.Row, 32, decMTMR002037.ToString("0.0"))
+                        DataGridView001.FinishEditing()
                     End If
                 End If
             End If
+            'End If
         End If
 
         '納品先履歴（過去18カ月）
