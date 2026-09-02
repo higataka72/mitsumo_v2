@@ -1,5 +1,6 @@
 ﻿Imports System.Configuration
 Imports System.Text
+Imports System.Runtime.InteropServices
 Imports Microsoft.VisualBasic.FileIO
 Imports MitsumoLib
 Public Class FormMTM01
@@ -12,6 +13,49 @@ Public Class FormMTM01
     ''' </summary>
     Private ReadOnly Biz01 As Biz.MTM01
     Private ReadOnly BizCom As Biz.ComTaskScheduler
+    Private Const DTM_FIRST As Integer = &H1000
+    Private Const DTM_GETMONTHCAL As Integer = DTM_FIRST + 8
+    Private Const VK_ESCAPE As Integer = &H1B
+
+    <StructLayout(LayoutKind.Sequential)>
+    Private Structure NativeRect
+        Public Left As Integer
+        Public Top As Integer
+        Public Right As Integer
+        Public Bottom As Integer
+    End Structure
+
+    <DllImport("user32.dll")>
+    Private Shared Function SendMessage(hWnd As IntPtr, msg As Integer, wParam As IntPtr, lParam As IntPtr) As IntPtr
+    End Function
+
+    <DllImport("user32.dll")>
+    Private Shared Function GetWindowRect(hWnd As IntPtr, ByRef lpRect As NativeRect) As Boolean
+    End Function
+
+    <DllImport("user32.dll")>
+    Private Shared Function GetAsyncKeyState(vKey As Integer) As Short
+    End Function
+
+    Private isDatePicker001Empty As Boolean = True
+    Private isDatePicker002Empty As Boolean = True
+    Private isDatePicker003Empty As Boolean = True
+    Private isDatePicker004Empty As Boolean = True
+
+    Private isDatePicker001DroppedDown As Boolean = False
+    Private isDatePicker002DroppedDown As Boolean = False
+    Private isDatePicker003DroppedDown As Boolean = False
+    Private isDatePicker004DroppedDown As Boolean = False
+
+    Private datePicker001DropDownRect As NativeRect
+    Private datePicker002DropDownRect As NativeRect
+    Private datePicker003DropDownRect As NativeRect
+    Private datePicker004DropDownRect As NativeRect
+
+    Private hasDatePicker001DropDownRect As Boolean = False
+    Private hasDatePicker002DropDownRect As Boolean = False
+    Private hasDatePicker003DropDownRect As Boolean = False
+    Private hasDatePicker004DropDownRect As Boolean = False
 
     ''' <summary>
     ''' コンストラクタ
@@ -82,19 +126,79 @@ Public Class FormMTM01
         Me.TextBox008.Text = ""
         '取込ファイル名を取得してセット
         Me.TextBox009.Text = Me.Biz01.ImportFileNameSearch()
-        Me.DatePicker001.Format = DateTimePickerFormat.Custom
-        Me.DatePicker001.CustomFormat = " "
-        Me.DatePicker001.Checked = False
-        Me.DatePicker002.Format = DateTimePickerFormat.Custom
-        Me.DatePicker002.CustomFormat = " "
-        Me.DatePicker002.Checked = False
-        Me.DatePicker003.Format = DateTimePickerFormat.Custom
-        Me.DatePicker003.CustomFormat = " "
-        Me.DatePicker003.Checked = False
-        Me.DatePicker004.Format = DateTimePickerFormat.Custom
-        Me.DatePicker004.CustomFormat = " "
-        Me.DatePicker004.Checked = False
+        SetDatePickerEmpty(Me.DatePicker001, isDatePicker001Empty)
+        SetDatePickerEmpty(Me.DatePicker002, isDatePicker002Empty)
+        SetDatePickerEmpty(Me.DatePicker003, isDatePicker003Empty)
+        SetDatePickerEmpty(Me.DatePicker004, isDatePicker004Empty)
     End Sub
+
+    Private Sub SetDatePickerEmpty(picker As DateTimePicker, ByRef isEmpty As Boolean)
+        isEmpty = True
+        picker.Format = DateTimePickerFormat.Custom
+        picker.CustomFormat = " "
+        picker.Checked = False
+    End Sub
+
+    Private Sub SetDatePickerSelected(picker As DateTimePicker, ByRef isEmpty As Boolean)
+        isEmpty = False
+        picker.Format = DateTimePickerFormat.Long
+        picker.Checked = True
+    End Sub
+
+    Private Sub HandleDatePickerDropDown(picker As DateTimePicker, ByRef isDroppedDown As Boolean, ByRef dropDownRect As NativeRect, ByRef hasDropDownRect As Boolean)
+        isDroppedDown = True
+        hasDropDownRect = TryGetMonthCalendarRect(picker, dropDownRect)
+    End Sub
+
+    Private Sub HandleDatePickerCloseUp(picker As DateTimePicker, ByRef isEmpty As Boolean, ByRef isDroppedDown As Boolean, ByRef dropDownRect As NativeRect, ByRef hasDropDownRect As Boolean)
+        Dim wasEmpty As Boolean = isEmpty
+        isDroppedDown = False
+
+        If wasEmpty Then
+            If IsCursorInRect(dropDownRect, hasDropDownRect) AndAlso Not IsEscapeKeyPressed() Then
+                SetDatePickerSelected(picker, isEmpty)
+            Else
+                SetDatePickerEmpty(picker, isEmpty)
+            End If
+        End If
+
+        hasDropDownRect = False
+    End Sub
+
+    Private Sub HandleDatePickerValueChanged(picker As DateTimePicker, ByRef isEmpty As Boolean, isDroppedDown As Boolean)
+        If isEmpty AndAlso isDroppedDown Then
+            picker.Format = DateTimePickerFormat.Custom
+            picker.CustomFormat = " "
+            Return
+        End If
+
+        SetDatePickerSelected(picker, isEmpty)
+    End Sub
+
+    Private Function TryGetMonthCalendarRect(picker As DateTimePicker, ByRef dropDownRect As NativeRect) As Boolean
+        Dim monthCalendarHandle As IntPtr = SendMessage(picker.Handle, DTM_GETMONTHCAL, IntPtr.Zero, IntPtr.Zero)
+        If monthCalendarHandle = IntPtr.Zero Then
+            Return False
+        End If
+
+        Return GetWindowRect(monthCalendarHandle, dropDownRect)
+    End Function
+
+    Private Function IsCursorInRect(dropDownRect As NativeRect, hasDropDownRect As Boolean) As Boolean
+        If Not hasDropDownRect Then
+            Return False
+        End If
+
+        Dim cursorPosition As Point = Cursor.Position
+        Return cursorPosition.X >= dropDownRect.Left AndAlso
+            cursorPosition.X <= dropDownRect.Right AndAlso
+            cursorPosition.Y >= dropDownRect.Top AndAlso
+            cursorPosition.Y <= dropDownRect.Bottom
+    End Function
+
+    Private Function IsEscapeKeyPressed() As Boolean
+        Return (GetAsyncKeyState(VK_ESCAPE) And &H8000S) <> 0
+    End Function
 
     ''' <summary>
     ''' ファイルオープンボタンクリック処理（案内文の指定）
@@ -147,12 +251,7 @@ Public Class FormMTM01
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     Private Sub DatePicker001_ValueChanged(sender As Object, e As EventArgs) Handles DatePicker001.ValueChanged
-        If IsNothing(Me.DatePicker001.Value) Then
-            Me.DatePicker001.Format = DateTimePickerFormat.Custom
-            Me.DatePicker001.CustomFormat = " "
-        Else
-            Me.DatePicker001.Format = DateTimePickerFormat.Long
-        End If
+        HandleDatePickerValueChanged(Me.DatePicker001, isDatePicker001Empty, isDatePicker001DroppedDown)
     End Sub
 
     ''' <summary>
@@ -161,12 +260,7 @@ Public Class FormMTM01
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     Private Sub DatePicker002_ValueChanged(sender As Object, e As EventArgs) Handles DatePicker002.ValueChanged
-        If IsNothing(Me.DatePicker002.Value) Then
-            Me.DatePicker002.Format = DateTimePickerFormat.Custom
-            Me.DatePicker002.CustomFormat = " "
-        Else
-            Me.DatePicker002.Format = DateTimePickerFormat.Long
-        End If
+        HandleDatePickerValueChanged(Me.DatePicker002, isDatePicker002Empty, isDatePicker002DroppedDown)
     End Sub
 
     ''' <summary>
@@ -175,12 +269,31 @@ Public Class FormMTM01
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     Private Sub DatePicker003_ValueChanged(sender As Object, e As EventArgs) Handles DatePicker003.ValueChanged
-        If IsNothing(Me.DatePicker003.Value) Then
-            Me.DatePicker003.Format = DateTimePickerFormat.Custom
-            Me.DatePicker003.CustomFormat = " "
-        Else
-            Me.DatePicker003.Format = DateTimePickerFormat.Long
-        End If
+        HandleDatePickerValueChanged(Me.DatePicker003, isDatePicker003Empty, isDatePicker003DroppedDown)
+    End Sub
+
+    Private Sub DatePicker001_DropDown(sender As Object, e As EventArgs) Handles DatePicker001.DropDown
+        HandleDatePickerDropDown(Me.DatePicker001, isDatePicker001DroppedDown, datePicker001DropDownRect, hasDatePicker001DropDownRect)
+    End Sub
+
+    Private Sub DatePicker001_CloseUp(sender As Object, e As EventArgs) Handles DatePicker001.CloseUp
+        HandleDatePickerCloseUp(Me.DatePicker001, isDatePicker001Empty, isDatePicker001DroppedDown, datePicker001DropDownRect, hasDatePicker001DropDownRect)
+    End Sub
+
+    Private Sub DatePicker002_DropDown(sender As Object, e As EventArgs) Handles DatePicker002.DropDown
+        HandleDatePickerDropDown(Me.DatePicker002, isDatePicker002DroppedDown, datePicker002DropDownRect, hasDatePicker002DropDownRect)
+    End Sub
+
+    Private Sub DatePicker002_CloseUp(sender As Object, e As EventArgs) Handles DatePicker002.CloseUp
+        HandleDatePickerCloseUp(Me.DatePicker002, isDatePicker002Empty, isDatePicker002DroppedDown, datePicker002DropDownRect, hasDatePicker002DropDownRect)
+    End Sub
+
+    Private Sub DatePicker003_DropDown(sender As Object, e As EventArgs) Handles DatePicker003.DropDown
+        HandleDatePickerDropDown(Me.DatePicker003, isDatePicker003DroppedDown, datePicker003DropDownRect, hasDatePicker003DropDownRect)
+    End Sub
+
+    Private Sub DatePicker003_CloseUp(sender As Object, e As EventArgs) Handles DatePicker003.CloseUp
+        HandleDatePickerCloseUp(Me.DatePicker003, isDatePicker003Empty, isDatePicker003DroppedDown, datePicker003DropDownRect, hasDatePicker003DropDownRect)
     End Sub
     ''' <summary>
     ''' データピッカーイベント
@@ -189,9 +302,7 @@ Public Class FormMTM01
     ''' <param name="e"></param>
     Private Sub DatePicker001_KeyDown(sender As Object, e As KeyEventArgs) Handles DatePicker001.KeyDown
         If e.KeyValue = Keys.Delete Then
-            Me.DatePicker001.Format = DateTimePickerFormat.Custom
-            Me.DatePicker001.CustomFormat = " "
-            Me.DatePicker001.Checked = False
+            SetDatePickerEmpty(Me.DatePicker001, isDatePicker001Empty)
         End If
     End Sub
     ''' <summary>
@@ -201,9 +312,7 @@ Public Class FormMTM01
     ''' <param name="e"></param>
     Private Sub DatePicker002_KeyDown(sender As Object, e As KeyEventArgs) Handles DatePicker002.KeyDown
         If e.KeyValue = Keys.Delete Then
-            Me.DatePicker002.Format = DateTimePickerFormat.Custom
-            Me.DatePicker002.CustomFormat = " "
-            Me.DatePicker002.Checked = False
+            SetDatePickerEmpty(Me.DatePicker002, isDatePicker002Empty)
         End If
     End Sub
     ''' <summary>
@@ -213,9 +322,7 @@ Public Class FormMTM01
     ''' <param name="e"></param>
     Private Sub DatePicker003_KeyDown(sender As Object, e As KeyEventArgs) Handles DatePicker003.KeyDown
         If e.KeyValue = Keys.Delete Then
-            Me.DatePicker003.Format = DateTimePickerFormat.Custom
-            Me.DatePicker003.CustomFormat = " "
-            Me.DatePicker003.Checked = False
+            SetDatePickerEmpty(Me.DatePicker003, isDatePicker003Empty)
         End If
     End Sub
     ''' <summary>
@@ -1320,6 +1427,7 @@ Public Class FormMTM01
                     Dim txtTextBox005 As String
                     If (Me.Biz01.GetDate(mtm10r003jitsukou.MTMR003005, txtDatePicker001)) Then
                         Me.DatePicker001.Value = txtDatePicker001.Year & "-" & txtDatePicker001.Month & "-" & txtDatePicker001.Day
+                        SetDatePickerSelected(Me.DatePicker001, isDatePicker001Empty)
                         If (mtm10r003jitsukou.MTMR003005.Trim.Length >= 9) Then
                             txtTextBox005 = mtm10r003jitsukou.MTMR003005.Trim.Substring(8)
                             Me.TextBox005.Text = txtTextBox005
@@ -1327,13 +1435,14 @@ Public Class FormMTM01
                             Me.TextBox005.Text = ""
                         End If
                     Else
-                        Me.DatePicker001.CustomFormat = " "
+                        SetDatePickerEmpty(Me.DatePicker001, isDatePicker001Empty)
                         Me.TextBox005.Text = ""
                     End If
                     Dim txtDatePicker002 As Date                                                       '更新日付
                     Dim txtTextBox006 As String
                     If (Me.Biz01.GetDate(mtm10r003jitsukou.MTMR003006, txtDatePicker002)) Then
                         Me.DatePicker002.Value = txtDatePicker002.Year & "-" & txtDatePicker002.Month & "-" & txtDatePicker002.Day
+                        SetDatePickerSelected(Me.DatePicker002, isDatePicker002Empty)
                         If (mtm10r003jitsukou.MTMR003006.Trim.Length >= 9) Then
                             txtTextBox006 = mtm10r003jitsukou.MTMR003006.Trim.Substring(8)
                             Me.TextBox006.Text = txtTextBox006
@@ -1341,21 +1450,23 @@ Public Class FormMTM01
                             Me.TextBox006.Text = ""
                         End If
                     Else
-                        Me.DatePicker002.CustomFormat = " "
+                        SetDatePickerEmpty(Me.DatePicker002, isDatePicker002Empty)
                         Me.TextBox006.Text = ""
                     End If
 
                     Dim txtDatePicker003 As Date                                                       '締切日
                     If (Me.Biz01.GetDate(mtm10r003jitsukou.MTMR003007, txtDatePicker003)) Then
                         Me.DatePicker003.Value = txtDatePicker003.Year & "-" & txtDatePicker003.Month & "-" & txtDatePicker003.Day
+                        SetDatePickerSelected(Me.DatePicker003, isDatePicker003Empty)
                     Else
-                        Me.DatePicker003.CustomFormat = " "
+                        SetDatePickerEmpty(Me.DatePicker003, isDatePicker003Empty)
                     End If
                     Dim txtDatePicker004 As Date                                                       '仕入先実施日
                     If (Me.Biz01.GetDate(mtm10r003jitsukou.MTMR003023, txtDatePicker004)) Then
                         Me.DatePicker004.Value = txtDatePicker004.Year & "-" & txtDatePicker004.Month & "-" & txtDatePicker004.Day
+                        SetDatePickerSelected(Me.DatePicker004, isDatePicker004Empty)
                     Else
-                        Me.DatePicker004.CustomFormat = " "
+                        SetDatePickerEmpty(Me.DatePicker004, isDatePicker004Empty)
                     End If
                     Me.TextBox010.Text = mtm10r003jitsukou.MTMR003021                                  '改定実施日
                     Me.TextBox007.Text = mtm10r003jitsukou.MTMR003008                                  '運賃の指定
@@ -1427,14 +1538,10 @@ Public Class FormMTM01
             Me.TextBox008.Text = ""
             '取込ファイル名を取得してセット
             Me.TextBox009.Text = Me.Biz01.ImportFileNameSearch()
-            Me.DatePicker001.Format = DateTimePickerFormat.Custom
-            Me.DatePicker001.CustomFormat = " "
-            Me.DatePicker002.Format = DateTimePickerFormat.Custom
-            Me.DatePicker002.CustomFormat = " "
-            Me.DatePicker003.Format = DateTimePickerFormat.Custom
-            Me.DatePicker003.CustomFormat = " "
-            Me.DatePicker004.Format = DateTimePickerFormat.Custom
-            Me.DatePicker004.CustomFormat = " "
+            SetDatePickerEmpty(Me.DatePicker001, isDatePicker001Empty)
+            SetDatePickerEmpty(Me.DatePicker002, isDatePicker002Empty)
+            SetDatePickerEmpty(Me.DatePicker003, isDatePicker003Empty)
+            SetDatePickerEmpty(Me.DatePicker004, isDatePicker004Empty)
             Me.CheckBox001.Checked = False
             Me.CheckBox002.Checked = False
             Me.CheckBox003.Checked = False
@@ -1502,13 +1609,17 @@ Public Class FormMTM01
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     Private Sub DatePicker004_ValueChanged(sender As Object, e As EventArgs) Handles DatePicker004.ValueChanged
-        If IsNothing(Me.DatePicker004.Value) Then
-            Me.DatePicker004.Format = DateTimePickerFormat.Custom
-            Me.DatePicker004.CustomFormat = " "
-        Else
-            Me.DatePicker004.Format = DateTimePickerFormat.Long
-        End If
+        HandleDatePickerValueChanged(Me.DatePicker004, isDatePicker004Empty, isDatePicker004DroppedDown)
     End Sub
+
+    Private Sub DatePicker004_DropDown(sender As Object, e As EventArgs) Handles DatePicker004.DropDown
+        HandleDatePickerDropDown(Me.DatePicker004, isDatePicker004DroppedDown, datePicker004DropDownRect, hasDatePicker004DropDownRect)
+    End Sub
+
+    Private Sub DatePicker004_CloseUp(sender As Object, e As EventArgs) Handles DatePicker004.CloseUp
+        HandleDatePickerCloseUp(Me.DatePicker004, isDatePicker004Empty, isDatePicker004DroppedDown, datePicker004DropDownRect, hasDatePicker004DropDownRect)
+    End Sub
+
     ''' <summary>
     ''' データピッカーイベント
     ''' </summary>
@@ -1516,9 +1627,7 @@ Public Class FormMTM01
     ''' <param name="e"></param>
     Private Sub DatePicker004_KeyDown(sender As Object, e As KeyEventArgs) Handles DatePicker004.KeyDown
         If e.KeyValue = Keys.Delete Then
-            Me.DatePicker004.Format = DateTimePickerFormat.Custom
-            Me.DatePicker004.CustomFormat = " "
-            Me.DatePicker004.Checked = False
+            SetDatePickerEmpty(Me.DatePicker004, isDatePicker004Empty)
         End If
     End Sub
 
